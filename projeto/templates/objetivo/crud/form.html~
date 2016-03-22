@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Projetos - Cadastrar/Editar Objetivo de Projeto</title> {% endblock title %}
+
+{% block content %}
+
+    <form class="form col-sm-10" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        {% endbuttons %}
+    </form>
+    
+    <!-- será esse o caminho? -->
+    {% include "objetivo/crud/list.html" %}
+    
+{% endblock content %}
+
+

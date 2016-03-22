@@ -1,0 +1,136 @@
+"""projetoGBP URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.8/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Add an import:  from blog import urls as blog_urls
+    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
+"""
+from django.conf.urls import patterns, include, url
+from django.contrib import admin
+from django.contrib.auth.decorators import login_required
+
+from projeto.views import *
+
+urlpatterns = patterns('projeto.views',
+    url(r'^$', Home.as_view(), name='home'),
+
+    # Views de Projeto
+    url(r'^new/$'               , ProjetoCreate.as_view(), name='new_projeto'),
+    url(r'^list/'               , ProjetoList.as_view()  , name='list_projeto'),
+    url(r'^detail/(?P<pk>\d+)/$', ProjetoDetail.as_view(), name='detail_projeto'),
+    url(r'^update/(?P<pk>\d+)/$', ProjetoUpdate.as_view(), name='update_projeto'),
+    url(r'^delete/(?P<pk>\d+)/$', ProjetoDelete.as_view(), name='delete_projeto'),
+)
+
+urlpatterns += patterns('projeto.views',
+    # Views de Instituicao de Projeto
+    url(r'^instituicao/$'                   , InstituicaoProjetoList.as_view()  , name='home_instituicao_projeto'),
+    url(r'^instituicao/new/$'               , InstituicaoProjetoCreate.as_view(), name='new_instituicao_projeto'),
+    url(r'^instituicao/list/'               , InstituicaoProjetoList.as_view()  , name='list_instituicao_projeto'),
+    url(r'^instituicao/detail/(?P<pk>\d+)/$', InstituicaoProjetoDetail.as_view(), name='detail_instituicao_projeto'),
+    url(r'^instituicao/update/(?P<pk>\d+)/$', InstituicaoProjetoUpdate.as_view(), name='update_instituicao_projeto'),
+    url(r'^instituicao/delete/(?P<pk>\d+)/$', InstituicaoProjetoDelete.as_view(), name='delete_instituicao_projeto'),
+)
+
+urlpatterns += patterns('projeto.views',
+    # Views de Objetivo de Projeto
+    url(r'^objetivo/$'                   , ObjetivoProjetoList.as_view()  , name='home_objetivo_projeto'),
+    url(r'^objetivo/new/$'               , ObjetivoProjetoCreate.as_view(), name='new_objetivo_projeto'),
+    url(r'^objetivo/new/$'               , ObjetivoProjetoList.as_view(), name='list_objetivo_projeto'),
+    url(r'^objetivo/list/'               , ObjetivoProjetoList.as_view()  , name='list_objetivo_projeto'),
+    url(r'^objetivo/detail/(?P<pk>\d+)/$', ObjetivoProjetoDetail.as_view(), name='detail_objetivo_projeto'),
+    url(r'^objetivo/update/(?P<pk>\d+)/$', ObjetivoProjetoUpdate.as_view(), name='update_objetivo_projeto'),
+    url(r'^objetivo/delete/(?P<pk>\d+)/$', ObjetivoProjetoDelete.as_view(), name='delete_objetivo_projeto'),
+)
+
+urlpatterns += patterns('projeto.views',
+    # Views de Resultado de Projeto
+    url(r'^resultado/$'                   , ResultadoProjetoList.as_view()  , name='home_resultado_projeto'),
+    url(r'^resultado/new/$'               , ResultadoProjetoCreate.as_view(), name='new_resultado_projeto'),
+    url(r'^resultado/list/'               , ResultadoProjetoList.as_view()  , name='list_resultado_projeto'),
+    url(r'^resultado/detail/(?P<pk>\d+)/$', ResultadoProjetoDetail.as_view(), name='detail_resultado_projeto'),
+    url(r'^resultado/update/(?P<pk>\d+)/$', ResultadoProjetoUpdate.as_view(), name='update_resultado_projeto'),
+    url(r'^resultado/delete/(?P<pk>\d+)/$', ResultadoProjetoDelete.as_view(), name='delete_resultado_projeto'),
+)
+
+urlpatterns += patterns('projeto.views',
+    # Views de Palavra Chave
+    url(r'^palavrachave/$'                   , PalavraChaveList.as_view()  , name='home_palavrachave_projeto'),
+    url(r'^palavrachave/new/$'               , PalavraChaveCreate.as_view(), name='new_palavrachave_projeto'),
+    url(r'^palavrachave/list/'               , PalavraChaveList.as_view()  , name='list_palavrachave_projeto'),
+    url(r'^palavrachave/detail/(?P<pk>\d+)/$', PalavraChaveDetail.as_view(), name='detail_palavrachave_projeto'),
+    url(r'^palavrachave/update/(?P<pk>\d+)/$', PalavraChaveUpdate.as_view(), name='update_palavrachave_projeto'),
+    url(r'^palavrachave/delete/(?P<pk>\d+)/$', PalavraChaveDelete.as_view(), name='delete_palavrachave_projeto'),
+)
+
+urlpatterns += patterns('projeto.views',
+    # Views de Metas de Projeto
+    url(r'^metaprojeto/$'                   , MetaProjetoList.as_view()  , name='home_metaprojeto_projeto'),
+    url(r'^metaprojeto/new/$'               , MetaProjetoCreate.as_view(), name='new_metaprojeto_projeto'),
+    url(r'^metaprojeto/list/'               , MetaProjetoList.as_view()  , name='list_metaprojeto_projeto'),
+    url(r'^metaprojeto/detail/(?P<pk>\d+)/$', MetaProjetoDetail.as_view(), name='detail_metaprojeto_projeto'),
+    url(r'^metaprojeto/update/(?P<pk>\d+)/$', MetaProjetoUpdate.as_view(), name='update_metaprojeto_projeto'),
+    url(r'^metaprojeto/delete/(?P<pk>\d+)/$', MetaProjetoDelete.as_view(), name='delete_metaprojeto_projeto'),
+)
+
+urlpatterns += patterns('projeto.views',
+    # Views de Projeto Componente
+    url(r'^projetocomponente/$'                   , ProjetoComponenteList.as_view()  , name='home_projetocomponente_projeto'),
+    url(r'^projetocomponente/new/$'               , ProjetoComponenteCreate.as_view(), name='new_projetocomponente_projeto'),
+    url(r'^projetocomponente/list/'               , ProjetoComponenteList.as_view()  , name='list_projetocomponente_projeto'),
+    url(r'^projetocomponente/detail/(?P<pk>\d+)/$', ProjetoComponenteDetail.as_view(), name='detail_projetocomponente_projeto'),
+    url(r'^projetocomponente/update/(?P<pk>\d+)/$', ProjetoComponenteUpdate.as_view(), name='update_projetocomponente_projeto'),
+    url(r'^projetocomponente/delete/(?P<pk>\d+)/$', ProjetoComponenteDelete.as_view(), name='delete_projetocomponente_projeto'),
+)
+
+urlpatterns += patterns('projeto.views',
+    # Views de Plano de Ação
+    url(r'^planoacao/$'                   , PlanoAcaoList.as_view()  , name='home_planoacao_projeto'),
+    url(r'^planoacao/new/$'               , PlanoAcaoCreate.as_view(), name='new_planoacao_projeto'),
+    url(r'^planoacao/list/'               , PlanoAcaoList.as_view()  , name='list_planoacao_projeto'),
+    url(r'^planoacao/detail/(?P<pk>\d+)/$', PlanoAcaoDetail.as_view(), name='detail_planoacao_projeto'),
+    url(r'^planoacao/update/(?P<pk>\d+)/$', PlanoAcaoUpdate.as_view(), name='update_planoacao_projeto'),
+    url(r'^planoacao/delete/(?P<pk>\d+)/$', PlanoAcaoDelete.as_view(), name='delete_planoacao_projeto'),
+)
+
+urlpatterns += patterns('projeto.views',
+    # Views de Atividade
+    url(r'^atividade/$'                   , AtividadeList.as_view()  , name='home_atividade_projeto'),
+    url(r'^atividade/new/$'               , AtividadeCreate.as_view(), name='new_atividade_projeto'),
+    url(r'^atividade/list/'               , AtividadeList.as_view()  , name='list_atividade_projeto'),
+    url(r'^atividade/detail/(?P<pk>\d+)/$', AtividadeDetail.as_view(), name='detail_atividade_projeto'),
+    url(r'^atividade/update/(?P<pk>\d+)/$', AtividadeUpdate.as_view(), name='update_atividade_projeto'),
+    url(r'^atividade/delete/(?P<pk>\d+)/$', AtividadeDelete.as_view(), name='delete_atividade_projeto'),
+)
+
+urlpatterns += patterns('projeto.views',
+    # Views de Tarefa
+    url(r'^tarefa/$'                   , TarefaList.as_view()  , name='home_tarefa_projeto'),
+    url(r'^tarefa/new/$'               , TarefaCreate.as_view(), name='new_tarefa_projeto'),
+    url(r'^tarefa/list/'               , TarefaList.as_view()  , name='list_tarefa_projeto'),
+    url(r'^tarefa/detail/(?P<pk>\d+)/$', TarefaDetail.as_view(), name='detail_tarefa_projeto'),
+    url(r'^tarefa/update/(?P<pk>\d+)/$', TarefaUpdate.as_view(), name='update_tarefa_projeto'),
+    url(r'^tarefa/delete/(?P<pk>\d+)/$', TarefaDelete.as_view(), name='delete_tarefa_projeto'),
+)
+
+
+urlpatterns += patterns('',
+    url(r'^login/$' , 'django.contrib.auth.views.login' , name='login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
+)
+
+urlpatterns += patterns('',
+    # Interface Admin e Auth
+    url(r'^admin/', include(admin.site.urls)),
+    
+    # Chained - Smart Select 
+    url(r'^chaining/', include('smart_selects.urls')),
+)

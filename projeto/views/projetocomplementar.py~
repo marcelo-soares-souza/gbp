@@ -1,0 +1,61 @@
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.models import User
+from sortable_listview import SortableListView
+
+from projeto.views.login import LoggedInMixin
+from projeto.models import ProjetoComplementar
+
+#
+#
+# Projeto Complementar
+#
+#
+
+class ProjetoComplementarList(LoggedInMixin, SortableListView):
+    allowed_sort_fields = {'nome': {'default_direction': '', 'verbose_name': 'Nome'},
+                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
+
+    default_sort_field = 'nome'
+    paginate_by = 5
+
+    template_name = 'projetocomplementar/crud/list.html'
+    context_object_name = 'projetoscomplementares'
+    model = ProjetoComplementar
+    fields = '__all__'
+
+    success_url = reverse_lazy('list_projetocomplementar_projeto')
+
+class ProjetoComplementarDetail(LoggedInMixin, DetailView):
+    template_name = 'projetocomplementar/crud/detail.html'
+    context_object_name = 'projetocomplementar'
+    model = ProjetoComplementar
+    fields = '__all__'
+
+    success_url = reverse_lazy('list_projetocomplementar_projeto')
+
+class ProjetoComplementarCreate(LoggedInMixin, CreateView):
+    template_name = 'projetocomplementar/crud/form.html'
+    model = ProjetoComplementar
+    fields = ['numero', 'nome', 'responsavel', 'projeto']
+
+    success_url = reverse_lazy('list_projetocomplementar_projeto')
+
+    def form_valid(self, form):
+        form.instance.criado_por = self.request.user
+        return super(ProjetoComplementarCreate, self).form_valid(form)
+
+    def get_initial(self):
+        return { 'criado_por': self.request.user.id }
+
+class ProjetoComplementarUpdate(LoggedInMixin, UpdateView):
+    template_name = 'projetocomplementar/crud/form.html'
+    model = ProjetoComplementar
+    fields = ['numero', 'nome', 'responsavel', 'projeto']
+
+    success_url = reverse_lazy('list_projetocomplementar_projeto')
+
+class ProjetoComplementarDelete(LoggedInMixin, DeleteView):
+    template_name = 'projetocomplementar/crud/delete.html'
+    model = ProjetoComplementar
+    success_url = reverse_lazy('list_projetocomplementar_projeto')

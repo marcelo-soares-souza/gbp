@@ -1,0 +1,14 @@
+from django.contrib import admin
+
+from .models import Tipo
+from .models import Status
+from projeto.models.projeto import Projeto
+
+#class ProjetoAdmin(admin.ModelAdmin):
+#    list_display = ('sigla', )
+#    list_filter = ['sigla']
+#    search_fields = ['sigla']
+
+admin.site.register(Tipo)
+admin.site.register(Status)
+admin.site.register(Projeto)

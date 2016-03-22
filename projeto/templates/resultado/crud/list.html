@@ -1,0 +1,46 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Projetos - Listar Todos os Resultados de Projetos</title> {% endblock title %}
+
+{% block content %}
+
+    {% if not resultados %}
+
+      <h3> Nenhum Resultado de Projeto Cadastrado. <a href="{% url 'new_resultado_projeto' %}">Criar um Resultado de Projeto?</a> </h3>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for resultado in resultados %}
+            <ul class="list-group">
+              <li class="list-group-item">
+                
+                <h3><a href="{{ resultado.get_resultado_detail_url }}">{{ resultado }}</a></h3>
+                
+                <b>Projeto Associado:</b>
+                <a href="{% url 'detail_projeto' resultado.projeto.id %}">{{ resultado.projeto }}</a>
+                <br/>
+                
+                
+                {% if request.user == resultado.criado_por or request.user.is_superuser %}
+                <br/>
+                  <p>
+                    <a href="{{ resultado.get_resultado_update_url }}">Editar</a> | 
+                    <a href="{{ resultado.get_resultado_delete_url }}">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ resultado.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+        
+    {% endif %} 
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Projetos - Listar Todas as Metas de Projetos</title> {% endblock title %}
+
+{% block content %}
+
+    {% if not metaprojeto %}
+
+      <h3> Nenhum Objetivo de Projeto Cadastrado. <a href="{% url 'new_metaprojeto_projeto' %}">Criar uma Meta para o Projeto?</a> </h3>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for metaprojeto in metaprojeto %}
+            <ul class="list-group">
+              <li class="list-group-item">
+                
+                <h3><a href="{{ metaprojeto.get_metaprojeto_detail_url }}">{{ metaprojeto }}</a></h3>        
+                
+                <br/>
+                
+                {% if request.user == metaprojeto.criado_por or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ metaprojeto.get_metaprojeto_update_url }}">Editar</a> | 
+                    <a href="{{ metaprojeto.get_metaprojeto_delete_url }}">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ metaprojeto.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+        
+    {% endif %} 
+
+{% endblock content %}

@@ -1,0 +1,46 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Projeto Complementar - Listar Todos os Projetos Complementares</title> {% endblock title %}
+
+{% block content %}
+
+    {% if not projetoscomplementares %}
+
+      <h3> Nenhum Projeto Complementar Cadastrado. <a href="{% url 'new_projetocomplementar_projeto' %}">Criar um Projeto Complementar?</a> </h3>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for projetocomplementar in projetoscomplementares %}
+            <ul class="list-group">
+              <li class="list-group-item">
+                
+                <h3><a href="{{ projetocomplementar.get_projetocomplementar_detail_url }}">{{ projetocomplementar }}</a></h3>
+
+                <b>Projeto Associado:</b>
+                <a href="{% url 'detail_projeto' projetocomplementar.projeto.id %}">{{ projetocomplementar.projeto }}</a>
+                <br/>
+                
+                <br/>
+                
+                {% if request.user == projetocomplementar.criado_por or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ projetocomplementar.get_projetocomplementar_update_url }}">Editar</a> | 
+                    <a href="{{ projetocomplementar.get_projetocomplementar_delete_url }}">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ projetocomplementar.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+        
+    {% endif %} 
+
+{% endblock content %}

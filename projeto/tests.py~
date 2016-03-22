@@ -1,0 +1,5 @@
+from __future__ import unicode_literals
+from django.test import TestCase
+from projeto import models
+
+# Create your tests here.

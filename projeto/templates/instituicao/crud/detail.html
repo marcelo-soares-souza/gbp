@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Projetos - Instituicao de Projeto {{ instituicao.nome }}</title> {% endblock title %}
+
+{% block content %}
+
+    <h2>{{ instituicao.nome }}</h2>
+
+    <hr/>
+
+    <p><b>Cadastrado:</b> {{ instituicao.data_cadastro }}</p>
+
+    {% if instituicao.proponentes.all %}
+      <p>
+        <b>Projetos Associados (Como Proponente):</b>
+        {% for projeto in instituicao.proponentes.all %}
+          {% if not forloop.first %}, {% endif %}
+          <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>
+        {% endfor %}
+      </p>
+    {% endif %}
+
+    {% if instituicao.executora.all %}
+      <p>
+      <b>Projetos Associados (Como Executor(a)):</b>
+      {% for projeto in instituicao.executora.all %}
+        {% if not forloop.first %}, {% endif %}
+        <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>
+      {% endfor %}
+      </p>
+    {% endif %}
+
+    <p><b>Descrição:</b> {{ instituicao.descricao }}</p>
+    <p><b>Sigla:</b> {{ instituicao.sigla }}</p>
+    <p><b>Site:</b> {{ instituicao.site }}</p>
+    <p><b>E-mail:</b> {{ instituicao.email }}</p>
+    <p><b>Endereço:</b> {{ instituicao.endereco }}</p>
+    <p><b>Cidade:</b> {{ instituicao.cidade }}</p>
+    <p><b>CNPJ:</b> {{ instituicao.cnpj }}</p>
+    <p><b>Telefone:</b> {{ instituicao.telefone }}</p>
+    <p><b>Estado:</b> {{ instituicao.estado }}</p>
+    <p><b>CEP:</b> {{ instituicao.cep }}</p>
+
+    <hr/>
+
+    {% if request.user == instituicao.criado_por or request.user.is_superuser %}
+      <p>
+        <a href="{{ instituicao.get_instituicao_update_url }}">Editar</a> | 
+        <a href="{{ instituicao.get_instituicao_delete_url }}">Apagar</a> |
+        <a href="{% url 'list_instituicao_projeto' %}">Voltar</a>
+      </p>
+    {% endif %}
+{% endblock content %}

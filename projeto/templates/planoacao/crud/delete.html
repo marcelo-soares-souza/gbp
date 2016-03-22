@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Plano de Ação - Apagar o Plano de Ação {{ object }}</title> {% endblock title %}
+
+{% block content %}
+
+<form action="" method="post">{% csrf_token %}
+    <h3>Deseja Apagar "{{ object }}"?</h3>
+
+    <br/>
+    
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Remover</button>
+    {% endbuttons %}
+</form>
+
+
+{% endblock content %}

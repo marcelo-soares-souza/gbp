@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>      
+    <meta charset="utf-8">
+    
+    <!-- Latest JQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+
+    
+
+    <link rel="stylesheet" href="/static/files/css/style.css" />
+    
+
+    {% block title %} <title>Projetos</title> {% endblock title %}
+
+  <style> body { padding-top: 70px; } </style>
+    
+</head>
+
+<body>
+      
+      <br>
+      {% include "base/menu.html" %}
+      <br/>
+      <div class="container">
+        
+        {% bootstrap_messages %}
+        
+        {% block content %}
+
+        {% endblock content %}
+      </div>
+   
+   
+  {% block javascript %}
+
+    {% bootstrap_javascript %}
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    
+    
+    {{ form.media }}
+    
+  {% endblock javascript %}
+
+</body>
+</html>

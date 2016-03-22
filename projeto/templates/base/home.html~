@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+
+{% block content %}    
+    <div class="jumbotron">
+        {% if request.user.is_authenticated %}
+          <center><h4>Bem-vindo, {{ request.user.name }}</h4></center>
+        {% else %}
+          <center><h4>Bem-vindo, Visitante!</h4></center>
+        {% endif %}
+        <br>
+        <center><p>Laboratório de Bioinformática em Bioenergia - EMBRAPA</p></center>
+    </div>
+    
+{% endblock content %}
+

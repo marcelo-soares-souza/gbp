@@ -1,0 +1,30 @@
+from django.db import models
+from django.core.validators import MinLengthValidator
+from django.contrib.auth.models import User
+
+#
+# Palavras Chaves
+#
+
+class Keyword(models.Model):
+    
+    projeto = models.ForeignKey(Projeto)
+    palavra_chave = models.CharField(max_length=256, validators=[MinLengthValidator(5)])
+    
+   
+    class Meta:
+        ordering = ['palavra_chave']
+        verbose_name = 'palavra-chave'
+        verbose_name_plural = 'palavras-chave'
+
+    def get_keyword_detail_url(self):
+        return u"/keyword/detail/%i" % self.id
+
+    def get_keyword_update_url(self):
+        return u"/keyword/update/%i" % self.id
+
+    def get_keyword_delete_url(self):
+        return u"/keyword/delete/%i" % self.id
+
+    def __str__(self):
+        return self.palavra_chave

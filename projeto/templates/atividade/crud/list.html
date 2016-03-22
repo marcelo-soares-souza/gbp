@@ -1,0 +1,43 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Atividade - Listar Todas as Atividade</title> {% endblock title %}
+
+{% block content %}
+
+    {% if not atividades %}
+
+      <h3> Nenhuma Atividade Cadastrada. <a href="{% url 'new_atividade_projeto' %}">Criar uma Atividade?</a> </h3>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for atividade in atividades %}
+            <ul class="list-group">
+              <li class="list-group-item">
+                
+                <h3><a href="{{ atividade.get_atividade_detail_url }}">{{ atividade }}</a></h3>
+                
+                
+                <br/>
+                
+                {% if request.user == atividade.criado_por or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ atividade.get_atividade_update_url }}">Editar</a> | 
+                    <a href="{{ atividade.get_atividade_delete_url }}">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ atividade.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+        
+    {% endif %} 
+
+{% endblock content %}

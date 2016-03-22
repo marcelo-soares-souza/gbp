@@ -1,0 +1,46 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Plano de Ação - Listar Todos os Planos de Ação</title> {% endblock title %}
+
+{% block content %}
+
+    {% if not planosacao %}
+
+      <h3> Nenhum Plano de Ação Cadastrado. <a href="{% url 'new_planoacao_projeto' %}">Criar um Plano de Ação?</a> </h3>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for planoacao in planosacao %}
+            <ul class="list-group">
+              <li class="list-group-item">
+                
+                <h3><a href="{{ planoacao.get_planoacao_detail_url }}">{{ planoacao }}</a></h3>
+
+                <b>Projeto Associado:</b>
+                <a href="{% url 'detail_projeto' planoacao.projeto.id %}">{{ planoacao.projeto }}</a>
+                <br/>
+                
+                <br/>
+                
+                {% if request.user == planoacao.criado_por or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ planoacao.get_planoacao_update_url }}">Editar</a> | 
+                    <a href="{{ planoacao.get_planoacao_delete_url }}">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ planoacao.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+        
+    {% endif %} 
+
+{% endblock content %}

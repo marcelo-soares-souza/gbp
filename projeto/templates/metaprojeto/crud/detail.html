@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Projetos - Objetivo de Projeto {{ metaprojeto.numero }}</title> {% endblock title %}
+
+{% block content %}
+
+    <h2>Meta {{ metaprojeto.nome }}</h2>
+
+    <hr/>
+    
+    <p><b>Numero:</b> {{ metaprojeto.numero }}</p>
+
+
+    <p>
+      <b>Objetivo Associado:</b>
+      {% for objetivo in metaprojeto.objetivo.all %}
+        <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo.numero }}</a>
+      {% endfor %}
+    </p>
+
+    <p><b>Cadastrado:</b> {{ metaprojeto.data_cadastro }}</p>
+    
+    <hr/>
+
+    {% if request.user == objetivo.criado_por or request.user.is_superuser %}
+      <p>
+        <a href="{{ metaprojeto.get_metaprojeto_update_url }}">Editar</a> | 
+        <a href="{{ metaprojeto.get_metaprojeto_delete_url }}">Apagar</a> |
+        <a href="{% url 'list_metaprojeto_projeto' %}">Voltar</a>
+      </p>
+    {% endif %}
+{% endblock content %}

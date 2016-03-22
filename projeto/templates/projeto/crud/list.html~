@@ -1,0 +1,73 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Projetos - Listar Todos</title> {% endblock title %}
+
+{% block content %}
+
+    {% if not projetos %}
+
+      <h3>Nenhum Projeto Cadastrado. <a href="{% url 'new_projeto' %}">Criar um Projeto?</a></h3>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for projeto in projetos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+                
+                <h3><a href="{{ projeto.get_projeto_detail_url }}">{{ projeto.sigla }}</a></h3>
+
+                <b>Título: </b> {{ projeto.titulo_portugues }}
+
+                <br/>
+
+                <b>Resumo: </b> {{ projeto.resumo |truncatechars:512 }}
+
+                <br/>
+
+                <b>Líder: </b>{{ projeto.lider }}
+
+                <br/>
+
+                <b>Tipo: </b> {{ projeto.tipo }}
+
+                <br/>
+                <!--
+                {% if projeto.objetivo_set.all %}
+                  <b>Objetivo(s): </b>
+                  {% for objetivo in projeto.objetivo_set.all %}
+                    {% if not forloop.first %}, {% endif %}
+                    <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo }}</a>
+                  {% endfor %}
+                {% endif %}
+
+                <br/> -->
+
+                <b>Situação: </b>{{ projeto.status }}
+
+                <br/>
+
+                <b>Publicado: </b>{{ projeto.get_publicado_display }}
+
+                <br/><br/>
+                {% if request.user == projeto.criado_por or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ projeto.get_projeto_update_url }}">Editar</a> | 
+                    <a href="{{ projeto.get_projeto_delete_url }}">Apagar</a>
+                  </p>
+                {% endif %}
+                
+                <div class="data-atualizado">{{ projeto.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+        
+        {% include 'base/pagination.html' %}
+
+    {% endif %} 
+
+{% endblock content %}
