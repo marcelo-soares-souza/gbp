@@ -5,7 +5,7 @@ from sortable_listview import SortableListView
 
 from projeto.views.login import LoggedInMixin
 from projeto.models import Tarefa
-
+from projeto.forms import TarefaForm
 #
 #
 # Tarefas
@@ -36,8 +36,7 @@ class TarefaDetail(LoggedInMixin, DetailView):
 
 class TarefaCreate(LoggedInMixin, CreateView):
     template_name = 'tarefa/crud/form.html'
-    model = Tarefa
-    fields = ['projeto', 'planoacao','atividade', 'numero', 'nome', 'indicador_fisico', 'responsavel', 'peso_atividade', 'colaborador']
+    form_class = TarefaForm
 
     success_url = reverse_lazy('list_tarefa_projeto')
 
@@ -50,8 +49,8 @@ class TarefaCreate(LoggedInMixin, CreateView):
 
 class TarefaUpdate(LoggedInMixin, UpdateView):
     template_name = 'tarefa/crud/form.html'
+    form_class = TarefaForm
     model = Tarefa
-    fields = ['projeto', 'planoacao', 'atividade', 'numero', 'nome', 'indicador_fisico', 'responsavel', 'peso_atividade', 'colaborador']
 
     success_url = reverse_lazy('list_tarefa_projeto')
 
