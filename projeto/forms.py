@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm, Textarea, TextInput
-from .models import Instituicao, Objetivo, Resultado, Projeto, ProjetoComponente 
+from .models import Instituicao, Objetivo, Resultado, Projeto, ProjetoComponente, MetaProjeto 
 from localflavor.br.forms import BRCNPJField, BRPhoneNumberField, BRZipCodeField, BRStateSelect
 
     
@@ -99,6 +99,14 @@ class ProjetoComponenteForm(forms.ModelForm):
             'responsavel': 'Responsável',
         }
         
+class MetaProjetoForm(forms.ModelForm):
+
+    class Meta:
+        model = MetaProjeto
+        fields = ('projeto', 'numero', 'nome', 'objetivo')
         
+        labels = {
+            'numero': 'Número',
+        }        
         
-        
+

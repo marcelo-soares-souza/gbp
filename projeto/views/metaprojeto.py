@@ -5,6 +5,7 @@ from sortable_listview import SortableListView
 
 from projeto.views.login import LoggedInMixin
 from projeto.models import MetaProjeto
+from projeto.forms import MetaProjetoForm
 
 #
 #
@@ -36,8 +37,7 @@ class MetaProjetoDetail(LoggedInMixin, DetailView):
 
 class MetaProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'metaprojeto/crud/form.html'
-    model = MetaProjeto
-    fields = ['projeto', 'numero', 'nome', 'objetivo']
+    form_class = MetaProjetoForm
 
     success_url = reverse_lazy('list_metaprojeto_projeto')
 
@@ -50,8 +50,8 @@ class MetaProjetoCreate(LoggedInMixin, CreateView):
 
 class MetaProjetoUpdate(LoggedInMixin, UpdateView):
     template_name = 'metaprojeto/crud/form.html'
+    form_class = MetaProjetoForm
     model = MetaProjeto
-    fields = ['projeto', 'numero', 'nome', 'objetivo']
 
     success_url = reverse_lazy('list_metaprojeto_projeto')
 
