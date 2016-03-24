@@ -5,6 +5,7 @@ from sortable_listview import SortableListView
 
 from projeto.views.login import LoggedInMixin
 from projeto.models import ProjetoComponente
+from projeto.forms import ProjetoComponenteForm
 
 #
 #
@@ -36,8 +37,7 @@ class ProjetoComponenteDetail(LoggedInMixin, DetailView):
 
 class ProjetoComponenteCreate(LoggedInMixin, CreateView):
     template_name = 'projetocomponente/crud/form.html'
-    model = ProjetoComponente
-    fields = [ 'projeto', 'numero', 'nome', 'responsavel']
+    form_class = ProjetoComponenteForm
 
     success_url = reverse_lazy('list_projetocomponente_projeto')
 
@@ -50,8 +50,8 @@ class ProjetoComponenteCreate(LoggedInMixin, CreateView):
 
 class ProjetoComponenteUpdate(LoggedInMixin, UpdateView):
     template_name = 'projetocomponente/crud/form.html'
+    form_class = ProjetoComponenteForm
     model = ProjetoComponente
-    fields = ['projeto', 'numero', 'nome', 'responsavel']
 
     success_url = reverse_lazy('list_projetocomponente_projeto')
 
