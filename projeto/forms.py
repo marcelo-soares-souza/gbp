@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm, Textarea, TextInput
-from .models import Instituicao, Objetivo, Resultado, Projeto, ProjetoComponente, MetaProjeto, PlanoAcao 
+from .models import Instituicao, Objetivo, Resultado, Projeto, ProjetoComponente, MetaProjeto, PlanoAcao, Atividade
 from localflavor.br.forms import BRCNPJField, BRPhoneNumberField, BRZipCodeField, BRStateSelect
 
     
@@ -123,4 +123,22 @@ class PlanoAcaoForm(forms.ModelForm):
             'codigo_seg': 'Código SEG',
             'data_inicio': 'Data de Início',
             'data_fim': 'Data de Fim',
+        }
+
+class AtividadeForm(forms.ModelForm):
+
+    class Meta:
+        model = Atividade
+        fields = ('projeto', 'planoacao', 'numero', 'nome', 'indicador_fisico', 'responsavel', 'peso_planoacao', 'data_inicio', 'data_fim', 'colaborador')
+        
+        labels = {
+            'planoacao': 'Plano de Ação',
+            'numero': 'Número da Atividade',
+            'nome': 'Nome da Atividade', 
+            'indicador_fisico': 'Indicador Físico',
+            'responsavel': 'Responsável pela Atividade',
+            'peso_planoacao': 'Peso no Plano de Ação',
+            'data_inicio': 'Data de Início',
+            'data_fim': 'Data de Fim',
+            'colaborador': 'Colaboradores da Atividade',
         }

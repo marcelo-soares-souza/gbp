@@ -5,6 +5,7 @@ from sortable_listview import SortableListView
 
 from projeto.views.login import LoggedInMixin
 from projeto.models import Atividade
+from projeto.forms import AtividadeForm
 
 #
 #
@@ -36,8 +37,7 @@ class AtividadeDetail(LoggedInMixin, DetailView):
 
 class AtividadeCreate(LoggedInMixin, CreateView):
     template_name = 'atividade/crud/form.html'
-    model = Atividade
-    fields = ['projeto', 'numero', 'nome', 'indicador_fisico', 'responsavel', 'peso_planoacao', 'data_inicio', 'data_fim', 'colaborador', 'planoacao']
+    form_class = AtividadeForm
 
     success_url = reverse_lazy('list_atividade_projeto')
 
@@ -50,8 +50,8 @@ class AtividadeCreate(LoggedInMixin, CreateView):
 
 class AtividadeUpdate(LoggedInMixin, UpdateView):
     template_name = 'atividade/crud/form.html'
+    form_class = AtividadeForm
     model = Atividade
-    fields = ['projeto', 'numero', 'nome', 'indicador_fisico', 'responsavel', 'peso_planoacao', 'data_inicio', 'data_fim', 'colaborador', 'planoacao']
 
     success_url = reverse_lazy('list_atividade_projeto')
 
