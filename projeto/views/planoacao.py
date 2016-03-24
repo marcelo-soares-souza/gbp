@@ -5,7 +5,7 @@ from sortable_listview import SortableListView
 
 from projeto.views.login import LoggedInMixin
 from projeto.models import PlanoAcao
-
+from projeto.forms import PlanoAcaoForm
 #
 #
 # Plano de Ação
@@ -36,8 +36,7 @@ class PlanoAcaoDetail(LoggedInMixin, DetailView):
 
 class PlanoAcaoCreate(LoggedInMixin, CreateView):
     template_name = 'planoacao/crud/form.html'
-    model = PlanoAcao
-    fields = ['projeto', 'numero', 'nome', 'responsavel', 'codigo_seg', 'data_inicio', 'data_fim', 'projeto_componente', 'resultado']
+    form_class = PlanoAcaoForm
 
     success_url = reverse_lazy('list_planoacao_projeto')
 
@@ -50,8 +49,8 @@ class PlanoAcaoCreate(LoggedInMixin, CreateView):
 
 class PlanoAcaoUpdate(LoggedInMixin, UpdateView):
     template_name = 'planoacao/crud/form.html'
+    form_class = PlanoAcaoForm
     model = PlanoAcao
-    fields = ['projeto', 'numero', 'nome', 'responsavel', 'codigo_seg', 'data_inicio', 'data_fim', 'projeto_componente', 'resultado']
 
     success_url = reverse_lazy('list_planoacao_projeto')
 
