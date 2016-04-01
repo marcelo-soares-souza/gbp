@@ -34,7 +34,6 @@ class Resultado(models.Model):
         verbose_name_plural = 'resultados'
     
                 
-    
     def get_resultado_detail_url(self):
         return u"/resultado/detail/%i" % self.id
 

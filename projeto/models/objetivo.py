@@ -5,14 +5,14 @@ from django.contrib.auth.models import User
 from projeto.models.projeto import Projeto
 
 #
-# Objetivo de Projetos
+# Objetivo Específicos de Projetos
 #
 
 class Objetivo(models.Model):
     
     #Atributos
     #Número do Objetivo, sequencial e único, mas não é o mesmo número que o id
-    numero = models.PositiveIntegerField(blank=True)
+    numero = models.PositiveIntegerField()
     
     #Descrição
     descricao = models.TextField(null=True, blank=True)

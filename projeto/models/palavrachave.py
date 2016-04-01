@@ -18,7 +18,7 @@ class PalavraChave(models.Model):
     class Meta:
         ordering = ['palavra']
         verbose_name = 'palavra chave'
-        verbose_name_plural = 'palavras chaves'
+        verbose_name_plural = 'palavras chave'
 
     def get_palavrachave_detail_url(self):
         return u"/palavrachave/detail/%i" % self.id
