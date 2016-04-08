@@ -3,10 +3,13 @@
 <head>      
     <meta charset="utf-8">
     
+    <!-- Latest JQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
     {% load bootstrap3 %}
     {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {% bootstrap_messages %}
+
+    
 
     <link rel="stylesheet" href="/static/files/css/style.css" />
     
@@ -22,7 +25,11 @@
       <br>
       {% include "base/menu.html" %}
       <br/>
+     
       <div class="container">
+        
+        {% bootstrap_messages %}
+        
         {% block content %}
 
         {% endblock content %}
@@ -30,13 +37,15 @@
    
    
   {% block javascript %}
-    <!-- Latest JQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    {% bootstrap_javascript %}
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     
-    <script src="/static/files/js/tab.js"></script>
     
     {{ form.media }}
     

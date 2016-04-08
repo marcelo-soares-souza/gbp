@@ -6,13 +6,20 @@
 
 {% block content %}
 
-    <form class="form col-sm-10" method="POST">
+    <form class="form-horizontal" method="POST">
         {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+        
+        {% bootstrap_form form layout='horizontal' %}
+        
+        <div class="modal-footer">
+            {% buttons %}
+                <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+            {% endbuttons %}
+            
+            <a href="javascript:window.history.go(-1)" class="btn btn-default btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
             <a href="{% url 'new_palavrachave_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
-        {% endbuttons %}
+        </div>
+    
     </form>
 
 {% endblock content %}

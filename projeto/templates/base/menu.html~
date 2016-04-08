@@ -9,21 +9,22 @@
             {% endif %}
             
             {% if request.user.is_authenticated %}
-                <li><a href="{% url 'new_objetivo_projeto' %}">Objetivos</a>
+                <li class="tab-title"><a href="{% url 'new_objetivo_projeto' %}">Objetivos</a>
             {% endif %}
             
             {% if request.user.is_authenticated %}
-                <li><a href="{% url 'new_resultado_projeto' %}">Resultados</a></li>
+                <li class="tab-title"><a href="{% url 'new_resultado_projeto' %}">Resultados</a></li>
             {% endif %}
             
             {% if request.user.is_authenticated %}
-                <li><a href="{% url 'new_palavrachave_projeto' %}">Keywords</a></li>
+                <li class="tab-title"><a href="{% url 'new_palavrachave_projeto' %}">Keywords</a></li>
             {% endif %}
             
+           <!--
             {% if request.user.is_authenticated %}
-                <li><a href="#">Proj. Relacionados</a></li>
+                <li class="tab-title"><a href="#">Proj. Relacionados</a></li>
             {% endif %}
-            
+            -->
             {% if request.user.is_authenticated %}
                 <li><a href="{% url 'new_projetocomponente_projeto' %}">PCs</a></li>
             {% endif %}

@@ -1,45 +1,24 @@
-<div class="container">
+{% extends "base/base.html" %}
 
-        <div class="container" id="container1">
-        <div class="row centered-form">
-            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title text-center">Preencha com seus dados</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form">
-                            <div class="form-group">
-                                <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="Seu nome">
-                            </div>
+{% load bootstrap3 %}
 
-                            <div class="form-group">
-                                <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Seu sobrenome">
-                            </div>
+{% block title %} <title>Projetos - Cadastrar/Editar Instituicao de Projeto</title> {% endblock title %}
 
-                            <div class="form-group">
-                                <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Seu e-mail">
-                            </div>
+{% block content %}
 
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Sua senha">
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Novamente">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <input type="submit" value="Registrar" class="btn btn-info btn-block">
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <form class="form col-sm-10" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        
+        <div class="btn-group" role="group">
+            {% buttons %}
+                <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+            {% endbuttons %}
+            
+            <a href="javascript:window.history.go(-1)" class="btn btn-default btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+            <a href="{% url 'new_instituicao_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
-    </div>
+        
+    </form>
 
-    </div>
+{% endblock content %}

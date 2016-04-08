@@ -2,14 +2,13 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Projetos - Cadastrar/Editar Objetivo de Projeto</title> {% endblock title %}
+{% block title %} <title>Projetos - Cadastrar/Editar Resultado de Projeto</title> {% endblock title %}
 
 {% block content %}
 
-    <form class="form-horizontal" method="POST">
+    <form class="form col-sm-10" method="POST">
         {% csrf_token %}
-        
-        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_form form %}
         
         <div class="modal-footer">
             {% buttons %}
@@ -17,9 +16,9 @@
             {% endbuttons %}
             
             <a href="javascript:window.history.go(-1)" class="btn btn-default btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
-            <a href="{% url 'new_resultado_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <a href="{% url 'new_palavrachave_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
     
     </form>
-        
+
 {% endblock content %}
