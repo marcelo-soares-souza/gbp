@@ -38,8 +38,13 @@ class ObjetivoProjetoDetail(LoggedInMixin, DetailView):
 class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'objetivo/crud/form.html'
     form_class = ObjetivoForm
-    success_url = reverse_lazy('list_objetivo_projeto')
-
+    success_url = reverse_lazy('new_objetivo_projeto')
+    
+    def get_context_data(self, **kwargs):
+        context = super(ObjetivoProjetoCreate, self).get_context_data(**kwargs)
+        context["objetivos"] = Objetivo.objects.all()
+        return context
+                
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
         return super(ObjetivoProjetoCreate, self).form_valid(form)
