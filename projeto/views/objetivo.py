@@ -7,11 +7,9 @@ from projeto.views.login import LoggedInMixin
 from projeto.models import Objetivo
 from projeto.forms import ObjetivoForm
 
-#
-#
-# Objetivo de Projeto
-#
-#
+'''
+
+'''
 
 class ObjetivoProjetoList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {'descricao': {'default_direction': '', 'verbose_name': 'Descrição'},
@@ -39,10 +37,12 @@ class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'objetivo/crud/form.html'
     form_class = ObjetivoForm
     success_url = reverse_lazy('new_objetivo_projeto')
-    
+   
+    # Método responsável por listar os objetos na página de form
+    #TODO: refatorar para que apresente apenas os objetivos relacionados ao projeto selecionado no form  
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoCreate, self).get_context_data(**kwargs)
-        context["objetivos"] = Objetivo.objects.all()
+        context["objetivos"] = Objetivo.objects.all().order_by('numero')
         return context
                 
     def form_valid(self, form):
@@ -57,9 +57,10 @@ class ObjetivoProjetoUpdate(LoggedInMixin, UpdateView):
     form_class = ObjetivoForm
     model = Objetivo
     
+    # Refatorar!
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoUpdate, self).get_context_data(**kwargs)
-        context["objetivos"] = Objetivo.objects.all()
+        context["objetivos"] = Objetivo.objects.all().order_by('numero')
         return context
         
     success_url = reverse_lazy('new_objetivo_projeto')
@@ -67,4 +68,4 @@ class ObjetivoProjetoUpdate(LoggedInMixin, UpdateView):
 class ObjetivoProjetoDelete(LoggedInMixin, DeleteView):
     template_name = 'objetivo/crud/delete.html'
     model = Objetivo
-    success_url = reverse_lazy('list_objetivo_projeto')
+    success_url = reverse_lazy('new_objetivo_projeto')
