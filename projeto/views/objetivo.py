@@ -56,8 +56,13 @@ class ObjetivoProjetoUpdate(LoggedInMixin, UpdateView):
     template_name = 'objetivo/crud/form.html'
     form_class = ObjetivoForm
     model = Objetivo
-
-    success_url = reverse_lazy('list_objetivo_projeto')
+    
+    def get_context_data(self, **kwargs):
+        context = super(ObjetivoProjetoUpdate, self).get_context_data(**kwargs)
+        context["objetivos"] = Objetivo.objects.all()
+        return context
+        
+    success_url = reverse_lazy('new_objetivo_projeto')
 
 class ObjetivoProjetoDelete(LoggedInMixin, DeleteView):
     template_name = 'objetivo/crud/delete.html'
