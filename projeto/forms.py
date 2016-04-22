@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm, Textarea, TextInput
-from .models import Instituicao, Objetivo, Resultado, Projeto, ProjetoComponente, MetaProjeto, PlanoAcao, Atividade, Tarefa
+from .models import Instituicao, Objetivo, Resultado, Projeto, ProjetoComponente, MetaProjeto, PlanoAcao, Atividade, Tarefa, PalavraChave
 from localflavor.br.forms import BRCNPJField, BRPhoneNumberField, BRZipCodeField, BRStateSelect
 
     
@@ -158,3 +158,9 @@ class TarefaForm(forms.ModelForm):
             'peso_atividade': 'Peso na Atividade',
             'colaborador': 'Colaboradores',
         }
+        
+class PalavraChaveForm(forms.ModelForm):
+
+    class Meta:
+        model = PalavraChave
+        fields =('projeto', 'palavra')

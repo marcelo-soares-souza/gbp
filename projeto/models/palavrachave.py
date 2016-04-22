@@ -1,6 +1,9 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
+from smart_selects.db_fields import ChainedForeignKey
+
+from projeto.models.projeto import Projeto
 
 #
 # Palavras chaves dos projetos
@@ -8,8 +11,10 @@ from django.contrib.auth.models import User
 
 class PalavraChave(models.Model):
     
+    projeto = models.ForeignKey(Projeto, null=True, blank=True)
+    
     palavra = models.CharField(max_length=32, validators=[MinLengthValidator(2)], blank=True)
-    descricao = models.CharField(max_length=256, validators=[MinLengthValidator(3)], null=True, blank=True)
+    
     
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)

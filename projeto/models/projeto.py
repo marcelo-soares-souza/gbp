@@ -2,7 +2,6 @@ from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 
-from projeto.models.palavrachave import PalavraChave
 from projeto.models.tipo import Tipo
 from projeto.models.status import Status
 from projeto.models.instituicao import Instituicao
@@ -42,8 +41,6 @@ class Projeto(models.Model):
     instituicao_proponente = models.ForeignKey(Instituicao, related_name='proponente', null=True, blank=True)
     instituicao_executora = models.ForeignKey(Instituicao, related_name='executora', null=True, blank=True)
     
-    #Palavra Chave: Relação: Palavra Chave * - * Projeto
-    palavra_chave = models.ManyToManyField(PalavraChave, related_name='palavrachave', blank=True)
     
     #Projeto relacionado: é um auto-relacionamento, uma vez que um projeto cadastrado pode estar relacionado com outro. Projeto Relacionado 1 - * Projeto 
     projeto_relacionado = models.ForeignKey('self', related_name='relacionado', null=True, blank=True)
