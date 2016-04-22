@@ -21,5 +21,42 @@
         </div>
         
     </form>
+    
+    <div>
+        {% if not palavraschave %}
+
+            <h3> Nenhuma Palavra Chave Cadastrada. <a href="{% url 'new_palavrachave_projeto' %}">Criar uma Palavra Chave?</a> </h3>
+
+        {% else %}
+
+            {% include 'base/sort_links.html' %}
+
+            {% for palavrachave in palavraschave %}
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    
+                    <h3><a href="{{ palavrachave.get_palavrachave_detail_url }}">{{ palavrachave.palavra }}</a></h3>
+                    
+                    <b>Palavra: </b> {{ palavrachave.palavra }} 
+                    
+                    <br/>
+                    
+                    {% if request.user == palavrachave.criado_por or request.user.is_superuser %}
+                      <p>
+                        <a href="{{ palavrachave.get_palavrachave_update_url }}">Editar</a> | 
+                        <a href="{{ palavrachave.get_palavrachave_delete_url }}">Apagar</a>
+                      </p>
+                    {% endif %}
+
+                    <div class="data-atualizado">{{ palavrachave.data_atualizado }}</div>
+
+                  </li>
+                </ul>
+            {% endfor %}
+
+            {% include 'base/pagination.html' %}
+            
+        {% endif %} 
+    </div>
 
 {% endblock content %}

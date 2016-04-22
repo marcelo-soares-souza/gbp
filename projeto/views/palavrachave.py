@@ -5,7 +5,7 @@ from sortable_listview import SortableListView
 
 from projeto.views.login import LoggedInMixin
 from projeto.models import PalavraChave
-
+from projeto.forms import PalavraChaveForm
 
 #
 # View de PalavraChave - métodos
@@ -19,7 +19,7 @@ class PalavraChaveList(LoggedInMixin, SortableListView):
     paginate_by = 5
 
     template_name = 'palavrachave/crud/list.html'
-    context_object_name = 'palavraschaves'
+    context_object_name = 'palavraschave'
     model = PalavraChave
     fields = '__all__'
 
@@ -35,11 +35,17 @@ class PalavraChaveDetail(LoggedInMixin, DetailView):
     
 class PalavraChaveCreate(LoggedInMixin, CreateView):
     template_name = 'palavrachave/crud/form.html'
-    model = PalavraChave
-    fields = ['palavra']
+    form_class = PalavraChaveForm
 
-    success_url = reverse_lazy('list_palavrachave_projeto')
-
+    success_url = reverse_lazy('new_palavrachave_projeto')
+    
+    # Método responsável por listar os objetos da classe na página de form
+    #TODO: refatorar para que apresente apenas os resultados relacionados ao projeto selecionado no form  
+    def get_context_data(self, **kwargs):
+        context = super(PalavraChaveCreate, self).get_context_data(**kwargs)
+        context["palavraschave"] = PalavraChave.objects.all()
+        return context
+        
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
         return super(PalavraChaveCreate, self).form_valid(form)
@@ -49,10 +55,17 @@ class PalavraChaveCreate(LoggedInMixin, CreateView):
         
 class PalavraChaveUpdate(LoggedInMixin, UpdateView):
     template_name = 'palavrachave/crud/form.html'
+    form_class = PalavraChaveForm
     model = PalavraChave
-    fields = ['palavra']
 
-    success_url = reverse_lazy('list_palavrachave_projeto')
+    success_url = reverse_lazy('new_palavrachave_projeto')
+    
+    # Método responsável por listar os objetos da classe na página
+    #TODO: refatorar! código duplicado?! 
+    def get_context_data(self, **kwargs):
+        context = super(PalavraChaveUpdate, self).get_context_data(**kwargs)
+        context["palavraschave"] = PalavraChave.objects.all()
+        return context
     
 class PalavraChaveDelete(LoggedInMixin, DeleteView):
     template_name = 'palavrachave/crud/delete.html'

@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    {% if not palavraschaves %}
+    {% if not palavraschave %}
 
       <h3> Nenhuma Palavra Chave Cadastrada. <a href="{% url 'new_palavrachave_projeto' %}">Criar uma Palavra Chave?</a> </h3>
 
@@ -14,7 +14,7 @@
 
         {% include 'base/sort_links.html' %}
 
-        {% for palavrachave in palavraschaves %}
+        {% for palavrachave in palavraschave %}
             <ul class="list-group">
               <li class="list-group-item">
                 
