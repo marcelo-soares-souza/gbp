@@ -13,3 +13,4 @@ build/
 tests/report/
 *~
 *.sqlite3
+*.swp
