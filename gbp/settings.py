@@ -79,26 +79,20 @@ WSGI_APPLICATION = 'gbp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-'''
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'lbb_gbp_devel',                      # Or path to database file if using sqlite3.
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # Or path to database file if using sqlite3.
+        'NAME': 'lbb_gbp_devel',
         'USER': 'lbb_gbp_devel',
         'PASSWORD': '!lbb.gbp.d3v3l!',
-        'HOST': '10.188.181.10',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
+        # Empty for localhost through domain sockets or           '127.0.0.1'
+        # for localhost through TCP.
+        'HOST': '10.188.181.10',
         'PORT': '5432',                      # Set to empty string for default.
     }
 }
-'''
-
-DATABASES = {
-     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'development.sqlite3'),
-    }
-}
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -125,5 +119,5 @@ STATICFILES_DIRS = (
 
 # Login URLs
 
-LOGIN_URL= '/login/'
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'

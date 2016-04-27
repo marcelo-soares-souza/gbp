@@ -15,7 +15,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='palavrachave',
-            options={'ordering': ['palavra'], 'verbose_name': 'palavra chave', 'verbose_name_plural': 'palavras chave'},
+            options={'ordering': [
+                'palavra'], 'verbose_name': 'palavra chave', 'verbose_name_plural': 'palavras chave'},
         ),
         migrations.RemoveField(
             model_name='palavrachave',
@@ -28,7 +29,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='palavrachave',
             name='projeto',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
+            field=models.ForeignKey(
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
         ),
         migrations.AlterField(
             model_name='objetivo',
