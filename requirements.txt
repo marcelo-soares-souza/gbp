@@ -1,9 +1,7 @@
-Cython==0.23.4
-Django==1.9.4
-django-bootstrap3==7.0.0
+Cython==0.24
+Django==1.9.5
+django-bootstrap3==7.0.1
 django-localflavor==1.2
+django-smart-selects==1.2.2
 django-sortable-listview==0.41
-numpy==1.10.4
-wheel==0.29.0
 psycopg2==2.6.1
-django-smart-selects-1.2.2
