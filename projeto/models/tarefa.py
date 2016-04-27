@@ -11,17 +11,20 @@ from projeto.models.atividade import Atividade
 # Tarefas
 #
 
+
 class Tarefa(models.Model):
-    
-    #Atributos
+
+    # Atributos
     numero = models.PositiveIntegerField(blank=True)
-    nome = models.CharField(max_length=100, validators=[MinLengthValidator(2)], blank=True)
-    indicador_fisico = models.CharField(max_length=32, validators=[MinLengthValidator(2)], blank=True)
+    nome = models.CharField(max_length=100, validators=[
+                            MinLengthValidator(2)], blank=True)
+    indicador_fisico = models.CharField(max_length=32, validators=[
+                                        MinLengthValidator(2)], blank=True)
     peso_atividade = models.PositiveIntegerField(blank=True)
-    
-    #Relacionamentos
+
+    # Relacionamentos
     projeto = models.ForeignKey(Projeto, blank=True)
-    
+
     planoacao = ChainedForeignKey(
         PlanoAcao,
         chained_field="projeto",
@@ -29,7 +32,7 @@ class Tarefa(models.Model):
         show_all=False,
         auto_choose=False
     )
-    
+
     atividade = ChainedForeignKey(
         Atividade,
         chained_field="planoacao",
@@ -37,10 +40,12 @@ class Tarefa(models.Model):
         show_all=False,
         auto_choose=False
     )
-    
-    responsavel = models.ForeignKey(User, null=True, blank=True, related_name='responsavel_tarefa')
-    colaborador = models.ManyToManyField(User, blank=True, related_name='colaborador_tarefa')
-    
+
+    responsavel = models.ForeignKey(
+        User, null=True, blank=True, related_name='responsavel_tarefa')
+    colaborador = models.ManyToManyField(
+        User, blank=True, related_name='colaborador_tarefa')
+
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
     criado_por = models.ForeignKey(User, null=True, blank=True)
@@ -58,9 +63,6 @@ class Tarefa(models.Model):
 
     def get_tarefa_delete_url(self):
         return u"/tarefa/delete/%i" % self.id
-    
-    
+
     def __str__(self):
         return 'TF%d: %s' % (self.numero, self.nome)
-
-        

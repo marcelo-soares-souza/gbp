@@ -8,17 +8,18 @@ from projeto.models.projeto import Projeto
 # Objetivo Específicos de Projetos
 #
 
+
 class Objetivo(models.Model):
-    
-    #Atributos
-    #Número do Objetivo, sequencial e único, mas não é o mesmo número que o id
+
+    # Atributos
+    # Número do Objetivo, sequencial e único, mas não é o mesmo número que o id
     numero = models.PositiveIntegerField()
-    
-    #Descrição
+
+    # Descrição
     descricao = models.TextField(null=True, blank=True)
-    
-    #Relacionamento 
-    #Projeto
+
+    # Relacionamento
+    # Projeto
     projeto = models.ForeignKey(Projeto)
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
@@ -38,9 +39,6 @@ class Objetivo(models.Model):
 
     def get_objetivo_delete_url(self):
         return u"/objetivo/delete/%i" % self.id
-    
-    
+
     def __str__(self):
         return 'OE%d: %s' % (self.numero, self.descricao)
-
-        

@@ -6,11 +6,13 @@ from sortable_listview import SortableListView
 from projeto.views.login import LoggedInMixin
 from projeto.models import Tarefa
 from projeto.forms import TarefaForm
+
 #
 #
 # Tarefas
 #
 #
+
 
 class TarefaList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {'nome': {'default_direction': '', 'verbose_name': 'Nome'},
@@ -26,6 +28,7 @@ class TarefaList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_tarefa_projeto')
 
+
 class TarefaDetail(LoggedInMixin, DetailView):
     template_name = 'tarefa/crud/detail.html'
     context_object_name = 'tarefa'
@@ -33,6 +36,7 @@ class TarefaDetail(LoggedInMixin, DetailView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_tarefa_projeto')
+
 
 class TarefaCreate(LoggedInMixin, CreateView):
     template_name = 'tarefa/crud/form.html'
@@ -45,7 +49,8 @@ class TarefaCreate(LoggedInMixin, CreateView):
         return super(TarefaCreate, self).form_valid(form)
 
     def get_initial(self):
-        return { 'criado_por': self.request.user.id }
+        return {'criado_por': self.request.user.id}
+
 
 class TarefaUpdate(LoggedInMixin, UpdateView):
     template_name = 'tarefa/crud/form.html'
@@ -53,6 +58,7 @@ class TarefaUpdate(LoggedInMixin, UpdateView):
     model = Tarefa
 
     success_url = reverse_lazy('list_tarefa_projeto')
+
 
 class TarefaDelete(LoggedInMixin, DeleteView):
     template_name = 'tarefa/crud/delete.html'

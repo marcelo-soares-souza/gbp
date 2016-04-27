@@ -7,15 +7,23 @@ from localflavor.br.br_states import STATE_CHOICES
 # Instituicão
 #
 
+
 class Instituicao(models.Model):
 
-    sigla = models.CharField(max_length=256, validators=[MinLengthValidator(2)], blank=True)
-    nome = models.CharField(max_length=256, validators=[MinLengthValidator(5)], blank=True)
-    site = models.CharField(max_length=128, validators=[MinLengthValidator(5)], blank=True)
-    email = models.CharField(max_length=256, validators=[EmailValidator()], blank=True)
-    endereco = models.CharField(max_length=256, validators=[MinLengthValidator(2)], blank=True)
-    cidade = models.CharField(max_length=256, validators=[MinLengthValidator(2)], blank=True)
-    descricao = models.TextField(max_length=512, validators=[MinLengthValidator(10)], blank=True)
+    sigla = models.CharField(max_length=256, validators=[
+                             MinLengthValidator(2)], blank=True)
+    nome = models.CharField(max_length=256, validators=[
+                            MinLengthValidator(5)], blank=True)
+    site = models.CharField(max_length=128, validators=[
+                            MinLengthValidator(5)], blank=True)
+    email = models.CharField(max_length=256, validators=[
+                             EmailValidator()], blank=True)
+    endereco = models.CharField(max_length=256, validators=[
+                                MinLengthValidator(2)], blank=True)
+    cidade = models.CharField(max_length=256, validators=[
+                              MinLengthValidator(2)], blank=True)
+    descricao = models.TextField(max_length=512, validators=[
+                                 MinLengthValidator(10)], blank=True)
     cnpj = models.CharField(max_length=14, blank=True)
     telefone = models.CharField(max_length=16, blank=True)
     estado = models.CharField(max_length=16, choices=STATE_CHOICES, blank=True)

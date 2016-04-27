@@ -12,10 +12,12 @@ from projeto.models.projeto import Projeto
 class ProjetoComponente(models.Model):
 
     numero = models.PositiveIntegerField(blank=True)
-    nome = models.CharField(max_length=256, validators=[MinLengthValidator(5)], blank=True)
-    responsavel = models.ForeignKey(User, null=True, blank=True, related_name='responsavel')
+    nome = models.CharField(max_length=256, validators=[
+                            MinLengthValidator(5)], blank=True)
+    responsavel = models.ForeignKey(
+        User, null=True, blank=True, related_name='responsavel')
     projeto = models.ForeignKey(Projeto)
-    
+
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
     criado_por = models.ForeignKey(User, null=True, blank=True)
@@ -33,8 +35,6 @@ class ProjetoComponente(models.Model):
 
     def get_projetocomponente_delete_url(self):
         return u"/projetocomponente/delete/%i" % self.id
-    
-    
+
     def __str__(self):
         return 'PC%d: %s' % (self.numero, self.nome)
-

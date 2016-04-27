@@ -13,9 +13,12 @@ from projeto.forms import InstituicaoForm
 #
 #
 
+
 class InstituicaoProjetoList(LoggedInMixin, SortableListView):
-    allowed_sort_fields = {'nome': {'default_direction': '', 'verbose_name': 'Nome'},
-                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
+    allowed_sort_fields = {'nome': {'default_direction': '',
+                                    'verbose_name': 'Nome'},
+                           'data_atualizado': {'default_direction': '',
+                                               'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'nome'
     paginate_by = 5
@@ -27,6 +30,7 @@ class InstituicaoProjetoList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_instituicao_projeto')
 
+
 class InstituicaoProjetoDetail(LoggedInMixin, DetailView):
     template_name = 'instituicao/crud/detail.html'
     context_object_name = 'instituicao'
@@ -34,6 +38,7 @@ class InstituicaoProjetoDetail(LoggedInMixin, DetailView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_instituicao_projeto')
+
 
 class InstituicaoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'instituicao/crud/form.html'
@@ -45,7 +50,8 @@ class InstituicaoProjetoCreate(LoggedInMixin, CreateView):
         return super(InstituicaoProjetoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return { 'criado_por': self.request.user.id }
+        return {'criado_por': self.request.user.id}
+
 
 class InstituicaoProjetoUpdate(LoggedInMixin, UpdateView):
     template_name = 'instituicao/crud/form.html'
@@ -53,6 +59,7 @@ class InstituicaoProjetoUpdate(LoggedInMixin, UpdateView):
     model = Instituicao
 
     success_url = reverse_lazy('list_instituicao_projeto')
+
 
 class InstituicaoProjetoDelete(LoggedInMixin, DeleteView):
     template_name = 'instituicao/crud/delete.html'

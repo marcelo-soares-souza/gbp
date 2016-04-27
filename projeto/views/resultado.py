@@ -7,9 +7,6 @@ from projeto.views.login import LoggedInMixin
 from projeto.models import Resultado
 from projeto.forms import ResultadoForm
 
-'''
-
-'''
 
 class ResultadoProjetoList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {'numero': {'default_direction': '', 'verbose_name': 'Numero'},
@@ -25,6 +22,7 @@ class ResultadoProjetoList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_resultado_projeto')
 
+
 class ResultadoProjetoDetail(LoggedInMixin, DetailView):
     template_name = 'resultado/crud/detail.html'
     context_object_name = 'resultado'
@@ -33,25 +31,29 @@ class ResultadoProjetoDetail(LoggedInMixin, DetailView):
 
     success_url = reverse_lazy('list_resultado_projeto')
 
+
 class ResultadoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'resultado/crud/form.html'
     form_class = ResultadoForm
-    
+
     success_url = reverse_lazy('new_resultado_projeto')
-    
+
     # Método responsável por listar os objetos da classe na página de form
-    #TODO: refatorar para que apresente apenas os resultados relacionados ao projeto selecionado no form  
+    # TODO: refatorar para que apresente apenas os resultados relacionados ao
+    # projeto selecionado no form
     def get_context_data(self, **kwargs):
-        context = super(ResultadoProjetoCreate, self).get_context_data(**kwargs)
+        context = super(ResultadoProjetoCreate,
+                        self).get_context_data(**kwargs)
         context["resultados"] = Resultado.objects.all().order_by('numero')
         return context
-    
+
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
         return super(ResultadoProjetoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return { 'criado_por': self.request.user.id }
+        return {'criado_por': self.request.user.id}
+
 
 class ResultadoProjetoUpdate(LoggedInMixin, UpdateView):
     template_name = 'resultado/crud/form.html'
@@ -59,13 +61,15 @@ class ResultadoProjetoUpdate(LoggedInMixin, UpdateView):
     model = Resultado
 
     success_url = reverse_lazy('list_resultado_projeto')
-    
+
     # Método responsável por listar os objetos da classe na página
-    #TODO: refatorar! código duplicado?! 
+    # TODO: refatorar! código duplicado?!
     def get_context_data(self, **kwargs):
-        context = super(ResultadoProjetoUpdate, self).get_context_data(**kwargs)
+        context = super(ResultadoProjetoUpdate,
+                        self).get_context_data(**kwargs)
         context["resultados"] = Resultado.objects.all().order_by('numero')
         return context
+
 
 class ResultadoProjetoDelete(LoggedInMixin, DeleteView):
     template_name = 'resultado/crud/delete.html'

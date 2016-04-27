@@ -13,6 +13,7 @@ from projeto.forms import ProjetoComponenteForm
 #
 #
 
+
 class ProjetoComponenteList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {'nome': {'default_direction': '', 'verbose_name': 'Nome'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
@@ -27,6 +28,7 @@ class ProjetoComponenteList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_projetocomponente_projeto')
 
+
 class ProjetoComponenteDetail(LoggedInMixin, DetailView):
     template_name = 'projetocomponente/crud/detail.html'
     context_object_name = 'projetocomponente'
@@ -34,6 +36,7 @@ class ProjetoComponenteDetail(LoggedInMixin, DetailView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_projetocomponente_projeto')
+
 
 class ProjetoComponenteCreate(LoggedInMixin, CreateView):
     template_name = 'projetocomponente/crud/form.html'
@@ -46,7 +49,8 @@ class ProjetoComponenteCreate(LoggedInMixin, CreateView):
         return super(ProjetoComponenteCreate, self).form_valid(form)
 
     def get_initial(self):
-        return { 'criado_por': self.request.user.id }
+        return {'criado_por': self.request.user.id}
+
 
 class ProjetoComponenteUpdate(LoggedInMixin, UpdateView):
     template_name = 'projetocomponente/crud/form.html'
@@ -54,6 +58,7 @@ class ProjetoComponenteUpdate(LoggedInMixin, UpdateView):
     model = ProjetoComponente
 
     success_url = reverse_lazy('list_projetocomponente_projeto')
+
 
 class ProjetoComponenteDelete(LoggedInMixin, DeleteView):
     template_name = 'projetocomponente/crud/delete.html'

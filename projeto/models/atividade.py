@@ -10,19 +10,22 @@ from projeto.models.planoacao import PlanoAcao
 # Atividade
 #
 
+
 class Atividade(models.Model):
-    
-    #Atributos
+
+    # Atributos
     numero = models.PositiveIntegerField(blank=True)
-    nome = models.CharField(max_length=100, validators=[MinLengthValidator(2)], blank=True)
-    indicador_fisico = models.CharField(max_length=32, validators=[MinLengthValidator(2)],blank=True)
+    nome = models.CharField(max_length=100, validators=[
+                            MinLengthValidator(2)], blank=True)
+    indicador_fisico = models.CharField(max_length=32, validators=[
+                                        MinLengthValidator(2)], blank=True)
     peso_planoacao = models.PositiveIntegerField(blank=True)
-    data_inicio =  models.DateField(blank=True)
-    data_fim =  models.DateField(blank=True)
-    
-    #Relacionamentos
+    data_inicio = models.DateField(blank=True)
+    data_fim = models.DateField(blank=True)
+
+    # Relacionamentos
     projeto = models.ForeignKey(Projeto, blank=True)
-    
+
     planoacao = ChainedForeignKey(
         PlanoAcao,
         chained_field="projeto",
@@ -30,9 +33,11 @@ class Atividade(models.Model):
         show_all=False,
         auto_choose=False
     )
-    
-    responsavel = models.ForeignKey(User, null=True, blank=True, related_name='responsavel_atividade')
-    colaborador = models.ManyToManyField(User, blank=True, related_name='colaborador_atividade')
+
+    responsavel = models.ForeignKey(
+        User, null=True, blank=True, related_name='responsavel_atividade')
+    colaborador = models.ManyToManyField(
+        User, blank=True, related_name='colaborador_atividade')
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
@@ -51,9 +56,6 @@ class Atividade(models.Model):
 
     def get_atividade_delete_url(self):
         return u"/atividade/delete/%i" % self.id
-    
-    
+
     def __str__(self):
         return 'AT%d: %s' % (self.numero, self.nome)
-
-        

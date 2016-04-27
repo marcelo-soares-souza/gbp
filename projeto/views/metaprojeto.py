@@ -13,9 +13,12 @@ from projeto.forms import MetaProjetoForm
 #
 #
 
+
 class MetaProjetoList(LoggedInMixin, SortableListView):
-    allowed_sort_fields = {'nome': {'default_direction': '', 'verbose_name': 'Nome'},
-                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
+    allowed_sort_fields = {'nome': {'default_direction': '',
+                                    'verbose_name': 'Nome'},
+                           'data_atualizado': {'default_direction': '',
+                                               'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'nome'
     paginate_by = 5
@@ -26,7 +29,8 @@ class MetaProjetoList(LoggedInMixin, SortableListView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_metaprojeto_projeto')
-    
+
+
 class MetaProjetoDetail(LoggedInMixin, DetailView):
     template_name = 'metaprojeto/crud/detail.html'
     context_object_name = 'metaprojeto'
@@ -34,6 +38,7 @@ class MetaProjetoDetail(LoggedInMixin, DetailView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_metaprojeto_projeto')
+
 
 class MetaProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'metaprojeto/crud/form.html'
@@ -46,7 +51,8 @@ class MetaProjetoCreate(LoggedInMixin, CreateView):
         return super(MetaProjetoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return { 'criado_por': self.request.user.id }
+        return {'criado_por': self.request.user.id}
+
 
 class MetaProjetoUpdate(LoggedInMixin, UpdateView):
     template_name = 'metaprojeto/crud/form.html'
@@ -54,6 +60,7 @@ class MetaProjetoUpdate(LoggedInMixin, UpdateView):
     model = MetaProjeto
 
     success_url = reverse_lazy('list_metaprojeto_projeto')
+
 
 class MetaProjetoDelete(LoggedInMixin, DeleteView):
     template_name = 'metaprojeto/crud/delete.html'

@@ -9,13 +9,14 @@ from projeto.models.projeto import Projeto
 # Palavras chaves dos projetos
 #
 
+
 class PalavraChave(models.Model):
-    
+
     projeto = models.ForeignKey(Projeto, null=True, blank=True)
-    
-    palavra = models.CharField(max_length=32, validators=[MinLengthValidator(2)], blank=True)
-    
-    
+
+    palavra = models.CharField(max_length=32, validators=[
+                               MinLengthValidator(2)], blank=True)
+
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
     criado_por = models.ForeignKey(User, null=True, blank=True)
@@ -27,10 +28,10 @@ class PalavraChave(models.Model):
 
     def get_palavrachave_detail_url(self):
         return u"/palavrachave/detail/%i" % self.id
-    
+
     def get_palavrachave_update_url(self):
         return u"/palavrachave/update/%i" % self.id
-        
+
     def get_palavrachave_delete_url(self):
         return u"/palavrachave/delete/%i" % self.id
 

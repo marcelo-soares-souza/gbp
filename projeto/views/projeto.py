@@ -7,8 +7,6 @@ from projeto.views.login import LoggedInMixin
 from projeto.models import Projeto
 from projeto.forms import ProjetoForm
 
-'''
-'''
 
 class ProjetoList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {'sigla': {'default_direction': '', 'verbose_name': 'Sigla'},
@@ -32,10 +30,11 @@ class ProjetoDetail(LoggedInMixin, DetailView):
 
     success_url = reverse_lazy('list_projeto')
 
+
 class ProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'projeto/crud/form.html'
     form_class = ProjetoForm
-    
+
     success_url = reverse_lazy('list_projeto')
 
     def form_valid(self, form):
@@ -43,7 +42,8 @@ class ProjetoCreate(LoggedInMixin, CreateView):
         return super(ProjetoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return { 'criado_por': self.request.user.id }
+        return {'criado_por': self.request.user.id}
+
 
 class ProjetoUpdate(LoggedInMixin, UpdateView):
     template_name = 'projeto/crud/form.html'
@@ -51,6 +51,7 @@ class ProjetoUpdate(LoggedInMixin, UpdateView):
     model = Projeto
 
     success_url = reverse_lazy('list_projeto')
+
 
 class ProjetoDelete(LoggedInMixin, DeleteView):
     template_name = 'projeto/crud/delete.html'

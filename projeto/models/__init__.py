@@ -13,4 +13,6 @@ from projeto.models.planoacao import PlanoAcao
 from projeto.models.atividade import Atividade
 from projeto.models.tarefa import Tarefa
 
-__all__ = ['tipo', 'instituicao', 'projeto', 'objetivo', 'resultado', 'status', 'palavrachave', 'metaprojeto', 'projetocomponente', 'planoacao', 'atividade', 'tarefa']
+__all__ = ['tipo', 'instituicao', 'projeto', 'objetivo',
+           'resultado', 'status', 'palavrachave', 'metaprojeto',
+           'projetocomponente', 'planoacao', 'atividade', 'tarefa']

@@ -4,8 +4,8 @@ from django.shortcuts import render
 
 from projeto.views.home import Home
 from projeto.views.tipo import TipoProjetoList, TipoProjetoDetail, TipoProjetoCreate, TipoProjetoUpdate, TipoProjetoDelete
-from projeto.views.instituicao import InstituicaoProjetoList,InstituicaoProjetoDetail,InstituicaoProjetoCreate,InstituicaoProjetoUpdate,InstituicaoProjetoDelete
-from projeto.views.projeto import ProjetoList,ProjetoDetail,ProjetoCreate,ProjetoUpdate,ProjetoDelete
+from projeto.views.instituicao import InstituicaoProjetoList, InstituicaoProjetoDetail, InstituicaoProjetoCreate, InstituicaoProjetoUpdate, InstituicaoProjetoDelete
+from projeto.views.projeto import ProjetoList, ProjetoDetail, ProjetoCreate, ProjetoUpdate, ProjetoDelete
 from projeto.views.objetivo import ObjetivoProjetoList, ObjetivoProjetoDetail, ObjetivoProjetoCreate, ObjetivoProjetoUpdate, ObjetivoProjetoDelete
 from projeto.views.resultado import ResultadoProjetoList, ResultadoProjetoDetail, ResultadoProjetoCreate, ResultadoProjetoUpdate, ResultadoProjetoDelete
 from projeto.views.palavrachave import PalavraChaveList, PalavraChaveDetail, PalavraChaveCreate, PalavraChaveUpdate, PalavraChaveDelete
@@ -21,10 +21,10 @@ __all__ = ['Home',
            'ProjetoList', 'ProjetoDetail', 'ProjetoCreate', 'ProjetoUpdate', 'ProjetoDelete',
            'ObjetivoProjetoList', 'ObjetivoProjetoDetail', 'ObjetivoProjetoCreate', 'ObjetivoProjetoUpdate', 'ObjetivoProjetoDelete',
            'ResultadoProjetoList', 'ResultadoProjetoDetail', 'ResultadoProjetoCreate', 'ResultadoProjetoUpdate', 'ResultadoProjetoDelete',
-           'PalavraChaveList', 'PalavraChaveDetail', 'PalavraChaveCreate', 'PalavraChaveUpdate', 'PalavraChaveDelete', 
+           'PalavraChaveList', 'PalavraChaveDetail', 'PalavraChaveCreate', 'PalavraChaveUpdate', 'PalavraChaveDelete',
            'MetaProjetoList', 'MetaProjetoDetail', 'MetaProjetoCreate', 'MetaProjetoUpdate', 'MetaProjetoDelete',
            'ProjetoComponenteList', 'ProjetoComponenteDetail', 'ProjetoComponenteCreate', 'ProjetoComponenteUpdate', 'ProjetoComponenteDelete',
            'PlanoAcaoList', 'PlanoAcaoDetail', 'PlanoAcaoCreate', 'PlanoAcaoUpdate', 'PlanoAcaoDelete',
            'AtividadeList', 'AtividadeDetail', 'AtividadeCreate', 'AtividadeUpdate', 'AtividadeDelete',
            'TarefaList', 'TarefaDetail', 'TarefaCreate', 'TarefaUpdate', 'TarefaDelete'
-          ]
+           ]

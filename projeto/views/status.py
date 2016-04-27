@@ -12,9 +12,12 @@ from projeto.models import Status
 #
 #
 
+
 class StatusProjetoList(LoggedInMixin, SortableListView):
-    allowed_sort_fields = {'nome': {'default_direction': '', 'verbose_name': 'Nome'},
-                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
+    allowed_sort_fields = {'nome': {'default_direction': '',
+                                    'verbose_name': 'Nome'},
+                           'data_atualizado': {'default_direction': '',
+                                               'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'nome'
     paginate_by = 5
@@ -26,6 +29,7 @@ class StatusProjetoList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_status_projeto')
 
+
 class StatusProjetoDetail(LoggedInMixin, DetailView):
     template_name = 'status/crud/detail.html'
     context_object_name = 'status'
@@ -33,6 +37,7 @@ class StatusProjetoDetail(LoggedInMixin, DetailView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_status_projeto')
+
 
 class StatusProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'status/crud/form.html'
@@ -46,7 +51,8 @@ class StatusProjetoCreate(LoggedInMixin, CreateView):
         return super(StatusProjetoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return { 'criado_por': self.request.user.id }
+        return {'criado_por': self.request.user.id}
+
 
 class StatusProjetoUpdate(LoggedInMixin, UpdateView):
     template_name = 'status/crud/form.html'
@@ -54,6 +60,7 @@ class StatusProjetoUpdate(LoggedInMixin, UpdateView):
     fields = ['nome']
 
     success_url = reverse_lazy('list_status_projeto')
+
 
 class StatusProjetoDelete(LoggedInMixin, DeleteView):
     template_name = 'status/crud/delete.html'

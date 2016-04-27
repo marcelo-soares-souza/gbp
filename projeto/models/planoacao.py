@@ -11,34 +11,35 @@ from projeto.models.resultado import Resultado
 # Plano de Ação
 #
 
+
 class PlanoAcao(models.Model):
-    
-    #Atributos
+
+    # Atributos
     numero = models.PositiveIntegerField(blank=True)
     nome = models.CharField(max_length=100, validators=[MinLengthValidator(2)])
-    responsavel = models.ForeignKey(User, null=True, blank=True, related_name='responsavel_plano')
-    codigo_seg = models.CharField(max_length=32, validators=[MinLengthValidator(2)], blank=True)
-    data_inicio =  models.DateField(blank=True)
-    data_fim =  models.DateField(blank=True)
-    
-    #Relacionamentos
+    responsavel = models.ForeignKey(
+        User, null=True, blank=True, related_name='responsavel_plano')
+    codigo_seg = models.CharField(max_length=32, validators=[
+                                  MinLengthValidator(2)], blank=True)
+    data_inicio = models.DateField(blank=True)
+    data_fim = models.DateField(blank=True)
+
+    # Relacionamentos
     projeto = models.ForeignKey(Projeto, blank=True)
-    
+
     projeto_componente = ChainedForeignKey(
-        ProjetoComponente, 
+        ProjetoComponente,
         chained_field="projeto",
         chained_model_field="projeto",
         show_all=False,
-        auto_choose=False        
+        auto_choose=False
     )
-    
-    
+
     resultado = ChainedManyToManyField(
-        Resultado, 
+        Resultado,
         chained_field="projeto",
         chained_model_field="projeto"
     )
-
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
@@ -57,9 +58,6 @@ class PlanoAcao(models.Model):
 
     def get_planoacao_delete_url(self):
         return u"/planoacao/delete/%i" % self.id
-    
-    
+
     def __str__(self):
         return 'PA%d: %s' % (self.numero, self.nome)
-
-        

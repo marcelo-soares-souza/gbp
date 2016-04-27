@@ -13,6 +13,7 @@ from projeto.forms import AtividadeForm
 #
 #
 
+
 class AtividadeList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {'nome': {'default_direction': '', 'verbose_name': 'Nome'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
@@ -27,6 +28,7 @@ class AtividadeList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_atividade_projeto')
 
+
 class AtividadeDetail(LoggedInMixin, DetailView):
     template_name = 'atividade/crud/detail.html'
     context_object_name = 'atividade'
@@ -34,6 +36,7 @@ class AtividadeDetail(LoggedInMixin, DetailView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_atividade_projeto')
+
 
 class AtividadeCreate(LoggedInMixin, CreateView):
     template_name = 'atividade/crud/form.html'
@@ -46,7 +49,8 @@ class AtividadeCreate(LoggedInMixin, CreateView):
         return super(AtividadeCreate, self).form_valid(form)
 
     def get_initial(self):
-        return { 'criado_por': self.request.user.id }
+        return {'criado_por': self.request.user.id}
+
 
 class AtividadeUpdate(LoggedInMixin, UpdateView):
     template_name = 'atividade/crud/form.html'
@@ -54,6 +58,7 @@ class AtividadeUpdate(LoggedInMixin, UpdateView):
     model = Atividade
 
     success_url = reverse_lazy('list_atividade_projeto')
+
 
 class AtividadeDelete(LoggedInMixin, DeleteView):
     template_name = 'atividade/crud/delete.html'
