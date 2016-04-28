@@ -6,6 +6,8 @@
 
 {% block content %}
 
+    {% include "base/menu-projetos.html" %} <br/>
+
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
         
@@ -23,3 +25,4 @@
 
     
 {% endblock content %}
+	

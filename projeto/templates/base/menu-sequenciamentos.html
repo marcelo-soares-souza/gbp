@@ -1,0 +1,6 @@
+<script> $(document).ready(function() { $('.nav-tabs a[id="{{request.resolver_match.url_name}}"]').tab('show'); }); </script>
+  <ul class="nav nav-tabs" id="myTab" >
+            {% if request.user.is_authenticated %}
+                <li class="tab-title"><a id="new_tiposequenciamento" href="{% url 'new_tiposequenciamento' %}#">Tipos de Sequenciamento</a></li>
+            {% endif %}
+  </ul>

@@ -1,42 +1,44 @@
-<script> $(document).ready(function() { $('.nav-tabs a[id="{{request.resolver_match.url_name}}"]').tab('show'); }); </script>
-
 <div class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <ul class="nav nav-tabs" id="myTab" >
+  <div class="container">
 
-            <li class="tab-title"><a id="home" href="{% url 'home' %}#">Início</a></li>
-
-            {% if request.user.is_authenticated %}
-                <li class="tab-title"><a id="new_projeto" href="{% url 'new_projeto' %}#">Projetos</a></li>
-                <li class="tab-title"><a id="new_objetivo_projeto" href="{% url 'new_objetivo_projeto' %}#">Obj. Específicos</a>
-                <li class="tab-title"><a id="new_resultado_projeto" href="{% url 'new_resultado_projeto' %}#">Resultados</a></li>
-                <li class="tab-title"><a id="new_palavrachave_projeto" href="{% url 'new_palavrachave_projeto' %}#">Keywords</a></li>
-                <li class="tab-title"><a id="new_projetocomponente_projeto" href="{% url 'new_projetocomponente_projeto' %}#">PCs</a></li>
-                <li class="tab-title"><a id="new_metaprojeto_projeto" href="{% url 'new_metaprojeto_projeto' %}#">Metas</a></li>
-                <li class="tab-title"><a id="new_planoacao_projeto" href="{% url 'new_planoacao_projeto' %}#">PAs</a></li>
-                <li class="tab-title"><a id="new_atividade_projeto" href="{% url 'new_atividade_projeto' %}#">Atividades</a></li>
-                <li class="tab-title"><a id="new_tarefa_projeto" href="{% url 'new_tarefa_projeto' %}#">Tarefas</a></li>
-                <li class="tab-title"><a id="new_instituicao_projeto" href="{% url 'new_instituicao_projeto' %}#">Instituições</a></li>
-                <li class="tab-title"><a id="new_tiposequenciamento" href="{% url 'new_tiposequenciamento' %}#">Tipo Sequenciamento</a></li>
-
-                <!--
-                  <li><a href="#">Equipe</a></li>
-                  <li><a href="#">Vínculos</a></li>
-                  <li><a href="#">Publicar</a></li>
-                  <li><a href="#">Ajuda</a></li>
-              -->
-            {% endif %}
-
-            {% if request.user.is_staff %}
-                <li><a href="/admin#">Perfis e Permissões</a></li>
-                <!-- <li><a href="#">Autorizar publicação</a></li> -->
-            {% endif %}
-
-            {% if request.user.is_authenticated %}
-                <li><a id="logout" href="{% url 'logout' %}#">Logout ({{ request.user.username }})</a></li>
-            {% else %}
-                <li><a id="login" href="{% url 'login' %}#">Login</a></li>
-            {% endif %}
-        </ul>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'home' %}">Início</a>
     </div>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li class="menu-item dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projetos<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+              <li class="menu-item dropdown">
+                  <a href="{% url 'new_projeto' %}">Gerenciar</a>
+              </li>
+          </ul>
+        </li>
+
+        <li class="menu-item dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sequenciamento<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+              <li class="menu-item dropdown">
+                  <a href="{% url 'new_tiposequenciamento' %}">Gerenciar</a>
+              </li>
+          </ul>
+        </li>
+        
+        {% if request.user.is_authenticated %}
+          <li><a href="{% url 'logout' %}">Logout ({{ request.user.username }})</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+
+      </ul>
+    </div>
+
+  </div>
 </div>
