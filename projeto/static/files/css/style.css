@@ -1,3 +1,8 @@
+.data-list {
+   text-align: center;
+   min-height: 200px;
+}
+
 .data-atualizado {
   float: right;
   margin-top: -10px;

@@ -1,0 +1,51 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Projetos - Cadastrar/Editar Tipo de Sequenciamento</title> {% endblock title %}
+
+{% block content %}
+
+    <form class="form-horizontal" method="POST">
+        {% csrf_token %}
+        
+        {% bootstrap_form form layout='horizontal' %}
+        
+        <div class="modal-footer">
+            {% buttons %}
+                <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+            {% endbuttons %}
+        </div>
+    
+    </form>
+    
+    <div class="data-list">
+        {% if not tiposequenciamentos %}
+
+            <h3> Nenhum Tipo de Sequenciamento Cadastrado. </h3>
+
+        {% else %}
+
+        {% for tiposequenciamento in tiposequenciamentos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+                
+                <h3><a href="{{ tiposequenciamento.get_tiposequenciamento_detail_url }}">{{ tiposequenciamento }}</a></h3>
+                
+                {% if request.user == tiposequenciamento.criado_por or request.user.is_superuser %}
+                <br/>
+                  <p>
+                    <a href="{{ tiposequenciamento.get_tiposequenciamento_update_url }}">Editar</a> | 
+                    <a href="{{ tiposequenciamento.get_tiposequenciamento_delete_url }}">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ tiposequenciamento.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+        
+    {% endif %} 
+
+{% endblock content %}

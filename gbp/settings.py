@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'sortable_listview',
     'smart_selects',
     'projeto',
+    'sequenciamento',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -82,16 +83,12 @@ WSGI_APPLICATION = 'gbp.wsgi.application'
 
 DATABASES = {
     'default': {
-        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # Or path to database file if using sqlite3.
-        'NAME': 'lbb_gbp_devel',
-        'USER': 'lbb_gbp_devel',
-        'PASSWORD': '!lbb.gbp.d3v3l!',
-        # Empty for localhost through domain sockets or           '127.0.0.1'
-        # for localhost through TCP.
+        'NAME': 'lbb_gbp_development',
+        'USER': 'lbb_gbp_development',
+        'PASSWORD': 'lbb_gbp_development',
         'HOST': '10.188.181.10',
-        'PORT': '5432',                      # Set to empty string for default.
+        'PORT': '5432',
     }
 }
 

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 
 from projeto.views import *
+from sequenciamento.views import *
 
 urlpatterns = [
 
@@ -139,6 +140,20 @@ urlpatterns = [
         TarefaUpdate.as_view(), name='update_tarefa_projeto'),
     url(r'^tarefa/delete/(?P<pk>\d+)/$',
         TarefaDelete.as_view(), name='delete_tarefa_projeto'),
+
+    # Views de Tipo Sequenciamento
+    url(r'^tiposequenciamento/$', TipoSequenciamentoList.as_view(),
+        name='home_tiposequenciamento'),
+    url(r'^tiposequenciamento/new/$', TipoSequenciamentoCreate.as_view(),
+        name='new_tiposequenciamento'),
+    url(r'^tiposequenciamento/list/', TipoSequenciamentoList.as_view(),
+        name='list_tiposequenciamento'),
+    url(r'^tiposequenciamento/detail/(?P<pk>\d+)/$',
+        TipoSequenciamentoDetail.as_view(), name='detail_tiposequenciamento'),
+    url(r'^tiposequenciamento/update/(?P<pk>\d+)/$',
+        TipoSequenciamentoUpdate.as_view(), name='update_tiposequenciamento'),
+    url(r'^tiposequenciamento/delete/(?P<pk>\d+)/$',
+        TipoSequenciamentoDelete.as_view(), name='delete_tiposequenciamento'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),
