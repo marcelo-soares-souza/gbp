@@ -1,55 +1,39 @@
+{% load bootstrap3 %}
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>      
+<head>
     <meta charset="utf-8">
-    
-    <!-- Latest JQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    
-    {% load bootstrap3 %}
-    {% bootstrap_css %}
 
-    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script type="text/javascript" src="/static/smart-selects/admin/js/chainedm2m.js"></script>
 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/files/css/style.css" />
-    
 
     {% block title %} <title>Projetos</title> {% endblock title %}
 
   <style> body { padding-top: 70px; } </style>
-    
+
 </head>
 
 <body>
-      
+
       <br>
       {% include "base/menu.html" %}
       <br/>
+
       <div class="container">
-        
+
         {% bootstrap_messages %}
-        
+
         {% block content %}
 
         {% endblock content %}
       </div>
-   
+
   <div style='float:right; margin-right: 15px; font-size: 11px;'>Using Django {{ django_version }}</div>
-
-  {% block javascript %}
-
-    {% bootstrap_javascript %}
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    
-    
-    {{ form.media }}
-    
-  {% endblock javascript %}
 
 </body>
 </html>
