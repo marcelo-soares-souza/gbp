@@ -155,6 +155,20 @@ urlpatterns = [
     url(r'^tiposequenciamento/delete/(?P<pk>\d+)/$',
         TipoSequenciamentoDelete.as_view(), name='delete_tiposequenciamento'),
 
+    # Views de Sequenciamento
+    url(r'^sequenciamento/$', SequenciamentoList.as_view(),
+        name='home_sequenciamento'),
+    url(r'^sequenciamento/new/$', SequenciamentoCreate.as_view(),
+        name='new_sequenciamento'),
+    url(r'^sequenciamento/list/', SequenciamentoList.as_view(),
+        name='list_sequenciamento'),
+    url(r'^sequenciamento/detail/(?P<pk>\d+)/$',
+        SequenciamentoDetail.as_view(), name='detail_sequenciamento'),
+    url(r'^sequenciamento/update/(?P<pk>\d+)/$',
+        SequenciamentoUpdate.as_view(), name='update_sequenciamento'),
+    url(r'^sequenciamento/delete/(?P<pk>\d+)/$',
+        SequenciamentoDelete.as_view(), name='delete_sequenciamento'),
+
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
