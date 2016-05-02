@@ -10,7 +10,7 @@ from sequenciamento.forms import SequenciamentoForm
 
 class SequenciamentoList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {'material_biologico': {'default_direction': '',
-                                    'verbose_name': 'Matérial Biológico'},
+                                                  'verbose_name': 'Matérial Biológico'},
                            'data_atualizado': {'default_direction': '',
                                                'verbose_name': 'Atualizado Em'}}
 

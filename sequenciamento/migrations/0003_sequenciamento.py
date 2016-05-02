@@ -19,13 +19,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sequenciamento',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('objetivo', models.TextField(blank=True, null=True)),
-                ('material_biologico', models.CharField(blank=True, max_length=256)),
-                ('descricao_material_biologico', models.TextField(blank=True, null=True)),
+                ('material_biologico', models.CharField(
+                    blank=True, max_length=256)),
+                ('descricao_material_biologico',
+                 models.TextField(blank=True, null=True)),
                 ('numero_amostras', models.IntegerField(blank=True)),
-                ('status_contrato', models.CharField(choices=[('Contratado', 'Contratado'), ('Em Contratação', 'Em Contratação'), ('Finalizado', 'Finalizadp')], max_length=64)),
-                ('status_pagamento', models.CharField(choices=[('Atencipação', 'Atencipação'), ('Pendente', 'Pendente'), ('Pago', 'Pago')], max_length=64)),
+                ('status_contrato', models.CharField(choices=[('Contratado', 'Contratado'), (
+                    'Em Contratação', 'Em Contratação'), ('Finalizado', 'Finalizadp')], max_length=64)),
+                ('status_pagamento', models.CharField(choices=[
+                 ('Atencipação', 'Atencipação'), ('Pendente', 'Pendente'), ('Pago', 'Pago')], max_length=64)),
                 ('empresa_executora', models.CharField(blank=True, max_length=256)),
                 ('data_contratacao', models.DateField(blank=True)),
                 ('detalhamento_material', models.TextField(blank=True, null=True)),
@@ -33,10 +38,14 @@ class Migration(migrations.Migration):
                 ('ttm', models.CharField(blank=True, max_length=128)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('projeto', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
-                ('responsavel', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='responsavel_sequenciamento', to=settings.AUTH_USER_MODEL)),
-                ('tipo_sequenciamento', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sequenciamento.TipoSequenciamento')),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('projeto', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
+                ('responsavel', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                                  related_name='responsavel_sequenciamento', to=settings.AUTH_USER_MODEL)),
+                ('tipo_sequenciamento', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='sequenciamento.TipoSequenciamento')),
             ],
             options={
                 'verbose_name_plural': 'sequenciamentos',

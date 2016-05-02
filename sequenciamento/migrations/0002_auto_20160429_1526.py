@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='tiposequenciamento',
-            options={'ordering': ['nome'], 'verbose_name': 'tiposequenciamento', 'verbose_name_plural': 'tiposequenciamentos'},
+            options={'ordering': ['nome'], 'verbose_name': 'tiposequenciamento',
+                     'verbose_name_plural': 'tiposequenciamentos'},
         ),
     ]
