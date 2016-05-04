@@ -3,15 +3,13 @@
 {% block content %}    
     <div class="jumbotron">
         {% if request.user.is_authenticated %}
-          <center><h4>Bem-vindo, {{ request.user }}</h4></center>
+          <h4>Bem-vindo, {{ request.user }}</h4>
         {% else %}
-          <center><h4>Bem-vindo, Visitante!</h4></center>
+          <h4>Bem-vindo, Visitante!</h4>
         {% endif %}
 
-        <center>
-          <p>Laboratório de Bioinformática em Bioenergia</p>
-          <img src="/static/files/img/logo.png" alt="Logo EMBRAPA Agroenergia"/>
-        </center>
+        <p>Laboratório de Bioinformática em Bioenergia</p>
+        <img src="/static/files/img/logo.png" alt="Logo EMBRAPA Agroenergia"/>
 
     </div>
     
