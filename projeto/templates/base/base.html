@@ -17,26 +17,20 @@
 
     {% block title %} <title>GBP - Laboratório de Bioinformática em Bioenergia - EMBRAPA Agroenergia</title> {% endblock title %}
 
-  <style> body { padding-top: 70px; } </style>
+  <style> body { padding-top: 75px; } </style>
 
 </head>
 
 <body>
 
-      <br>
-      {% include "base/menu.html" %}
-      <br/>
+  {% include "base/menu.html" %}
 
-      <div class="container">
-
-        {% bootstrap_messages %}
-
-        {% block content %}
-
-        {% endblock content %}
-      </div>
-
+  <div class="container">
+    {% bootstrap_messages %}
+    {% block content %}
+    {% endblock content %}
+  </div>
+  <br/>
   <div style='float:right; margin-right: 15px; font-size: 11px;'>Using Django {{ django_version }}</div>
-
 </body>
 </html>
