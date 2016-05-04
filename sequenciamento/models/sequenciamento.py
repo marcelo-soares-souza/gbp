@@ -37,7 +37,7 @@ class Sequenciamento(models.Model):
         User, null=True, blank=True, related_name='responsavel_sequenciamento')
 
     objetivo = models.TextField(null=True, blank=True)
-    material_biologico = models.CharField(max_length=256, blank=True)
+    material_biologico = models.CharField(validators=[MinLengthValidator(5)], max_length=256)
     descricao_material_biologico = models.TextField(null=True, blank=True)
     numero_amostras = models.IntegerField(null=True, blank=True, default=0)
     status_contrato = models.CharField(

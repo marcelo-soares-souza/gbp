@@ -9,7 +9,7 @@
 
     {% if not sequenciamentos %}
 
-      <h3> Nenhum Sequenciamento Cadastrado. <a href="{% url 'new_sequenciamento' %}">Adicionar um Sequenciamento?</a> </h3>
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_sequenciamento' %}">Cadastrar?</a> </h4</div>
 
     {% else %}
 
@@ -18,18 +18,15 @@
         {% for sequenciamento in sequenciamentos %}
             <ul class="list-group">
               <li class="list-group-item">
-
                 <h3><a href="{{ sequenciamento.get_sequenciamento_detail_url }}">{{ sequenciamento }}</a></h3>
 
-
                 {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
-                <br/>
+                  <br/>
                   <p>
                     <a href="{{ sequenciamento.get_sequenciamento_update_url }}">Editar</a> |
                     <a href="{{ sequenciamento.get_sequenciamento_delete_url }}">Apagar</a>
                   </p>
                 {% endif %}
-
                 <div class="data-atualizado">{{ sequenciamento.data_atualizado }}</div>
 
               </li>

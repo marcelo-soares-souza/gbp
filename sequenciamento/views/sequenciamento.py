@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from sortable_listview import SortableListView
+from django.db.models import Q
 
 from projeto.views.login import LoggedInMixin
 from sequenciamento.models import Sequenciamento
@@ -23,6 +24,16 @@ class SequenciamentoList(LoggedInMixin, SortableListView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_sequenciamento')
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_superuser:
+            queryset = Sequenciamento.objects.all()
+        else:
+            queryset = Sequenciamento.objects.filter(Q(colaborador__in=[user.id]) | Q(criado_por_id=user.id) |  Q(responsavel_id=user.id))
+
+        return queryset
 
 
 class SequenciamentoDetail(LoggedInMixin, DetailView):
@@ -61,13 +72,6 @@ class SequenciamentoUpdate(LoggedInMixin, UpdateView):
     model = Sequenciamento
 
     success_url = reverse_lazy('list_sequenciamento')
-
-    def get_context_data(self, **kwargs):
-        context = super(SequenciamentoUpdate,
-                        self).get_context_data(**kwargs)
-        context["sequenciamentos"] = Sequenciamento.objects.all(
-        ).order_by('material_biologico')
-        return context
 
 
 class SequenciamentoDelete(LoggedInMixin, DeleteView):

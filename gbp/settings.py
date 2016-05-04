@@ -43,6 +43,12 @@ INSTALLED_APPS = (
     'smart_selects',
     'projeto',
     'sequenciamento',
+    'guardian',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
 )
 
 MIDDLEWARE_CLASSES = (

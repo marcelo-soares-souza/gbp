@@ -4,62 +4,60 @@
 
 {% block title %} <title>Sequenciamento {{ sequenciamento.nome }}</title> {% endblock title %}
 
+
 {% block content %}
+  {% if request.user == sequenciamento.criador_por or request.user in sequenciamento.colaborador.all or request.user.is_superuser %}
 
     <h2>{{ object }}</h2>
 
     <hr/>
 
-    <p><b>Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.material_biologico }}</div></p>
+    <p><b>Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.material_biologico }}&nbsp;</div></p>
 
-    <p><b>Tipo de Sequenciamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.tipo_sequenciamento }}</div></p>
+    <p><b>Tipo de Sequenciamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.tipo_sequenciamento }}&nbsp;</div></p>
 
-    <p><b>Responsável:</b> <br/> <div class='text-highlight'>{{ sequenciamento.responsavel }}</div></p>
+    <p><b>Responsável:</b> <br/> <div class='text-highlight'>{{ sequenciamento.responsavel }}&nbsp;</div></p>
 
-    <p><b>Objetivo:</b> <br/> <div class='text-highlight'>{{ sequenciamento.objetivo }}</div></p>
+    <p><b>Objetivo:</b> <br/> <div class='text-highlight'>{{ sequenciamento.objetivo }}&nbsp;</div></p>
 
-    <p><b>Descrição do Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.descricao_material_biologico }}</div></p>
+    <p><b>Descrição do Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.descricao_material_biologico }}&nbsp;</div></p>
 
-    <p><b>Número de Amostras:</b> <br/> <div class='text-highlight'>{{ sequenciamento.numero_amostras }}</div></p>
+    <p><b>Número de Amostras:</b> <br/> <div class='text-highlight'>{{ sequenciamento.numero_amostras }}&nbsp;</div></p>
 
-    <p><b>Status do Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_contrato }}</div></p>
+    <p><b>Status do Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_contrato }}&nbsp;</div></p>
 
-    <p><b>Status do Pagamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_pagamento }}</div></p>
+    <p><b>Status do Pagamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_pagamento }}&nbsp;</div></p>
 
-    <p><b>Prioridade:</b> <br/> <div class='text-highlight'>{{ sequenciamento.prioridade }}</div></p>
+    <p><b>Prioridade:</b> <br/> <div class='text-highlight'>{{ sequenciamento.prioridade }}&nbsp;</div></p>
 
-    <p><b>Empresa Executora:</b> <br/> <div class='text-highlight'>{{ sequenciamento.empresa_executora }}</div></p>
+    <p><b>Empresa Executora:</b> <br/> <div class='text-highlight'>{{ sequenciamento.empresa_executora }}&nbsp;</div></p>
 
-    <p><b>Data de Contratação:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_contratacao }}</div></p>
+    <p><b>Data de Contratação:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_contratacao }}&nbsp;</div></p>
 
-    <p><b>Detalhamento do Material:</b> <br/> <div class='text-highlight'>{{ sequenciamento.detalhamento_material }}</div></p>
+    <p><b>Detalhamento do Material:</b> <br/> <div class='text-highlight'>{{ sequenciamento.detalhamento_material }}&nbsp;</div></p>
 
-    <p><b>Status no CGEN:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_cgen }}</div></p>
+    <p><b>Status no CGEN:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_cgen }}&nbsp;</div></p>
 
-    <p><b>TTM:</b> <br/> <div class='text-highlight'>{{ sequenciamento.ttm }}</div></p>
+    <p><b>TTM:</b> <br/> <div class='text-highlight'>{{ sequenciamento.ttm }}&nbsp;</div></p>
 
-    <p><b>Contato do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contato_gestor }}</div></p>
+    <p><b>Contato do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contato_gestor }}&nbsp;</div></p>
 
-    <p><b>Código do Pedido do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.codigo_pedido_gestor }}</div></p>
+    <p><b>Código do Pedido do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.codigo_pedido_gestor }}&nbsp;</div></p>
 
-    <p>
-      <b>Colaboradores:</b> <br/>
-      <div class='text-highlight'>
-        {% for colaborador in sequenciamento.colaborador.all %}
-          {{ colaborador.username }}
-        {% endfor %}
-      </div>
-    </p>
+    <p><b>Colaboradores:</b> <br/><div class='text-highlight'>{{sequenciamento.colaborador.all|join:', '}}&nbsp;</div></p>
 
-    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_cadastro }}</div></p>
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_cadastro }}&nbsp;</div></p>
 
     <hr/>
 
-    {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
       <p>
-        <a href="{{ sequenciamento.get_sequenciamento_update_url }}">Editar</a> |
-        <a href="{{ sequenciamento.get_sequenciamento_delete_url }}">Apagar</a> |
+        {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+          <a href="{{ sequenciamento.get_sequenciamento_update_url }}">Editar</a> |
+          <a href="{{ sequenciamento.get_sequenciamento_delete_url }}">Apagar</a> |
+        {% endif %}
         <a href="{% url 'list_sequenciamento' %}">Voltar</a>
       </p>
-    {% endif %}
+  {% else %}
+  <div class="jumbotron"><h4>Você não possui autorização para acessar este Dado<h4></div>
+  {% endif %}
 {% endblock content %}
