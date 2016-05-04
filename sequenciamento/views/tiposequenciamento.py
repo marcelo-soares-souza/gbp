@@ -38,7 +38,7 @@ class TipoSequenciamentoCreate(LoggedInMixin, CreateView):
     template_name = 'tiposequenciamento/crud/form.html'
     form_class = TipoSequenciamentoForm
 
-    success_url = reverse_lazy('new_tiposequenciamento')
+    success_url = reverse_lazy('list_tiposequenciamento')
 
     def get_context_data(self, **kwargs):
         context = super(TipoSequenciamentoCreate,
@@ -60,7 +60,7 @@ class TipoSequenciamentoUpdate(LoggedInMixin, UpdateView):
     form_class = TipoSequenciamentoForm
     model = TipoSequenciamento
 
-    success_url = reverse_lazy('new_tiposequenciamento')
+    success_url = reverse_lazy('list_tiposequenciamento')
 
     def get_context_data(self, **kwargs):
         context = super(TipoSequenciamentoUpdate,
@@ -73,4 +73,4 @@ class TipoSequenciamentoUpdate(LoggedInMixin, UpdateView):
 class TipoSequenciamentoDelete(LoggedInMixin, DeleteView):
     template_name = 'tiposequenciamento/crud/delete.html'
     model = TipoSequenciamento
-    success_url = reverse_lazy('new_tiposequenciamento')
+    success_url = reverse_lazy('list_tiposequenciamento')

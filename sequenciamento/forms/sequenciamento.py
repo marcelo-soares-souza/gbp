@@ -14,7 +14,7 @@ class SequenciamentoForm(forms.ModelForm):
                   'numero_amostras', 'status_contrato', 'status_pagamento',
                   'prioridade', 'empresa_executora', 'data_contratacao',
                   'detalhamento_material', 'status_cgen', 'ttm',
-                  'contato_gestor', 'codigo_pedido_gestor')
+                  'contato_gestor', 'codigo_pedido_gestor', 'colaborador')
 
         labels = {
             'material_biologico': 'Matérial Biológico',
@@ -32,5 +32,6 @@ class SequenciamentoForm(forms.ModelForm):
             'status_cgen': 'Status no CGEN',
             'ttm': 'TTM',
             'contato_gestor': 'Contato do Gestor',
-            'codigo_pedido_gestor': 'Código do Pedido do Gestor'
+            'codigo_pedido_gestor': 'Código do Pedido do Gestor',
+            'colaborador': 'Colaboradores'
         }

@@ -56,6 +56,9 @@ class Sequenciamento(models.Model):
     codigo_pedido_gestor = models.CharField(
         max_length=256, null=True, blank=True)
 
+    colaborador = models.ManyToManyField(
+        User, blank=True, related_name='colaborador_sequenciamento')
+
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
     criado_por = models.ForeignKey(User, null=True, blank=True)
@@ -65,13 +68,13 @@ class Sequenciamento(models.Model):
         verbose_name = 'sequenciamento'
         verbose_name_plural = 'sequenciamentos'
 
-    def get_tiposequenciamento_detail_url(self):
+    def get_sequenciamento_detail_url(self):
         return u"/sequenciamento/detail/%i" % self.id
 
-    def get_tiposequenciamento_update_url(self):
+    def get_sequenciamento_update_url(self):
         return u"/sequenciamento/update/%i" % self.id
 
-    def get_tiposequenciamento_delete_url(self):
+    def get_sequenciamento_delete_url(self):
         return u"/sequenciamento/delete/%i" % self.id
 
     def __str__(self):

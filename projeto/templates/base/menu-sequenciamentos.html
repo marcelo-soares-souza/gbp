@@ -1,7 +1,12 @@
 <script> $(document).ready(function() { $('.nav-tabs a[id="{{request.resolver_match.url_name}}"]').tab('show'); }); </script>
+{% if request.user.is_authenticated %}
   <ul class="nav nav-tabs" id="myTab" >
-            {% if request.user.is_authenticated %}
-                <li class="tab-title"><a id="new_sequenciamento" href="{% url 'new_sequenciamento' %}#">Sequenciamento</a></li>
-                <li class="tab-title"><a id="new_tiposequenciamento" href="{% url 'new_tiposequenciamento' %}#">Tipos de Sequenciamento</a></li>
-            {% endif %}
+    {% if 'new' in request.resolver_match.url_name %}
+        <li class="tab-title"><a id="new_sequenciamento" href="{% url 'new_sequenciamento' %}#">Sequenciamento</a></li>
+        <li class="tab-title"><a id="new_tiposequenciamento" href="{% url 'new_tiposequenciamento' %}#">Tipos de Sequenciamento</a></li>
+    {% elif 'list' in request.resolver_match.url_name %}
+        <li class="tab-title"><a id="list_sequenciamento" href="{% url 'list_sequenciamento' %}#">Sequenciamento</a></li>
+        <li class="tab-title"><a id="list_tiposequenciamento" href="{% url 'list_tiposequenciamento' %}#">Tipos de Sequenciamento</a></li>
+    {% endif %}
   </ul>
+{% endif %}

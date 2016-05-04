@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 
 class TipoSequenciamento(models.Model):
-    nome = models.CharField(max_length=256, blank=True)
+    nome = models.CharField(validators=[MinLengthValidator(5)],
+                            max_length=256)
+
     descricao = models.TextField(null=True, blank=True)
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)

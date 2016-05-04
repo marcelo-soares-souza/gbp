@@ -38,7 +38,7 @@ class SequenciamentoCreate(LoggedInMixin, CreateView):
     template_name = 'sequenciamento/crud/form.html'
     form_class = SequenciamentoForm
 
-    success_url = reverse_lazy('new_sequenciamento')
+    success_url = reverse_lazy('list_sequenciamento')
 
     def get_context_data(self, **kwargs):
         context = super(SequenciamentoCreate,
@@ -60,7 +60,7 @@ class SequenciamentoUpdate(LoggedInMixin, UpdateView):
     form_class = SequenciamentoForm
     model = Sequenciamento
 
-    success_url = reverse_lazy('new_sequenciamento')
+    success_url = reverse_lazy('list_sequenciamento')
 
     def get_context_data(self, **kwargs):
         context = super(SequenciamentoUpdate,
@@ -73,4 +73,4 @@ class SequenciamentoUpdate(LoggedInMixin, UpdateView):
 class SequenciamentoDelete(LoggedInMixin, DeleteView):
     template_name = 'sequenciamento/crud/delete.html'
     model = Sequenciamento
-    success_url = reverse_lazy('new_sequenciamento')
+    success_url = reverse_lazy('list_sequenciamento')
