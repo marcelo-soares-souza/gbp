@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Projetos - Cadastrar/Editar Projeto</title> {% endblock title %}
+{% block title %} <title>Cadastrar/Editar Projeto</title> {% endblock title %}
 
 {% block content %}
 
@@ -16,13 +16,12 @@
         <div class="modal-footer">
             {% buttons %}
                 <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
-                <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
                 <a href="{% url 'new_objetivo_projeto' %}" class="btn btn-sm btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
             {% endbuttons %}
         </div>
 
     </form>
-  
+
     <script type="text/javascript">
       $(document).ready(function() {
         $(function() { $('#id_data_inicio').datepicker({ language: 'pt-BR' }); });

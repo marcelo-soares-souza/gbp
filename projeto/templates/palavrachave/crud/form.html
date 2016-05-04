@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Projetos - Cadastrar/Editar Palavra Chave de Projeto</title> {% endblock title %}
+{% block title %} <title>Cadastrar/Editar Palavra Chave de Projeto</title> {% endblock title %}
 
 {% block content %}
 
@@ -10,20 +10,19 @@
 
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
-        
+
         {% bootstrap_form form layout='horizontal' %}
-        
+
         <div class="modal-footer">
             {% buttons %}
-                <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+              <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+              <a href="javascript:window.history.go(-1)" class="btn btn-default btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+              <a href="{% url 'new_projetocomponente_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
             {% endbuttons %}
-            
-            <a href="javascript:window.history.go(-1)" class="btn btn-default btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
-            <a href="{% url 'new_projetocomponente_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
-        
+
     </form>
-    
+
     <div>
         {% if not palavraschave %}
 
@@ -36,16 +35,16 @@
             {% for palavrachave in palavraschave %}
                 <ul class="list-group">
                   <li class="list-group-item">
-                    
+
                     <h3><a href="{{ palavrachave.get_palavrachave_detail_url }}">{{ palavrachave.palavra }}</a></h3>
-                    
-                    <b>Palavra: </b> {{ palavrachave.palavra }} 
-                    
+
+                    <b>Palavra: </b> {{ palavrachave.palavra }}
+
                     <br/>
-                    
+
                     {% if request.user == palavrachave.criado_por or request.user.is_superuser %}
                       <p>
-                        <a href="{{ palavrachave.get_palavrachave_update_url }}">Editar</a> | 
+                        <a href="{{ palavrachave.get_palavrachave_update_url }}">Editar</a> |
                         <a href="{{ palavrachave.get_palavrachave_delete_url }}">Apagar</a>
                       </p>
                     {% endif %}
@@ -57,8 +56,8 @@
             {% endfor %}
 
             {% include 'base/pagination.html' %}
-            
-        {% endif %} 
+
+        {% endif %}
     </div>
 
 {% endblock content %}

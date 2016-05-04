@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='tiposequenciamento',
             name='nome',
-            field=models.CharField(blank=True, max_length=256, validators=[django.core.validators.MinLengthValidator(5)]),
+            field=models.CharField(blank=True, max_length=256, validators=[
+                                   django.core.validators.MinLengthValidator(5)]),
         ),
     ]
