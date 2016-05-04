@@ -10,46 +10,48 @@
 
     <hr/>
 
-    <p><b>Matérial Biológico:</b> {{ sequenciamento.material_biologico }}</p>
+    <p><b>Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.material_biologico }}</div></p>
 
-    <p><b>Tipo de Sequenciamento:</b> {{ sequenciamento.tipo_sequenciamento }}</p>
+    <p><b>Tipo de Sequenciamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.tipo_sequenciamento }}</div></p>
 
-    <p><b>Responsável:</b> {{ sequenciamento.responsavel }}</p>
+    <p><b>Responsável:</b> <br/> <div class='text-highlight'>{{ sequenciamento.responsavel }}</div></p>
 
-    <p><b>Objetivo:</b> {{ sequenciamento.objetivo }}</p>
+    <p><b>Objetivo:</b> <br/> <div class='text-highlight'>{{ sequenciamento.objetivo }}</div></p>
 
-    <p><b>Descrição do Matérial Biológico:</b> {{ sequenciamento.descricao_material_biologico }}</p>
+    <p><b>Descrição do Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.descricao_material_biologico }}</div></p>
 
-    <p><b>Número de Amostras:</b> {{ sequenciamento.numero_amostras }}</p>
+    <p><b>Número de Amostras:</b> <br/> <div class='text-highlight'>{{ sequenciamento.numero_amostras }}</div></p>
 
-    <p><b>Status do Contrato:</b> {{ sequenciamento.status_contrato }}</p>
+    <p><b>Status do Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_contrato }}</div></p>
 
-    <p><b>Status do Pagamento:</b> {{ sequenciamento.status_pagamento }}</p>
+    <p><b>Status do Pagamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_pagamento }}</div></p>
 
-    <p><b>Prioridade:</b> {{ sequenciamento.prioridade }}</p>
+    <p><b>Prioridade:</b> <br/> <div class='text-highlight'>{{ sequenciamento.prioridade }}</div></p>
 
-    <p><b>Empresa Executora:</b> {{ sequenciamento.empresa_executora }}</p>
+    <p><b>Empresa Executora:</b> <br/> <div class='text-highlight'>{{ sequenciamento.empresa_executora }}</div></p>
 
-    <p><b>Data de Contratação:</b> {{ sequenciamento.data_contratacao }}</p>
+    <p><b>Data de Contratação:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_contratacao }}</div></p>
 
-    <p><b>Detalhamento do Material:</b> {{ sequenciamento.detalhamento_material }}</p>
+    <p><b>Detalhamento do Material:</b> <br/> <div class='text-highlight'>{{ sequenciamento.detalhamento_material }}</div></p>
 
-    <p><b>Status no CGEN:</b> {{ sequenciamento.status_cgen }}</p>
+    <p><b>Status no CGEN:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_cgen }}</div></p>
 
-    <p><b>TTM:</b> {{ sequenciamento.ttm }}</p>
+    <p><b>TTM:</b> <br/> <div class='text-highlight'>{{ sequenciamento.ttm }}</div></p>
 
-    <p><b>Contato do Gestor:</b> {{ sequenciamento.contato_gestor }}</p>
+    <p><b>Contato do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contato_gestor }}</div></p>
 
-    <p><b>Código do Pedido do Gestor:</b> {{ sequenciamento.codigo_pedido_gestor }}</p>
+    <p><b>Código do Pedido do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.codigo_pedido_gestor }}</div></p>
 
     <p>
-      <b>Colaboradores:</b>
-      {% for colaborador in sequenciamento.colaborador.all %}
-        {{ colaborador.username }}
-      {% endfor %}
+      <b>Colaboradores:</b> <br/>
+      <div class='text-highlight'>
+        {% for colaborador in sequenciamento.colaborador.all %}
+          {{ colaborador.username }}
+        {% endfor %}
+      </div>
     </p>
 
-    <p><b>Cadastrado:</b> {{ sequenciamento.data_cadastro }}</p>
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_cadastro }}</div></p>
 
     <hr/>
 
