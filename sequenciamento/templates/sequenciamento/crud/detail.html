@@ -10,20 +10,54 @@
 
     <hr/>
 
-    {% if sequenciamento.material_biologico %}
-      <p><b>Matérial Biológico:</b> {{ sequenciamento.material_biologico }}</p>
-    {% endif %}
-    
+    <p><b>Matérial Biológico:</b> {{ sequenciamento.material_biologico }}</p>
+
+    <p><b>Tipo de Sequenciamento:</b> {{ sequenciamento.tipo_sequenciamento }}</p>
+
+    <p><b>Responsável:</b> {{ sequenciamento.responsavel }}</p>
+
+    <p><b>Objetivo:</b> {{ sequenciamento.objetivo }}</p>
+
+    <p><b>Descrição do Matérial Biológico:</b> {{ sequenciamento.descricao_material_biologico }}</p>
+
+    <p><b>Número de Amostras:</b> {{ sequenciamento.numero_amostras }}</p>
+
+    <p><b>Status do Contrato:</b> {{ sequenciamento.status_contrato }}</p>
+
+    <p><b>Status do Pagamento:</b> {{ sequenciamento.status_pagamento }}</p>
+
+    <p><b>Prioridade:</b> {{ sequenciamento.prioridade }}</p>
+
+    <p><b>Empresa Executora:</b> {{ sequenciamento.empresa_executora }}</p>
+
+    <p><b>Data de Contratação:</b> {{ sequenciamento.data_contratacao }}</p>
+
+    <p><b>Detalhamento do Material:</b> {{ sequenciamento.detalhamento_material }}</p>
+
+    <p><b>Status no CGEN:</b> {{ sequenciamento.status_cgen }}</p>
+
+    <p><b>TTM:</b> {{ sequenciamento.ttm }}</p>
+
+    <p><b>Contato do Gestor:</b> {{ sequenciamento.contato_gestor }}</p>
+
+    <p><b>Código do Pedido do Gestor:</b> {{ sequenciamento.codigo_pedido_gestor }}</p>
+
+    <p>
+      <b>Colaboradores:</b>
+      {% for colaborador in sequenciamento.colaborador.all %}
+        {{ colaborador.username }}
+      {% endfor %}
+    </p>
 
     <p><b>Cadastrado:</b> {{ sequenciamento.data_cadastro }}</p>
-    
+
     <hr/>
 
     {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
       <p>
-        <a href="{{ sequenciamento.get_sequenciamento_update_url }}">Editar</a> | 
+        <a href="{{ sequenciamento.get_sequenciamento_update_url }}">Editar</a> |
         <a href="{{ sequenciamento.get_sequenciamento_delete_url }}">Apagar</a> |
-        <a href="{% url 'new_sequenciamento' %}">Voltar</a>
+        <a href="{% url 'list_sequenciamento' %}">Voltar</a>
       </p>
     {% endif %}
 {% endblock content %}
