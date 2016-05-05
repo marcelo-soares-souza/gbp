@@ -31,7 +31,10 @@ class ColaboradorRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
 
-        if self.request.user not in obj.colaborador.all() and obj.criado_por != self.request.user and not self.request.user.is_superuser:
+        if (self.request.user not in obj.colaborador.all()
+                                    and obj.criado_por != self.request.user
+                                    and not self.request.user.is_superuser
+                                    and obj.responsavel != self.request.user):
             return HttpResponseRedirect(reverse('permission_denied'))
 
         return super(ColaboradorRequiredMixin, self).dispatch(request, *args, **kwargs)
