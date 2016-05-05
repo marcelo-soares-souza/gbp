@@ -2,11 +2,11 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 
 # import logging
 # logger = logging.getLogger('sequenciamento')
+
 
 class LoggedInMixin(object):
 
@@ -21,9 +21,10 @@ class CreatedByRequiredMixin(object):
         obj = self.get_object()
 
         if obj.criado_por != self.request.user:
-            return HttpResponseForbidden()
+            return HttpResponseRedirect(reverse('permission_denied'))
 
         return super(CreatedByRequiredMixin, self).dispatch(request, *args, **kwargs)
+
 
 class ColaboradorRequiredMixin(object):
 
@@ -35,13 +36,16 @@ class ColaboradorRequiredMixin(object):
 
         return super(ColaboradorRequiredMixin, self).dispatch(request, *args, **kwargs)
 
+
 class ListColaboradorRequiredMixin(object):
+
     def get_queryset(self):
         user = self.request.user
 
         if user.is_superuser:
             queryset = self.model._default_manager.all()
         else:
-            queryset = self.model._default_manager.filter(Q(colaborador__in=[user.id]) | Q(criado_por_id=user.id) |  Q(responsavel_id=user.id))
+            queryset = self.model._default_manager.filter(Q(colaborador__in=[user.id]) | Q(
+                criado_por_id=user.id) | Q(responsavel_id=user.id))
 
         return queryset
