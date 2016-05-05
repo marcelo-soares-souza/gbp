@@ -6,7 +6,8 @@
 
 {% block content %}
 
-<form action="" method="post">{% csrf_token %}
+{% if request.user == tiposequenciamento.criado_por or request.user.is_superuser %}
+  <form action="" method="post">{% csrf_token %}
     <h3>Deseja Apagar "{{ object }}"?</h3>
 
     <br/>
@@ -14,7 +15,8 @@
     {% buttons %}
         <button type="submit" class="btn btn-primary">Remover</button>
     {% endbuttons %}
-    
-</form>
+
+  </form>
+{% endif %}
 
 {% endblock content %}

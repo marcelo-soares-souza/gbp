@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from sortable_listview import SortableListView
 
-from projeto.views.login import LoggedInMixin
+from projeto.views.login import LoggedInMixin, CreatedByRequiredMixin, ColaboradorRequiredMixin, ListColaboradorRequiredMixin
 from sequenciamento.models import TipoSequenciamento
 from sequenciamento.forms import TipoSequenciamentoForm
 
@@ -55,7 +55,7 @@ class TipoSequenciamentoCreate(LoggedInMixin, CreateView):
         return {'criado_por': self.request.user.id}
 
 
-class TipoSequenciamentoUpdate(LoggedInMixin, UpdateView):
+class TipoSequenciamentoUpdate(LoggedInMixin, CreatedByRequiredMixin, UpdateView):
     template_name = 'tiposequenciamento/crud/form.html'
     form_class = TipoSequenciamentoForm
     model = TipoSequenciamento
@@ -70,7 +70,7 @@ class TipoSequenciamentoUpdate(LoggedInMixin, UpdateView):
         return context
 
 
-class TipoSequenciamentoDelete(LoggedInMixin, DeleteView):
+class TipoSequenciamentoDelete(LoggedInMixin, CreatedByRequiredMixin, DeleteView):
     template_name = 'tiposequenciamento/crud/delete.html'
     model = TipoSequenciamento
     success_url = reverse_lazy('list_tiposequenciamento')
