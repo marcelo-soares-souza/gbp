@@ -24,11 +24,7 @@
     </form>
 
     <div>
-        {% if not resultados %}
-
-            <h3> Nenhum Resultado de Projeto Cadastrado. <a href="{% url 'new_resultado_projeto' %}">Criar um Resultado de Projeto?</a> </h3>
-
-        {% else %}
+      {% if resultados %}
 
         {% for resultado in resultados %}
             <ul class="list-group">

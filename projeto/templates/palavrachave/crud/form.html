@@ -24,11 +24,7 @@
     </form>
 
     <div>
-        {% if not palavraschave %}
-
-            <h3> Nenhuma Palavra Chave Cadastrada. <a href="{% url 'new_palavrachave_projeto' %}">Criar uma Palavra Chave?</a> </h3>
-
-        {% else %}
+      {% if palavraschave %}
 
             {% include 'base/sort_links.html' %}
 

@@ -8,6 +8,23 @@
 
     {% include "base/menu-projetos.html" %} <br/>
 
+    {% if projetos %}
+    <div class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-3 control-label" for="id_select_projeto">Editar Projeto</label>
+        <div class="col-md-9">
+        <select id="editar_projeto" class="form-control" name="editar_projeto" onChange="redirectUrl()">
+          <option  value="" selected="selected">---------</option>
+          <option  value="0">Criar Novo Projeto</option>
+          {% for projeto in projetos %}
+            <option value="{{projeto.id}}">{{projeto|capfirst}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
 
@@ -25,6 +42,23 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $(function() { $('#id_data_inicio').datepicker({ language: 'pt-BR' }); });
+      });
+    </script>
+
+    <script>
+      $(function(){
+        $('#editar_projeto').on('change', function () {
+          if ($(this).val() == 0) {
+            window.location = '/new';
+          }
+          else {
+            var url = '/update/' + $(this).val();
+            if (url) {
+                window.location = url;
+            }
+          }
+          return false;
+        });
       });
     </script>
 

@@ -8,9 +8,9 @@
 
     {% include "base/menu-projetos.html" %} <br/>
 
-    <form class="form col-sm-10" method="POST">
+    <form class="form-horizontal" method="POST">
         {% csrf_token %}
-        {% bootstrap_form form %}
+        {% bootstrap_form form layout='horizontal' %}
 
         <div class="modal-footer">
             {% buttons %}

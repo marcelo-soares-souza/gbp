@@ -37,8 +37,6 @@ urlpatterns = [
         name='home_objetivo_projeto'),
     url(r'^objetivo/new/$', ObjetivoProjetoCreate.as_view(),
         name='new_objetivo_projeto'),
-    url(r'^objetivo/new/$', ObjetivoProjetoList.as_view(),
-        name='list_objetivo_projeto'),
     url(r'^objetivo/list/', ObjetivoProjetoList.as_view(),
         name='list_objetivo_projeto'),
     url(r'^objetivo/detail/(?P<pk>\d+)/$',

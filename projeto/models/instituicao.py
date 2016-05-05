@@ -11,9 +11,9 @@ from localflavor.br.br_states import STATE_CHOICES
 class Instituicao(models.Model):
 
     sigla = models.CharField(max_length=256, validators=[
-                             MinLengthValidator(2)], blank=True)
+                             MinLengthValidator(2)])
     nome = models.CharField(max_length=256, validators=[
-                            MinLengthValidator(5)], blank=True)
+                            MinLengthValidator(5)])
     site = models.CharField(max_length=128, validators=[
                             MinLengthValidator(5)], blank=True)
     email = models.CharField(max_length=256, validators=[

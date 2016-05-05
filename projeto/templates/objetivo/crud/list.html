@@ -17,18 +17,18 @@
         {% for objetivo in objetivos %}
             <ul class="list-group">
               <li class="list-group-item">
-                
+
                 <h3><a href="{{ objetivo.get_objetivo_detail_url }}">{{ objetivo }}</a></h3>
 
                 <b>Projeto Associado:</b>
                 <a href="{% url 'detail_projeto' objetivo.projeto.id %}">{{ objetivo.projeto }}</a>
                 <br/>
-                
+
                 <br/>
-                
+
                 {% if request.user == objetivo.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ objetivo.get_objetivo_update_url }}">Editar</a> | 
+                    <a href="{{ objetivo.get_objetivo_update_url }}">Editar</a> |
                     <a href="{{ objetivo.get_objetivo_delete_url }}">Apagar</a>
                   </p>
                 {% endif %}
@@ -40,7 +40,7 @@
         {% endfor %}
 
         {% include 'base/pagination.html' %}
-        
+
     {% endif %}
 
 {% endblock content %}

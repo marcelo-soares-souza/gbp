@@ -13,9 +13,9 @@ from projeto.models.projeto import Projeto
 
 class Resultado(models.Model):
 
-    numero = models.PositiveIntegerField(blank=True)
-    descricao = models.TextField(null=True, blank=True)
-    projeto = models.ForeignKey(Projeto, null=True, blank=True)
+    numero = models.PositiveIntegerField(default=1)
+    descricao = models.TextField()
+    projeto = models.ForeignKey(Projeto)
 
     objetivo = ChainedManyToManyField(
         Objetivo,

@@ -15,7 +15,7 @@ from projeto.models.resultado import Resultado
 class PlanoAcao(models.Model):
 
     # Atributos
-    numero = models.PositiveIntegerField(blank=True)
+    numero = models.PositiveIntegerField(default=1)
     nome = models.CharField(max_length=100, validators=[MinLengthValidator(2)])
     responsavel = models.ForeignKey(
         User, null=True, blank=True, related_name='responsavel_plano')
@@ -25,7 +25,7 @@ class PlanoAcao(models.Model):
     data_fim = models.DateField(blank=True)
 
     # Relacionamentos
-    projeto = models.ForeignKey(Projeto, blank=True)
+    projeto = models.ForeignKey(Projeto)
 
     projeto_componente = ChainedForeignKey(
         ProjetoComponente,

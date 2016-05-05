@@ -6,10 +6,10 @@ from localflavor.br.forms import BRCNPJField, BRPhoneNumberField, BRZipCodeField
 
 class InstituicaoForm(forms.ModelForm):
 
-    cep = BRZipCodeField(label='CEP')
+    # cep = BRZipCodeField(label='CEP')
     estado = BRStateSelect()
-    telefone = BRPhoneNumberField()
-    cnpj = BRCNPJField(label='CNPJ')
+    # telefone = BRPhoneNumberField()
+    # cnpj = BRCNPJField(label='CNPJ')
 
     class Meta:
         model = Instituicao
@@ -25,7 +25,6 @@ class InstituicaoForm(forms.ModelForm):
             'sigla': 'Sigla',
             'email': 'E-Mail',
             'endereco': 'Endereço',
-
             'descricao': 'Descrição',
         }
 

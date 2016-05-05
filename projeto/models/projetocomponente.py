@@ -11,9 +11,8 @@ from projeto.models.projeto import Projeto
 
 class ProjetoComponente(models.Model):
 
-    numero = models.PositiveIntegerField(blank=True)
-    nome = models.CharField(max_length=256, validators=[
-                            MinLengthValidator(5)], blank=True)
+    numero = models.PositiveIntegerField(default=1)
+    nome = models.CharField(max_length=256, validators=[MinLengthValidator(5)])
     responsavel = models.ForeignKey(
         User, null=True, blank=True, related_name='responsavel')
     projeto = models.ForeignKey(Projeto)

@@ -19,9 +19,11 @@ class Projeto(models.Model):
     seg = models.CharField(max_length=32, validators=[
                            MinLengthValidator(2)], blank=True)
 
-    titulo_portugues = models.CharField(max_length=256, validators=[MinLengthValidator(5)])
+    titulo_portugues = models.CharField(
+        max_length=256, validators=[MinLengthValidator(5)])
 
-    titulo_ingles = models.CharField(max_length=256, validators=[MinLengthValidator(5)], blank=True)
+    titulo_ingles = models.CharField(max_length=256, validators=[
+                                     MinLengthValidator(5)], blank=True)
 
     sigla = models.CharField(max_length=64, validators=[MinLengthValidator(2)])
 

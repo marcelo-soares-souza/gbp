@@ -13,10 +13,10 @@ from projeto.models.objetivo import Objetivo
 
 class MetaProjeto(models.Model):
 
-    numero = models.IntegerField(blank=True)
+    numero = models.IntegerField(default=1)
     nome = models.CharField(max_length=256, validators=[
-                            MinLengthValidator(5)], blank=True)
-    projeto = models.ForeignKey(Projeto, null=True, blank=True)
+                            MinLengthValidator(5)])
+    projeto = models.ForeignKey(Projeto)
 
     objetivo = ChainedManyToManyField(
         Objetivo,

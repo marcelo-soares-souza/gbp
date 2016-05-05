@@ -13,10 +13,10 @@ class Objetivo(models.Model):
 
     # Atributos
     # Número do Objetivo, sequencial e único, mas não é o mesmo número que o id
-    numero = models.PositiveIntegerField()
+    numero = models.PositiveIntegerField(default=1)
 
     # Descrição
-    descricao = models.TextField(null=True, blank=True)
+    descricao = models.TextField()
 
     # Relacionamento
     # Projeto
