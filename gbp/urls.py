@@ -9,6 +9,7 @@ from sequenciamento.views import *
 urlpatterns = [
 
     url(r'^$', Home.as_view(), name='home'),
+    url(r'^permission/$', Permission.as_view(), name='permission_denied'),
 
     # Views de Projeto
     url(r'^new/$', ProjetoCreate.as_view(), name='new_projeto'),

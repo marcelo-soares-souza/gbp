@@ -2,14 +2,13 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from sortable_listview import SortableListView
-from django.db.models import Q
 
-from projeto.views.login import LoggedInMixin
+from projeto.views.login import LoggedInMixin, CreatedByRequiredMixin, ColaboradorRequiredMixin, ListColaboradorRequiredMixin
 from sequenciamento.models import Sequenciamento
 from sequenciamento.forms import SequenciamentoForm
 
 
-class SequenciamentoList(LoggedInMixin, SortableListView):
+class SequenciamentoList(LoggedInMixin, ListColaboradorRequiredMixin, SortableListView):
     allowed_sort_fields = {'material_biologico': {'default_direction': '',
                                                   'verbose_name': 'Matérial Biológico'},
                            'data_atualizado': {'default_direction': '',
@@ -25,18 +24,9 @@ class SequenciamentoList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_sequenciamento')
 
-    def get_queryset(self):
-        user = self.request.user
 
-        if user.is_superuser:
-            queryset = Sequenciamento.objects.all()
-        else:
-            queryset = Sequenciamento.objects.filter(Q(colaborador__in=[user.id]) | Q(criado_por_id=user.id) |  Q(responsavel_id=user.id))
-
-        return queryset
-
-
-class SequenciamentoDetail(LoggedInMixin, DetailView):
+class SequenciamentoDetail(LoggedInMixin, ColaboradorRequiredMixin, DetailView):
+    permission_required = 'sequenciamento.change_userprofile'
     template_name = 'sequenciamento/crud/detail.html'
     context_object_name = 'sequenciamento'
     model = Sequenciamento
@@ -66,7 +56,7 @@ class SequenciamentoCreate(LoggedInMixin, CreateView):
         return {'criado_por': self.request.user.id}
 
 
-class SequenciamentoUpdate(LoggedInMixin, UpdateView):
+class SequenciamentoUpdate(LoggedInMixin, ColaboradorRequiredMixin, UpdateView):
     template_name = 'sequenciamento/crud/form.html'
     form_class = SequenciamentoForm
     model = Sequenciamento
@@ -74,7 +64,7 @@ class SequenciamentoUpdate(LoggedInMixin, UpdateView):
     success_url = reverse_lazy('list_sequenciamento')
 
 
-class SequenciamentoDelete(LoggedInMixin, DeleteView):
+class SequenciamentoDelete(LoggedInMixin, ColaboradorRequiredMixin, DeleteView):
     template_name = 'sequenciamento/crud/delete.html'
     model = Sequenciamento
     success_url = reverse_lazy('list_sequenciamento')

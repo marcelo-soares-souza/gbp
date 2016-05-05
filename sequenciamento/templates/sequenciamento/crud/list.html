@@ -20,13 +20,13 @@
               <li class="list-group-item">
                 <h3><a href="{{ sequenciamento.get_sequenciamento_detail_url }}">{{ sequenciamento }}</a></h3>
 
-                {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
                   <br/>
                   <p>
-                    <a href="{{ sequenciamento.get_sequenciamento_update_url }}">Editar</a> |
-                    <a href="{{ sequenciamento.get_sequenciamento_delete_url }}">Apagar</a>
+                    <a href="{{ sequenciamento.get_sequenciamento_update_url }}">Editar</a>
+                    {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+                       | <a href="{{ sequenciamento.get_sequenciamento_delete_url }}">Apagar</a>
+                    {% endif %}
                   </p>
-                {% endif %}
                 <div class="data-atualizado">{{ sequenciamento.data_atualizado }}</div>
 
               </li>

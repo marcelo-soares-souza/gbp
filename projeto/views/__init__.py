@@ -2,7 +2,7 @@
 
 from django.shortcuts import render
 
-from projeto.views.home import Home
+from projeto.views.home import Home, Permission
 from projeto.views.tipo import TipoProjetoList, TipoProjetoDetail, TipoProjetoCreate, TipoProjetoUpdate, TipoProjetoDelete
 from projeto.views.instituicao import InstituicaoProjetoList, InstituicaoProjetoDetail, InstituicaoProjetoCreate, InstituicaoProjetoUpdate, InstituicaoProjetoDelete
 from projeto.views.projeto import ProjetoList, ProjetoDetail, ProjetoCreate, ProjetoUpdate, ProjetoDelete
@@ -15,7 +15,7 @@ from projeto.views.planoacao import PlanoAcaoList, PlanoAcaoDetail, PlanoAcaoCre
 from projeto.views.atividade import AtividadeList, AtividadeDetail, AtividadeCreate, AtividadeUpdate, AtividadeDelete
 from projeto.views.tarefa import TarefaList, TarefaDetail, TarefaCreate, TarefaUpdate, TarefaDelete
 
-__all__ = ['Home',
+__all__ = ['Home', 'Permission',
            'TipoProjetoList', 'TipoProjetoDetail', 'TipoProjetoCreate', 'TipoProjetoUpdate', 'TipoProjetoDelete',
            'InstituicaoProjetoList', 'InstituicaoProjetoDetail', 'InstituicaoProjetoCreate', 'InstituicaoProjetoUpdate', 'InstituicaoProjetoDelete',
            'ProjetoList', 'ProjetoDetail', 'ProjetoCreate', 'ProjetoUpdate', 'ProjetoDelete',

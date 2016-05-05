@@ -6,7 +6,7 @@
 
 {% block content %}
 
-{% if request.user == sequenciamento.criador_por or request.user in sequenciamento.colaborador.all or request.user.is_superuser %}
+{% if request.user == sequenciamento.criador_por or request.user.is_superuser %}
   <form action="" method="post">{% csrf_token %}
     <h3>Deseja Apagar "{{ object }}"?</h3>
 
@@ -18,7 +18,7 @@
 
   </form>
 {% else %}
-  <div class="jumbotron"><h4>Você não possui autorização para acessar este Dado<h4></div>
+  <div class="jumbotron"><h4>Você não possui autorização para Remover este Dado<h4></div>
 {% endif %}
 
 {% endblock content %}
