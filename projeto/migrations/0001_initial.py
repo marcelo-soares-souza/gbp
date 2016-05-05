@@ -22,17 +22,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Atividade',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('numero', models.PositiveIntegerField(blank=True)),
-                ('nome', models.CharField(blank=True, max_length=100, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('indicador_fisico', models.CharField(blank=True, max_length=32, validators=[django.core.validators.MinLengthValidator(2)])),
+                ('nome', models.CharField(blank=True, max_length=100,
+                                          validators=[django.core.validators.MinLengthValidator(2)])),
+                ('indicador_fisico', models.CharField(blank=True, max_length=32,
+                                                      validators=[django.core.validators.MinLengthValidator(2)])),
                 ('peso_planoacao', models.PositiveIntegerField(blank=True)),
                 ('data_inicio', models.DateField(blank=True)),
                 ('data_fim', models.DateField(blank=True)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('colaborador', models.ManyToManyField(blank=True, related_name='colaborador_atividade', to=settings.AUTH_USER_MODEL)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('colaborador', models.ManyToManyField(
+                    blank=True, related_name='colaborador_atividade', to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'atividade',
@@ -43,21 +48,31 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Instituicao',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sigla', models.CharField(max_length=256, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('nome', models.CharField(max_length=256, validators=[django.core.validators.MinLengthValidator(5)])),
-                ('site', models.CharField(blank=True, max_length=128, validators=[django.core.validators.MinLengthValidator(5)])),
-                ('email', models.CharField(blank=True, max_length=256, validators=[django.core.validators.EmailValidator()])),
-                ('endereco', models.CharField(blank=True, max_length=256, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('cidade', models.CharField(blank=True, max_length=256, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('descricao', models.TextField(blank=True, max_length=512, validators=[django.core.validators.MinLengthValidator(10)])),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('sigla', models.CharField(max_length=256, validators=[
+                 django.core.validators.MinLengthValidator(2)])),
+                ('nome', models.CharField(max_length=256, validators=[
+                 django.core.validators.MinLengthValidator(5)])),
+                ('site', models.CharField(blank=True, max_length=128,
+                                          validators=[django.core.validators.MinLengthValidator(5)])),
+                ('email', models.CharField(blank=True, max_length=256,
+                                           validators=[django.core.validators.EmailValidator()])),
+                ('endereco', models.CharField(blank=True, max_length=256,
+                                              validators=[django.core.validators.MinLengthValidator(2)])),
+                ('cidade', models.CharField(blank=True, max_length=256,
+                                            validators=[django.core.validators.MinLengthValidator(2)])),
+                ('descricao', models.TextField(blank=True, max_length=512,
+                                               validators=[django.core.validators.MinLengthValidator(10)])),
                 ('cnpj', models.CharField(blank=True, max_length=14)),
                 ('telefone', models.CharField(blank=True, max_length=16)),
-                ('estado', models.CharField(blank=True, choices=[('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'), ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'), ('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'), ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'), ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'), ('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'), ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')], max_length=16)),
+                ('estado', models.CharField(blank=True, choices=[('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'), ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'), ('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'), ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'), (
+                    'PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'), ('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'), ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')], max_length=16)),
                 ('cep', models.CharField(blank=True, max_length=9)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'instituição',
@@ -68,12 +83,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='MetaProjeto',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('numero', models.IntegerField(default=1)),
-                ('nome', models.CharField(max_length=256, validators=[django.core.validators.MinLengthValidator(5)])),
+                ('nome', models.CharField(max_length=256, validators=[
+                 django.core.validators.MinLengthValidator(5)])),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'meta',
@@ -84,12 +102,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Objetivo',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('numero', models.PositiveIntegerField(default=1)),
                 ('descricao', models.TextField()),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'objetivo',
@@ -100,11 +120,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PalavraChave',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('palavra', models.CharField(max_length=32, validators=[django.core.validators.MinLengthValidator(2)])),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('palavra', models.CharField(max_length=32, validators=[
+                 django.core.validators.MinLengthValidator(2)])),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'palavra chave',
@@ -115,15 +138,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PlanoAcao',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('numero', models.PositiveIntegerField(default=1)),
-                ('nome', models.CharField(max_length=100, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('codigo_seg', models.CharField(blank=True, max_length=32, validators=[django.core.validators.MinLengthValidator(2)])),
+                ('nome', models.CharField(max_length=100, validators=[
+                 django.core.validators.MinLengthValidator(2)])),
+                ('codigo_seg', models.CharField(blank=True, max_length=32,
+                                                validators=[django.core.validators.MinLengthValidator(2)])),
                 ('data_inicio', models.DateField(blank=True)),
                 ('data_fim', models.DateField(blank=True)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'plano de ação',
@@ -134,23 +161,34 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Projeto',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('seg', models.CharField(blank=True, max_length=32, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('titulo_portugues', models.CharField(max_length=256, validators=[django.core.validators.MinLengthValidator(5)])),
-                ('titulo_ingles', models.CharField(blank=True, max_length=256, validators=[django.core.validators.MinLengthValidator(5)])),
-                ('sigla', models.CharField(max_length=64, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('data_inicio', models.DateField(blank=True, default=datetime.datetime.now, null=True)),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('seg', models.CharField(blank=True, max_length=32,
+                                         validators=[django.core.validators.MinLengthValidator(2)])),
+                ('titulo_portugues', models.CharField(max_length=256,
+                                                      validators=[django.core.validators.MinLengthValidator(5)])),
+                ('titulo_ingles', models.CharField(blank=True, max_length=256,
+                                                   validators=[django.core.validators.MinLengthValidator(5)])),
+                ('sigla', models.CharField(max_length=64, validators=[
+                 django.core.validators.MinLengthValidator(2)])),
+                ('data_inicio', models.DateField(blank=True,
+                                                 default=datetime.datetime.now, null=True)),
                 ('duracao', models.IntegerField(blank=True, default=1)),
                 ('hipotese', models.TextField(blank=True)),
                 ('objetivo_geral', models.TextField(blank=True)),
                 ('resumo', models.TextField(blank=True)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='criado', to=settings.AUTH_USER_MODEL)),
-                ('instituicao_executora', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='executora', to='projeto.Instituicao')),
-                ('instituicao_proponente', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='proponente', to='projeto.Instituicao')),
-                ('lider', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='lider', to=settings.AUTH_USER_MODEL)),
-                ('projeto_relacionado', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='relacionado', to='projeto.Projeto')),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, related_name='criado', to=settings.AUTH_USER_MODEL)),
+                ('instituicao_executora', models.ForeignKey(blank=True, null=True,
+                                                            on_delete=django.db.models.deletion.CASCADE, related_name='executora', to='projeto.Instituicao')),
+                ('instituicao_proponente', models.ForeignKey(blank=True, null=True,
+                                                             on_delete=django.db.models.deletion.CASCADE, related_name='proponente', to='projeto.Instituicao')),
+                ('lider', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                            related_name='lider', to=settings.AUTH_USER_MODEL)),
+                ('projeto_relacionado', models.ForeignKey(blank=True, null=True,
+                                                          on_delete=django.db.models.deletion.CASCADE, related_name='relacionado', to='projeto.Projeto')),
             ],
             options={
                 'verbose_name': 'projeto',
@@ -161,14 +199,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ProjetoComponente',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('numero', models.PositiveIntegerField(default=1)),
-                ('nome', models.CharField(max_length=256, validators=[django.core.validators.MinLengthValidator(5)])),
+                ('nome', models.CharField(max_length=256, validators=[
+                 django.core.validators.MinLengthValidator(5)])),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('projeto', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
-                ('responsavel', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='responsavel', to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('projeto', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
+                ('responsavel', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                                  related_name='responsavel', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'projeto componente',
@@ -179,14 +222,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Resultado',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('numero', models.PositiveIntegerField(default=1)),
                 ('descricao', models.TextField()),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('objetivo', smart_selects.db_fields.ChainedManyToManyField(chained_field='projeto', chained_model_field='projeto', to='projeto.Objetivo')),
-                ('projeto', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('objetivo', smart_selects.db_fields.ChainedManyToManyField(
+                    chained_field='projeto', chained_model_field='projeto', to='projeto.Objetivo')),
+                ('projeto', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
             ],
             options={
                 'verbose_name': 'resultado',
@@ -197,12 +244,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Status',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nome', models.CharField(blank=True, max_length=32, validators=[django.core.validators.MinLengthValidator(2)])),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('nome', models.CharField(blank=True, max_length=32,
+                                          validators=[django.core.validators.MinLengthValidator(2)])),
                 ('descricao', models.TextField(blank=True, null=True)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'status',
@@ -213,19 +263,28 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Tarefa',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('numero', models.PositiveIntegerField(blank=True)),
-                ('nome', models.CharField(blank=True, max_length=100, validators=[django.core.validators.MinLengthValidator(2)])),
-                ('indicador_fisico', models.CharField(blank=True, max_length=32, validators=[django.core.validators.MinLengthValidator(2)])),
+                ('nome', models.CharField(blank=True, max_length=100,
+                                          validators=[django.core.validators.MinLengthValidator(2)])),
+                ('indicador_fisico', models.CharField(blank=True, max_length=32,
+                                                      validators=[django.core.validators.MinLengthValidator(2)])),
                 ('peso_atividade', models.PositiveIntegerField(blank=True)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('atividade', smart_selects.db_fields.ChainedForeignKey(chained_field='planoacao', chained_model_field='planoacao', on_delete=django.db.models.deletion.CASCADE, to='projeto.Atividade')),
-                ('colaborador', models.ManyToManyField(blank=True, related_name='colaborador_tarefa', to=settings.AUTH_USER_MODEL)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('planoacao', smart_selects.db_fields.ChainedForeignKey(chained_field='projeto', chained_model_field='projeto', on_delete=django.db.models.deletion.CASCADE, to='projeto.PlanoAcao')),
-                ('projeto', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
-                ('responsavel', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='responsavel_tarefa', to=settings.AUTH_USER_MODEL)),
+                ('atividade', smart_selects.db_fields.ChainedForeignKey(chained_field='planoacao',
+                                                                        chained_model_field='planoacao', on_delete=django.db.models.deletion.CASCADE, to='projeto.Atividade')),
+                ('colaborador', models.ManyToManyField(
+                    blank=True, related_name='colaborador_tarefa', to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('planoacao', smart_selects.db_fields.ChainedForeignKey(chained_field='projeto',
+                                                                        chained_model_field='projeto', on_delete=django.db.models.deletion.CASCADE, to='projeto.PlanoAcao')),
+                ('projeto', models.ForeignKey(
+                    blank=True, on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
+                ('responsavel', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                                  related_name='responsavel_tarefa', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'tarefa',
@@ -236,12 +295,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Tipo',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sigla', models.CharField(blank=True, max_length=256, validators=[django.core.validators.MinLengthValidator(3)])),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('sigla', models.CharField(blank=True, max_length=256,
+                                           validators=[django.core.validators.MinLengthValidator(3)])),
                 ('descricao', models.TextField(blank=True, null=True)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'tipo',
@@ -252,66 +314,79 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='projeto',
             name='status',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='status', to='projeto.Status'),
+            field=models.ForeignKey(
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='status', to='projeto.Status'),
         ),
         migrations.AddField(
             model_name='projeto',
             name='tipo',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='tipo', to='projeto.Tipo'),
+            field=models.ForeignKey(
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='tipo', to='projeto.Tipo'),
         ),
         migrations.AddField(
             model_name='planoacao',
             name='projeto',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
         ),
         migrations.AddField(
             model_name='planoacao',
             name='projeto_componente',
-            field=smart_selects.db_fields.ChainedForeignKey(chained_field='projeto', chained_model_field='projeto', on_delete=django.db.models.deletion.CASCADE, to='projeto.ProjetoComponente'),
+            field=smart_selects.db_fields.ChainedForeignKey(
+                chained_field='projeto', chained_model_field='projeto', on_delete=django.db.models.deletion.CASCADE, to='projeto.ProjetoComponente'),
         ),
         migrations.AddField(
             model_name='planoacao',
             name='responsavel',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='responsavel_plano', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='responsavel_plano', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='planoacao',
             name='resultado',
-            field=smart_selects.db_fields.ChainedManyToManyField(chained_field='projeto', chained_model_field='projeto', to='projeto.Resultado'),
+            field=smart_selects.db_fields.ChainedManyToManyField(
+                chained_field='projeto', chained_model_field='projeto', to='projeto.Resultado'),
         ),
         migrations.AddField(
             model_name='palavrachave',
             name='projeto',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
         ),
         migrations.AddField(
             model_name='objetivo',
             name='projeto',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
         ),
         migrations.AddField(
             model_name='metaprojeto',
             name='objetivo',
-            field=smart_selects.db_fields.ChainedManyToManyField(chained_field='projeto', chained_model_field='projeto', to='projeto.Objetivo'),
+            field=smart_selects.db_fields.ChainedManyToManyField(
+                chained_field='projeto', chained_model_field='projeto', to='projeto.Objetivo'),
         ),
         migrations.AddField(
             model_name='metaprojeto',
             name='projeto',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
         ),
         migrations.AddField(
             model_name='atividade',
             name='planoacao',
-            field=smart_selects.db_fields.ChainedForeignKey(chained_field='projeto', chained_model_field='projeto', on_delete=django.db.models.deletion.CASCADE, to='projeto.PlanoAcao'),
+            field=smart_selects.db_fields.ChainedForeignKey(
+                chained_field='projeto', chained_model_field='projeto', on_delete=django.db.models.deletion.CASCADE, to='projeto.PlanoAcao'),
         ),
         migrations.AddField(
             model_name='atividade',
             name='projeto',
-            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
+            field=models.ForeignKey(
+                blank=True, on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto'),
         ),
         migrations.AddField(
             model_name='atividade',
             name='responsavel',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='responsavel_atividade', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='responsavel_atividade', to=settings.AUTH_USER_MODEL),
         ),
     ]

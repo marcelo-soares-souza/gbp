@@ -21,27 +21,42 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sequenciamento',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('objetivo', models.TextField(blank=True, null=True)),
-                ('material_biologico', models.CharField(max_length=256, validators=[django.core.validators.MinLengthValidator(5)])),
-                ('descricao_material_biologico', models.TextField(blank=True, null=True)),
-                ('numero_amostras', models.IntegerField(blank=True, default=0, null=True)),
-                ('status_contrato', models.CharField(blank=True, choices=[('Contratado', 'Contratado'), ('Em Contratação', 'Em Contratação'), ('Em Cotação', 'Em Cotação'), ('Finalizado', 'Finalizado')], max_length=64, null=True)),
-                ('status_pagamento', models.CharField(blank=True, choices=[('Aviso de Fornecimento', 'Aviso de Fornecimento'), ('Atencipação', 'Atencipação'), ('Pendente', 'Pendente'), ('Pago', 'Pago')], max_length=64, null=True)),
-                ('prioridade', models.CharField(choices=[('Normal', 'Normal'), ('Urgente', 'Urgente')], default='Normal', max_length=64)),
-                ('empresa_executora', models.CharField(blank=True, max_length=256, null=True)),
+                ('material_biologico', models.CharField(max_length=256,
+                                                        validators=[django.core.validators.MinLengthValidator(5)])),
+                ('descricao_material_biologico',
+                 models.TextField(blank=True, null=True)),
+                ('numero_amostras', models.IntegerField(
+                    blank=True, default=0, null=True)),
+                ('status_contrato', models.CharField(blank=True, choices=[('Contratado', 'Contratado'), (
+                    'Em Contratação', 'Em Contratação'), ('Em Cotação', 'Em Cotação'), ('Finalizado', 'Finalizado')], max_length=64, null=True)),
+                ('status_pagamento', models.CharField(blank=True, choices=[('Aviso de Fornecimento', 'Aviso de Fornecimento'), (
+                    'Atencipação', 'Atencipação'), ('Pendente', 'Pendente'), ('Pago', 'Pago')], max_length=64, null=True)),
+                ('prioridade', models.CharField(choices=[
+                 ('Normal', 'Normal'), ('Urgente', 'Urgente')], default='Normal', max_length=64)),
+                ('empresa_executora', models.CharField(
+                    blank=True, max_length=256, null=True)),
                 ('data_contratacao', models.DateField(blank=True, null=True)),
                 ('detalhamento_material', models.TextField(blank=True, null=True)),
-                ('status_cgen', models.CharField(blank=True, choices=[('TTM - Preparado', 'TTM - Preparado'), ('TTM - Não Preparado', 'TTM - Não Preparado')], max_length=64, null=True)),
+                ('status_cgen', models.CharField(blank=True, choices=[
+                 ('TTM - Preparado', 'TTM - Preparado'), ('TTM - Não Preparado', 'TTM - Não Preparado')], max_length=64, null=True)),
                 ('ttm', models.CharField(blank=True, max_length=256, null=True)),
-                ('contato_gestor', models.CharField(blank=True, max_length=256, null=True)),
-                ('codigo_pedido_gestor', models.CharField(blank=True, max_length=256, null=True)),
+                ('contato_gestor', models.CharField(
+                    blank=True, max_length=256, null=True)),
+                ('codigo_pedido_gestor', models.CharField(
+                    blank=True, max_length=256, null=True)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('colaborador', models.ManyToManyField(blank=True, related_name='colaborador_sequenciamento', to=settings.AUTH_USER_MODEL)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('projeto', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
-                ('responsavel', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='responsavel_sequenciamento', to=settings.AUTH_USER_MODEL)),
+                ('colaborador', models.ManyToManyField(
+                    blank=True, related_name='colaborador_sequenciamento', to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('projeto', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='projeto.Projeto')),
+                ('responsavel', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                                  related_name='responsavel_sequenciamento', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'sequenciamento',
@@ -52,12 +67,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TipoSequenciamento',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nome', models.CharField(max_length=256, validators=[django.core.validators.MinLengthValidator(5)])),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('nome', models.CharField(max_length=256, validators=[
+                 django.core.validators.MinLengthValidator(5)])),
                 ('descricao', models.TextField(blank=True, null=True)),
                 ('data_cadastro', models.DateTimeField(auto_now_add=True)),
                 ('data_atualizado', models.DateTimeField(auto_now=True)),
-                ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('criado_por', models.ForeignKey(blank=True, null=True,
+                                                 on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'tiposequenciamento',
@@ -68,6 +86,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='sequenciamento',
             name='tipo_sequenciamento',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sequenciamento.TipoSequenciamento'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='sequenciamento.TipoSequenciamento'),
         ),
     ]

@@ -1,10 +1,20 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 
-from projeto.views import *
-from sequenciamento.views import *
+from projeto.views.home import Home, Permission
+from projeto.views.instituicao import InstituicaoProjetoList, InstituicaoProjetoDetail, InstituicaoProjetoCreate, InstituicaoProjetoUpdate, InstituicaoProjetoDelete
+from projeto.views.projeto import ProjetoList, ProjetoDetail, ProjetoCreate, ProjetoUpdate, ProjetoDelete
+from projeto.views.objetivo import ObjetivoProjetoList, ObjetivoProjetoDetail, ObjetivoProjetoCreate, ObjetivoProjetoUpdate, ObjetivoProjetoDelete
+from projeto.views.resultado import ResultadoProjetoList, ResultadoProjetoDetail, ResultadoProjetoCreate, ResultadoProjetoUpdate, ResultadoProjetoDelete
+from projeto.views.palavrachave import PalavraChaveList, PalavraChaveDetail, PalavraChaveCreate, PalavraChaveUpdate, PalavraChaveDelete
+from projeto.views.metaprojeto import MetaProjetoList, MetaProjetoDetail, MetaProjetoCreate, MetaProjetoUpdate, MetaProjetoDelete
+from projeto.views.projetocomponente import ProjetoComponenteList, ProjetoComponenteDetail, ProjetoComponenteCreate, ProjetoComponenteUpdate, ProjetoComponenteDelete
+from projeto.views.planoacao import PlanoAcaoList, PlanoAcaoDetail, PlanoAcaoCreate, PlanoAcaoUpdate, PlanoAcaoDelete
+from projeto.views.atividade import AtividadeList, AtividadeDetail, AtividadeCreate, AtividadeUpdate, AtividadeDelete
+from projeto.views.tarefa import TarefaList, TarefaDetail, TarefaCreate, TarefaUpdate, TarefaDelete
+from sequenciamento.views.tiposequenciamento import TipoSequenciamentoList, TipoSequenciamentoDetail, TipoSequenciamentoCreate, TipoSequenciamentoUpdate, TipoSequenciamentoDelete
+from sequenciamento.views.sequenciamento import SequenciamentoList, SequenciamentoDetail, SequenciamentoCreate, SequenciamentoUpdate, SequenciamentoDelete
 
 urlpatterns = [
 
