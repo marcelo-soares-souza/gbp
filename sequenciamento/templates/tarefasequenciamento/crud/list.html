@@ -23,8 +23,6 @@
                 <p><b>Status: </b> {{ tarefasequenciamento.status }}</p>
                 <p><b>Responsável: </b> {{ tarefasequenciamento.responsavel }}</p>
 
-                {% if request.user == tarefasequenciamento.criado_por or request.user.is_superuser %}
-                <br/>
                 <p>
                   {% buttons %}
                     <a href="{{ tarefasequenciamento.get_tarefasequenciamento_update_url }}" class="btn btn-sm btn-warning">Editar</a>
@@ -33,7 +31,6 @@
                     {% endif %}
                   {% endbuttons %}
                 </p>
-                {% endif %}
 
                 <div class="data-atualizado">{{ tarefasequenciamento.data_atualizado }}</div>
 

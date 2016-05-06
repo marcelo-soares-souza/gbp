@@ -51,7 +51,7 @@ class TarefaSequenciamentoCreate(LoggedInMixin, CreateView):
         return {'criado_por': self.request.user.id}
 
 
-class TarefaSequenciamentoUpdate(LoggedInMixin, CreatedByRequiredMixin, UpdateView):
+class TarefaSequenciamentoUpdate(LoggedInMixin, ResponsavelRequiredMixin, UpdateView):
     template_name = 'tarefasequenciamento/crud/form.html'
     form_class = TarefaSequenciamentoForm
     model = TarefaSequenciamento
