@@ -184,6 +184,8 @@ urlpatterns = [
         name='home_tarefasequenciamento'),
     url(r'^tarefasequenciamento/new/$', TarefaSequenciamentoCreate.as_view(),
         name='new_tarefasequenciamento'),
+    url(r'^tarefasequenciamento/new/(?P<pk>\d+)/$', TarefaSequenciamentoCreate.as_view(),
+        name='new_tarefasequenciamento_sequenciamento'),
     url(r'^tarefasequenciamento/list/', TarefaSequenciamentoList.as_view(),
         name='list_tarefasequenciamento'),
     url(r'^tarefasequenciamento/detail/(?P<pk>\d+)/$',

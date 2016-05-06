@@ -18,20 +18,31 @@
         {% for sequenciamento in sequenciamentos %}
             <ul class="list-group">
               <li class="list-group-item">
+
                 <h3><a href="{{ sequenciamento.get_detail_url }}">{{ sequenciamento }}</a></h3>
                 <p><b>Tipo: </b> {{ sequenciamento.tipo_sequenciamento }}</p>
                 <p><b>Responsável: </b> {{ sequenciamento.responsavel }}</p>
                 {% if sequenciamento.colaborador.all %}
                   <p><b>Colaboradores: </b> {{sequenciamento.colaborador.all|join:', '}}</p>
                 {% endif %}
-                  <p>
-                    {% buttons %}
-                      <a href="{{ sequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
-                      {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
-                        <a href="{{ sequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
-                      {% endif %}
-                    {% endbuttons %}
+                {% if sequenciamento.tarefasequenciamento_set.all %}
+                  <p><b>Tarefas: </b>
+                    {% for tarefa in sequenciamento.tarefasequenciamento_set.all %}
+                    {% if not forloop.first %}, {% endif %}
+                    <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>
+                    {% endfor %}
                   </p>
+                {% endif %}
+                <p>
+                  {% buttons %}
+                    <a href="{{ sequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+                      <a href="{{ sequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                    {% endif %}
+                    <a href="{% url 'new_tarefasequenciamento' %}{{sequenciamento.id}}" class="btn btn-sm btn-info">Adicionar Tarefa</a>
+                  {% endbuttons %}
+                </p>
+
                 <div class="data-atualizado">{{ sequenciamento.data_atualizado }}</div>
 
               </li>

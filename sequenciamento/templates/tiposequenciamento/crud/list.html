@@ -21,9 +21,16 @@
 
                 <h3><a href="{{ tiposequenciamento.get_detail_url }}">{{ tiposequenciamento }}</a></h3>
 
+                {% if tiposequenciamento.sequenciamento_set.all %}
+                  <p><b>Sequenciamentos: </b>
+                    {% for sequenciamento in tiposequenciamento.sequenciamento_set.all %}
+                    {% if not forloop.first %}, {% endif %}
+                    <a href="{{ sequenciamento.get_detail_url }}">{{ sequenciamento.material_biologico }}</a>
+                    {% endfor %}
+                  </p>
+                {% endif %}
 
                 {% if request.user == tiposequenciamento.criado_por or request.user.is_superuser %}
-                <br/>
                 <p>
                   {% buttons %}
                     <a href="{{ tiposequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>

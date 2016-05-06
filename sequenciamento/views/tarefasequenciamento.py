@@ -6,6 +6,9 @@ from projeto.views.login import LoggedInMixin, CreatedByRequiredMixin, ListRespo
 from sequenciamento.models import TarefaSequenciamento
 from sequenciamento.forms import TarefaSequenciamentoForm
 
+# import logging
+# logger = logging.getLogger('sequenciamento')
+
 
 class TarefaSequenciamentoList(LoggedInMixin, ListResponsavelRequiredMixin, SortableListView):
     allowed_sort_fields = {'tarefa': {'default_direction': '', 'verbose_name': 'Tarefa'},
@@ -48,7 +51,12 @@ class TarefaSequenciamentoCreate(LoggedInMixin, CreateView):
         return super(TarefaSequenciamentoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return {'criado_por': self.request.user.id}
+        data = {'criado_por': self.request.user.id}
+
+        if self.kwargs:
+            data['sequenciamento'] = int(self.kwargs['pk'])
+
+        return data
 
 
 class TarefaSequenciamentoUpdate(LoggedInMixin, ResponsavelRequiredMixin, UpdateView):
