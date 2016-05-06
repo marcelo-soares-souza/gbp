@@ -19,15 +19,15 @@
             <ul class="list-group">
               <li class="list-group-item">
 
-                <h3><a href="{{ tarefasequenciamento.get_tarefasequenciamento_detail_url }}">{{ tarefasequenciamento }}</a></h3>
+                <h3><a href="{{ tarefasequenciamento.get_detail_url }}">{{ tarefasequenciamento }}</a></h3>
                 <p><b>Status: </b> {{ tarefasequenciamento.status }}</p>
                 <p><b>Responsável: </b> {{ tarefasequenciamento.responsavel }}</p>
 
                 <p>
                   {% buttons %}
-                    <a href="{{ tarefasequenciamento.get_tarefasequenciamento_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ tarefasequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
-                      <a href="{{ tarefasequenciamento.get_tarefasequenciamento_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                      <a href="{{ tarefasequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                     {% endif %}
                   {% endbuttons %}
                 </p>

@@ -38,13 +38,13 @@ class Instituicao(models.Model):
         verbose_name = 'instituição'
         verbose_name_plural = 'instituições'
 
-    def get_instituicao_detail_url(self):
+    def get_detail_url(self):
         return u"/instituicao/detail/%i" % self.id
 
-    def get_instituicao_update_url(self):
+    def get_update_url(self):
         return u"/instituicao/update/%i" % self.id
 
-    def get_instituicao_delete_url(self):
+    def get_delete_url(self):
         return u"/instituicao/delete/%i" % self.id
 
     def __str__(self):

@@ -26,13 +26,13 @@ class ProjetoComponente(models.Model):
         verbose_name = 'projeto componente'
         verbose_name_plural = 'projetos componentees'
 
-    def get_projetocomponente_detail_url(self):
+    def get_detail_url(self):
         return u"/projetocomponente/detail/%i" % self.id
 
-    def get_projetocomponente_update_url(self):
+    def get_update_url(self):
         return u"/projetocomponente/update/%i" % self.id
 
-    def get_projetocomponente_delete_url(self):
+    def get_delete_url(self):
         return u"/projetocomponente/delete/%i" % self.id
 
     def __str__(self):

@@ -18,7 +18,7 @@
         {% for sequenciamento in sequenciamentos %}
             <ul class="list-group">
               <li class="list-group-item">
-                <h3><a href="{{ sequenciamento.get_sequenciamento_detail_url }}">{{ sequenciamento }}</a></h3>
+                <h3><a href="{{ sequenciamento.get_detail_url }}">{{ sequenciamento }}</a></h3>
                 <p><b>Tipo: </b> {{ sequenciamento.tipo_sequenciamento }}</p>
                 <p><b>Responsável: </b> {{ sequenciamento.responsavel }}</p>
                 {% if sequenciamento.colaborador.all %}
@@ -26,9 +26,9 @@
                 {% endif %}
                   <p>
                     {% buttons %}
-                      <a href="{{ sequenciamento.get_sequenciamento_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                      <a href="{{ sequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                       {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
-                        <a href="{{ sequenciamento.get_sequenciamento_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                        <a href="{{ sequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                       {% endif %}
                     {% endbuttons %}
                   </p>

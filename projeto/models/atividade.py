@@ -48,13 +48,13 @@ class Atividade(models.Model):
         verbose_name = 'atividade'
         verbose_name_plural = 'atividades'
 
-    def get_atividade_detail_url(self):
+    def get_detail_url(self):
         return u"/atividade/detail/%i" % self.id
 
-    def get_atividade_update_url(self):
+    def get_update_url(self):
         return u"/atividade/update/%i" % self.id
 
-    def get_atividade_delete_url(self):
+    def get_delete_url(self):
         return u"/atividade/delete/%i" % self.id
 
     def __str__(self):

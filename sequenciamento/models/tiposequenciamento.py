@@ -18,13 +18,13 @@ class TipoSequenciamento(models.Model):
         verbose_name = 'tiposequenciamento'
         verbose_name_plural = 'tiposequenciamentos'
 
-    def get_tiposequenciamento_detail_url(self):
+    def get_detail_url(self):
         return u"/tiposequenciamento/detail/%i" % self.id
 
-    def get_tiposequenciamento_update_url(self):
+    def get_update_url(self):
         return u"/tiposequenciamento/update/%i" % self.id
 
-    def get_tiposequenciamento_delete_url(self):
+    def get_delete_url(self):
         return u"/tiposequenciamento/delete/%i" % self.id
 
     def __str__(self):

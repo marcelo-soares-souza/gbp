@@ -50,13 +50,13 @@ class PlanoAcao(models.Model):
         verbose_name = 'plano de ação'
         verbose_name_plural = 'planos de ação'
 
-    def get_planoacao_detail_url(self):
+    def get_detail_url(self):
         return u"/planoacao/detail/%i" % self.id
 
-    def get_planoacao_update_url(self):
+    def get_update_url(self):
         return u"/planoacao/update/%i" % self.id
 
-    def get_planoacao_delete_url(self):
+    def get_delete_url(self):
         return u"/planoacao/delete/%i" % self.id
 
     def __str__(self):

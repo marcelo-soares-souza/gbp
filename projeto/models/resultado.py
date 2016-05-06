@@ -31,13 +31,13 @@ class Resultado(models.Model):
         verbose_name = 'resultado'
         verbose_name_plural = 'resultados'
 
-    def get_resultado_detail_url(self):
+    def get_detail_url(self):
         return u"/resultado/detail/%i" % self.id
 
-    def get_resultado_update_url(self):
+    def get_update_url(self):
         return u"/resultado/update/%i" % self.id
 
-    def get_resultado_delete_url(self):
+    def get_delete_url(self):
         return u"/resultado/delete/%i" % self.id
 
     def __str__(self):

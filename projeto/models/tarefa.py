@@ -55,13 +55,13 @@ class Tarefa(models.Model):
         verbose_name = 'tarefa'
         verbose_name_plural = 'tarefas'
 
-    def get_tarefa_detail_url(self):
+    def get_detail_url(self):
         return u"/tarefa/detail/%i" % self.id
 
-    def get_tarefa_update_url(self):
+    def get_update_url(self):
         return u"/tarefa/update/%i" % self.id
 
-    def get_tarefa_delete_url(self):
+    def get_delete_url(self):
         return u"/tarefa/delete/%i" % self.id
 
     def __str__(self):

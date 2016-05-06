@@ -32,7 +32,7 @@
                 <ul class="list-group">
                   <li class="list-group-item">
 
-                    <h3><a href="{{ palavrachave.get_palavrachave_detail_url }}">{{ palavrachave.palavra }}</a></h3>
+                    <h3><a href="{{ palavrachave.get_detail_url }}">{{ palavrachave.palavra }}</a></h3>
 
                     <b>Palavra: </b> {{ palavrachave.palavra }}
 
@@ -40,8 +40,8 @@
 
                     {% if request.user == palavrachave.criado_por or request.user.is_superuser %}
                       <p>
-                        <a href="{{ palavrachave.get_palavrachave_update_url }}">Editar</a> |
-                        <a href="{{ palavrachave.get_palavrachave_delete_url }}">Apagar</a>
+                        <a href="{{ palavrachave.get_update_url }}">Editar</a> |
+                        <a href="{{ palavrachave.get_delete_url }}">Apagar</a>
                       </p>
                     {% endif %}
 

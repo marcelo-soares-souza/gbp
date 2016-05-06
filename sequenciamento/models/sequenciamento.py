@@ -69,13 +69,13 @@ class Sequenciamento(models.Model):
         verbose_name = 'sequenciamento'
         verbose_name_plural = 'sequenciamentos'
 
-    def get_sequenciamento_detail_url(self):
+    def get_detail_url(self):
         return u"/sequenciamento/detail/%i" % self.id
 
-    def get_sequenciamento_update_url(self):
+    def get_update_url(self):
         return u"/sequenciamento/update/%i" % self.id
 
-    def get_sequenciamento_delete_url(self):
+    def get_delete_url(self):
         return u"/sequenciamento/delete/%i" % self.id
 
     def __str__(self):

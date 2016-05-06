@@ -50,9 +50,9 @@
 
       <p>
         {% buttons %}
-          <a href="{{ sequenciamento.get_sequenciamento_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{{ sequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
           {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
-            <a href="{{ sequenciamento.get_sequenciamento_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+            <a href="{{ sequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
           {% endif %}
         {% endbuttons %}
       </p>

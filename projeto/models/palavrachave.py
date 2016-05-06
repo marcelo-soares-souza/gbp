@@ -25,13 +25,13 @@ class PalavraChave(models.Model):
         verbose_name = 'palavra chave'
         verbose_name_plural = 'palavras chave'
 
-    def get_palavrachave_detail_url(self):
+    def get_detail_url(self):
         return u"/palavrachave/detail/%i" % self.id
 
-    def get_palavrachave_update_url(self):
+    def get_update_url(self):
         return u"/palavrachave/update/%i" % self.id
 
-    def get_palavrachave_delete_url(self):
+    def get_delete_url(self):
         return u"/palavrachave/delete/%i" % self.id
 
     def __str__(self):

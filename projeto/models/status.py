@@ -22,10 +22,10 @@ class Status(models.Model):
         verbose_name = 'status'
         verbose_name_plural = 'status'
 
-    def get_status_detail_url(self):
+    def get_detail_url(self):
         return u"/status/detail/%i" % self.id
 
-    def get_status_delete_url(self):
+    def get_delete_url(self):
         return u"/status/delete/%i" % self.id
 
     def __str__(self):

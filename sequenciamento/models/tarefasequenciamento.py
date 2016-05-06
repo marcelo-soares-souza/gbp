@@ -37,13 +37,13 @@ class TarefaSequenciamento(models.Model):
         verbose_name = 'tarefasequenciamento'
         verbose_name_plural = 'tarefasequenciamentos'
 
-    def get_tarefasequenciamento_detail_url(self):
+    def get_detail_url(self):
         return u"/tarefasequenciamento/detail/%i" % self.id
 
-    def get_tarefasequenciamento_update_url(self):
+    def get_update_url(self):
         return u"/tarefasequenciamento/update/%i" % self.id
 
-    def get_tarefasequenciamento_delete_url(self):
+    def get_delete_url(self):
         return u"/tarefasequenciamento/delete/%i" % self.id
 
     def __str__(self):

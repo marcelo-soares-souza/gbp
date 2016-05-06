@@ -30,13 +30,13 @@ class Objetivo(models.Model):
         verbose_name = 'objetivo'
         verbose_name_plural = 'objetivos'
 
-    def get_objetivo_detail_url(self):
+    def get_detail_url(self):
         return u"/objetivo/detail/%i" % self.id
 
-    def get_objetivo_update_url(self):
+    def get_update_url(self):
         return u"/objetivo/update/%i" % self.id
 
-    def get_objetivo_delete_url(self):
+    def get_delete_url(self):
         return u"/objetivo/delete/%i" % self.id
 
     def __str__(self):

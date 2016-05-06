@@ -19,16 +19,16 @@
             <ul class="list-group">
               <li class="list-group-item">
 
-                <h3><a href="{{ tiposequenciamento.get_tiposequenciamento_detail_url }}">{{ tiposequenciamento }}</a></h3>
+                <h3><a href="{{ tiposequenciamento.get_detail_url }}">{{ tiposequenciamento }}</a></h3>
 
 
                 {% if request.user == tiposequenciamento.criado_por or request.user.is_superuser %}
                 <br/>
                 <p>
                   {% buttons %}
-                    <a href="{{ tiposequenciamento.get_tiposequenciamento_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ tiposequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
-                      <a href="{{ tiposequenciamento.get_tiposequenciamento_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                      <a href="{{ tiposequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                     {% endif %}
                   {% endbuttons %}
                 </p>

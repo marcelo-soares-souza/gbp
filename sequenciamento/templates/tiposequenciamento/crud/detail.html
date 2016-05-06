@@ -17,9 +17,9 @@
 
       <p>
         {% buttons %}
-          <a href="{{ tiposequenciamento.get_tiposequenciamento_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{{ tiposequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
           {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
-            <a href="{{ tiposequenciamento.get_tiposequenciamento_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+            <a href="{{ tiposequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
           {% endif %}
         {% endbuttons %}
       </p>

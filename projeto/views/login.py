@@ -36,6 +36,7 @@ class ColaboradorRequiredMixin(object):
 
         return super(ColaboradorRequiredMixin, self).dispatch(request, *args, **kwargs)
 
+
 class ResponsavelRequiredMixin(object):
 
     def dispatch(self, request, *args, **kwargs):
@@ -45,6 +46,7 @@ class ResponsavelRequiredMixin(object):
             return HttpResponseRedirect(reverse('permission_denied'))
 
         return super(ResponsavelRequiredMixin, self).dispatch(request, *args, **kwargs)
+
 
 class ListColaboradorRequiredMixin(object):
 
