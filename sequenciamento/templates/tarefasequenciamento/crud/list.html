@@ -1,0 +1,48 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todos as Tarefas de Sequenciamento</title> {% endblock title %}
+
+{% block content %}
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    {% if not tarefasequenciamentos %}
+
+    <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_tarefasequenciamento' %}">Cadastrar?</a> </h4</div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for tarefasequenciamento in tarefasequenciamentos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ tarefasequenciamento.get_tarefasequenciamento_detail_url }}">{{ tarefasequenciamento }}</a></h3>
+                <p><b>Status: </b> {{ tarefasequenciamento.status }}</p>
+                <p><b>Responsável: </b> {{ tarefasequenciamento.responsavel }}</p>
+
+                {% if request.user == tarefasequenciamento.criado_por or request.user.is_superuser %}
+                <br/>
+                <p>
+                  {% buttons %}
+                    <a href="{{ tarefasequenciamento.get_tarefasequenciamento_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+                      <a href="{{ tarefasequenciamento.get_tarefasequenciamento_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                    {% endif %}
+                  {% endbuttons %}
+                </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ tarefasequenciamento.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

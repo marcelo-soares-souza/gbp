@@ -15,6 +15,7 @@ from projeto.views.atividade import AtividadeList, AtividadeDetail, AtividadeCre
 from projeto.views.tarefa import TarefaList, TarefaDetail, TarefaCreate, TarefaUpdate, TarefaDelete
 from sequenciamento.views.tiposequenciamento import TipoSequenciamentoList, TipoSequenciamentoDetail, TipoSequenciamentoCreate, TipoSequenciamentoUpdate, TipoSequenciamentoDelete
 from sequenciamento.views.sequenciamento import SequenciamentoList, SequenciamentoDetail, SequenciamentoCreate, SequenciamentoUpdate, SequenciamentoDelete
+from sequenciamento.views.tarefasequenciamento import TarefaSequenciamentoList, TarefaSequenciamentoDetail, TarefaSequenciamentoCreate, TarefaSequenciamentoUpdate, TarefaSequenciamentoDelete
 
 urlpatterns = [
 
@@ -177,6 +178,20 @@ urlpatterns = [
         SequenciamentoUpdate.as_view(), name='update_sequenciamento'),
     url(r'^sequenciamento/delete/(?P<pk>\d+)/$',
         SequenciamentoDelete.as_view(), name='delete_sequenciamento'),
+
+    # Views de Tarefa Sequenciamento
+    url(r'^tarefasequenciamento/$', TarefaSequenciamentoList.as_view(),
+        name='home_tarefasequenciamento'),
+    url(r'^tarefasequenciamento/new/$', TarefaSequenciamentoCreate.as_view(),
+        name='new_tarefasequenciamento'),
+    url(r'^tarefasequenciamento/list/', TarefaSequenciamentoList.as_view(),
+        name='list_tarefasequenciamento'),
+    url(r'^tarefasequenciamento/detail/(?P<pk>\d+)/$',
+        TarefaSequenciamentoDetail.as_view(), name='detail_tarefasequenciamento'),
+    url(r'^tarefasequenciamento/update/(?P<pk>\d+)/$',
+        TarefaSequenciamentoUpdate.as_view(), name='update_tarefasequenciamento'),
+    url(r'^tarefasequenciamento/delete/(?P<pk>\d+)/$',
+        TarefaSequenciamentoDelete.as_view(), name='delete_tarefasequenciamento'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),

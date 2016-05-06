@@ -2,11 +2,11 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Apagar o Tipo de Sequenciamento {{ object }}</title> {% endblock title %}
+{% block title %} <title>Apagar {{ object }}</title> {% endblock title %}
 
 {% block content %}
 
-{% if request.user == tiposequenciamento.criado_por or request.user.is_superuser %}
+{% if request.user == tarefasequenciamento.criado_por or request.user.is_superuser %}
   <form action="" method="post">{% csrf_token %}
     <h3>Deseja Apagar "{{ object }}"?</h3>
 

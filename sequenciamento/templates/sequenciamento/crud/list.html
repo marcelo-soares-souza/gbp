@@ -19,13 +19,18 @@
             <ul class="list-group">
               <li class="list-group-item">
                 <h3><a href="{{ sequenciamento.get_sequenciamento_detail_url }}">{{ sequenciamento }}</a></h3>
-
-                  <br/>
+                <p><b>Tipo: </b> {{ sequenciamento.tipo_sequenciamento }}</p>
+                <p><b>Responsável: </b> {{ sequenciamento.responsavel }}</p>
+                {% if sequenciamento.colaborador.all %}
+                  <p><b>Colaboradores: </b> {{sequenciamento.colaborador.all|join:', '}}</p>
+                {% endif %}
                   <p>
-                    <a href="{{ sequenciamento.get_sequenciamento_update_url }}">Editar</a>
-                    {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
-                       | <a href="{{ sequenciamento.get_sequenciamento_delete_url }}">Apagar</a>
-                    {% endif %}
+                    {% buttons %}
+                      <a href="{{ sequenciamento.get_sequenciamento_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                      {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+                        <a href="{{ sequenciamento.get_sequenciamento_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                      {% endif %}
+                    {% endbuttons %}
                   </p>
                 <div class="data-atualizado">{{ sequenciamento.data_atualizado }}</div>
 

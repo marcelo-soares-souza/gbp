@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Tarefa de Sequenciamento {{ tarefasequenciamento.tarefa }}</title> {% endblock title %}
+
+{% block content %}
+
+    <h2>{{ object }}</h2>
+
+    <hr/>
+    <p><b>Sequenciamento:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.sequenciamento.material_biologico }}&nbsp;</div></p>
+    <p><b>Tarefa:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.tarefa }}&nbsp;</div></p>
+    <p><b>Status:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.status }}&nbsp;</div></p>
+    <p><b>Responsável:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.responsavel }}&nbsp;</div></p>
+    <p><b>Observação:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.observacao }}&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="{{ tarefasequenciamento.get_tarefasequenciamento_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+          {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+            <a href="{{ tarefasequenciamento.get_tarefasequenciamento_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+          {% endif %}
+        {% endbuttons %}
+      </p>
+{% endblock content %}
