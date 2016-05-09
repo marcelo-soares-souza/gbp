@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 
+from projeto.models.template import TemplateModelMixin
 from projeto.models.projeto import Projeto
 
 
@@ -9,7 +10,7 @@ from projeto.models.projeto import Projeto
 # Projeto Componente
 #
 
-class ProjetoComponente(models.Model):
+class ProjetoComponente(models.Model, TemplateModelMixin):
 
     numero = models.PositiveIntegerField(default=1)
     nome = models.CharField(max_length=256, validators=[MinLengthValidator(5)])
@@ -25,15 +26,6 @@ class ProjetoComponente(models.Model):
         ordering = ['nome']
         verbose_name = 'projeto componente'
         verbose_name_plural = 'projetos componentees'
-
-    def get_detail_url(self):
-        return u"/projetocomponente/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/projetocomponente/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/projetocomponente/delete/%i" % self.id
 
     def __str__(self):
         return 'PC%d: %s' % (self.numero, self.nome)

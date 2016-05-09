@@ -3,6 +3,7 @@ from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 from datetime import datetime
 
+from projeto.models.template import TemplateModelMixin
 from projeto.models.tipo import Tipo
 from projeto.models.status import Status
 from projeto.models.instituicao import Instituicao
@@ -14,7 +15,7 @@ elacionamentos com as outras classes}
 '''
 
 
-class Projeto(models.Model):
+class Projeto(models.Model, TemplateModelMixin):
 
     seg = models.CharField(max_length=32, validators=[
                            MinLengthValidator(2)], blank=True)
@@ -55,15 +56,6 @@ class Projeto(models.Model):
         ordering = ['sigla']
         verbose_name = 'projeto'
         verbose_name_plural = 'projetos'
-
-    def get_detail_url(self):
-        return u"/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/delete/%i" % self.id
 
     def __str__(self):
         return self.sigla

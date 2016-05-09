@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from projeto.models.template import TemplateModelMixin
 from sequenciamento.models.sequenciamento import Sequenciamento
 
 
-class TarefaSequenciamento(models.Model):
+class TarefaSequenciamento(models.Model, TemplateModelMixin):
     TAREFAS = (
         ('Definição de amostras', 'Definição de amostras'),
         ('Coleta', 'Coleta'),
@@ -36,15 +37,6 @@ class TarefaSequenciamento(models.Model):
         ordering = ['tarefa']
         verbose_name = 'tarefasequenciamento'
         verbose_name_plural = 'tarefasequenciamentos'
-
-    def get_detail_url(self):
-        return u"/tarefasequenciamento/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/tarefasequenciamento/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/tarefasequenciamento/delete/%i" % self.id
 
     def __str__(self):
         return '%s %s' % (self.tarefa, self.sequenciamento.material_biologico)

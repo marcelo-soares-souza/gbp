@@ -3,6 +3,7 @@ from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 from smart_selects.db_fields import ChainedManyToManyField, ChainedForeignKey
 
+from projeto.models.template import TemplateModelMixin
 from projeto.models.projeto import Projeto
 from projeto.models.projetocomponente import ProjetoComponente
 from projeto.models.resultado import Resultado
@@ -12,7 +13,7 @@ from projeto.models.resultado import Resultado
 #
 
 
-class PlanoAcao(models.Model):
+class PlanoAcao(models.Model, TemplateModelMixin):
 
     # Atributos
     numero = models.PositiveIntegerField(default=1)
@@ -49,15 +50,6 @@ class PlanoAcao(models.Model):
         ordering = ['nome']
         verbose_name = 'plano de ação'
         verbose_name_plural = 'planos de ação'
-
-    def get_detail_url(self):
-        return u"/planoacao/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/planoacao/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/planoacao/delete/%i" % self.id
 
     def __str__(self):
         return 'PA%d: %s' % (self.numero, self.nome)

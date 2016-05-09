@@ -1,5 +1,6 @@
 # __init__.py
 
+from projeto.models.template import TemplateModelMixin
 from projeto.models.tipo import Tipo
 from projeto.models.instituicao import Instituicao
 from projeto.models.projeto import Projeto
@@ -13,6 +14,7 @@ from projeto.models.planoacao import PlanoAcao
 from projeto.models.atividade import Atividade
 from projeto.models.tarefa import Tarefa
 
-__all__ = ['tipo', 'instituicao', 'projeto', 'objetivo',
+__all__ = ['TemplateModelMixin',
+           'tipo', 'instituicao', 'projeto', 'objetivo',
            'resultado', 'status', 'palavrachave', 'metaprojeto',
            'projetocomponente', 'planoacao', 'atividade', 'tarefa']

@@ -1,7 +1,5 @@
 # __init__.py
 
-from django.shortcuts import render
-
 from projeto.views.home import Home, Permission
 from projeto.views.tipo import TipoProjetoList, TipoProjetoDetail, TipoProjetoCreate, TipoProjetoUpdate, TipoProjetoDelete
 from projeto.views.instituicao import InstituicaoProjetoList, InstituicaoProjetoDetail, InstituicaoProjetoCreate, InstituicaoProjetoUpdate, InstituicaoProjetoDelete

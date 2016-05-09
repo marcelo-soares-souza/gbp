@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from smart_selects.db_fields import ChainedManyToManyField
 
+from projeto.models.template import TemplateModelMixin
 from projeto.models.objetivo import Objetivo
 from projeto.models.projeto import Projeto
 
@@ -10,7 +11,7 @@ from projeto.models.projeto import Projeto
 # Resultado de Objetivos
 #
 
-class Resultado(models.Model):
+class Resultado(models.Model, TemplateModelMixin):
 
     numero = models.PositiveIntegerField(default=1)
     descricao = models.TextField()
@@ -30,15 +31,6 @@ class Resultado(models.Model):
         ordering = ['numero']
         verbose_name = 'resultado'
         verbose_name_plural = 'resultados'
-
-    def get_detail_url(self):
-        return u"/resultado/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/resultado/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/resultado/delete/%i" % self.id
 
     def __str__(self):
         return 'RE%d: %s' % (self.numero, self.descricao)

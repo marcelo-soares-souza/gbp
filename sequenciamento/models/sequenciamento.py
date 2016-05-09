@@ -3,10 +3,11 @@ from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 
 from projeto.models.projeto import Projeto
+from projeto.models.template import TemplateModelMixin
 from sequenciamento.models.tiposequenciamento import TipoSequenciamento
 
 
-class Sequenciamento(models.Model):
+class Sequenciamento(models.Model, TemplateModelMixin):
     STATUS_CONTRATO = (
         ('Contratado', 'Contratado'),
         ('Em Contratação', 'Em Contratação'),
@@ -68,15 +69,6 @@ class Sequenciamento(models.Model):
         ordering = ['material_biologico']
         verbose_name = 'sequenciamento'
         verbose_name_plural = 'sequenciamentos'
-
-    def get_detail_url(self):
-        return u"/sequenciamento/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/sequenciamento/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/sequenciamento/delete/%i" % self.id
 
     def __str__(self):
         return '%s' % self.material_biologico

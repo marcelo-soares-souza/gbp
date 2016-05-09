@@ -2,12 +2,14 @@ from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 
+from projeto.models.template import TemplateModelMixin
+
 #
 # Tipos de Projetos
 #
 
 
-class Tipo(models.Model):
+class Tipo(models.Model, TemplateModelMixin):
 
     sigla = models.CharField(max_length=256, validators=[
                              MinLengthValidator(3)], blank=True)
@@ -21,15 +23,6 @@ class Tipo(models.Model):
         ordering = ['sigla']
         verbose_name = 'tipo'
         verbose_name_plural = 'tipos'
-
-    def get_detail_url(self):
-        return u"/tipo/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/tipo/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/tipo/delete/%i" % self.id
 
     def __str__(self):
         return self.sigla

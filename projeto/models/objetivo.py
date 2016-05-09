@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from projeto.models.template import TemplateModelMixin
 from projeto.models.projeto import Projeto
 
 #
@@ -8,7 +9,7 @@ from projeto.models.projeto import Projeto
 #
 
 
-class Objetivo(models.Model):
+class Objetivo(models.Model, TemplateModelMixin):
 
     # Atributos
     # Número do Objetivo, sequencial e único, mas não é o mesmo número que o id
@@ -29,15 +30,6 @@ class Objetivo(models.Model):
         ordering = ['descricao']
         verbose_name = 'objetivo'
         verbose_name_plural = 'objetivos'
-
-    def get_detail_url(self):
-        return u"/objetivo/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/objetivo/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/objetivo/delete/%i" % self.id
 
     def __str__(self):
         return 'OE%d: %s' % (self.numero, self.descricao)

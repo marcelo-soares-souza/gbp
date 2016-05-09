@@ -3,12 +3,14 @@ from django.core.validators import MinLengthValidator, EmailValidator
 from django.contrib.auth.models import User
 from localflavor.br.br_states import STATE_CHOICES
 
+from projeto.models.template import TemplateModelMixin
+
 #
 # Instituicão
 #
 
 
-class Instituicao(models.Model):
+class Instituicao(models.Model, TemplateModelMixin):
 
     sigla = models.CharField(max_length=256, validators=[
                              MinLengthValidator(2)])
@@ -37,15 +39,6 @@ class Instituicao(models.Model):
         ordering = ['sigla']
         verbose_name = 'instituição'
         verbose_name_plural = 'instituições'
-
-    def get_detail_url(self):
-        return u"/instituicao/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/instituicao/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/instituicao/delete/%i" % self.id
 
     def __str__(self):
         return self.nome

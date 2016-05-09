@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 
+from projeto.models.template import TemplateModelMixin
 from projeto.models.projeto import Projeto
 
 #
@@ -9,7 +10,7 @@ from projeto.models.projeto import Projeto
 #
 
 
-class PalavraChave(models.Model):
+class PalavraChave(models.Model, TemplateModelMixin):
 
     projeto = models.ForeignKey(Projeto)
 
@@ -24,15 +25,6 @@ class PalavraChave(models.Model):
         ordering = ['palavra']
         verbose_name = 'palavra chave'
         verbose_name_plural = 'palavras chave'
-
-    def get_detail_url(self):
-        return u"/palavrachave/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/palavrachave/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/palavrachave/delete/%i" % self.id
 
     def __str__(self):
         return self.palavra

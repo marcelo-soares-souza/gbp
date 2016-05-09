@@ -23,11 +23,11 @@ urlpatterns = [
     url(r'^permission/$', Permission.as_view(), name='permission_denied'),
 
     # Views de Projeto
-    url(r'^new/$', ProjetoCreate.as_view(), name='new_projeto'),
-    url(r'^list/', ProjetoList.as_view(), name='list_projeto'),
-    url(r'^detail/(?P<pk>\d+)/$', ProjetoDetail.as_view(), name='detail_projeto'),
-    url(r'^update/(?P<pk>\d+)/$', ProjetoUpdate.as_view(), name='update_projeto'),
-    url(r'^delete/(?P<pk>\d+)/$', ProjetoDelete.as_view(), name='delete_projeto'),
+    url(r'^projeto/new/$', ProjetoCreate.as_view(), name='new_projeto'),
+    url(r'^projeto/list/', ProjetoList.as_view(), name='list_projeto'),
+    url(r'^projeto/detail/(?P<pk>\d+)/$', ProjetoDetail.as_view(), name='detail_projeto'),
+    url(r'^projeto/update/(?P<pk>\d+)/$', ProjetoUpdate.as_view(), name='update_projeto'),
+    url(r'^projeto/delete/(?P<pk>\d+)/$', ProjetoDelete.as_view(), name='delete_projeto'),
 
     # Views de Instituicao de Projeto
     url(r'^instituicao/$', InstituicaoProjetoList.as_view(),

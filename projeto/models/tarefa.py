@@ -3,6 +3,7 @@ from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 from smart_selects.db_fields import ChainedForeignKey
 
+from projeto.models.template import TemplateModelMixin
 from projeto.models.projeto import Projeto
 from projeto.models.planoacao import PlanoAcao
 from projeto.models.atividade import Atividade
@@ -12,7 +13,7 @@ from projeto.models.atividade import Atividade
 #
 
 
-class Tarefa(models.Model):
+class Tarefa(models.Model, TemplateModelMixin):
 
     # Atributos
     numero = models.PositiveIntegerField(blank=True)
@@ -54,15 +55,6 @@ class Tarefa(models.Model):
         ordering = ['nome']
         verbose_name = 'tarefa'
         verbose_name_plural = 'tarefas'
-
-    def get_detail_url(self):
-        return u"/tarefa/detail/%i" % self.id
-
-    def get_update_url(self):
-        return u"/tarefa/update/%i" % self.id
-
-    def get_delete_url(self):
-        return u"/tarefa/delete/%i" % self.id
 
     def __str__(self):
         return 'TF%d: %s' % (self.numero, self.nome)
