@@ -9,6 +9,16 @@
     <h2>{{ object }}</h2>
 
     <hr/>
+
+    {% if tiposequenciamento.sequenciamento_set.all %}
+      <p><b>Sequenciamentos deste Tipo: </b> <br/>
+        <div class='text-highlight'>
+          {% for sequenciamento in tiposequenciamento.sequenciamento_set.all %}{% if not forloop.first %}, {% endif %}
+          <a href="{{ sequenciamento.get_detail_url }}">{{ sequenciamento }}</a>{% endfor %}
+        </div>
+      </p>
+    {% endif %}
+
     <p><b>Descrição:</b> <br/> <div class='text-highlight'> {{ tiposequenciamento.descricao }}&nbsp;</div></p>
 
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ tiposequenciamento.data_cadastro }}&nbsp;</div></p>

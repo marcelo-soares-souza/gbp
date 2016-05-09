@@ -52,7 +52,12 @@ class SequenciamentoCreate(LoggedInMixin, CreateView):
         return super(SequenciamentoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return {'criado_por': self.request.user.id}
+        data = {'criado_por': self.request.user.id, 'responsavel': self.request.user.id}
+
+        if self.kwargs:
+            data['tipo_sequenciamento'] = int(self.kwargs['pk'])
+
+        return data
 
 
 class SequenciamentoUpdate(LoggedInMixin, ColaboradorRequiredMixin, UpdateView):
