@@ -5,8 +5,10 @@ from sequenciamento.models.sequenciamento import Sequenciamento
 from sequenciamento.models.tiposequenciamento import TipoSequenciamento
 from sequenciamento.models.tarefasequenciamento import TarefaSequenciamento
 
+
 def django_version(request):
     return {'django_version': get_version() + ' with Python ' + python_version()}
+
 
 def stats(request):
     return {'count_sequenciamento': '(' + str(Sequenciamento.objects.count()) + ')',

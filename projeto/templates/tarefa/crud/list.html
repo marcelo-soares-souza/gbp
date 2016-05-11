@@ -6,6 +6,8 @@
 
 {% block content %}
 
+    {% include "base/menu-projetos.html" %} <br/>
+
     {% if not tarefas %}
 
       <h3> Nenhuma Tarefa Cadastrada. <a href="{% url 'new_tarefa_projeto' %}">Criar uma Tarefa?</a> </h3>

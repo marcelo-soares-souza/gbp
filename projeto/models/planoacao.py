@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
@@ -22,8 +23,8 @@ class PlanoAcao(models.Model, TemplateModelMixin):
         User, null=True, blank=True, related_name='responsavel_plano')
     codigo_seg = models.CharField(max_length=32, validators=[
                                   MinLengthValidator(2)], blank=True)
-    data_inicio = models.DateField(blank=True)
-    data_fim = models.DateField(blank=True)
+    data_inicio = models.DateField(blank=True, default=datetime.now)
+    data_fim = models.DateField(blank=True, default=datetime.now() + timedelta(days=1))
 
     # Relacionamentos
     projeto = models.ForeignKey(Projeto)
@@ -32,14 +33,16 @@ class PlanoAcao(models.Model, TemplateModelMixin):
         ProjetoComponente,
         chained_field="projeto",
         chained_model_field="projeto",
-        show_all=False,
-        auto_choose=False
+        show_all=True,
+        auto_choose=True,
+        blank=True, null=True
     )
 
     resultado = ChainedManyToManyField(
         Resultado,
         chained_field="projeto",
-        chained_model_field="projeto"
+        chained_model_field="projeto",
+        blank=True, null=True
     )
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)

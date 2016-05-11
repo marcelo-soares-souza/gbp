@@ -16,12 +16,12 @@ from projeto.models.atividade import Atividade
 class Tarefa(models.Model, TemplateModelMixin):
 
     # Atributos
-    numero = models.PositiveIntegerField(blank=True)
+    numero = models.PositiveIntegerField(blank=True, default=1)
     nome = models.CharField(max_length=100, validators=[
                             MinLengthValidator(2)], blank=True)
     indicador_fisico = models.CharField(max_length=32, validators=[
                                         MinLengthValidator(2)], blank=True)
-    peso_atividade = models.PositiveIntegerField(blank=True)
+    peso_atividade = models.PositiveIntegerField(blank=True, default=1)
 
     # Relacionamentos
     projeto = models.ForeignKey(Projeto, blank=True)
@@ -30,16 +30,16 @@ class Tarefa(models.Model, TemplateModelMixin):
         PlanoAcao,
         chained_field="projeto",
         chained_model_field="projeto",
-        show_all=False,
-        auto_choose=False
+        show_all=True,
+        auto_choose=True
     )
 
     atividade = ChainedForeignKey(
         Atividade,
         chained_field="planoacao",
         chained_model_field="planoacao",
-        show_all=False,
-        auto_choose=False
+        show_all=True,
+        auto_choose=True
     )
 
     responsavel = models.ForeignKey(

@@ -6,6 +6,8 @@
 
 {% block content %}
 
+    {% include "base/menu-projetos.html" %} <br/>
+
     {% if not projetos %}
 
       <h3>Nenhum Projeto Cadastrado. <a href="{% url 'new_projeto' %}">Criar um Projeto?</a></h3>
@@ -17,7 +19,7 @@
         {% for projeto in projetos %}
             <ul class="list-group">
               <li class="list-group-item">
-                
+
                 <h3><a href="{{ projeto.get_detail_url }}">{{ projeto.sigla }}</a></h3>
 
                 <b>Título: </b> {{ projeto.titulo_portugues }}
@@ -35,7 +37,7 @@
                 <b>Tipo: </b> {{ projeto.tipo }}
 
                 <br/>
-                
+
 
                 <b>Situação: </b>{{ projeto.status }}
 
@@ -46,19 +48,19 @@
                 <br/><br/>
                 {% if request.user == projeto.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ projeto.get_update_url }}">Editar</a> | 
+                    <a href="{{ projeto.get_update_url }}">Editar</a> |
                     <a href="{{ projeto.get_delete_url }}">Apagar</a>
                   </p>
                 {% endif %}
-                
+
                 <div class="data-atualizado">{{ projeto.data_atualizado }}</div>
 
               </li>
             </ul>
         {% endfor %}
-        
+
         {% include 'base/pagination.html' %}
 
-    {% endif %} 
+    {% endif %}
 
 {% endblock content %}

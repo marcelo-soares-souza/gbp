@@ -6,6 +6,8 @@
 
 {% block content %}
 
+    {% include "base/menu-projetos.html" %} <br/>
+
     {% if not metaprojeto %}
 
       <h3> Nenhum Objetivo de Projeto Cadastrado. <a href="{% url 'new_metaprojeto_projeto' %}">Criar uma Meta para o Projeto?</a> </h3>

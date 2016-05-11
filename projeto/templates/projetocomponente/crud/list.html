@@ -6,6 +6,8 @@
 
 {% block content %}
 
+    {% include "base/menu-projetos.html" %} <br/>
+
     {% if not projetoscomponentes %}
 
       <h3> Nenhum Projeto Componente Cadastrado. <a href="{% url 'new_projetocomponente_projeto' %}">Criar um Projeto Componente?</a> </h3>

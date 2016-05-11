@@ -6,6 +6,8 @@
 
 {% block content %}
 
+    {% include "base/menu-projetos.html" %} <br/>
+
     {% if not resultados %}
 
       <h3> Nenhum Resultado de Projeto Cadastrado. <a href="{% url 'new_resultado_projeto' %}">Criar um Resultado de Projeto?</a> </h3>
