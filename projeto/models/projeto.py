@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 from projeto.models.template import TemplateModelMixin
-from projeto.models.tipo import Tipo
-from projeto.models.status import Status
 from projeto.models.instituicao import Instituicao
 
 '''
@@ -16,6 +14,12 @@ elacionamentos com as outras classes}
 
 
 class Projeto(models.Model, TemplateModelMixin):
+    STATUS = (
+        ('PLAN', 'Planejamento'),
+        ('AVAL', 'Em Avaliação'),
+        ('EXEC', 'Em Execução'),
+        ('FINA', 'Finalizado'),
+    )
 
     seg = models.CharField(max_length=32, validators=[
                            MinLengthValidator(2)], blank=True)
@@ -34,9 +38,7 @@ class Projeto(models.Model, TemplateModelMixin):
     hipotese = models.TextField(blank=True)
     objetivo_geral = models.TextField(blank=True)
     resumo = models.TextField(blank=True)
-    tipo = models.ForeignKey(Tipo, null=True, blank=True, related_name='tipo')
-    status = models.ForeignKey(
-        Status, null=True, blank=True, related_name='status')
+    status = models.CharField(max_length=64, choices=STATUS, default='PLAN')
     lider = models.ForeignKey(
         User, null=True, blank=True, related_name='lider')
 

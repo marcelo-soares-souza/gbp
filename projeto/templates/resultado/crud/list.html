@@ -14,6 +14,8 @@
 
     {% else %}
 
+        <div style="float: right;"><a href="{% url 'new_resultado_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
         {% include 'base/sort_links.html' %}
 
         {% for resultado in resultados %}
@@ -24,11 +26,10 @@
                 
                 <b>Projeto Associado:</b>
                 <a href="{% url 'detail_projeto' resultado.projeto.id %}">{{ resultado.projeto }}</a>
-                <br/>
-                
+
+                <br/><br/>
                 
                 {% if request.user == resultado.criado_por or request.user.is_superuser %}
-                <br/>
                   <p>
                     <a href="{{ resultado.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
                     <a href="{{ resultado.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>

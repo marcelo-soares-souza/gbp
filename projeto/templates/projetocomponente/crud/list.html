@@ -14,6 +14,8 @@
 
     {% else %}
 
+        <div style="float: right;"><a href="{% url 'new_projetocomponente_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
         {% include 'base/sort_links.html' %}
 
         {% for projetocomponente in projetoscomponentes %}
@@ -24,9 +26,8 @@
 
                 <b>Projeto Associado:</b>
                 <a href="{% url 'detail_projeto' projetocomponente.projeto.id %}">{{ projetocomponente.projeto }}</a>
-                <br/>
-                
-                <br/>
+
+                <br/><br/>
                 
                 {% if request.user == projetocomponente.criado_por or request.user.is_superuser %}
                   <p>

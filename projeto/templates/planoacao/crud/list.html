@@ -13,6 +13,7 @@
       <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_planoacao_projeto' %}">Cadastrar?</a> </h4</div>
 
     {% else %}
+        <div style="float: right;"><a href="{% url 'new_planoacao_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
 
         {% include 'base/sort_links.html' %}
 
@@ -24,9 +25,8 @@
 
                 <b>Projeto Associado:</b>
                 <a href="{% url 'detail_projeto' planoacao.projeto.id %}">{{ planoacao.projeto }}</a>
-                <br/>
                 
-                <br/>
+                <br/><br/>
                 
                 {% if request.user == planoacao.criado_por or request.user.is_superuser %}
                   <p>

@@ -13,6 +13,8 @@
 
     {% else %}
 
+        <div style="float: right;"><a href="{% url 'new_sequenciamento' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
         {% include 'base/sort_links.html' %}
 
         {% for sequenciamento in sequenciamentos %}

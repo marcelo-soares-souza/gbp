@@ -14,6 +14,8 @@
 
     {% else %}
 
+        <div style="float: right;"><a href="{% url 'new_metaprojeto_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
         {% include 'base/sort_links.html' %}
 
         {% for metaprojeto in metaprojeto %}

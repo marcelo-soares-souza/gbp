@@ -17,7 +17,7 @@
           <option  value="" selected="selected">---------</option>
           <option  value="0">Criar Novo Projeto</option>
           {% for projeto in projetos %}
-            <option value="{{projeto.id}}">{{projetocapfirst}}</option>
+            <option value="{{projeto.id}}">{{projeto}}</option>
           {% endfor %}
         </select>
       </div>
@@ -49,10 +49,10 @@
       $(function(){
         $('#editar_projeto').on('change', function () {
           if ($(this).val() == 0) {
-            window.location = '/new';
+            window.location = '{% url 'new_projeto' %}';
           }
           else {
-            var url = '/update/' + $(this).val();
+            var url = '/projeto/update/' + $(this).val();
             if (url) {
                 window.location = url;
             }

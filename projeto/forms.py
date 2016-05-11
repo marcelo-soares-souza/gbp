@@ -69,7 +69,7 @@ class ProjetoForm(forms.ModelForm):
 
     class Meta:
         model = Projeto
-        fields = ('tipo', 'status', 'lider', 'seg', 'titulo_portugues', 'titulo_ingles', 'sigla', 'data_inicio',
+        fields = ('status', 'lider', 'seg', 'titulo_portugues', 'titulo_ingles', 'sigla', 'data_inicio',
                   'duracao', 'hipotese', 'instituicao_proponente', 'instituicao_executora', 'objetivo_geral', 'resumo')
 
         widgets = {
@@ -79,6 +79,7 @@ class ProjetoForm(forms.ModelForm):
         }
 
         labels = {
+            'status': 'Situação',
             'lider': 'Líder',
             'seg': 'Número SEG',
             'titulo_portugues': 'Título em Português',

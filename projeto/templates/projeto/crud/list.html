@@ -14,6 +14,8 @@
 
     {% else %}
 
+        <div style="float: right;"><a href="{% url 'new_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
         {% include 'base/sort_links.html' %}
 
         {% for projeto in projetos %}
@@ -34,16 +36,7 @@
 
                 <br/>
 
-                <b>Tipo: </b> {{ projeto.tipo }}
-
-                <br/>
-
-
                 <b>Situação: </b>{{ projeto.status }}
-
-                <br/>
-
-                <b>Publicado: </b>{{ projeto.get_publicado_display }}
 
                 <br/><br/>
                 {% if request.user == projeto.criado_por or request.user.is_superuser %}

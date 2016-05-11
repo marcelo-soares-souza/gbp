@@ -14,6 +14,8 @@
 
     {% else %}
 
+        <div style="float: right;"><a href="{% url 'new_instituicao_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
         {% include 'base/sort_links.html' %}
 
         {% for instituicao in instituicaos %}
@@ -45,7 +47,7 @@
                  {% endfor %}
                 {% endif %}
 
-                <br/><br/>
+                <br/>
                 
                 {% if request.user == instituicao.criado_por or request.user.is_superuser %}
                   <p>
