@@ -8,6 +8,7 @@
 
     {% include "base/menu-projetos.html" %} <br/>
 
+    <!--
     {% if projetos %}
     <div class="form-horizontal">
     <div class="form-group">
@@ -24,6 +25,7 @@
     </div>
   </div>
   {% endif %}
+  -->
 
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
@@ -45,6 +47,7 @@
       });
     </script>
 
+    <!--
     <script>
       $(function(){
         $('#editar_projeto').on('change', function () {
@@ -61,5 +64,5 @@
         });
       });
     </script>
-
+    -->
 {% endblock content %}

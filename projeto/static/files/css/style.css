@@ -1,5 +1,7 @@
 .text-highlight {
   background-color: #F8F8F8;
+  padding: 8px 8px 8px 8px;
+  border: 1px solid #ddd;
 }
 
 .jumbotron {

@@ -23,25 +23,15 @@
               <li class="list-group-item">
 
                 <h3><a href="{{ projeto.get_detail_url }}">{{ projeto.sigla }}</a></h3>
-
-                <b>Título: </b> {{ projeto.titulo_portugues }}
-
-                <br/>
-
-                <b>Resumo: </b> {{ projeto.resumo | truncatechars:512 }}
+                
+                <p><b>Título:</b> <br/> <div class='text-highlight'> {{ projeto.titulo_portugues }}&nbsp;</div></p>
+                <p><b>Líder:</b> <br/> <div class='text-highlight'> {{ projeto.lider }}&nbsp;</div></p>
+                <p><b>Situação:</b> <br/> <div class='text-highlight'> {{ projeto.status_verbose }}&nbsp;</div></p>
 
                 <br/>
-
-                <b>Líder: </b>{{ projeto.lider }}
-
-                <br/>
-
-                <b>Situação: </b>{{ projeto.status }}
-
-                <br/><br/>
                 {% if request.user == projeto.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ projeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a> 
+                    <a href="{{ projeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{ projeto.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                   </p>
                 {% endif %}

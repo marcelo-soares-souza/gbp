@@ -61,3 +61,6 @@ class Projeto(models.Model, TemplateModelMixin):
 
     def __str__(self):
         return self.sigla
+
+    def status_verbose(self):
+        return dict(Projeto.STATUS)[self.status]

@@ -22,27 +22,31 @@
               <li class="list-group-item">
 
                 <h3><a href="{{ sequenciamento.get_detail_url }}">{{ sequenciamento }}</a></h3>
-                <p><b>Tipo: </b> {{ sequenciamento.tipo_sequenciamento }}</p>
-                <p><b>Responsável: </b> {{ sequenciamento.responsavel }}</p>
+
+                <p><b>Tipo: </b> <br/> <div class='text-highlight'> {{ sequenciamento.tipo_sequenciamento }}&nbsp;</div></p>
+                <p><b>Responsável: </b> <div class='text-highlight'> {{ sequenciamento.responsavel }}&nbsp;</div></p>
+
                 {% if sequenciamento.colaborador.all %}
-                  <p><b>Colaboradores: </b> {{sequenciamento.colaborador.all|join:', '}}</p>
+                  <p><b>Colaboradores: </b> <div class='text-highlight'> {{sequenciamento.colaborador.all|join:', '}}&nbsp;</div></p>
                 {% endif %}
+
                 {% if sequenciamento.tarefasequenciamento_set.all %}
-                  <p><b>Tarefas: </b>
+                  <p><b>Tarefas: </b> <div class='text-highlight'>
                     {% for tarefa in sequenciamento.tarefasequenciamento_set.all %}
-                    {% if not forloop.first %}, {% endif %}
-                    <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>
+                      {% if not forloop.first %}, {% endif %}
+                      <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>
                     {% endfor %}
-                  </p>
+                  &nbsp;</div></p>
                 {% endif %}
+
+                <br/>
+
                 <p>
-                  {% buttons %}
                     <a href="{{ sequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
                       <a href="{{ sequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                     {% endif %}
                     <a href="{% url 'new_tarefasequenciamento' %}{{sequenciamento.id}}" class="btn btn-sm btn-info">Adicionar Tarefa</a>
-                  {% endbuttons %}
                 </p>
 
                 <div class="data-atualizado">{{ sequenciamento.data_atualizado }}</div>
