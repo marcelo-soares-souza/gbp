@@ -23,14 +23,12 @@
 
                 <h3><a href="{{ objetivo.get_detail_url }}">{{ objetivo }}</a></h3>
 
-                <b>Projeto Associado:</b>
-                <a href="{% url 'detail_projeto' objetivo.projeto.id %}">{{ objetivo.projeto }}</a>
+                <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' objetivo.projeto.id %}">{{ objetivo.projeto }}</a>&nbsp;</div></p>
 
-                <br/><br/>
-
+                <br/>
                 {% if request.user == objetivo.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ objetivo.get_update_url }}" class="btn btn-sm btn-warning">Editar</a> 
+                    <a href="{{ objetivo.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{ objetivo.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                   </p>
                 {% endif %}

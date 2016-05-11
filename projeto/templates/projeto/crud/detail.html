@@ -10,7 +10,7 @@
     <h2>Projeto {{ projeto.sigla }}</h2>
     <hr/>
     <p><b>Resumo:</b> <br/> <div class='text-highlight'> {{ projeto.resumo }}&nbsp;</div></p>
-    <p><b>Situação:</b> <br/> <div class='text-highlight'> {{ projeto.status }}&nbsp;</div></p>
+    <p><b>Situação:</b> <br/> <div class='text-highlight'> {{ projeto.status_verbose }}&nbsp;</div></p>
     <p><b>Líder:</b> <br/> <div class='text-highlight'> {{ projeto.lider }}&nbsp;</div></p>
     <p><b>Código SEG:</b> <br/> <div class='text-highlight'> {{ projeto.seg }}&nbsp;</div></p>
     <p><b>Título (Português):</b> <br/> <div class='text-highlight'> {{ projeto.titulo_portugues }}&nbsp;</div></p>
@@ -19,9 +19,13 @@
     <p><b>Duração (Meses):</b> <br/> <div class='text-highlight'> {{ projeto.duracao }}&nbsp;</div></p>
     <p><b>Hipotese:</b> <br/> <div class='text-highlight'> {{ projeto.hipotese }}&nbsp;</div></p>
 
-    <p><b>Proponente(s):</b> <br/> <div class='text-highlight'><a href="{% url 'detail_instituicao_projeto' projeto.instituicao_proponente.id %}">{{ projeto.instituicao_proponente }}</a></div></p>
+    {% if projeto.instituicao_proponente %}
+      <p><b>Proponente(s):</b> <br/> <div class='text-highlight'><a href="{% url 'detail_instituicao_projeto' projeto.instituicao_proponente.id %}">{{ projeto.instituicao_proponente }}</a></div></p>
+    {% endif %}
 
-    <p><b>Executora:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_instituicao_projeto' projeto.instituicao_executora.id %}">{{ projeto.instituicao_executora }}</a></div></p>
+    {% if projeto.instituicao_executora %}
+      <p><b>Executora:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_instituicao_projeto' projeto.instituicao_executora.id %}">{{ projeto.instituicao_executora }}</a></div></p>
+    {% endif %}
 
     <p><b>Objetivo Geral:</b> <br/> <div class='text-highlight'> {{ projeto.objetivo_geral }}&nbsp;</div></p>
 

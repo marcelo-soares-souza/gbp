@@ -21,16 +21,14 @@
         {% for palavrachave in palavraschave %}
             <ul class="list-group">
               <li class="list-group-item">
-                
+
                 <h3><a href="{{ palavrachave.get_detail_url }}">{{ palavrachave.palavra }}</a></h3>
-                
-                <b>Palavra: </b> {{ palavrachave.palavra }} 
-                
-                <br/><br/>
-                
+
+                <br/>
+
                 {% if request.user == palavrachave.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ palavrachave.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
+                    <a href="{{ palavrachave.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{ palavrachave.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                   </p>
                 {% endif %}
@@ -42,7 +40,7 @@
         {% endfor %}
 
         {% include 'base/pagination.html' %}
-        
-    {% endif %} 
+
+    {% endif %}
 
 {% endblock content %}

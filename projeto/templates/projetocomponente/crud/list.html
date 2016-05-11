@@ -21,17 +21,16 @@
         {% for projetocomponente in projetoscomponentes %}
             <ul class="list-group">
               <li class="list-group-item">
-                
+
                 <h3><a href="{{ projetocomponente.get_detail_url }}">{{ projetocomponente }}</a></h3>
 
-                <b>Projeto Associado:</b>
-                <a href="{% url 'detail_projeto' projetocomponente.projeto.id %}">{{ projetocomponente.projeto }}</a>
+                <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' projetocomponente.projeto.id %}">{{ projetocomponente.projeto }}</a>&nbsp;</div></p>
 
-                <br/><br/>
-                
+                <br/>
+
                 {% if request.user == projetocomponente.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ projetocomponente.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
+                    <a href="{{ projetocomponente.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{ projetocomponente.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                   </p>
                 {% endif %}
@@ -43,7 +42,7 @@
         {% endfor %}
 
         {% include 'base/pagination.html' %}
-        
-    {% endif %} 
+
+    {% endif %}
 
 {% endblock content %}

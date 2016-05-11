@@ -21,49 +21,46 @@
         {% for instituicao in instituicaos %}
             <ul class="list-group">
               <li class="list-group-item">
-                
+
                 <h3><a href="{{ instituicao.get_detail_url }}">{{ instituicao.nome }}</a></h3>
 
-                <b>Descrição:</b> {{ instituicao.descricao }}
-                <br/>
+                {% if instituicao.descricao %}
+                  <p><b>Descrição:</b> <br/> <div class='text-highlight'> {{ instituicao.descricao|truncatechars:256 }}&nbsp;</div></p>
+                {% endif %}
 
-                <b>Sigla:</b> {{ instituicao.sigla }}
+                <p><b>Sigla:</b> <br/> <div class='text-highlight'> {{ instituicao.sigla }}&nbsp;</div></p>
 
-                {% if instituicao.proponentes.all %}
-                  <br/>
-                  <b>Projetos Associados (Como Proponente):</b>
-                  {% for projeto in instituicao.proponentes.all %}
-                    {% if not forloop.first %}, {% endif %}
-                    <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>
-                  {% endfor %}
+                {% if instituicao.proponente.all %}
+                  <p><b>Projetos Associados (Como Proponente):</b> <br/> <div class='text-highlight'>
+                  {% for projeto in instituicao.proponente.all %}{% if not forloop.first %}, {% endif %}
+                     <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>{% endfor %}
+                  &nbsp;</div></p>
                 {% endif %}
 
                 {% if instituicao.executora.all %}
-                 <br/>
-                 <b>Projetos Associados (Como Executor(a)):</b>
-                 {% for projeto in instituicao.executora.all %}
-                   {% if not forloop.first %}, {% endif %}
-                   <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>
-                 {% endfor %}
+                 <p><b>Projetos Associados (Como Executor(a)):</b> <br/> <div class='text-highlight'>
+                 {% for projeto in instituicao.executora.all %}{% if not forloop.first %}, {% endif %}
+                   <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>{% endfor %}
+                 &nbsp;</div></p>
                 {% endif %}
 
                 <br/>
-                
+
                 {% if request.user == instituicao.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ instituicao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
+                    <a href="{{ instituicao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{ instituicao.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                   </p>
                 {% endif %}
 
                 <div class="data-atualizado">{{ instituicao.data_atualizado }}</div>
-                
+
               </li>
             </ul>
         {% endfor %}
 
         {% include 'base/pagination.html' %}
-        
-    {% endif %} 
+
+    {% endif %}
 
 {% endblock content %}

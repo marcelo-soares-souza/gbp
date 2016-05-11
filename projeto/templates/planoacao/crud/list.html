@@ -20,17 +20,16 @@
         {% for planoacao in planosacao %}
             <ul class="list-group">
               <li class="list-group-item">
-                
+
                 <h3><a href="{{ planoacao.get_detail_url }}">{{ planoacao }}</a></h3>
 
-                <b>Projeto Associado:</b>
-                <a href="{% url 'detail_projeto' planoacao.projeto.id %}">{{ planoacao.projeto }}</a>
-                
-                <br/><br/>
-                
+                <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' planoacao.projeto.id %}">{{ planoacao.projeto }}</a>&nbsp;</div></p>
+
+                <br/>
+
                 {% if request.user == planoacao.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ planoacao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
+                    <a href="{{ planoacao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{ planoacao.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                   </p>
                 {% endif %}
@@ -42,7 +41,7 @@
         {% endfor %}
 
         {% include 'base/pagination.html' %}
-        
-    {% endif %} 
+
+    {% endif %}
 
 {% endblock content %}
