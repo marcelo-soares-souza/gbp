@@ -24,22 +24,22 @@ class Tarefa(models.Model, TemplateModelMixin):
     peso_atividade = models.PositiveIntegerField(blank=True, default=1)
 
     # Relacionamentos
-    projeto = models.ForeignKey(Projeto, blank=True)
+    projeto = models.ForeignKey(Projeto)
 
     planoacao = ChainedForeignKey(
         PlanoAcao,
         chained_field="projeto",
         chained_model_field="projeto",
-        show_all=True,
-        auto_choose=True
+        show_all=False,
+        auto_choose=False
     )
 
     atividade = ChainedForeignKey(
         Atividade,
         chained_field="planoacao",
         chained_model_field="planoacao",
-        show_all=True,
-        auto_choose=True
+        show_all=False,
+        auto_choose=False
     )
 
     responsavel = models.ForeignKey(

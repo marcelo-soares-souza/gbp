@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from django.utils import timezone
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
@@ -22,18 +22,18 @@ class Atividade(models.Model, TemplateModelMixin):
     indicador_fisico = models.CharField(max_length=32, validators=[
                                         MinLengthValidator(2)], blank=True)
     peso_planoacao = models.PositiveIntegerField(blank=True, default=1)
-    data_inicio = models.DateField(blank=True, default=datetime.now)
-    data_fim = models.DateField(blank=True, default=datetime.now() + timedelta(days=1))
+    data_inicio = models.DateField(blank=True, default=timezone.now)
+    data_fim = models.DateField(blank=True, default=timezone.now)
 
     # Relacionamentos
-    projeto = models.ForeignKey(Projeto, blank=True)
+    projeto = models.ForeignKey(Projeto)
 
     planoacao = ChainedForeignKey(
         PlanoAcao,
         chained_field="projeto",
         chained_model_field="projeto",
-        show_all=True,
-        auto_choose=True
+        show_all=False,
+        auto_choose=False
     )
 
     responsavel = models.ForeignKey(

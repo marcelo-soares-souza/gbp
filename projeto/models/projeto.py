@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
-from datetime import datetime
+from django.utils import timezone
 
 from projeto.models.template import TemplateModelMixin
 from projeto.models.tipo import Tipo
@@ -28,7 +28,7 @@ class Projeto(models.Model, TemplateModelMixin):
 
     sigla = models.CharField(max_length=64, validators=[MinLengthValidator(2)])
 
-    data_inicio = models.DateField(blank=True, null=True, default=datetime.now)
+    data_inicio = models.DateField(blank=True, null=True, default=timezone.now)
 
     duracao = models.IntegerField(blank=True, default=1)
     hipotese = models.TextField(blank=True)

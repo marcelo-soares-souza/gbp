@@ -9,8 +9,7 @@
     {% include "base/menu-projetos.html" %} <br/>
 
     {% if not objetivos %}
-
-      <h3> Nenhum Objetivo de Projeto Cadastrado. <a href="{% url 'new_objetivo_projeto' %}">Criar um Objetivo de Projeto?</a> </h3>
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_objetivo_projeto' %}">Cadastrar?</a> </h4</div>
 
     {% else %}
 
