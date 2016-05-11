@@ -63,6 +63,7 @@
           {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
             <a href="{{ sequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
           {% endif %}
+            <a href="{% url 'list_sequenciamento' %}" class="btn btn-sm btn-info">Voltar</a>
         {% endbuttons %}
       </p>
 

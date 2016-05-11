@@ -14,15 +14,6 @@
     <p><b>Data Início: </b> {{ planoacao.data_inicio }}
     <p><b>Data Fim: </b> {{ planoacao.data_fim }}
    
-     <p> <b>Projeto associado: </b>
-         <a href="{% url 'detail_projeto' planoacao.projeto_complementar.projeto.id %}">{{ planoacao.projeto_complementar.projeto }}</a>
-    </p>
-   
-    <p> <b>Projeto Complementar associado: </b>
-         <a href="{% url 'detail_projetocomplementar_projeto' planoacao.projeto_complementar.id %}">{{ planoacao.projeto_complementar }}</a>
-    </p>
-    
-    
     <p>
       <b>Objetivos Associados:</b>
       {% for objetivo in planoacao.resultado.objetivo.all %}
@@ -45,7 +36,7 @@
       <p>
         <a href="{{ planoacao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
         <a href="{{ planoacao.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a> 
-        <a href="{% url 'list_planoacao_projeto' %}">Voltar</a>
+        <a href="{% url 'list_planoacao_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
       </p>
     {% endif %}
 {% endblock content %}

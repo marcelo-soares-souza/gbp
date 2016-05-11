@@ -28,7 +28,7 @@
       <p>
         <a href="{{ metaprojeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
         <a href="{{ metaprojeto.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a> 
-        <a href="{% url 'list_metaprojeto_projeto' %}">Voltar</a>
+        <a href="{% url 'list_metaprojeto_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
       </p>
     {% endif %}
 {% endblock content %}
