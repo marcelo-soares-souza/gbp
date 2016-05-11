@@ -9,6 +9,10 @@
         <li class="tab-title"><a id="list_tarefasequenciamento" href="{% url 'list_tarefasequenciamento' %}#">Tarefa de Sequenciamento {{count_tarefasequenciamento}}</a></li>
         <li class="tab-title"><a id="list_sequenciamento" href="{% url 'list_sequenciamento' %}#">Sequenciamento {{count_sequenciamento}}</a></li>
         <li class="tab-title"><a id="list_tiposequenciamento" href="{% url 'list_tiposequenciamento' %}#">Tipos de Sequenciamento {{count_tiposequenciamento}}</a></li>
+    {% elif 'detail' in request.resolver_match.url_name %}
+        <li class="tab-title"><a id="detail_tarefasequenciamento" href="{% url 'list_tarefasequenciamento' %}#">Tarefa de Sequenciamento {{count_tarefasequenciamento}}</a></li>
+        <li class="tab-title"><a id="detail_sequenciamento" href="{% url 'list_sequenciamento' %}#">Sequenciamento {{count_sequenciamento}}</a></li>
+        <li class="tab-title"><a id="detail_tiposequenciamento" href="{% url 'list_tiposequenciamento' %}#">Tipos de Sequenciamento {{count_tiposequenciamento}}</a></li>
     {% endif %}
   </ul>
 {% endif %}

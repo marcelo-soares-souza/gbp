@@ -7,7 +7,9 @@
 
 {% block content %}
 
-    <h2>Projeto {{ projeto.sigla }}</h2>
+    {% include "base/menu-projetos.html" %} <br/>
+
+    <h2>{{ projeto }}</h2>
 
     <hr/>
 

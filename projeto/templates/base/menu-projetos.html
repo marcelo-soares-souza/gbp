@@ -23,6 +23,17 @@
                 <li class="tab-title"><a id="list_atividade_projeto" href="{% url 'list_atividade_projeto' %}#">Atividades {{ count_atividade }}</a></li>
                 <li class="tab-title"><a id="list_tarefa_projeto" href="{% url 'list_tarefa_projeto' %}#">Tarefas {{ count_tarefa }}</a></li>
                 <li class="tab-title"><a id="list_instituicao_projeto" href="{% url 'list_instituicao_projeto' %}#">Instituições {{ count_instituicao }}</a></li>
+              {% elif 'detail' in request.resolver_match.url_name %}
+                <li class="tab-title"><a id="detail_projeto" href="{% url 'list_projeto' %}#">Projetos {{ count_projeto }}</a></li>
+                <li class="tab-title"><a id="detail_objetivo_projeto" href="{% url 'list_objetivo_projeto' %}#">Obj. Específicos {{ count_objetivo }}</a>
+                <li class="tab-title"><a id="detail_resultado_projeto" href="{% url 'list_resultado_projeto' %}#">Resultados {{ count_resultado }}</a></li>
+                <li class="tab-title"><a id="detail_palavrachave_projeto" href="{% url 'list_palavrachave_projeto' %}#">Keywords {{ count_palavrachave }}</a></li>
+                <li class="tab-title"><a id="detail_projetocomponente_projeto" href="{% url 'list_projetocomponente_projeto' %}#">PCs {{ count_projetocomponente }}</a></li>
+                <li class="tab-title"><a id="detail_metaprojeto_projeto" href="{% url 'list_metaprojeto_projeto' %}#">Metas {{ count_metaprojeto }}</a></li>
+                <li class="tab-title"><a id="detail_planoacao_projeto" href="{% url 'list_planoacao_projeto' %}#">PAs {{ count_planoacao }}</a></li>
+                <li class="tab-title"><a id="detail_atividade_projeto" href="{% url 'list_atividade_projeto' %}#">Atividades {{ count_atividade }}</a></li>
+                <li class="tab-title"><a id="detail_tarefa_projeto" href="{% url 'list_tarefa_projeto' %}#">Tarefas {{ count_tarefa }}</a></li>
+                <li class="tab-title"><a id="detail_instituicao_projeto" href="{% url 'list_instituicao_projeto' %}#">Instituições {{ count_instituicao }}</a></li>
               {% endif %}
             {% endif %}
   </ul>
