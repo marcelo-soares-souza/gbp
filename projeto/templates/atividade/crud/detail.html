@@ -2,39 +2,36 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Atividade - {{ atividade.nome }}</title> {% endblock title %}
+{% block title %} <title>{{ atividade }}</title> {% endblock title %}
 
 {% block content %}
 
-    <h2>{{ object }}</h2>
-    <hr/>
-    <p><b>Número:</b> {{ atividade.numero }}</p>
-    <p><b>Indicador Físico</b> {{ atividade.indicador_fisico }}</p>
-    <p><b>Responsável: </b> {{ atividade.responsavel }}</p>
-    <p><b>Peso no Plano de Ação: </b> {{ atividade.peso_planoacao }} </p>
-    <p><b>Data Início: </b> {{ atividade.data_inicio }} </p>
-    <p><b>Data Fim: </b> {{ atividade.data_fim }} </p>
-    
-    <p> <b>Colaborador(es): </b>
-    {% for colaborador in atvidade.colaborador.all %}
-      {% if not forloop.first %}, {% endif %}
-      {{ colaborador.nome }}</a>
-    {% endfor %}
-    </p>
-    
-    <p> <b>Plano de Ação associado: </b>
-         <a href="{% url 'detail_planoacao_projeto' atividade.planoacao.id %}">{{ atividade.planoacao }}</a>
-    </p>  
+    <h2>{{ atividade }}</h2>
 
-    <p><b>Cadastrado:</b> {{ atividade.data_cadastro }}</p>
-    <p><b>Atualizado:</b> {{ atividade.data_atualizado }}</p>
+    <hr/>
+
+    <p><b>Indicador Físico</b> <br/> <div class='text-highlight'> {{ atividade.indicador_fisico }}&nbsp;</div></p>
+    <p><b>Responsável: </b> <br/> <div class='text-highlight'> {{ atividade.responsavel }}&nbsp;</div></p>
+    <p><b>Peso no Plano de Ação: <br/> <div class='text-highlight'> </b> {{ atividade.peso_planoacao }}&nbsp;</div></p>
+    <p><b>Data Início: </b> <br/> <div class='text-highlight'> {{ atividade.data_inicio }}&nbsp;</div></p>
+    <p><b>Data Fim: </b <br/> <div class='text-highlight'>  {{ atividade.data_fim }}&nbsp;</div></p>
+
+    <p><b>Colaborador(es): </b> <br/> <div class='text-highlight'>
+    {% for colaborador in atividade.colaborador.all %}{% if not forloop.first %}, {% endif %}
+      {{ colaborador }}{% endfor %}
+    &nbsp;</div></p>
+
+    <p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' atividade.planoacao.id %}">{{ atividade.planoacao }}</a>&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ atividade.data_cadastro }}&nbsp;</div></p>
 
     <hr/>
     {% if request.user == atividade.criado_por or request.user.is_superuser %}
       <p>
-        <a href="{{ atividade.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
-        <a href="{{ atividade.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a> 
+        <a href="{{ atividade.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ atividade.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
         <a href="{% url 'list_atividade_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
       </p>
     {% endif %}
+
 {% endblock content %}

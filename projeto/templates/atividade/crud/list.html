@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Atividade - Listar Todas as Atividade</title> {% endblock title %}
+{% block title %} <title>Listar Todas as Atividade</title> {% endblock title %}
 
 {% block content %}
 
@@ -21,14 +21,16 @@
         {% for atividade in atividades %}
             <ul class="list-group">
               <li class="list-group-item">
-                
+
                 <h3><a href="{{ atividade.get_detail_url }}">{{ atividade }}</a></h3>
+
+                <p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' atividade.planoacao.id %}">{{ atividade.planoacao }}</a>&nbsp;</div></p>
 
                 <br/>
 
                 {% if request.user == atividade.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ atividade.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
+                    <a href="{{ atividade.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{ atividade.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                   </p>
                 {% endif %}
@@ -40,7 +42,7 @@
         {% endfor %}
 
         {% include 'base/pagination.html' %}
-        
-    {% endif %} 
+
+    {% endif %}
 
 {% endblock content %}

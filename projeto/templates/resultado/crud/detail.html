@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Resultado de Projeto {{ resultado.numero }}</title> {% endblock title %}
+{% block title %} <title>{{ resultado }}</title> {% endblock title %}
 
 {% block content %}
 
@@ -10,33 +10,23 @@
 
     <hr/>
 
-    <p>
-      <b>Projeto Associado:</b>
-      <a href="{% url 'detail_projeto' resultado.projeto.id %}">{{ resultado.projeto }}</a>
-    </p>
+    <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' resultado.projeto.id %}">{{ resultado.projeto }}</a>&nbsp;</div></p>
 
-    
-    {% if resultado.descricao %}
-      <p><b>Descrição:</b> {{ resultado.descricao }}</p>
-    {% endif %}
-    
+    <p><b>Objetivo Associado:</b> <br/> <div class='text-highlight'>
+      {% for objetivo in resultado.objetivo.all %}{% if not forloop.first %}, {% endif %}
+        <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo }}</a>{% endfor %}
+    &nbsp;</div></p>
 
-    <p>
-      <b>Objetivo Associado:</b>
-      {% for objetivo in resultado.objetivo.all %}
-        <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo.numero }}</a>
-      {% endfor %}
-    </p>
-      
-    <p><b>Cadastrado:</b> {{ resultado.data_cadastro }}</p>
-    
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ resultado.data_cadastro }}&nbsp;</div></p>
+
     <hr/>
 
     {% if request.user == resultado.criado_por or request.user.is_superuser %}
       <p>
-        <a href="{{ resultado.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
-        <a href="{{ resultado.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a> 
+        <a href="{{ resultado.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ resultado.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
         <a href="{% url 'list_resultado_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
       </p>
     {% endif %}
+
 {% endblock content %}

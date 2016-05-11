@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Tarefa - Listar Todas as Tarefas</title> {% endblock title %}
+{% block title %} <title>Listar Todas as Tarefas</title> {% endblock title %}
 
 {% block content %}
 
@@ -21,14 +21,18 @@
         {% for tarefa in tarefas %}
             <ul class="list-group">
               <li class="list-group-item">
-                
+
                 <h3><a href="{{ tarefa.get_detail_url }}">{{ tarefa }}</a></h3>
+
+                <p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' tarefa.planoacao.id %}">{{ tarefa.planoacao }}</a>&nbsp;</div></p>
+
+                <p> <b>Atividade associada: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_atividade_projeto' tarefa.atividade.id %}">{{ tarefa.atividade }}</a>&nbsp;</div></p>
 
                 <br/>
 
                 {% if request.user == tarefa.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ tarefa.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
+                    <a href="{{ tarefa.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{ tarefa.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                   </p>
                 {% endif %}
@@ -40,7 +44,7 @@
         {% endfor %}
 
         {% include 'base/pagination.html' %}
-        
-    {% endif %} 
+
+    {% endif %}
 
 {% endblock content %}

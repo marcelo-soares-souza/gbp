@@ -26,6 +26,11 @@
 
                 <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' resultado.projeto.id %}">{{ resultado.projeto }}</a>&nbsp;</div></p>
 
+                <p><b>Objetivo Associado:</b> <br/> <div class='text-highlight'>
+                  {% for objetivo in resultado.objetivo.all %}{% if not forloop.first %}, {% endif %}
+                    <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo }}</a>{% endfor %}
+                &nbsp;</div></p>
+
                 <br/>
 
                 {% if request.user == resultado.criado_por or request.user.is_superuser %}

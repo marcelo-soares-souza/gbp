@@ -2,23 +2,24 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Palavra-Chave de Projeto {{ palavrachave.palavra }}</title> {% endblock title %}
+{% block title %} <title>{{ palavrachave }}</title> {% endblock title %}
 
 {% block content %}
 
-    <h2>Palavra Chave: {{ palavrachave.palavra }}</h2>
+    <h2>{{ palavrachave }}</h2>
 
     <hr/>
 
-    <p><b>Cadastrado:</b> {{ palavrachave.data_cadastro }}</p>
-    
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ palavrachave.data_cadastro }}&nbsp;</div></p>
+
     <hr/>
 
     {% if request.user == palavrachave.criado_por or request.user.is_superuser %}
       <p>
-        <a href="{{ palavrachave.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
-        <a href="{{ palavrachave.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a> 
+        <a href="{{ palavrachave.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ palavrachave.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
         <a href="{% url 'list_palavrachave_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
       </p>
     {% endif %}
+
 {% endblock content %}

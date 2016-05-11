@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Plano de Ação - Listar Todos os Planos de Ação</title> {% endblock title %}
+{% block title %} <title>Listar Todos os Planos de Ação</title> {% endblock title %}
 
 {% block content %}
 
@@ -13,6 +13,7 @@
       <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_planoacao_projeto' %}">Cadastrar?</a> </h4</div>
 
     {% else %}
+
         <div style="float: right;"><a href="{% url 'new_planoacao_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
 
         {% include 'base/sort_links.html' %}
@@ -24,7 +25,11 @@
                 <h3><a href="{{ planoacao.get_detail_url }}">{{ planoacao }}</a></h3>
 
                 <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' planoacao.projeto.id %}">{{ planoacao.projeto }}</a>&nbsp;</div></p>
-
+                
+                <p><b>Resultados Associados:</b> <br/> <div class='text-highlight'>
+                  {% for resultado in planoacao.resultado.all %}{% if not forloop.first %}, {% endif %}
+                    <a href="{% url 'detail_resultado_projeto' resultado.id %}">{{ resultado }}</a>{% endfor %}
+                &nbsp;</div></p>
                 <br/>
 
                 {% if request.user == planoacao.criado_por or request.user.is_superuser %}

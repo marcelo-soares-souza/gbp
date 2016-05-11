@@ -1,14 +1,15 @@
-{% extends "objetivo/crud/form.html" %}
+{% extends "base/base.html" %}
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Cadastrar/Editar Objetivo de Projeto</title> {% endblock title %}
+{% block title %} <title>Listar Objetivos de Projetos</title> {% endblock title %}
 
 {% block content %}
 
     {% include "base/menu-projetos.html" %} <br/>
 
     {% if not objetivos %}
+
       <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_objetivo_projeto' %}">Cadastrar?</a> </h4</div>
 
     {% else %}

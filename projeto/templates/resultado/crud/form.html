@@ -10,7 +10,6 @@
 
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
-
         {% bootstrap_form form layout='horizontal' %}
 
         <div class="modal-footer">
@@ -20,37 +19,6 @@
               <a href="{% url 'new_palavrachave_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
             {% endbuttons %}
         </div>
-
     </form>
-
-    <div>
-      {% if resultados %}
-
-        {% for resultado in resultados %}
-            <ul class="list-group">
-              <li class="list-group-item">
-
-                <h3><a href="{{ resultado.get_detail_url }}">{{ resultado }}</a></h3>
-
-                <b>Projeto Associado:</b>
-                <a href="{% url 'detail_projeto' resultado.projeto.id %}">{{ resultado.projeto }}</a>
-                <br/>
-
-
-                {% if request.user == resultado.criado_por or request.user.is_superuser %}
-                <br/>
-                  <p>
-                    <a href="{{ resultado.get_update_url }}" class="btn btn-sm btn-warning">Editar</a> 
-                    <a href="{{ resultado.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
-                  </p>
-                {% endif %}
-
-                <div class="data-atualizado">{{ resultado.data_atualizado }}</div>
-
-              </li>
-            </ul>
-        {% endfor %}
-
-    {% endif %}
 
 {% endblock content %}

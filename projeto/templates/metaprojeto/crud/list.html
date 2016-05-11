@@ -21,14 +21,19 @@
         {% for metaprojeto in metaprojeto %}
             <ul class="list-group">
               <li class="list-group-item">
-                
-                <h3><a href="{{ metaprojeto.get_detail_url }}">{{ metaprojeto }}</a></h3>        
-                
+
+                <h3><a href="{{ metaprojeto.get_detail_url }}">{{ metaprojeto }}</a></h3>
+
+                <p><b>Objetivo Associado:</b> <br/> <div class='text-highlight'>
+                  {% for objetivo in metaprojeto.objetivo.all %}{% if not forloop.first %}, {% endif %}
+                    <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo }}</a>{% endfor %}
+                &nbsp;</div></p>
+
                 <br/>
-                
+
                 {% if request.user == metaprojeto.criado_por or request.user.is_superuser %}
                   <p>
-                    <a href="{{ metaprojeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
+                    <a href="{{ metaprojeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{ metaprojeto.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                   </p>
                 {% endif %}
@@ -40,7 +45,7 @@
         {% endfor %}
 
         {% include 'base/pagination.html' %}
-        
-    {% endif %} 
+
+    {% endif %}
 
 {% endblock content %}

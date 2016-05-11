@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Cadastrar/Editar Objetivo de Projeto</title> {% endblock title %}
+{% block title %} <title>Cadastrar/Editar Objetivo</title> {% endblock title %}
 
 {% block content %}
 
@@ -11,6 +11,7 @@
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}
+
         <div class="modal-footer">
             {% buttons %}
                <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
@@ -19,38 +20,5 @@
              {% endbuttons %}
         </div>
     </form>
-
-    <div>
-      {% if objetivos %}
-
-        {% include 'base/sort_links.html' %}
-
-        {% for objetivo in objetivos %}
-            <ul class="list-group">
-              <li class="list-group-item">
-
-                <h3><a href="{{ objetivo.get_detail_url }}">{{ objetivo }}</a></h3>
-
-                <b>Projeto Associado:</b>
-                <a href="{% url 'detail_projeto' objetivo.projeto.id %}">{{ objetivo.projeto }}</a>
-                <br/>
-
-                <br/>
-
-                {% if request.user == objetivo.criado_por or request.user.is_superuser %}
-                  <p>
-                    <a href="{{ objetivo.get_update_url }}" class="btn btn-sm btn-warning">Editar</a> 
-                    <a href="{{ objetivo.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
-                  </p>
-                {% endif %}
-
-                <div class="data-atualizado">{{ objetivo.data_atualizado }}</div>
-
-              </li>
-            </ul>
-        {% endfor %}
-
-    {% endif %}
-    </div>
 
 {% endblock content %}

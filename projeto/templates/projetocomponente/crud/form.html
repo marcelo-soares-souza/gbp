@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Projeto Componente - Cadastrar/Editar Projeto Componente</title> {% endblock title %}
+{% block title %} <title>Cadastrar/Editar Projeto Componente</title> {% endblock title %}
 
 {% block content %}
 
@@ -10,7 +10,6 @@
 
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
-
         {% bootstrap_form form layout='horizontal' %}
 
         <div class="modal-footer">
@@ -20,39 +19,6 @@
               <a href="{% url 'new_metaprojeto_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
             {% endbuttons %}
         </div>
-
     </form>
-    <div>
-      {% if projetocomponentes %}
-
-            {% include 'base/sort_links.html' %}
-
-            {% for projetocomponente in projetocomponentes %}
-                <ul class="list-group">
-                  <li class="list-group-item">
-
-                    <h3><a href="{{ projetocomponente.get_detail_url }}">{{ projetocomponente.nome }}</a></h3>
-
-                    <b>Nome: </b> {{ projetocomponente.nome }}
-
-                    <br/>
-
-                    {% if request.user == projetocomponente.criado_por or request.user.is_superuser %}
-                      <p>
-                        <a href="{{ projetocomponente.get_update_url }}" class="btn btn-sm btn-warning">Editar</a> 
-                        <a href="{{ projetocomponente.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
-                      </p>
-                    {% endif %}
-
-                    <div class="data-atualizado">{{ projetocomponente.data_atualizado }}</div>
-
-                  </li>
-                </ul>
-            {% endfor %}
-
-            {% include 'base/pagination.html' %}
-
-        {% endif %}
-    </div>
 
 {% endblock content %}

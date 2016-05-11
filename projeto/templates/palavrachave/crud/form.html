@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Cadastrar/Editar Palavra Chave de Projeto</title> {% endblock title %}
+{% block title %} <title>Cadastrar/Editar Palavra Chave</title> {% endblock title %}
 
 {% block content %}
 
@@ -10,7 +10,6 @@
 
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
-
         {% bootstrap_form form layout='horizontal' %}
 
         <div class="modal-footer">
@@ -20,40 +19,6 @@
               <a href="{% url 'new_projetocomponente_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
             {% endbuttons %}
         </div>
-
     </form>
-
-    <div>
-      {% if palavraschave %}
-
-            {% include 'base/sort_links.html' %}
-
-            {% for palavrachave in palavraschave %}
-                <ul class="list-group">
-                  <li class="list-group-item">
-
-                    <h3><a href="{{ palavrachave.get_detail_url }}">{{ palavrachave.palavra }}</a></h3>
-
-                    <b>Palavra: </b> {{ palavrachave.palavra }}
-
-                    <br/>
-
-                    {% if request.user == palavrachave.criado_por or request.user.is_superuser %}
-                      <p>
-                        <a href="{{ palavrachave.get_update_url }}" class="btn btn-sm btn-warning">Editar</a> 
-                        <a href="{{ palavrachave.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
-                      </p>
-                    {% endif %}
-
-                    <div class="data-atualizado">{{ palavrachave.data_atualizado }}</div>
-
-                  </li>
-                </ul>
-            {% endfor %}
-
-            {% include 'base/pagination.html' %}
-
-        {% endif %}
-    </div>
 
 {% endblock content %}

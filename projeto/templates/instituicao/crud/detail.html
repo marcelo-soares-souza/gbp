@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Instituicao de Projeto {{ instituicao.nome }}</title> {% endblock title %}
+{% block title %} <title>{{ instituicao }}</title> {% endblock title %}
 
 {% block content %}
 
@@ -10,46 +10,41 @@
 
     <hr/>
 
-    <p><b>Cadastrado:</b> {{ instituicao.data_cadastro }}</p>
-
-    {% if instituicao.proponentes.all %}
-      <p>
-        <b>Projetos Associados (Como Proponente):</b>
-        {% for projeto in instituicao.proponentes.all %}
-          {% if not forloop.first %}, {% endif %}
-          <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>
-        {% endfor %}
-      </p>
+    {% if instituicao.proponente.all %}
+      <p><b>Projetos Associados (Como Proponente):</b> <br/> <div class='text-highlight'>
+      {% for projeto in instituicao.proponente.all %}{% if not forloop.first %}, {% endif %}
+         <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>{% endfor %}
+      &nbsp;</div></p>
     {% endif %}
 
     {% if instituicao.executora.all %}
-      <p>
-      <b>Projetos Associados (Como Executor(a)):</b>
-      {% for projeto in instituicao.executora.all %}
-        {% if not forloop.first %}, {% endif %}
-        <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>
-      {% endfor %}
-      </p>
+     <p><b>Projetos Associados (Como Executor(a)):</b> <br/> <div class='text-highlight'>
+     {% for projeto in instituicao.executora.all %}{% if not forloop.first %}, {% endif %}
+       <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>{% endfor %}
+     &nbsp;</div></p>
     {% endif %}
 
-    <p><b>Descrição:</b> {{ instituicao.descricao }}</p>
-    <p><b>Sigla:</b> {{ instituicao.sigla }}</p>
-    <p><b>Site:</b> {{ instituicao.site }}</p>
-    <p><b>E-mail:</b> {{ instituicao.email }}</p>
-    <p><b>Endereço:</b> {{ instituicao.endereco }}</p>
-    <p><b>Cidade:</b> {{ instituicao.cidade }}</p>
-    <p><b>CNPJ:</b> {{ instituicao.cnpj }}</p>
-    <p><b>Telefone:</b> {{ instituicao.telefone }}</p>
-    <p><b>Estado:</b> {{ instituicao.estado }}</p>
-    <p><b>CEP:</b> {{ instituicao.cep }}</p>
+    <p><b>Descrição:</b> <br/> <div class='text-highlight'> {{ instituicao.descricao }}&nbsp;</div></p>
+    <p><b>Sigla:</b> <br/> <div class='text-highlight'> {{ instituicao.sigla }}&nbsp;</div></p>
+    <p><b>Site:</b> <br/> <div class='text-highlight'> {{ instituicao.site }}&nbsp;</div></p>
+    <p><b>E-mail:</b> <br/> <div class='text-highlight'> {{ instituicao.email }}&nbsp;</div></p>
+    <p><b>Endereço:</b> <br/> <div class='text-highlight'> {{ instituicao.endereco }}&nbsp;</div></p>
+    <p><b>Cidade:</b> <br/> <div class='text-highlight'> {{ instituicao.cidade }}&nbsp;</div></p>
+    <p><b>CNPJ:</b> <br/> <div class='text-highlight'> {{ instituicao.cnpj }}&nbsp;</div></p>
+    <p><b>Telefone:</b> <br/> <div class='text-highlight'> {{ instituicao.telefone }}&nbsp;</div></p>
+    <p><b>Estado:</b> <br/> <div class='text-highlight'> {{ instituicao.estado }}&nbsp;</div></p>
+    <p><b>CEP:</b> <br/> <div class='text-highlight'> {{ instituicao.cep }}&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ instituicao.data_cadastro }}&nbsp;</div></p>
 
     <hr/>
 
     {% if request.user == instituicao.criado_por or request.user.is_superuser %}
       <p>
-        <a href="{{ instituicao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
-        <a href="{{ instituicao.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a> 
+        <a href="{{ instituicao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ instituicao.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
         <a href="{% url 'list_instituicao_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
       </p>
     {% endif %}
+
 {% endblock content %}

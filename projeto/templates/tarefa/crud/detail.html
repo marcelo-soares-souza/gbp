@@ -2,41 +2,38 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>Tarefa - {{ tarefa.nome }}</title> {% endblock title %}
+{% block title %} <title>{{ tarefa.nome }}</title> {% endblock title %}
 
 {% block content %}
 
-    <h2>{{ object }}</h2>
-    <hr/>
-    <p><b>Número:</b> {{ tarefa.numero }}</p>
-    <p><b>Indicador Físico</b> {{ tarefa.indicador_fisico }}</p>
-    <p><b>Responsável: </b> {{ tarefa.responsavel }}</p>
-    <p><b>Peso no Plano de Ação: </b> {{ tarefa.peso_atividade }} </p>
-    
-    
-    <p> <b>Colaborador(es): </b>
-    {% for colaborador in atvidade.colaborador.all %}
-      {% if not forloop.first %}, {% endif %}
-      {{ colaborador.nome }}</a>
-    {% endfor %}</p>
-    </p>
-    
-    <p> <b>Plano de Ação associado: </b>
-         <a href="{% url 'detail_planoacao_projeto' tarefa.atividade.planoacao.id %}">{{ tarefa.atividade.planoacao }}</a>
-    </p>  
-    <p> <b>Atividade associada: </b>
-         <a href="{% url 'detail_atividade_projeto' tarefa.atividade.id %}">{{ tarefa.atividade }}</a>
-    </p> 
+    <h2>{{ tarefa }}</h2>
 
-    <p><b>Cadastrado:</b> {{ tarefa.data_cadastro }}</p>
-    <p><b>Atualizado:</b> {{ tarefa.data_atualizado }}</p>
+    <hr/>
+
+    <p><b>Número:</b> <br/> <div class='text-highlight'> {{ tarefa.numero }}&nbsp;</div></p>
+    <p><b>Indicador Físico</b> <br/> <div class='text-highlight'> {{ tarefa.indicador_fisico }}&nbsp;</div></p>
+    <p><b>Responsável: </b> <br/> <div class='text-highlight'> {{ tarefa.responsavel }}&nbsp;</div></p>
+    <p><b>Peso no Plano de Ação: </b> <br/> <div class='text-highlight'> {{ tarefa.peso_atividade }}&nbsp;</div></p>
+
+
+    <p><b>Colaborador(es): </b> <br/> <div class='text-highlight'>
+    {% for colaborador in tarefa.colaborador.all %}{% if not forloop.first %}, {% endif %}
+      {{ colaborador }}{% endfor %}
+    &nbsp;</div></p>
+
+    <p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' tarefa.planoacao.id %}">{{ tarefa.planoacao }}</a>&nbsp;</div></p>
+
+    <p> <b>Atividade associada: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_atividade_projeto' tarefa.atividade.id %}">{{ tarefa.atividade }}</a>&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ tarefa.data_cadastro }}&nbsp;</div></p>
 
     <hr/>
     {% if request.user == tarefa.criado_por or request.user.is_superuser %}
       <p>
-        <a href="{{ tarefa.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>  
-        <a href="{{ tarefa.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a> 
+        <a href="{{ tarefa.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ tarefa.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
         <a href="{% url 'list_tarefa_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
       </p>
     {% endif %}
+
 {% endblock content %}
