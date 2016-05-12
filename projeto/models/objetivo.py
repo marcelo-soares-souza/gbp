@@ -1,8 +1,9 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
-from projeto.models.template import TemplateModelMixin
 from projeto.models.projeto import Projeto
+from projeto.models.template import TemplateModelMixin
+
 
 #
 # Objetivo Específicos de Projetos

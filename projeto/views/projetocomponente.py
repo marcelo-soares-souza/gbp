@@ -1,10 +1,11 @@
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 
-from projeto.views.login import LoggedInMixin
-from projeto.models import ProjetoComponente
 from projeto.forms import ProjetoComponenteForm
+from projeto.models import ProjetoComponente
+from projeto.views.login import LoggedInMixin
+
 
 #
 #

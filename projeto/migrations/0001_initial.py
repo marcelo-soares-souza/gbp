@@ -3,11 +3,12 @@
 from __future__ import unicode_literals
 
 import datetime
-from django.conf import settings
+
 import django.core.validators
-from django.db import migrations, models
 import django.db.models.deletion
 import smart_selects.db_fields
+from django.conf import settings
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):

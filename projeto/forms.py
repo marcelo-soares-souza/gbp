@@ -1,7 +1,8 @@
 from django import forms
 from django.forms import Textarea, TextInput
-from .models import Instituicao, Objetivo, Resultado, Projeto, ProjetoComponente, MetaProjeto, PlanoAcao, Atividade, Tarefa, PalavraChave
-from localflavor.br.forms import BRCNPJField, BRPhoneNumberField, BRZipCodeField, BRStateSelect
+from localflavor.br.forms import BRCNPJField, BRPhoneNumberField, BRStateSelect, BRZipCodeField
+
+from .models import Atividade, Instituicao, MetaProjeto, Objetivo, PalavraChave, PlanoAcao, Projeto, ProjetoComponente, Resultado, Tarefa
 
 
 class InstituicaoForm(forms.ModelForm):

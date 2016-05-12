@@ -1,19 +1,20 @@
 from platform import python_version
+
 from django import get_version
 
-from projeto.models.instituicao import Instituicao
-from projeto.models.projeto import Projeto
-from projeto.models.objetivo import Objetivo
-from projeto.models.resultado import Resultado
-from projeto.models.palavrachave import PalavraChave
-from projeto.models.metaprojeto import MetaProjeto
-from projeto.models.projetocomponente import ProjetoComponente
-from projeto.models.planoacao import PlanoAcao
 from projeto.models.atividade import Atividade
+from projeto.models.instituicao import Instituicao
+from projeto.models.metaprojeto import MetaProjeto
+from projeto.models.objetivo import Objetivo
+from projeto.models.palavrachave import PalavraChave
+from projeto.models.planoacao import PlanoAcao
+from projeto.models.projeto import Projeto
+from projeto.models.projetocomponente import ProjetoComponente
+from projeto.models.resultado import Resultado
 from projeto.models.tarefa import Tarefa
 from sequenciamento.models.sequenciamento import Sequenciamento
-from sequenciamento.models.tiposequenciamento import TipoSequenciamento
 from sequenciamento.models.tarefasequenciamento import TarefaSequenciamento
+from sequenciamento.models.tiposequenciamento import TipoSequenciamento
 
 
 def django_version(request):

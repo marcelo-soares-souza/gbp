@@ -1,13 +1,14 @@
-from django.utils import timezone
-from django.db import models
-from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
-from smart_selects.db_fields import ChainedManyToManyField, ChainedForeignKey
+from django.core.validators import MinLengthValidator
+from django.db import models
+from django.utils import timezone
+from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField
 
-from projeto.models.template import TemplateModelMixin
 from projeto.models.projeto import Projeto
 from projeto.models.projetocomponente import ProjetoComponente
 from projeto.models.resultado import Resultado
+from projeto.models.template import TemplateModelMixin
+
 
 #
 # Plano de Ação

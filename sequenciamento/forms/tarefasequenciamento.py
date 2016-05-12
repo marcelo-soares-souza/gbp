@@ -1,4 +1,5 @@
 from django import forms
+
 from sequenciamento.models import TarefaSequenciamento
 
 

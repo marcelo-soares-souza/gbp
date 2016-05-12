@@ -1,9 +1,10 @@
-from django.db import models
-from django.core.validators import MinLengthValidator, EmailValidator
 from django.contrib.auth.models import User
+from django.core.validators import EmailValidator, MinLengthValidator
+from django.db import models
 from localflavor.br.br_states import STATE_CHOICES
 
 from projeto.models.template import TemplateModelMixin
+
 
 #
 # Instituicão

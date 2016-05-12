@@ -1,11 +1,11 @@
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 
-from projeto.views.login import LoggedInMixin, CreatedByRequiredMixin, ListResponsavelRequiredMixin, ResponsavelRequiredMixin
-from sequenciamento.models import TarefaSequenciamento
+from projeto.views.login import CreatedByRequiredMixin, ListResponsavelRequiredMixin, LoggedInMixin, ResponsavelRequiredMixin
 from sequenciamento.forms import TarefaSequenciamentoForm
-from sequenciamento.models import Sequenciamento
+from sequenciamento.models import Sequenciamento, TarefaSequenciamento
+
 
 # import logging
 # logger = logging.getLogger('sequenciamento')

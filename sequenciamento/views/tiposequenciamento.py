@@ -1,10 +1,10 @@
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 
-from projeto.views.login import LoggedInMixin, CreatedByRequiredMixin
-from sequenciamento.models import TipoSequenciamento
+from projeto.views.login import CreatedByRequiredMixin, LoggedInMixin
 from sequenciamento.forms import TipoSequenciamentoForm
+from sequenciamento.models import TipoSequenciamento
 
 
 class TipoSequenciamentoList(LoggedInMixin, SortableListView):

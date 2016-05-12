@@ -1,12 +1,13 @@
-from django.utils import timezone
-from django.db import models
-from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator
+from django.db import models
+from django.utils import timezone
 from smart_selects.db_fields import ChainedForeignKey
 
-from projeto.models.template import TemplateModelMixin
-from projeto.models.projeto import Projeto
 from projeto.models.planoacao import PlanoAcao
+from projeto.models.projeto import Projeto
+from projeto.models.template import TemplateModelMixin
+
 
 #
 # Atividade

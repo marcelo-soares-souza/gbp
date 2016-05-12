@@ -1,4 +1,5 @@
 # __init__.py
+# flake8: noqa
 
 from projeto.models.template import TemplateModelMixin
 from projeto.models.instituicao import Instituicao

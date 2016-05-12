@@ -2,20 +2,20 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
+from projeto.views.atividade import AtividadeCreate, AtividadeDelete, AtividadeDetail, AtividadeList, AtividadeUpdate
 from projeto.views.home import Home, Permission
-from projeto.views.instituicao import InstituicaoProjetoList, InstituicaoProjetoDetail, InstituicaoProjetoCreate, InstituicaoProjetoUpdate, InstituicaoProjetoDelete
-from projeto.views.projeto import ProjetoList, ProjetoDetail, ProjetoCreate, ProjetoUpdate, ProjetoDelete
-from projeto.views.objetivo import ObjetivoProjetoList, ObjetivoProjetoDetail, ObjetivoProjetoCreate, ObjetivoProjetoUpdate, ObjetivoProjetoDelete
-from projeto.views.resultado import ResultadoProjetoList, ResultadoProjetoDetail, ResultadoProjetoCreate, ResultadoProjetoUpdate, ResultadoProjetoDelete
-from projeto.views.palavrachave import PalavraChaveList, PalavraChaveDetail, PalavraChaveCreate, PalavraChaveUpdate, PalavraChaveDelete
-from projeto.views.metaprojeto import MetaProjetoList, MetaProjetoDetail, MetaProjetoCreate, MetaProjetoUpdate, MetaProjetoDelete
-from projeto.views.projetocomponente import ProjetoComponenteList, ProjetoComponenteDetail, ProjetoComponenteCreate, ProjetoComponenteUpdate, ProjetoComponenteDelete
-from projeto.views.planoacao import PlanoAcaoList, PlanoAcaoDetail, PlanoAcaoCreate, PlanoAcaoUpdate, PlanoAcaoDelete
-from projeto.views.atividade import AtividadeList, AtividadeDetail, AtividadeCreate, AtividadeUpdate, AtividadeDelete
-from projeto.views.tarefa import TarefaList, TarefaDetail, TarefaCreate, TarefaUpdate, TarefaDelete
-from sequenciamento.views.tiposequenciamento import TipoSequenciamentoList, TipoSequenciamentoDetail, TipoSequenciamentoCreate, TipoSequenciamentoUpdate, TipoSequenciamentoDelete
-from sequenciamento.views.sequenciamento import SequenciamentoList, SequenciamentoDetail, SequenciamentoCreate, SequenciamentoUpdate, SequenciamentoDelete
-from sequenciamento.views.tarefasequenciamento import TarefaSequenciamentoList, TarefaSequenciamentoDetail, TarefaSequenciamentoCreate, TarefaSequenciamentoUpdate, TarefaSequenciamentoDelete
+from projeto.views.instituicao import InstituicaoProjetoCreate, InstituicaoProjetoDelete, InstituicaoProjetoDetail, InstituicaoProjetoList, InstituicaoProjetoUpdate
+from projeto.views.metaprojeto import MetaProjetoCreate, MetaProjetoDelete, MetaProjetoDetail, MetaProjetoList, MetaProjetoUpdate
+from projeto.views.objetivo import ObjetivoProjetoCreate, ObjetivoProjetoDelete, ObjetivoProjetoDetail, ObjetivoProjetoList, ObjetivoProjetoUpdate
+from projeto.views.palavrachave import PalavraChaveCreate, PalavraChaveDelete, PalavraChaveDetail, PalavraChaveList, PalavraChaveUpdate
+from projeto.views.planoacao import PlanoAcaoCreate, PlanoAcaoDelete, PlanoAcaoDetail, PlanoAcaoList, PlanoAcaoUpdate
+from projeto.views.projeto import ProjetoCreate, ProjetoDelete, ProjetoDetail, ProjetoList, ProjetoUpdate
+from projeto.views.projetocomponente import ProjetoComponenteCreate, ProjetoComponenteDelete, ProjetoComponenteDetail, ProjetoComponenteList, ProjetoComponenteUpdate
+from projeto.views.resultado import ResultadoProjetoCreate, ResultadoProjetoDelete, ResultadoProjetoDetail, ResultadoProjetoList, ResultadoProjetoUpdate
+from projeto.views.tarefa import TarefaCreate, TarefaDelete, TarefaDetail, TarefaList, TarefaUpdate
+from sequenciamento.views.sequenciamento import SequenciamentoCreate, SequenciamentoDelete, SequenciamentoDetail, SequenciamentoList, SequenciamentoUpdate
+from sequenciamento.views.tarefasequenciamento import TarefaSequenciamentoCreate, TarefaSequenciamentoDelete, TarefaSequenciamentoDetail, TarefaSequenciamentoList, TarefaSequenciamentoUpdate
+from sequenciamento.views.tiposequenciamento import TipoSequenciamentoCreate, TipoSequenciamentoDelete, TipoSequenciamentoDetail, TipoSequenciamentoList, TipoSequenciamentoUpdate
 
 urlpatterns = [
 

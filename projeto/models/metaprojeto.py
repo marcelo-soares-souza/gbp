@@ -1,11 +1,11 @@
-from django.db import models
-from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator
+from django.db import models
 from smart_selects.db_fields import ChainedManyToManyField
 
-from projeto.models.template import TemplateModelMixin
-from projeto.models.projeto import Projeto
 from projeto.models.objetivo import Objetivo
+from projeto.models.projeto import Projeto
+from projeto.models.template import TemplateModelMixin
 
 
 #
