@@ -5,6 +5,7 @@ from sortable_listview import SortableListView
 from projeto.views.login import LoggedInMixin, ColaboradorRequiredMixin, ListColaboradorRequiredMixin
 from sequenciamento.models import Sequenciamento
 from sequenciamento.forms import SequenciamentoForm
+from sequenciamento.models import TipoSequenciamento
 
 
 class SequenciamentoList(LoggedInMixin, ListColaboradorRequiredMixin, SortableListView):
@@ -22,6 +23,24 @@ class SequenciamentoList(LoggedInMixin, ListColaboradorRequiredMixin, SortableLi
     fields = '__all__'
 
     success_url = reverse_lazy('list_sequenciamento')
+
+    def get_queryset(self):
+        if self.kwargs:
+            queryset = self.model._default_manager.filter(tipo_sequenciamento_id=int(self.kwargs['pk']))
+        else:
+            queryset = self.model._default_manager.all()
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(SequenciamentoList, self).get_context_data(**kwargs)
+        context['tipos'] = TipoSequenciamento.objects.all()
+        context['tipo_id'] = 0
+
+        if self.kwargs:
+            context['tipo_id'] = self.kwargs['pk']
+
+        return context
 
 
 class SequenciamentoDetail(LoggedInMixin, ColaboradorRequiredMixin, DetailView):

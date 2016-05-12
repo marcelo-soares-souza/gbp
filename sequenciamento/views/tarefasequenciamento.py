@@ -5,6 +5,7 @@ from sortable_listview import SortableListView
 from projeto.views.login import LoggedInMixin, CreatedByRequiredMixin, ListResponsavelRequiredMixin, ResponsavelRequiredMixin
 from sequenciamento.models import TarefaSequenciamento
 from sequenciamento.forms import TarefaSequenciamentoForm
+from sequenciamento.models import Sequenciamento
 
 # import logging
 # logger = logging.getLogger('sequenciamento')
@@ -23,6 +24,24 @@ class TarefaSequenciamentoList(LoggedInMixin, ListResponsavelRequiredMixin, Sort
     fields = '__all__'
 
     success_url = reverse_lazy('list_tarefasequenciamento')
+
+    def get_queryset(self):
+        if self.kwargs:
+            queryset = self.model._default_manager.filter(sequenciamento_id=int(self.kwargs['pk']))
+        else:
+            queryset = self.model._default_manager.all()
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(TarefaSequenciamentoList, self).get_context_data(**kwargs)
+        context['sequenciamentos'] = Sequenciamento.objects.all()
+        context['sequenciamento_id'] = 0
+
+        if self.kwargs:
+            context['sequenciamento_id'] = self.kwargs['pk']
+
+        return context
 
 
 class TarefaSequenciamentoDetail(LoggedInMixin, ResponsavelRequiredMixin, DetailView):

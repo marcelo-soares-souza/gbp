@@ -43,11 +43,13 @@ class ProjetoCreate(LoggedInMixin, CreateView):
     def get_initial(self):
         return {'criado_por': self.request.user.id}
 
+    '''
     def get_context_data(self, **kwargs):
         context = super(ProjetoCreate, self).get_context_data(**kwargs)
         context['projetos'] = Projeto.objects.all()
 
         return context
+    '''
 
 
 class ProjetoUpdate(LoggedInMixin, UpdateView):

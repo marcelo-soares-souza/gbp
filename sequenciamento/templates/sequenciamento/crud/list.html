@@ -8,16 +8,32 @@
 
     {% include "base/menu-sequenciamentos.html" %} <br/>
 
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        <a href="{% url 'new_sequenciamento' %}" class="btn btn-sm btn-success">Adicionar</a>
+      </div>
+
+      <div style="float: left;">
+        <div class="form-horizontal"><div class="form-group">
+          <div class="col-md-12">
+            <select id="listar_tipo" class="form-control" name="listar_tipo" onChange="redirectUrl()">
+              <option value="0">Todos os Tipos</option>
+              {% for tipo in tipos %}
+                <option value="{{tipo.id}}">{{tipo}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
     {% if not sequenciamentos %}
 
       <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_sequenciamento' %}">Cadastrar?</a> </h4</div>
 
     {% else %}
 
-        <div style="float: right;"><a href="{% url 'new_sequenciamento' %}" class="btn btn-sm btn-success">Adicionar</a></div>
-
         {% include 'base/sort_links.html' %}
-
         {% for sequenciamento in sequenciamentos %}
             <ul class="list-group">
               <li class="list-group-item">
@@ -59,5 +75,28 @@
         {% include 'base/pagination.html' %}
 
     {% endif %}
+
+    <script>
+      $(function(){
+
+        $('#listar_tipo').val({{tipo_id}});
+
+        $('#listar_tipo').on('change', function () {
+
+        if ($(this).val() != 0) {
+          var url = '/sequenciamento/list/tipo/' + $(this).val();
+
+          if (url) {
+            window.location = url;
+          }
+        }
+        else {
+          window.location = '{% url 'list_sequenciamento' %}';
+        }
+
+        return false;
+       });
+     });
+   </script>
 
 {% endblock content %}
