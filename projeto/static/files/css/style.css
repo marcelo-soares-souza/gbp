@@ -1,3 +1,7 @@
+body {
+  overflow-y: scroll;
+}
+
 .text-highlight {
   background-color: #F8F8F8;
   padding: 8px 8px 8px 8px;
