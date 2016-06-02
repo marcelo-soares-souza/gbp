@@ -3,7 +3,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 
 from projeto.forms import ObjetivoForm
-from projeto.models import Objetivo
+from projeto.models import Objetivo, Projeto
 from projeto.views.login import LoggedInMixin
 
 
@@ -21,6 +21,24 @@ class ObjetivoProjetoList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_objetivo_projeto')
 
+    def get_queryset(self):
+        if self.kwargs:
+            queryset = self.model._default_manager.filter(projeto_id=int(self.kwargs['pk']))
+        else:
+            queryset = self.model._default_manager.all()
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(ObjetivoProjetoList, self).get_context_data(**kwargs)
+        context['projetos'] = Projeto.objects.all()
+        context['projeto_id'] = 0
+
+        if self.kwargs:
+            context['projeto_id'] = self.kwargs['pk']
+
+        return context
+
 
 class ObjetivoProjetoDetail(LoggedInMixin, DetailView):
     template_name = 'objetivo/crud/detail.html'
@@ -36,9 +54,6 @@ class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
     form_class = ObjetivoForm
     success_url = reverse_lazy('new_objetivo_projeto')
 
-    # Método responsável por listar os objetos na página de form
-    # TODO: refatorar para que apresente apenas os objetivos relacionados ao
-    # projeto selecionado no form
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoCreate, self).get_context_data(**kwargs)
         context["objetivos"] = Objetivo.objects.all().order_by('numero')
@@ -57,7 +72,6 @@ class ObjetivoProjetoUpdate(LoggedInMixin, UpdateView):
     form_class = ObjetivoForm
     model = Objetivo
 
-    # Refatorar!
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoUpdate, self).get_context_data(**kwargs)
         context["objetivos"] = Objetivo.objects.all().order_by('numero')

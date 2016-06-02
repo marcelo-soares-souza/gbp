@@ -29,9 +29,11 @@ class InstituicaoForm(forms.ModelForm):
             'descricao': 'Descrição',
         }
 
+        '''
         help_texts = {
             'sigla': ('Sigla da Instituição'),
         }
+        '''
 
 
 class ObjetivoForm(forms.ModelForm):

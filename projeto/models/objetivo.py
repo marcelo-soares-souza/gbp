@@ -33,4 +33,4 @@ class Objetivo(models.Model, TemplateModelMixin):
         verbose_name_plural = 'objetivos'
 
     def __str__(self):
-        return 'OE%d: %s' % (self.numero, self.descricao)
+        return 'Objetivo %d' % (self.numero)

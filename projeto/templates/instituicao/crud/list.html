@@ -22,13 +22,17 @@
             <ul class="list-group">
               <li class="list-group-item">
 
-                <h3><a href="{{ instituicao.get_detail_url }}">{{ instituicao.nome }}</a></h3>
+                <h3><a href="{{ instituicao.get_detail_url }}">{{ instituicao.sigla }}</a></h3>
 
                 {% if instituicao.descricao %}
                   <p><b>Descrição:</b> <br/> <div class='text-highlight'> {{ instituicao.descricao|truncatechars:256 }}&nbsp;</div></p>
                 {% endif %}
 
-                <p><b>Sigla:</b> <br/> <div class='text-highlight'> {{ instituicao.sigla }}&nbsp;</div></p>
+                <p><b>Nome:</b> <br/> <div class='text-highlight'> {{ instituicao.nome }}&nbsp;</div></p>
+
+                {% if instituicao.site %}
+                  <p><b>Site:</b> <br/> <div class='text-highlight'> <a href="{{instituicao.site}}" target="_blank"> {{ instituicao.site }} </a>&nbsp;</div></p>
+                {% endif %}
 
                 {% if instituicao.proponente.all %}
                   <p><b>Projetos Associados (Como Proponente):</b> <br/> <div class='text-highlight'>
