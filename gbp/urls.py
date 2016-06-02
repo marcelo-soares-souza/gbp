@@ -64,6 +64,8 @@ urlpatterns = [
         name='home_resultado_projeto'),
     url(r'^resultado/new/$', ResultadoProjetoCreate.as_view(),
         name='new_resultado_projeto'),
+    url(r'^resultado/list/projeto/(?P<pk>\d+)', ResultadoProjetoList.as_view(),
+        name='list_resultado_projeto'),
     url(r'^resultado/list/', ResultadoProjetoList.as_view(),
         name='list_resultado_projeto'),
     url(r'^resultado/detail/(?P<pk>\d+)/$',
