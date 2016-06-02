@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
+from django.db.models import Count
 
 from projeto.forms import ResultadoForm
 from projeto.models import Resultado, Projeto
@@ -62,6 +63,8 @@ class ResultadoProjetoCreate(LoggedInMixin, CreateView):
         context = super(ResultadoProjetoCreate,
                         self).get_context_data(**kwargs)
         context["resultados"] = Resultado.objects.all().order_by('numero')
+        context["projetos"] = Resultado.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
+
         return context
 
     def form_valid(self, form):
