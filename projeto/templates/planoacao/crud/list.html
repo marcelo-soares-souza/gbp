@@ -8,13 +8,30 @@
 
     {% include "base/menu-projetos.html" %} <br/>
 
+    <div style="min-width: 60%; float: right;">
+      <div style="float: right;">
+        <a href="{% url 'new_planoacao_projeto' %}" class="btn btn-sm btn-success">Adicionar</a>
+      </div>
+
+      <div style="float: left;">
+        <div class="form-horizontal"><div class="form-group">
+          <div class="col-md-12">
+            <select id="listar_projeto" class="form-control" name="listar_projeto" onChange="redirectUrl()">
+              <option value="0">Todos os Projetos</option>
+              {% for projeto in projetos %}
+                <option value="{{projeto.id}}">{{projeto}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
     {% if not planosacao %}
 
       <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_planoacao_projeto' %}">Cadastrar?</a> </h4</div>
 
     {% else %}
-
-        <div style="float: right;"><a href="{% url 'new_planoacao_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
 
         {% include 'base/sort_links.html' %}
 
@@ -25,7 +42,7 @@
                 <h3><a href="{{ planoacao.get_detail_url }}">{{ planoacao }}</a></h3>
 
                 <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' planoacao.projeto.id %}">{{ planoacao.projeto }}</a>&nbsp;</div></p>
-                
+
                 <p><b>Resultados Associados:</b> <br/> <div class='text-highlight'>
                   {% for resultado in planoacao.resultado.all %}{% if not forloop.first %}, {% endif %}
                     <a href="{% url 'detail_resultado_projeto' resultado.id %}">{{ resultado }}</a>{% endfor %}
@@ -48,5 +65,27 @@
         {% include 'base/pagination.html' %}
 
     {% endif %}
+
+    <script>
+        $(function(){
+          $('#listar_projeto').val({{projeto_id}});
+
+          $('#listar_projeto').on('change', function () {
+
+          if ($(this).val() != 0) {
+            var url = '/planoacao/list/projeto/' + $(this).val();
+
+            if (url) {
+              window.location = url;
+            }
+          }
+          else {
+            window.location = '{% url 'list_planoacao_projeto' %}';
+          }
+
+          return false;
+        });
+      });
+    </script>
 
 {% endblock content %}

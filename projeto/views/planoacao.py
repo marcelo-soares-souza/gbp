@@ -3,7 +3,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 
 from projeto.forms import PlanoAcaoForm
-from projeto.models import PlanoAcao
+from projeto.models import PlanoAcao, Projeto
 from projeto.views.login import LoggedInMixin
 
 
@@ -27,6 +27,24 @@ class PlanoAcaoList(LoggedInMixin, SortableListView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_planoacao_projeto')
+
+    def get_queryset(self):
+        if self.kwargs:
+            queryset = self.model._default_manager.filter(projeto_id=int(self.kwargs['pk']))
+        else:
+            queryset = self.model._default_manager.all()
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(PlanoAcaoList, self).get_context_data(**kwargs)
+        context['projetos'] = Projeto.objects.all()
+        context['projeto_id'] = 0
+
+        if self.kwargs:
+            context['projeto_id'] = self.kwargs['pk']
+
+        return context
 
 
 class PlanoAcaoDetail(LoggedInMixin, DetailView):

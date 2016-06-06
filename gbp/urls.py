@@ -126,6 +126,8 @@ urlpatterns = [
     url(r'^planoacao/$', PlanoAcaoList.as_view(), name='home_planoacao_projeto'),
     url(r'^planoacao/new/$', PlanoAcaoCreate.as_view(),
         name='new_planoacao_projeto'),
+    url(r'^planoacao/list/projeto/(?P<pk>\d+)', PlanoAcaoList.as_view(),
+        name='list_planoacao_projeto'),
     url(r'^planoacao/list/', PlanoAcaoList.as_view(),
         name='list_planoacao_projeto'),
     url(r'^planoacao/detail/(?P<pk>\d+)/$',
