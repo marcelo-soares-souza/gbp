@@ -12,7 +12,7 @@
 
     <hr/>
 
-    <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' resultado.projeto.id %}">{{ resultado.projeto }}</a>&nbsp;</div></p>
+    <p><b>Projeto:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' resultado.projeto.id %}">{{ resultado.projeto }}</a>&nbsp;</div></p>
 
     <p><b>Objetivo Associado:</b> <br/> <div class='text-highlight'>
       {% for objetivo in resultado.objetivo.all %}{% if not forloop.first %}, {% endif %}

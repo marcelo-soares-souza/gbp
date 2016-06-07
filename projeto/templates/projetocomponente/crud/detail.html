@@ -11,10 +11,10 @@
     <h2>{{ projetocomponente }}</h2>
 
     <hr/>
-    
-    <p><b>Responsável:</b> <br/> <div class='text-highlight'> {{ projetocomponente.responsavel }}&nbsp;</div></p>
 
-    <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' projetocomponente.projeto.id %}">{{ projetocomponente.projeto }}</a>&nbsp;</div></p>
+    <p><b>Projeto:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' projetocomponente.projeto.id %}">{{ projetocomponente.projeto }}</a>&nbsp;</div></p>
+
+    <p><b>Responsável:</b> <br/> <div class='text-highlight'> {{ projetocomponente.responsavel }}&nbsp;</div></p>
 
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ projetocomponente.data_cadastro }}&nbsp;</div></p>
 

@@ -12,6 +12,8 @@
 
     <hr/>
 
+    <p><b>Projeto:</b> <br/> <div class='text-highlight'> {{ metaprojeto.projeto }}&nbsp;</div></p>
+
     <p><b>Objetivo Associado:</b> <br/> <div class='text-highlight'>
       {% for objetivo in metaprojeto.objetivo.all %}{% if not forloop.first %}, {% endif %}
         <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo }}</a>{% endfor %}
