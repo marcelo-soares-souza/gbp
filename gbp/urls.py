@@ -141,6 +141,8 @@ urlpatterns = [
     url(r'^atividade/$', AtividadeList.as_view(), name='home_atividade_projeto'),
     url(r'^atividade/new/$', AtividadeCreate.as_view(),
         name='new_atividade_projeto'),
+    url(r'^atividade/list/projeto/(?P<pk>\d+)', AtividadeList.as_view(),
+        name='list_atividade_projeto'),
     url(r'^atividade/list/', AtividadeList.as_view(),
         name='list_atividade_projeto'),
     url(r'^atividade/detail/(?P<pk>\d+)/$',
@@ -153,6 +155,7 @@ urlpatterns = [
     # Views de Tarefa
     url(r'^tarefa/$', TarefaList.as_view(), name='home_tarefa_projeto'),
     url(r'^tarefa/new/$', TarefaCreate.as_view(), name='new_tarefa_projeto'),
+    url(r'^tarefa/list/projeto/(?P<pk>\d+)', TarefaList.as_view(), name='list_tarefa_projeto'),
     url(r'^tarefa/list/', TarefaList.as_view(), name='list_tarefa_projeto'),
     url(r'^tarefa/detail/(?P<pk>\d+)/$',
         TarefaDetail.as_view(), name='detail_tarefa_projeto'),
