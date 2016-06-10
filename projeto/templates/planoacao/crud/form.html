@@ -28,4 +28,29 @@
       });
     </script>
 
+    <script>
+      var value = {};
+
+      {% for projeto in projetos %}
+        value[{{projeto.projeto_id}}] = {{projeto.total}};
+      {% endfor %}
+
+      $(function(){
+        $('#id_projeto').on('change', function () {
+          if ($(this).val() != 0) {
+
+            if (value[$(this).val()])
+              $('#id_numero').val(value[$(this).val()] + 1);
+            else
+              $('#id_numero').val(1);
+          }
+          else {
+            $('#id_numero').val(1);
+          }
+
+          return false;
+        });
+      });
+    </script>
+
 {% endblock content %}

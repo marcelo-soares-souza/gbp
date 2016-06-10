@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
+from django.db.models import Count
 
 from projeto.forms import PlanoAcaoForm
 from projeto.models import PlanoAcao, Projeto
@@ -68,6 +69,12 @@ class PlanoAcaoCreate(LoggedInMixin, CreateView):
 
     def get_initial(self):
         return {'criado_por': self.request.user.id}
+
+    def get_context_data(self, **kwargs):
+        context = super(PlanoAcaoCreate, self).get_context_data(**kwargs)
+        context["projetos"] = PlanoAcao.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
+
+        return context
 
 
 class PlanoAcaoUpdate(LoggedInMixin, UpdateView):
