@@ -8,13 +8,13 @@
 
     {% include "base/menu-sequenciamentos.html" %} <br/>
 
+    <div style="float: right;"><a href="{% url 'new_tiposequenciamento' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
     {% if not tiposequenciamentos %}
 
-    <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_tiposequenciamento' %}">Cadastrar?</a> </h4</div>
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_tiposequenciamento' %}">Cadastrar?</a> </h4</div>
 
     {% else %}
-
-        <div style="float: right;"><a href="{% url 'new_tiposequenciamento' %}" class="btn btn-sm btn-success">Adicionar</a></div>
 
         {% include 'base/sort_links.html' %}
 

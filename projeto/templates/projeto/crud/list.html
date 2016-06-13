@@ -8,13 +8,13 @@
 
     {% include "base/menu-projetos.html" %} <br/>
 
+    <div style="float: right;"><a href="{% url 'new_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
     {% if not projetos %}
 
       <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_projeto' %}">Cadastrar?</a> </h4</div>
 
     {% else %}
-
-        <div style="float: right;"><a href="{% url 'new_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
 
         {% include 'base/sort_links.html' %}
 
@@ -23,7 +23,7 @@
               <li class="list-group-item">
 
                 <h3><a href="{{ projeto.get_detail_url }}">{{ projeto.sigla }}</a></h3>
-                
+
                 <p><b>Título:</b> <br/> <div class='text-highlight'> {{ projeto.titulo_portugues }}&nbsp;</div></p>
                 <p><b>Líder:</b> <br/> <div class='text-highlight'> {{ projeto.lider }}&nbsp;</div></p>
                 <p><b>Situação:</b> <br/> <div class='text-highlight'> {{ projeto.status_verbose }}&nbsp;</div></p>

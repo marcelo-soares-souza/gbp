@@ -8,13 +8,13 @@
 
     {% include "base/menu-projetos.html" %} <br/>
 
+    <div style="float: right;"><a href="{% url 'new_palavrachave_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
     {% if not palavraschave %}
 
       <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_palavrachave_projeto' %}">Cadastrar?</a> </h4</div>
 
     {% else %}
-
-        <div style="float: right;"><a href="{% url 'new_palavrachave_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
 
         {% include 'base/sort_links.html' %}
 
