@@ -1,18 +1,15 @@
 {% load i18n admin_static %}
 
 <style>
-  td {
+  table, thead, th, tr, td, tbody {
+    border: 1px solid #ddd;
     padding: 12px 36px 12px 36px;
-    border: 1px solid;
+    text-align: center;
   }
 
   .action-checkbox, .action-checkbox-column {
     display: none;
     visibility: hidden;
-  }
-
-  .field-username {
-    text-align: center;
   }
 </style>
 
@@ -23,11 +20,11 @@
 {% endif %}
 {% if results %}
 <div class="results">
-<table id="result_list" style="border: 1px solid;">
-<thead style="border: 1px solid;">
+<table id="result_list">
+<thead>
 <tr>
 {% for header in result_headers %}
-<th scope="col" {{ header.class_attrib }} style="border: 1px solid; padding: 12px 32px 12px 32px; text-align: center;">
+<th scope="col" {{ header.class_attrib }} style="padding: 12px 32px 12px 32px; text-align: center;">
    {% if header.sortable %}
      {% if header.sort_priority > 0 %}
        <div class="sortoptions">
@@ -51,7 +48,7 @@
     {% if result.form.non_field_errors %}
       <tr><td colspan="{{ result|length }}">{{ result.form.non_field_errors }}</td></tr>
     {% endif %}
-    <tr class="{% cycle 'row1' 'row2' %}" style="border: 1px solid; text-align: center;">
+    <tr class="{% cycle 'row1' 'row2' %}" style="text-align: center;">
       {% for item in result %}
         {{ item }}
       {% endfor %}
