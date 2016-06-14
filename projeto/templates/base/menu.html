@@ -30,6 +30,14 @@
               <li class="menu-item dropdown"><a href="{% url 'list_tarefasequenciamento' %}">Listar/Editar</a></li>
           </ul>
         </li>
+        {% if request.user.is_superuser %}
+          <li class="menu-item dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li class="menu-item dropdown"><a href="/admin/auth/user/">Usuários</a></li>
+            </ul>
+          </li>
+        {% endif %}
 
           <li><a href="{% url 'logout' %}">Logout ({{ request.user.username }})</a></li>
         {% else %}
