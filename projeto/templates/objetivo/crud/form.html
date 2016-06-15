@@ -21,6 +21,10 @@
         </div>
     </form>
 
+    <tbody class="objetivos">
+       {% include 'objetivos.html' %}
+    </tbody>
+
     <script>
       var value = {};
 
@@ -28,16 +32,28 @@
         value[{{projeto.projeto_id}}] = {{projeto.total}};
       {% endfor %}
 
-      $(function(){
+      $(function() {
+        /*
+        $(window).on('load', function(){
+          $('#id_projeto').val("");
+          $('#id_numero').val(1);
+        });
+        */
         $('#id_projeto').on('change', function () {
           if ($(this).val() != 0) {
+            if (value[$(this).val()]) {
+              $('#objetivos').html('').load("/objetivo/ajax/projeto/" + $(this).val());
+              $('#objetivos').show();
 
-            if (value[$(this).val()])
               $('#id_numero').val(value[$(this).val()] + 1);
-            else
+            }
+            else {
+              $('#objetivos').hide();
               $('#id_numero').val(1);
+            }
           }
           else {
+            $('#objetivos').hide();
             $('#id_numero').val(1);
           }
 

@@ -24,7 +24,7 @@
 <thead>
 <tr>
 {% for header in result_headers %}
-<th scope="col" {{ header.class_attrib }} style="padding: 12px 32px 12px 32px; text-align: center;">
+<th scope="col" {{ header.class_attrib }} style="padding: 12px 32px 12px 32px; text-align: center; background-color: #F8F8F8;">
    {% if header.sortable %}
      {% if header.sort_priority > 0 %}
        <div class="sortoptions">

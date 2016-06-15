@@ -2,10 +2,18 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 from django.db.models import Count
+from django.shortcuts import render
 
 from projeto.forms import ObjetivoForm
 from projeto.models import Objetivo, Projeto
 from projeto.views.login import LoggedInMixin
+
+
+def ObjetivosAjax(request, pk):
+    # objetivos = Objetivo.objects.all()
+    objetivos = Objetivo.objects.filter(projeto_id=int(pk)).order_by('numero')
+
+    return render(request, 'objetivos.html', {'objetivos': objetivos})
 
 
 class ObjetivoProjetoList(LoggedInMixin, SortableListView):
@@ -57,7 +65,7 @@ class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoCreate, self).get_context_data(**kwargs)
-        context["objetivos"] = Objetivo.objects.all().order_by('numero')
+        # context["objetivos"] = Objetivo.objects.all().order_by('numero')
         context["projetos"] = Objetivo.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
