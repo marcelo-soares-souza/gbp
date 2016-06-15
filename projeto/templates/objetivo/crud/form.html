@@ -33,18 +33,16 @@
       {% endfor %}
 
       $(function() {
-        /*
-        $(window).on('load', function(){
-          $('#id_projeto').val("");
-          $('#id_numero').val(1);
-        });
-        */
+        if ($('#id_projeto').val() != 0) {
+          $('#objetivos').html('').load("/objetivo/ajax/projeto/" + $('#id_projeto').val());
+          $('#objetivos').show();
+        }
+
         $('#id_projeto').on('change', function () {
           if ($(this).val() != 0) {
             if (value[$(this).val()]) {
               $('#objetivos').html('').load("/objetivo/ajax/projeto/" + $(this).val());
               $('#objetivos').show();
-
               $('#id_numero').val(value[$(this).val()] + 1);
             }
             else {
@@ -55,6 +53,7 @@
           else {
             $('#objetivos').hide();
             $('#id_numero').val(1);
+            $('#id_projeto').val("");
           }
 
           return false;

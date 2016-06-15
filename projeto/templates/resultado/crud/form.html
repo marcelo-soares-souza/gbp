@@ -21,6 +21,10 @@
         </div>
     </form>
 
+    <tbody class="resultados">
+       {% include 'resultados.html' %}
+    </tbody>
+
     <script>
       var value = {};
 
@@ -28,17 +32,28 @@
         value[{{projeto.projeto_id}}] = {{projeto.total}};
       {% endfor %}
 
-      $(function(){
+      $(function() {
+        if ($('#id_projeto').val() != 0) {
+          $('#resultados').html('').load("/resultado/ajax/projeto/" + $('#id_projeto').val());
+          $('#resultados').show();
+        }
+
         $('#id_projeto').on('change', function () {
           if ($(this).val() != 0) {
-
-            if (value[$(this).val()])
+            if (value[$(this).val()]) {
+              $('#resultados').html('').load("/resultado/ajax/projeto/" + $(this).val());
+              $('#resultados').show();
               $('#id_numero').val(value[$(this).val()] + 1);
-            else
+            }
+            else {
+              $('#resultados').hide();
               $('#id_numero').val(1);
+            }
           }
           else {
+            $('#resultados').hide();
             $('#id_numero').val(1);
+            $('#id_projeto').val("");
           }
 
           return false;

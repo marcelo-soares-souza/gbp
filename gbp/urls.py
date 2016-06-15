@@ -16,7 +16,7 @@ from projeto.views.tarefa import TarefaCreate, TarefaDelete, TarefaDetail, Taref
 from sequenciamento.views.sequenciamento import SequenciamentoCreate, SequenciamentoDelete, SequenciamentoDetail, SequenciamentoList, SequenciamentoUpdate
 from sequenciamento.views.tarefasequenciamento import TarefaSequenciamentoCreate, TarefaSequenciamentoDelete, TarefaSequenciamentoDetail, TarefaSequenciamentoList, TarefaSequenciamentoUpdate
 from sequenciamento.views.tiposequenciamento import TipoSequenciamentoCreate, TipoSequenciamentoDelete, TipoSequenciamentoDetail, TipoSequenciamentoList, TipoSequenciamentoUpdate
-from projeto.views import objetivo
+from projeto.views import objetivo, resultado
 
 urlpatterns = [
 
@@ -76,7 +76,7 @@ urlpatterns = [
         ResultadoProjetoUpdate.as_view(), name='update_resultado_projeto'),
     url(r'^resultado/delete/(?P<pk>\d+)/$',
         ResultadoProjetoDelete.as_view(), name='delete_resultado_projeto'),
-
+    url(r'^resultado/ajax/projeto/(?P<pk>\d+)$', resultado.ResultadosAjax, name='resultados_ajax'),
 
     # Views de Palavra Chave
     url(r'^palavrachave/$', PalavraChaveList.as_view(),

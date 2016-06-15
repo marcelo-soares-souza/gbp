@@ -2,10 +2,17 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 from django.db.models import Count
+from django.shortcuts import render
 
 from projeto.forms import ResultadoForm
 from projeto.models import Resultado, Projeto
 from projeto.views.login import LoggedInMixin
+
+
+def ResultadosAjax(request, pk):
+    resultados = Resultado.objects.filter(projeto_id=int(pk)).order_by('numero')
+
+    return render(request, 'resultados.html', {'resultados': resultados})
 
 
 class ResultadoProjetoList(LoggedInMixin, SortableListView):
@@ -56,13 +63,10 @@ class ResultadoProjetoCreate(LoggedInMixin, CreateView):
 
     success_url = reverse_lazy('new_resultado_projeto')
 
-    # Método responsável por listar os objetos da classe na página de form
-    # TODO: refatorar para que apresente apenas os resultados relacionados ao
-    # projeto selecionado no form
     def get_context_data(self, **kwargs):
         context = super(ResultadoProjetoCreate,
                         self).get_context_data(**kwargs)
-        context["resultados"] = Resultado.objects.all().order_by('numero')
+        # context["resultados"] = Resultado.objects.all().order_by('numero')
         context["projetos"] = Resultado.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
