@@ -21,9 +21,11 @@
         </div>
     </form>
 
-    <tbody class="resultados">
-       {% include 'resultados.html' %}
-    </tbody>
+    {% if 'update' not in request.resolver_match.url_name %}
+      <tbody class="resultados">
+         {% include 'resultados.html' %}
+      </tbody>
+    {% endif %}
 
     <script>
       var value = {};
