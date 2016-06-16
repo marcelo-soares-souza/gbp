@@ -1,0 +1,17 @@
+  <div id="projetocomponentes">
+      {% for projetocomponente in projetocomponentes %}
+        <ul class="list-group">
+          <li class="list-group-item">
+              <h4><a href="{{ projetocomponente.get_detail_url }}">{{ projetocomponente }}</a></h4> {{projetocomponente.nome}}
+              <br/><br/>
+              <p style="float: right;">
+                {% if request.user == projetocomponente.criado_por or request.user.is_superuser %}
+                  <a href="{{ projetocomponente.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                  <a href="{{ projetocomponente.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                {% endif %}
+            </p>
+           <br/><br/>
+          </li>
+        </ul>
+      {% endfor %}
+  </div>

@@ -21,6 +21,12 @@
         </div>
     </form>
 
+    {% if 'update' not in request.resolver_match.url_name %}
+      <tbody class="metaprojetos">
+         {% include 'metaprojetos.html' %}
+      </tbody>
+    {% endif %}
+
     <script>
       var value = {};
 
@@ -28,17 +34,28 @@
         value[{{projeto.projeto_id}}] = {{projeto.total}};
       {% endfor %}
 
-      $(function(){
+      $(function() {
+        if ($('#id_projeto').val() != 0) {
+          $('#metaprojetos').html('').load("/metaprojeto/ajax/projeto/" + $('#id_projeto').val());
+          $('#metaprojetos').show();
+        }
+
         $('#id_projeto').on('change', function () {
           if ($(this).val() != 0) {
-
-            if (value[$(this).val()])
+            if (value[$(this).val()]) {
+              $('#metaprojetos').html('').load("/metaprojeto/ajax/projeto/" + $(this).val());
+              $('#metaprojetos').show();
               $('#id_numero').val(value[$(this).val()] + 1);
-            else
+            }
+            else {
+              $('#metaprojetos').hide();
               $('#id_numero').val(1);
+            }
           }
           else {
+            $('#metaprojetos').hide();
             $('#id_numero').val(1);
+            $('#id_projeto').val("");
           }
 
           return false;

@@ -21,6 +21,12 @@
         </div>
     </form>
 
+    {% if 'update' not in request.resolver_match.url_name %}
+      <tbody class="projetocomponentes">
+         {% include 'projetocomponentes.html' %}
+      </tbody>
+    {% endif %}
+
     <script>
       var value = {};
 
@@ -28,17 +34,28 @@
         value[{{projeto.projeto_id}}] = {{projeto.total}};
       {% endfor %}
 
-      $(function(){
+      $(function() {
+        if ($('#id_projeto').val() != 0) {
+          $('#projetocomponentes').html('').load("/projetocomponente/ajax/projeto/" + $('#id_projeto').val());
+          $('#projetocomponentes').show();
+        }
+
         $('#id_projeto').on('change', function () {
           if ($(this).val() != 0) {
-
-            if (value[$(this).val()])
+            if (value[$(this).val()]) {
+              $('#projetocomponentes').html('').load("/projetocomponente/ajax/projeto/" + $(this).val());
+              $('#projetocomponentes').show();
               $('#id_numero').val(value[$(this).val()] + 1);
-            else
+            }
+            else {
+              $('#projetocomponentes').hide();
               $('#id_numero').val(1);
+            }
           }
           else {
+            $('#projetocomponentes').hide();
             $('#id_numero').val(1);
+            $('#id_projeto').val("");
           }
 
           return false;

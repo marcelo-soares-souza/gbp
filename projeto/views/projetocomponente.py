@@ -2,17 +2,17 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 from django.db.models import Count
+from django.shortcuts import render
 
 from projeto.forms import ProjetoComponenteForm
 from projeto.models import ProjetoComponente, Projeto
 from projeto.views.login import LoggedInMixin
 
 
-#
-#
-# Projeto Componente
-#
-#
+def ProjetoComponenteAjax(request, pk):
+    projetocomponentes = ProjetoComponente.objects.filter(projeto_id=int(pk)).order_by('numero')
+
+    return render(request, 'projetocomponentes.html', {'projetocomponentes': projetocomponentes})
 
 
 class ProjetoComponenteList(LoggedInMixin, SortableListView):
@@ -73,7 +73,7 @@ class ProjetoComponenteCreate(LoggedInMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ProjetoComponenteCreate,
                         self).get_context_data(**kwargs)
-        context["projetocomponentes"] = ProjetoComponente.objects.all()
+        # context["projetocomponentes"] = ProjetoComponente.objects.all()
         context["projetos"] = ProjetoComponente.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context

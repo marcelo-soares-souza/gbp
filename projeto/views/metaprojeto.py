@@ -2,17 +2,17 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 from django.db.models import Count
+from django.shortcuts import render
 
 from projeto.forms import MetaProjetoForm
 from projeto.models import MetaProjeto, Projeto
 from projeto.views.login import LoggedInMixin
 
 
-#
-#
-# Meta do Projeto
-#
-#
+def MetaProjetoAjax(request, pk):
+    metaprojetos = MetaProjeto.objects.filter(projeto_id=int(pk)).order_by('numero')
+
+    return render(request, 'metaprojetos.html', {'metaprojetos': metaprojetos})
 
 
 class MetaProjetoList(LoggedInMixin, SortableListView):

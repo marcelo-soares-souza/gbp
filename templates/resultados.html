@@ -2,8 +2,14 @@
       {% for resultado in resultados %}
         <ul class="list-group">
           <li class="list-group-item">
-              <h4><a href="{{ resultado.get_detail_url }}">{{ resultado }}</a></h4> {{resultado.descricao}}
-              <br/><br/>
+              <h4><a href="{{ resultado.get_detail_url }}">{{ resultado }}</a></h4>
+              <p><b>Descrição:</b> <br/> <div class='text-highlight'>{{resultado.descricao}}&nbsp;</div></p>
+
+              <p><b>Objetivo Associado:</b> <br/> <div class='text-highlight'>
+                {% for objetivo in resultado.objetivo.all %}{% if not forloop.first %}, {% endif %}
+                  <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo }}</a>{% endfor %}
+              &nbsp;</div></p>
+              <br/>
               <p style="float: right;">
                 {% if request.user == resultado.criado_por or request.user.is_superuser %}
                   <a href="{{ resultado.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
