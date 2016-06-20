@@ -141,6 +141,7 @@ urlpatterns = [
     url(r'^planoacao/delete/(?P<pk>\d+)/$',
         PlanoAcaoDelete.as_view(), name='delete_planoacao_projeto'),
     url(r'^planoacao/ajax/projeto/(?P<pk>\d+)$', planoacao.PlanoAcaoAjax, name='planoacaos_ajax'),
+    url(r'^planoacao/ajax/projeto_componente/(?P<pk>\d+)$', planoacao.PlanoAcaoProjetoComponenteAjax, name='planoacaos_projeto_componente_ajax'),
 
     # Views de Atividade
     url(r'^atividade/$', AtividadeList.as_view(), name='home_atividade_projeto'),

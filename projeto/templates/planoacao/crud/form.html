@@ -67,6 +67,17 @@
 
           return false;
         });
+
+        $('#id_projeto_componente').on('change', function () {
+          if ($(this).val() != 0) {
+            $('#planoacaos').html('').load("/planoacao/ajax/projeto_componente/" + $(this).val());
+          }
+          else {
+            $('#planoacaos').html('').load("/planoacao/ajax/projeto/" + $('#id_projeto').val());
+          }
+
+          return false;
+        });
       });
     </script>
 

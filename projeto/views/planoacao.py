@@ -15,6 +15,12 @@ def PlanoAcaoAjax(request, pk):
     return render(request, 'planoacaos.html', {'planoacaos': planoacaos})
 
 
+def PlanoAcaoProjetoComponenteAjax(request, pk):
+    planoacaos = PlanoAcao.objects.filter(projeto_componente_id=int(pk)).order_by('numero')
+
+    return render(request, 'planoacaos.html', {'planoacaos': planoacaos})
+
+
 class PlanoAcaoList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {'nome': {'default_direction': '', 'verbose_name': 'Nome'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
