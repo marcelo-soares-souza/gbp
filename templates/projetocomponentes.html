@@ -2,8 +2,9 @@
       {% for projetocomponente in projetocomponentes %}
         <ul class="list-group">
           <li class="list-group-item">
-              <h4><a href="{{ projetocomponente.get_detail_url }}">{{ projetocomponente }}</a></h4> {{projetocomponente.nome}}
-              <br/><br/>
+              <h4><a href="{{ projetocomponente.get_detail_url }}">{{ projetocomponente }}</a></h4>
+              <p><b>Descrição:</b> <br/> <div class='text-highlight'>{{projetocomponente.nome}}&nbsp;</div></p>
+              <br/>
               <p style="float: right;">
                 {% if request.user == projetocomponente.criado_por or request.user.is_superuser %}
                   <a href="{{ projetocomponente.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>

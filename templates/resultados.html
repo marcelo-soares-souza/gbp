@@ -9,6 +9,7 @@
                 {% for objetivo in resultado.objetivo.all %}{% if not forloop.first %}, {% endif %}
                   <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo }}</a>{% endfor %}
               &nbsp;</div></p>
+
               <br/>
               <p style="float: right;">
                 {% if request.user == resultado.criado_por or request.user.is_superuser %}

@@ -2,8 +2,9 @@
       {% for metaprojeto in metaprojetos %}
         <ul class="list-group">
           <li class="list-group-item">
-              <h4><a href="{{ metaprojeto.get_detail_url }}">{{ metaprojeto }}</a></h4> {{metaprojeto.nome}}
-              <br/><br/>
+              <h4><a href="{{ metaprojeto.get_detail_url }}">{{ metaprojeto }}</a></h4>
+              <p><b>Descrição:</b> <br/> <div class='text-highlight'>{{metaprojeto.nome}}&nbsp;</div></p>
+              <br/>
               <p style="float: right;">
                 {% if request.user == metaprojeto.criado_por or request.user.is_superuser %}
                   <a href="{{ metaprojeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
