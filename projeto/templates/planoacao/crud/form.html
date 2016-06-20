@@ -28,6 +28,12 @@
       });
     </script>
 
+    {% if 'update' not in request.resolver_match.url_name %}
+      <tbody class="planoacaos">
+         {% include 'planoacaos.html' %}
+      </tbody>
+    {% endif %}
+
     <script>
       var value = {};
 
@@ -35,17 +41,28 @@
         value[{{projeto.projeto_id}}] = {{projeto.total}};
       {% endfor %}
 
-      $(function(){
+      $(function() {
+        if ($('#id_projeto').val() != 0) {
+          $('#planoacaos').html('').load("/planoacao/ajax/projeto/" + $('#id_projeto').val());
+          $('#planoacaos').show();
+        }
+
         $('#id_projeto').on('change', function () {
           if ($(this).val() != 0) {
-
-            if (value[$(this).val()])
+            if (value[$(this).val()]) {
+              $('#planoacaos').html('').load("/planoacao/ajax/projeto/" + $(this).val());
+              $('#planoacaos').show();
               $('#id_numero').val(value[$(this).val()] + 1);
-            else
+            }
+            else {
+              $('#planoacaos').hide();
               $('#id_numero').val(1);
+            }
           }
           else {
+            $('#planoacaos').hide();
             $('#id_numero').val(1);
+            $('#id_projeto').val("");
           }
 
           return false;
