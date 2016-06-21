@@ -21,6 +21,12 @@
         </div>
     </form>
 
+    {% if 'update' not in request.resolver_match.url_name %}
+      <tbody class="tarefas">
+         {% include 'tarefas.html' %}
+      </tbody>
+    {% endif %}
+
     <script>
       var value = {};
 
@@ -28,17 +34,40 @@
         value[{{projeto.projeto_id}}] = {{projeto.total}};
       {% endfor %}
 
-      $(function(){
-        $('#id_projeto').on('change', function () {
-          if ($(this).val() != 0) {
+      $(function() {
+        if ($('#id_projeto').val() != 0) {
+          $('#tarefas').html('').load("/tarefa/ajax/projeto/" + $('#id_projeto').val());
+          $('#tarefas').show();
+        }
 
-            if (value[$(this).val()])
+        $('#id_projeto').on('change', function () {
+          alerta("Aqui");
+          if ($(this).val() != 0) {
+            if (value[$(this).val()]) {
+              $('#tarefas').html('').load("/tarefa/ajax/projeto/" + $(this).val());
+              $('#tarefas').show();
               $('#id_numero').val(value[$(this).val()] + 1);
-            else
+            }
+            else {
+              $('#tarefas').hide();
               $('#id_numero').val(1);
+            }
           }
           else {
+            $('#tarefas').hide();
             $('#id_numero').val(1);
+            $('#id_projeto').val("");
+          }
+
+          return false;
+        });
+
+        $('#id_planoacao').on('change', function () {
+          if ($(this).val() != 0) {
+            $('#tarefas').html('').load("/tarefa/ajax/planoacao/" + $(this).val());
+          }
+          else {
+            $('#tarefas').html('').load("/tarefa/ajax/projeto/" + $('#id_projeto').val());
           }
 
           return false;

@@ -16,7 +16,7 @@ from projeto.views.tarefa import TarefaCreate, TarefaDelete, TarefaDetail, Taref
 from sequenciamento.views.sequenciamento import SequenciamentoCreate, SequenciamentoDelete, SequenciamentoDetail, SequenciamentoList, SequenciamentoUpdate
 from sequenciamento.views.tarefasequenciamento import TarefaSequenciamentoCreate, TarefaSequenciamentoDelete, TarefaSequenciamentoDetail, TarefaSequenciamentoList, TarefaSequenciamentoUpdate
 from sequenciamento.views.tiposequenciamento import TipoSequenciamentoCreate, TipoSequenciamentoDelete, TipoSequenciamentoDetail, TipoSequenciamentoList, TipoSequenciamentoUpdate
-from projeto.views import objetivo, resultado, projetocomponente, metaprojeto, planoacao, atividade
+from projeto.views import objetivo, resultado, projetocomponente, metaprojeto, planoacao, atividade, tarefa
 
 urlpatterns = [
 
@@ -171,6 +171,8 @@ urlpatterns = [
         TarefaUpdate.as_view(), name='update_tarefa_projeto'),
     url(r'^tarefa/delete/(?P<pk>\d+)/$',
         TarefaDelete.as_view(), name='delete_tarefa_projeto'),
+    url(r'^tarefa/ajax/projeto/(?P<pk>\d+)$', tarefa.TarefaAjax, name='tarefas_ajax'),
+    url(r'^tarefa/ajax/planoacao/(?P<pk>\d+)$', tarefa.TarefaPlanoAcaoAjax, name='tarefas_planoacao_ajax'),
 
     # Views de Tipo Sequenciamento
     url(r'^tiposequenciamento/$', TipoSequenciamentoList.as_view(),

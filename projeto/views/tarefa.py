@@ -2,17 +2,23 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 from django.db.models import Count
+from django.shortcuts import render
 
 from projeto.forms import TarefaForm
 from projeto.models import Tarefa, Projeto
 from projeto.views.login import LoggedInMixin
 
 
-#
-#
-# Tarefas
-#
-#
+def TarefaAjax(request, pk):
+    tarefas = Tarefa.objects.filter(projeto_id=int(pk)).order_by('numero')
+
+    return render(request, 'tarefas.html', {'tarefas': tarefas})
+
+
+def TarefaPlanoAcaoAjax(request, pk):
+    tarefas = Tarefa.objects.filter(planoacao_id=int(pk)).order_by('numero')
+
+    return render(request, 'tarefas.html', {'tarefas': tarefas})
 
 
 class TarefaList(LoggedInMixin, SortableListView):
