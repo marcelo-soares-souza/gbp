@@ -2,17 +2,23 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 from django.db.models import Count
+from django.shortcuts import render
 
 from projeto.forms import AtividadeForm
 from projeto.models import Atividade, Projeto
 from projeto.views.login import LoggedInMixin
 
 
-#
-#
-# Atividade
-#
-#
+def AtividadeAjax(request, pk):
+    atividades = Atividade.objects.filter(projeto_id=int(pk)).order_by('numero')
+
+    return render(request, 'atividades.html', {'atividades': atividades})
+
+
+def AtividadePlanoAcaoAjax(request, pk):
+    atividades = Atividade.objects.filter(planoacao_id=int(pk)).order_by('numero')
+
+    return render(request, 'atividades.html', {'atividades': atividades})
 
 
 class AtividadeList(LoggedInMixin, SortableListView):
