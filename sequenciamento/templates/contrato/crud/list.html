@@ -1,0 +1,65 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todos os Contrato</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        <a href="{% url 'new_contrato' %}" class="btn btn-sm btn-success">Adicionar</a>
+      </div>
+    </div>
+
+    {% if not contratos %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_contrato' %}">Cadastrar?</a> </h4</div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for contrato in contratos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ contrato.get_detail_url }}">{{ contrato }}</a></h3>
+
+                <p><b>Responsável: </b> <div class='text-highlight'> {{ contrato.responsavel }}&nbsp;</div></p>
+
+                {% if contrato.colaborador.all %}
+                  <p><b>Colaboradores: </b> <div class='text-highlight'> {{contrato.colaborador.all|join:', '}}&nbsp;</div></p>
+                {% endif %}
+
+                {% if contrato.tarefacontrato_set.all %}
+                  <p><b>Tarefas: </b> <div class='text-highlight'>
+                    {% for tarefa in contrato.tarefacontrato_set.all %}
+                      {% if not forloop.first %}, {% endif %}
+                      <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>
+                    {% endfor %}
+                  &nbsp;</div></p>
+                {% endif %}
+
+                <br/>
+
+                <p>
+                    <a href="{{ contrato.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if request.user == contrato.criado_por or request.user.is_superuser %}
+                      <a href="{{ contrato.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                    {% endif %}
+                    <a href="{% url 'new_tarefacontrato' %}{{contrato.id}}" class="btn btn-sm btn-info">Adicionar Tarefa</a>
+                </p>
+
+                <div class="data-atualizado">{{ contrato.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

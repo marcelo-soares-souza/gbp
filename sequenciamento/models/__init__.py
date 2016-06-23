@@ -4,5 +4,6 @@
 from sequenciamento.models.tiposequenciamento import TipoSequenciamento
 from sequenciamento.models.sequenciamento import Sequenciamento
 from sequenciamento.models.tarefasequenciamento import TarefaSequenciamento
+from sequenciamento.models.contrato import Contrato
 
-__all__ = ['tiposequenciamento', 'sequenciamento', 'tarefasequenciamento']
+__all__ = ['tiposequenciamento', 'sequenciamento', 'tarefasequenciamento', 'contrato']

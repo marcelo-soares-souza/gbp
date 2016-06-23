@@ -15,6 +15,7 @@ from projeto.models.tarefa import Tarefa
 from sequenciamento.models.sequenciamento import Sequenciamento
 from sequenciamento.models.tarefasequenciamento import TarefaSequenciamento
 from sequenciamento.models.tiposequenciamento import TipoSequenciamento
+from sequenciamento.models.contrato import Contrato
 
 
 def django_version(request):
@@ -22,7 +23,8 @@ def django_version(request):
 
 
 def stats(request):
-    return {'count_sequenciamento': '(' + str(Sequenciamento.objects.count()) + ')',
+    return {'count_contrato': '(' + str(Contrato.objects.count()) + ')',
+            'count_sequenciamento': '(' + str(Sequenciamento.objects.count()) + ')',
             'count_tiposequenciamento': '(' + str(TipoSequenciamento.objects.count()) + ')',
             'count_tarefasequenciamento': '(' + str(TarefaSequenciamento.objects.count()) + ')',
             'count_instituicao': '(' + str(Instituicao.objects.count()) + ')',

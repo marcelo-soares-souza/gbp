@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Apagar {{ object }}</title> {% endblock title %}
+
+{% block content %}
+
+{% if request.user == contrato.criado_por or request.user.is_superuser %}
+  <form action="" method="post">{% csrf_token %}
+    <h3>Deseja Apagar "{{ object }}"?</h3>
+
+    <br/>
+
+    {% buttons %}
+        <button type="submit" class="btn btn-danger">Remover</button>
+    {% endbuttons %}
+
+  </form>
+{% else %}
+  <div class="jumbotron"><h4>Você não possui autorização para Remover este Dado<h4></div>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,72 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ contrato }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <h2>{{ contrato }}</h2>
+
+    <hr/>
+
+    {% if contrato.tarefacontrato_set.all %}
+      <p><b>Tarefas Registradas: </b> <br/>
+        <div class='text-highlight'>
+          {% for tarefa in contrato.tarefacontrato_set.all %}{% if not forloop.first %}, {% endif %}
+          <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>{% endfor %}
+        </div>
+      </p>
+    {% endif %}
+
+    <p><b>Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ contrato.material_biologico }}&nbsp;</div></p>
+
+    <p><b>Tipo de Contrato:</b> <br/> <div class='text-highlight'>{{ contrato.tipo_contrato }}&nbsp;</div></p>
+
+    <p><b>Responsável:</b> <br/> <div class='text-highlight'>{{ contrato.responsavel }}&nbsp;</div></p>
+
+    <p><b>Objetivo:</b> <br/> <div class='text-highlight'>{{ contrato.objetivo }}&nbsp;</div></p>
+
+    <p><b>Descrição do Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ contrato.descricao_material_biologico }}&nbsp;</div></p>
+
+    <p><b>Número de Amostras:</b> <br/> <div class='text-highlight'>{{ contrato.numero_amostras }}&nbsp;</div></p>
+
+    <p><b>Status do Contrato:</b> <br/> <div class='text-highlight'>{{ contrato.status_contrato }}&nbsp;</div></p>
+
+    <p><b>Status do Pagamento:</b> <br/> <div class='text-highlight'>{{ contrato.status_pagamento }}&nbsp;</div></p>
+
+    <p><b>Prioridade:</b> <br/> <div class='text-highlight'>{{ contrato.prioridade }}&nbsp;</div></p>
+
+    <p><b>Empresa Executora:</b> <br/> <div class='text-highlight'>{{ contrato.empresa_executora }}&nbsp;</div></p>
+
+    <p><b>Data de Contratação:</b> <br/> <div class='text-highlight'>{{ contrato.data_contratacao }}&nbsp;</div></p>
+
+    <p><b>Detalhamento do Material:</b> <br/> <div class='text-highlight'>{{ contrato.detalhamento_material }}&nbsp;</div></p>
+
+    <p><b>Status no CGEN:</b> <br/> <div class='text-highlight'>{{ contrato.status_cgen }}&nbsp;</div></p>
+
+    <p><b>TTM:</b> <br/> <div class='text-highlight'>{{ contrato.ttm }}&nbsp;</div></p>
+
+    <p><b>Contato do Gestor:</b> <br/> <div class='text-highlight'>{{ contrato.contato_gestor }}&nbsp;</div></p>
+
+    <p><b>Código do Pedido do Gestor:</b> <br/> <div class='text-highlight'>{{ contrato.codigo_pedido_gestor }}&nbsp;</div></p>
+
+    <p><b>Colaboradores:</b> <br/><div class='text-highlight'>{{contrato.colaborador.all|join:', '}}&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ contrato.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="{{ contrato.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+          {% if request.user == contrato.criado_por or request.user.is_superuser %}
+            <a href="{{ contrato.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+          {% endif %}
+            <a href="{% url 'list_contrato' %}" class="btn btn-sm btn-info">Voltar</a>
+        {% endbuttons %}
+      </p>
+
+{% endblock content %}

@@ -16,6 +16,7 @@ from projeto.views.tarefa import TarefaCreate, TarefaDelete, TarefaDetail, Taref
 from sequenciamento.views.sequenciamento import SequenciamentoCreate, SequenciamentoDelete, SequenciamentoDetail, SequenciamentoList, SequenciamentoUpdate
 from sequenciamento.views.tarefasequenciamento import TarefaSequenciamentoCreate, TarefaSequenciamentoDelete, TarefaSequenciamentoDetail, TarefaSequenciamentoList, TarefaSequenciamentoUpdate
 from sequenciamento.views.tiposequenciamento import TipoSequenciamentoCreate, TipoSequenciamentoDelete, TipoSequenciamentoDetail, TipoSequenciamentoList, TipoSequenciamentoUpdate
+from sequenciamento.views.contrato import ContratoCreate, ContratoDelete, ContratoDetail, ContratoList, ContratoUpdate
 from projeto.views import objetivo, resultado, projetocomponente, metaprojeto, planoacao, atividade, tarefa
 
 urlpatterns = [
@@ -223,6 +224,24 @@ urlpatterns = [
         TarefaSequenciamentoUpdate.as_view(), name='update_tarefasequenciamento'),
     url(r'^tarefasequenciamento/delete/(?P<pk>\d+)/$',
         TarefaSequenciamentoDelete.as_view(), name='delete_tarefasequenciamento'),
+
+    # Views de Contrato
+    url(r'^contrato/$', ContratoList.as_view(),
+        name='home_contrato'),
+    url(r'^contrato/new/$', ContratoCreate.as_view(),
+        name='new_contrato'),
+    url(r'^contrato/new/(?P<pk>\d+)/$', ContratoCreate.as_view(),
+        name='new_contrato'),
+    url(r'^contrato/list/tipo/(?P<pk>\d+)$', ContratoList.as_view(),
+        name='list_contrato'),
+    url(r'^contrato/list/', ContratoList.as_view(),
+        name='list_contrato'),
+    url(r'^contrato/detail/(?P<pk>\d+)/$',
+        ContratoDetail.as_view(), name='detail_contrato'),
+    url(r'^contrato/update/(?P<pk>\d+)/$',
+        ContratoUpdate.as_view(), name='update_contrato'),
+    url(r'^contrato/delete/(?P<pk>\d+)/$',
+        ContratoDelete.as_view(), name='delete_contrato'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),
