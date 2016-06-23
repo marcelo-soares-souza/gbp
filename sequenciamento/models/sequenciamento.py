@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 from django.db import models
 
-from projeto.models.projeto import Projeto
 from projeto.models.template import TemplateModelMixin
+from sequenciamento.models.contrato import Contrato
 from sequenciamento.models.tiposequenciamento import TipoSequenciamento
 
 
@@ -32,7 +32,7 @@ class Sequenciamento(models.Model, TemplateModelMixin):
         ('TTM - Não Preparado', 'TTM - Não Preparado')
     )
 
-    projeto = models.ForeignKey(Projeto)
+    contrato = models.ForeignKey(Contrato)
     tipo_sequenciamento = models.ForeignKey(TipoSequenciamento)
     responsavel = models.ForeignKey(
         User, null=True, blank=True, related_name='responsavel_sequenciamento')

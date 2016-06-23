@@ -2,13 +2,13 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 
-from projeto.views.login import ColaboradorRequiredMixin, ListColaboradorRequiredMixin, LoggedInMixin
+from projeto.views.login import ColaboradorRequiredMixin, LoggedInMixin
 from sequenciamento.forms import ContratoForm
 from sequenciamento.models import Contrato
 
 
-class ContratoList(LoggedInMixin, ListColaboradorRequiredMixin, SortableListView):
-    allowed_sort_fields = {'empresa_executora': {'default_direction': '', 'verbose_name': 'Matérial Biológico'},
+class ContratoList(LoggedInMixin, SortableListView):
+    allowed_sort_fields = {'empresa_executora': {'default_direction': '', 'verbose_name': 'Empresa Executora'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'empresa_executora'
@@ -22,7 +22,7 @@ class ContratoList(LoggedInMixin, ListColaboradorRequiredMixin, SortableListView
     success_url = reverse_lazy('list_contrato')
 
 
-class ContratoDetail(LoggedInMixin, ColaboradorRequiredMixin, DetailView):
+class ContratoDetail(LoggedInMixin, DetailView):
     template_name = 'contrato/crud/detail.html'
     context_object_name = 'contrato'
     model = Contrato
@@ -49,12 +49,12 @@ class ContratoCreate(LoggedInMixin, CreateView):
         return super(ContratoCreate, self).form_valid(form)
 
     def get_initial(self):
-        data = {'criado_por': self.request.user.id, 'responsavel': self.request.user.id}
+        data = {'criado_por': self.request.user.id}
 
         return data
 
 
-class ContratoUpdate(LoggedInMixin, ColaboradorRequiredMixin, UpdateView):
+class ContratoUpdate(LoggedInMixin, UpdateView):
     template_name = 'contrato/crud/form.html'
     form_class = ContratoForm
     model = Contrato
@@ -62,7 +62,7 @@ class ContratoUpdate(LoggedInMixin, ColaboradorRequiredMixin, UpdateView):
     success_url = reverse_lazy('list_contrato')
 
 
-class ContratoDelete(LoggedInMixin, ColaboradorRequiredMixin, DeleteView):
+class ContratoDelete(LoggedInMixin, DeleteView):
     template_name = 'contrato/crud/delete.html'
     model = Contrato
     success_url = reverse_lazy('list_contrato')

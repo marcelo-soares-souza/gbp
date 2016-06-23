@@ -19,4 +19,4 @@ class Contrato(models.Model, TemplateModelMixin):
         verbose_name_plural = 'contratos'
 
     def __str__(self):
-        return '%s - %s' % (self.projeto, self.empresa_executora)
+        return '%s' % self.empresa_executora

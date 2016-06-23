@@ -26,21 +26,7 @@
               <li class="list-group-item">
 
                 <h3><a href="{{ contrato.get_detail_url }}">{{ contrato }}</a></h3>
-
-                <p><b>Responsável: </b> <div class='text-highlight'> {{ contrato.responsavel }}&nbsp;</div></p>
-
-                {% if contrato.colaborador.all %}
-                  <p><b>Colaboradores: </b> <div class='text-highlight'> {{contrato.colaborador.all|join:', '}}&nbsp;</div></p>
-                {% endif %}
-
-                {% if contrato.tarefacontrato_set.all %}
-                  <p><b>Tarefas: </b> <div class='text-highlight'>
-                    {% for tarefa in contrato.tarefacontrato_set.all %}
-                      {% if not forloop.first %}, {% endif %}
-                      <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>
-                    {% endfor %}
-                  &nbsp;</div></p>
-                {% endif %}
+                <p><b>Projeto: </b> <br/> <div class='text-highlight'> {{ contrato.projeto }}&nbsp;</div></p>
 
                 <br/>
 
@@ -49,7 +35,7 @@
                     {% if request.user == contrato.criado_por or request.user.is_superuser %}
                       <a href="{{ contrato.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                     {% endif %}
-                    <a href="{% url 'new_tarefacontrato' %}{{contrato.id}}" class="btn btn-sm btn-info">Adicionar Tarefa</a>
+                    <a href="{% url 'new_sequenciamento' %}{{contrato.id}}" class="btn btn-sm btn-info">Adicionar Sequenciamento</a>
                 </p>
 
                 <div class="data-atualizado">{{ contrato.data_atualizado }}</div>
