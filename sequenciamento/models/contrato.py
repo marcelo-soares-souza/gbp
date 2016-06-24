@@ -6,8 +6,35 @@ from projeto.models.template import TemplateModelMixin
 
 
 class Contrato(models.Model, TemplateModelMixin):
+    STATUS_CONTRATO = (
+        ('Contratado', 'Contratado'),
+        ('Em Contratação', 'Em Contratação'),
+        ('Em Cotação', 'Em Cotação'),
+        ('Finalizado', 'Finalizado')
+    )
+
+    STATUS_PAGAMENTO = (
+        ('Aviso de Fornecimento', 'Aviso de Fornecimento'),
+        ('Atencipação', 'Atencipação'),
+        ('Pendente', 'Pendente'),
+        ('Pago', 'Pago')
+    )
+
+    STATUS_CGEN = (
+        ('TTM - Preparado', 'TTM - Preparado'),
+        ('TTM - Não Preparado', 'TTM - Não Preparado')
+    )
+
     projeto = models.ForeignKey(Projeto)
+    objetivo = models.TextField(null=True, blank=True)
+    status_contrato = models.CharField(max_length=64, choices=STATUS_CONTRATO, null=True, blank=True)
+    status_pagamento = models.CharField(max_length=64, choices=STATUS_PAGAMENTO, null=True, blank=True)
     empresa_executora = models.CharField(max_length=256, null=True, blank=True)
+    data_contratacao = models.DateField(null=True, blank=True)
+    status_cgen = models.CharField(max_length=64, choices=STATUS_CGEN, null=True, blank=True)
+    ttm = models.CharField(max_length=256, null=True, blank=True)
+    contato_gestor = models.CharField(max_length=256, null=True, blank=True)
+    codigo_pedido_gestor = models.CharField(max_length=256, null=True, blank=True)
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
