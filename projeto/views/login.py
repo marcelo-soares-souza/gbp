@@ -21,7 +21,7 @@ class CreatedByRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
 
-        if obj.criado_por != self.request.user:
+        if obj.criado_por != self.request.user and not self.request.user.is_superuser:
             return HttpResponseRedirect(reverse('permission_denied'))
 
         return super(CreatedByRequiredMixin, self).dispatch(request, *args, **kwargs)
