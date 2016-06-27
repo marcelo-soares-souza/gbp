@@ -8,8 +8,8 @@
 
 <style> .panel-heading { cursor: pointer; } </style>
 
-<div style="min-width: 60%; float: right;">
-  <div style="float: left;">
+<div style="min-width: 30%; float: right; padding-top: 24px;">
+  <div style="float: right;">
     <div class="form-horizontal">
       <div class="form-group">
         <div class="col-md-12">
@@ -44,19 +44,11 @@
             <p><b>Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.material_biologico }}&nbsp;</div></p>
             <p><b>Tipo de Sequenciamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.tipo_sequenciamento }}&nbsp;</div></p>
             <p><b>Responsável:</b> <br/> <div class='text-highlight'>{{ sequenciamento.responsavel }}&nbsp;</div></p>
-            <p><b>Objetivo:</b> <br/> <div class='text-highlight'>{{ sequenciamento.objetivo }}&nbsp;</div></p>
             <p><b>Descrição do Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.descricao_material_biologico }}&nbsp;</div></p>
+            <p><b>Finalidade:</b> <br/> <div class='text-highlight'>{{ sequenciamento.finalidade }}&nbsp;</div></p>
             <p><b>Número de Amostras:</b> <br/> <div class='text-highlight'>{{ sequenciamento.numero_amostras }}&nbsp;</div></p>
-            <p><b>Status do Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_contrato }}&nbsp;</div></p>
-            <p><b>Status do Pagamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_pagamento }}&nbsp;</div></p>
             <p><b>Prioridade:</b> <br/> <div class='text-highlight'>{{ sequenciamento.prioridade }}&nbsp;</div></p>
-            <p><b>Empresa Executora:</b> <br/> <div class='text-highlight'>{{ sequenciamento.empresa_executora }}&nbsp;</div></p>
-            <p><b>Data de Contratação:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_contratacao }}&nbsp;</div></p>
             <p><b>Detalhamento do Material:</b> <br/> <div class='text-highlight'>{{ sequenciamento.detalhamento_material }}&nbsp;</div></p>
-            <p><b>Status no CGEN:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_cgen }}&nbsp;</div></p>
-            <p><b>TTM:</b> <br/> <div class='text-highlight'>{{ sequenciamento.ttm }}&nbsp;</div></p>
-            <p><b>Contato do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contato_gestor }}&nbsp;</div></p>
-            <p><b>Código do Pedido do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.codigo_pedido_gestor }}&nbsp;</div></p>
             <p><b>Colaboradores:</b> <br/><div class='text-highlight'>{{sequenciamento.colaborador.all|join:', '}}&nbsp;</div></p>
             <p><b>Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato }}&nbsp;</div></p>
             <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_cadastro }}&nbsp;</div></p>
@@ -77,20 +69,43 @@
             {% if sequenciamento.tarefasequenciamento_set.all %}
               <p><b>Tarefas Registradas: </b> <br/>
                 <div class='text-highlight'>
-                  {% for tarefa in sequenciamento.tarefasequenciamento_set.all %}{% if not forloop.first %}, {% endif %}
-                  <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>{% endfor %}
+                  {% for tarefa in sequenciamento.tarefasequenciamento_set.all %}{% if not forloop.first %}<br/> {% endif %}
+                  <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }} ({{ tarefa.status }})</a>{% endfor %}
                 </div>
               </p>
             {% else %}
             <p><b>Tarefas Registradas: </b> <br/>
               <div class='text-highlight'>
-                Não existe Tarefas Registradas.
+                Não existe Tarefas Registradas. <a href="{% url 'new_tarefasequenciamento' %}{{sequenciamento.id}}">Registre uma Nova Tarefa.</a>
               </div>
             </p>
             {% endif %}
           </div>
         </div>
     </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingThree{{ sequenciamento.id }}" data-toggle="collapse" data-target="#collapseThree{{ sequenciamento.id }}">
+        <h4 class="panel-title">
+            Contrato
+        </h4>
+      </div>
+
+      <div id="collapseThree{{ sequenciamento.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree{{ sequenciamento.id }}">
+        <div class="panel-body">
+          <p><b>Empresa Executora:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato.empresa_executora }}&nbsp;</div></p>
+          <p><b>Status do Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato.status_contrato }}&nbsp;</div></p>
+          <p><b>Status do Pagamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato.status_pagamento }}&nbsp;</div></p>
+          <p><b>Data de Contratação:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato.data_contratacao }}&nbsp;</div></p>
+          <p><b>Status no CGEN:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato.status_cgen }}&nbsp;</div></p>
+          <p><b>TTM:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato.ttm }}&nbsp;</div></p>
+          <p><b>Contato do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato.contato_gestor }}&nbsp;</div></p>
+          <p><b>Código do Pedido do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato.codigo_pedido_gestor }}&nbsp;</div></p>
+          <p><b>Objetivo:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato.objetivo }}&nbsp;</div></p>
+        </div>
+      </div>
+  </div>
+
   </div>
 
   <hr/>
@@ -104,7 +119,7 @@
     $('#listar_sequenciamento').on('change', function () {
 
     if ($(this).val() != 0) {
-      var url = '/sequenciamento/dashboard/' + $(this).val();
+      var url = '/sequenciamento/dashboard/' + $(this).val() + '/';
 
       if (url) {
         window.location = url;
