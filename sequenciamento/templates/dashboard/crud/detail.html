@@ -2,9 +2,12 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>{{ sequenciamento.id }}</title> {% endblock title %}
+{% block title %} <title>Dashboard Sequenciamentos</title> {% endblock title %}
 
 {% block content %}
+
+<style> .panel-heading { cursor: pointer; } </style>
+
 <div style="min-width: 60%; float: right;">
   <div style="float: left;">
     <div class="form-horizontal">
@@ -30,11 +33,9 @@
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
       <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingOne{{ sequenciamento.id }}">
+        <div class="panel-heading" role="tab" id="headingOne{{ sequenciamento.id }}" data-toggle="collapse" data-target="#collapseOne{{ sequenciamento.id }}">
           <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{ sequenciamento.id }}" aria-expanded="false" aria-controls="collapseOne{{ sequenciamento.id }}">
               Dados Gerais
-            </a>
           </h4>
         </div>
 
@@ -64,11 +65,9 @@
       </div>
 
       <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingTwo{{ sequenciamento.id }}">
+        <div class="panel-heading" role="tab" id="headingTwo{{ sequenciamento.id }}" data-toggle="collapse" data-target="#collapseTwo{{ sequenciamento.id }}">
           <h4 class="panel-title">
-            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo{{ sequenciamento.id }}" aria-expanded="false" aria-controls="collapseTwo{{ sequenciamento.id }}">
               Tarefas
-            </a>
           </h4>
         </div>
 
