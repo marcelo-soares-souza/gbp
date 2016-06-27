@@ -17,6 +17,7 @@ from sequenciamento.views.sequenciamento import SequenciamentoCreate, Sequenciam
 from sequenciamento.views.tarefasequenciamento import TarefaSequenciamentoCreate, TarefaSequenciamentoDelete, TarefaSequenciamentoDetail, TarefaSequenciamentoList, TarefaSequenciamentoUpdate
 from sequenciamento.views.tiposequenciamento import TipoSequenciamentoCreate, TipoSequenciamentoDelete, TipoSequenciamentoDetail, TipoSequenciamentoList, TipoSequenciamentoUpdate
 from sequenciamento.views.contrato import ContratoCreate, ContratoDelete, ContratoDetail, ContratoList, ContratoUpdate
+from sequenciamento.views.dashboard import DashboardList
 from projeto.views import objetivo, resultado, projetocomponente, metaprojeto, planoacao, atividade, tarefa
 
 urlpatterns = [
@@ -242,6 +243,10 @@ urlpatterns = [
         ContratoUpdate.as_view(), name='update_contrato'),
     url(r'^contrato/delete/(?P<pk>\d+)/$',
         ContratoDelete.as_view(), name='delete_contrato'),
+
+    # View Dashboard Sequenciamento
+    url(r'^sequenciamento/dashboard/(?P<pk>\d+)/$', DashboardList.as_view(), name='dashboard_sequenciamento'),
+    url(r'^sequenciamento/dashboard/', DashboardList.as_view(), name='dashboard_sequenciamento'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),

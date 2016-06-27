@@ -1,0 +1,123 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ sequenciamento.id }}</title> {% endblock title %}
+
+{% block content %}
+<div style="min-width: 60%; float: right;">
+  <div style="float: left;">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-md-12">
+          <select id="listar_sequenciamento" class="form-control" name="listar_sequenciamento" onChange="redirectUrl()">
+            <option value="0">Todos os Sequenciamentos</option>
+            {% for sequenciamento in sequenciamentos_list %}
+              <option value="{{sequenciamento.id}}">{{sequenciamento}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% for sequenciamento in sequenciamentos %}
+
+    <h2>{{ sequenciamento }}</h2>
+
+    <hr/>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne{{ sequenciamento.id }}">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{ sequenciamento.id }}" aria-expanded="false" aria-controls="collapseOne{{ sequenciamento.id }}">
+              Dados Gerais
+            </a>
+          </h4>
+        </div>
+
+        <div id="collapseOne{{ sequenciamento.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne{{ sequenciamento.id }}">
+          <div class="panel-body">
+            <p><b>Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.material_biologico }}&nbsp;</div></p>
+            <p><b>Tipo de Sequenciamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.tipo_sequenciamento }}&nbsp;</div></p>
+            <p><b>Responsável:</b> <br/> <div class='text-highlight'>{{ sequenciamento.responsavel }}&nbsp;</div></p>
+            <p><b>Objetivo:</b> <br/> <div class='text-highlight'>{{ sequenciamento.objetivo }}&nbsp;</div></p>
+            <p><b>Descrição do Matérial Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.descricao_material_biologico }}&nbsp;</div></p>
+            <p><b>Número de Amostras:</b> <br/> <div class='text-highlight'>{{ sequenciamento.numero_amostras }}&nbsp;</div></p>
+            <p><b>Status do Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_contrato }}&nbsp;</div></p>
+            <p><b>Status do Pagamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_pagamento }}&nbsp;</div></p>
+            <p><b>Prioridade:</b> <br/> <div class='text-highlight'>{{ sequenciamento.prioridade }}&nbsp;</div></p>
+            <p><b>Empresa Executora:</b> <br/> <div class='text-highlight'>{{ sequenciamento.empresa_executora }}&nbsp;</div></p>
+            <p><b>Data de Contratação:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_contratacao }}&nbsp;</div></p>
+            <p><b>Detalhamento do Material:</b> <br/> <div class='text-highlight'>{{ sequenciamento.detalhamento_material }}&nbsp;</div></p>
+            <p><b>Status no CGEN:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_cgen }}&nbsp;</div></p>
+            <p><b>TTM:</b> <br/> <div class='text-highlight'>{{ sequenciamento.ttm }}&nbsp;</div></p>
+            <p><b>Contato do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contato_gestor }}&nbsp;</div></p>
+            <p><b>Código do Pedido do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.codigo_pedido_gestor }}&nbsp;</div></p>
+            <p><b>Colaboradores:</b> <br/><div class='text-highlight'>{{sequenciamento.colaborador.all|join:', '}}&nbsp;</div></p>
+            <p><b>Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato }}&nbsp;</div></p>
+            <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_cadastro }}&nbsp;</div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo{{ sequenciamento.id }}">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo{{ sequenciamento.id }}" aria-expanded="false" aria-controls="collapseTwo{{ sequenciamento.id }}">
+              Tarefas
+            </a>
+          </h4>
+        </div>
+
+        <div id="collapseTwo{{ sequenciamento.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo{{ sequenciamento.id }}">
+          <div class="panel-body">
+
+            {% if sequenciamento.tarefasequenciamento_set.all %}
+              <p><b>Tarefas Registradas: </b> <br/>
+                <div class='text-highlight'>
+                  {% for tarefa in sequenciamento.tarefasequenciamento_set.all %}{% if not forloop.first %}, {% endif %}
+                  <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>{% endfor %}
+                </div>
+              </p>
+            {% else %}
+            <p><b>Tarefas Registradas: </b> <br/>
+              <div class='text-highlight'>
+                Não existe Tarefas Registradas.
+              </div>
+            </p>
+            {% endif %}
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <hr/>
+{% endfor %}
+
+<script>
+  $(function(){
+
+    $('#listar_sequenciamento').val({{sequenciamento_id}});
+
+    $('#listar_sequenciamento').on('change', function () {
+
+    if ($(this).val() != 0) {
+      var url = '/sequenciamento/dashboard/' + $(this).val();
+
+      if (url) {
+        window.location = url;
+      }
+    }
+    else {
+      window.location = '{% url 'dashboard_sequenciamento' %}';
+    }
+
+    return false;
+  });
+});
+</script>
+
+{% endblock content %}
