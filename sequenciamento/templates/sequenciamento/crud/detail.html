@@ -2,13 +2,13 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>{{ sequenciamento }}</title> {% endblock title %}
+{% block title %} <title>{{ sequenciamento.material_biologico }}</title> {% endblock title %}
 
 {% block content %}
 
     {% include "base/menu-sequenciamentos.html" %} <br/>
 
-    <h2>{{ sequenciamento }}</h2>
+    <h2>{{ sequenciamento.material_biologico }}</h2>
 
     <hr/>
 

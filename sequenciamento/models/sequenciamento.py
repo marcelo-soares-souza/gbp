@@ -36,4 +36,4 @@ class Sequenciamento(models.Model, TemplateModelMixin):
         verbose_name_plural = 'sequenciamentos'
 
     def __str__(self):
-        return '%s' % self.material_biologico
+        return '%s - %s - %s' % (self.tipo_sequenciamento, self.numero_amostras, self.material_biologico)
