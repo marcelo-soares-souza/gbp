@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
+{% load gbp_filters %}
 
 {% block title %} <title>Listar Todas as Tarefas de Sequenciamento</title> {% endblock title %}
 
@@ -41,7 +42,7 @@
                 <h3><a href="{{ tarefasequenciamento.get_detail_url }}">{{ tarefasequenciamento }}</a></h3>
 
                 <p><b>Status: </b> <div class='text-highlight'> {{ tarefasequenciamento.status }}&nbsp;</div></p>
-                <p><b>Responsável: </b> <div class='text-highlight'> {{ tarefasequenciamento.responsavel }}&nbsp;</div></p>
+                <p><b>Responsável: </b> <div class='text-highlight'> {{ tarefasequenciamento.responsavel|verifyfullname }}&nbsp;</div></p>
 
                 <br/>
 

@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
+{% load gbp_filters %}
 
 {% block title %} <title>{{ sequenciamento.material_biologico }}</title> {% endblock title %}
 
@@ -25,7 +26,7 @@
 
     <p><b>Tipo de Sequenciamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.tipo_sequenciamento }}&nbsp;</div></p>
 
-    <p><b>Responsável:</b> <br/> <div class='text-highlight'>{{ sequenciamento.responsavel }}&nbsp;</div></p>
+    <p><b>Responsável:</b> <br/> <div class='text-highlight'>{{ sequenciamento.responsavel|verifyfullname }}&nbsp;</div></p>
 
     <p><b>Objetivo:</b> <br/> <div class='text-highlight'>{{ sequenciamento.objetivo }}&nbsp;</div></p>
 
@@ -53,7 +54,18 @@
 
     <p><b>Código do Pedido do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.codigo_pedido_gestor }}&nbsp;</div></p>
 
-    <p><b>Colaboradores:</b> <br/><div class='text-highlight'>{{sequenciamento.colaborador.all|join:', '}}&nbsp;</div></p>
+    {% if sequenciamento.colaborador.all %}
+      <!-- <p><b>Colaboradores: </b> <div class='text-highlight'> {{sequenciamento.colaborador.all|join:', '}}&nbsp;</div></p> -->
+      <p><b>Colaboradores: </b>
+        <div class='text-highlight'>
+          {% for colaborador in sequenciamento.colaborador.all %}
+          {% if not forloop.first %}, {% endif %}
+            {{colaborador|verifyfullname}}
+          {% endfor %}
+          &nbsp;
+        </div>
+      </p>
+    {% endif %}
 
     <p><b>Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato }}&nbsp;</div></p>
 

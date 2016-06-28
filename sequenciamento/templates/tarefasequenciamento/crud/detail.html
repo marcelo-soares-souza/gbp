@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
+{% load gbp_filters %}
 
 {% block title %} <title>{{ tarefasequenciamento }}</title> {% endblock title %}
 
@@ -14,7 +15,7 @@
     <p><b>Sequenciamento:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.sequenciamento.material_biologico }} ({{ tarefasequenciamento.sequenciamento.tipo_sequenciamento }})&nbsp;</div></p>
     <p><b>Tarefa:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.tarefa }}&nbsp;</div></p>
     <p><b>Status:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.status }}&nbsp;</div></p>
-    <p><b>Responsável:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.responsavel }}&nbsp;</div></p>
+    <p><b>Responsável:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.responsavel|verifyfullname }}&nbsp;</div></p>
     <p><b>Observação:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.observacao }}&nbsp;</div></p>
 
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ tarefasequenciamento.data_cadastro }}&nbsp;</div></p>
