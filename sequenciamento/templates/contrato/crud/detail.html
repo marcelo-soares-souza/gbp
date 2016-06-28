@@ -2,20 +2,20 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>{{ contrato }}</title> {% endblock title %}
+{% block title %} <title>{{ contrato.empresa_executora }}</title> {% endblock title %}
 
 {% block content %}
 
     {% include "base/menu-sequenciamentos.html" %} <br/>
 
-    <h2>{{ contrato }}</h2>
+    <h2>{{ contrato.empresa_executora }}</h2>
 
     <hr/>
 
     <p><b>Projeto:</b> <br/> <div class='text-highlight'>{{ contrato.projeto }}&nbsp;</div></p>
 
     <p><b>Status do Contrato</b> <br/> <div class='text-highlight'>{{ contrato.status_contrato }}&nbsp;</div></p>
-    
+
     <p><b>Status do Pagamento</b> <br/> <div class='text-highlight'>{{ contrato.status_pagamento }}&nbsp;</div></p>
 
     <p><b>Data de Contratação</b> <br/> <div class='text-highlight'>{{ contrato.data_contratacao }}&nbsp;</div></p>
