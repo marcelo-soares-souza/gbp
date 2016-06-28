@@ -47,4 +47,7 @@ class Contrato(models.Model, TemplateModelMixin):
         verbose_name_plural = 'contratos'
 
     def __str__(self):
-        return '%s - %s - %s' % (self.projeto, self.data_contratacao.strftime('%d/%m/%Y'), self.empresa_executora)
+        if self.data_contratacao:
+            return '%s - %s - %s' % (self.projeto, self.data_contratacao.strftime('%d/%m/%Y'), self.empresa_executora)
+        else:
+            return '%s - %s' % (self.projeto, self.empresa_executora)
