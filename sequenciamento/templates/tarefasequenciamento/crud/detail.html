@@ -28,7 +28,7 @@
           {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
             <a href="{{ tarefasequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
           {% endif %}
-            <a href="{% url 'list_tarefasequenciamento' %}" class="btn btn-sm btn-info">Voltar</a>
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Voltar</a>
         {% endbuttons %}
       </p>
 
