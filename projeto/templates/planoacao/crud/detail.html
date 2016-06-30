@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
+{% load gbp_filters %}
 
 {% block title %} <title>{{ planoacao }}</title> {% endblock title %}
 
@@ -18,7 +19,7 @@
       <p><b>Codigo SEG: </b> <br/> <div class='text-highlight'> {{ planoacao.codigo_seg }}&nbsp;</div></p>
     {% endif %}
 
-    <p><b>Responsável: </b> <br/> <div class='text-highlight'> {{ planoacao.responsavel }}&nbsp;</div></p>
+    <p><b>Responsável: </b> <br/> <div class='text-highlight'> {{ planoacao.responsavel|verifyfullname }}&nbsp;</div></p>
     <p><b>Data Início:</b> <br/> <div class='text-highlight'> {{ planoacao.data_inicio }}&nbsp;</div></p>
     <p><b>Data Fim:</b> <br/> <div class='text-highlight'> {{ planoacao.data_fim }}&nbsp;</div></p>
 

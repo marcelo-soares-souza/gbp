@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
+{% load gbp_filters %}
 
 {% block title %} <title>{{ projetocomponente }}</title> {% endblock title %}
 
@@ -14,7 +15,7 @@
 
     <p><b>Projeto:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' projetocomponente.projeto.id %}">{{ projetocomponente.projeto }}</a>&nbsp;</div></p>
 
-    <p><b>Responsável:</b> <br/> <div class='text-highlight'> {{ projetocomponente.responsavel }}&nbsp;</div></p>
+    <p><b>Responsável:</b> <br/> <div class='text-highlight'> {{ projetocomponente.responsavel|verifyfullname }}&nbsp;</div></p>
 
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ projetocomponente.data_cadastro }}&nbsp;</div></p>
 

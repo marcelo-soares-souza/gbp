@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
+{% load gbp_filters %}
 
 {% block title %} <title>{{ tarefa.nome }}</title> {% endblock title %}
 
@@ -15,13 +16,13 @@
     <p><b>Projeto</b> <br/> <div class='text-highlight'> {{ tarefa.projeto }}&nbsp;</div></p>
     <p><b>Número:</b> <br/> <div class='text-highlight'> {{ tarefa.numero }}&nbsp;</div></p>
     <p><b>Indicador Físico</b> <br/> <div class='text-highlight'> {{ tarefa.indicador_fisico }}&nbsp;</div></p>
-    <p><b>Responsável: </b> <br/> <div class='text-highlight'> {{ tarefa.responsavel }}&nbsp;</div></p>
+    <p><b>Responsável: </b> <br/> <div class='text-highlight'> {{ tarefa.responsavel|verifyfullname }}&nbsp;</div></p>
     <p><b>Peso no Plano de Ação: </b> <br/> <div class='text-highlight'> {{ tarefa.peso_atividade }}&nbsp;</div></p>
 
 
     <p><b>Colaborador(es): </b> <br/> <div class='text-highlight'>
     {% for colaborador in tarefa.colaborador.all %}{% if not forloop.first %}, {% endif %}
-      {{ colaborador }}{% endfor %}
+      {{ colaborador|verifyfullname }}{% endfor %}
     &nbsp;</div></p>
 
     <p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' tarefa.planoacao.id %}">{{ tarefa.planoacao }}</a>&nbsp;</div></p>
