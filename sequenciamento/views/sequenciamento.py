@@ -6,6 +6,9 @@ from projeto.views.login import ColaboradorRequiredMixin, ListColaboradorRequire
 from sequenciamento.forms import SequenciamentoForm
 from sequenciamento.models import Sequenciamento, TipoSequenciamento
 
+# import logging
+# logger = logging.getLogger('sequenciamento')
+
 
 class SequenciamentoList(LoggedInMixin, ListColaboradorRequiredMixin, SortableListView):
     allowed_sort_fields = {'material_biologico': {'default_direction': '',
@@ -73,7 +76,20 @@ class SequenciamentoCreate(LoggedInMixin, CreateView):
         data = {'criado_por': self.request.user.id, 'responsavel': self.request.user.id}
 
         if self.kwargs:
-            data['tipo_sequenciamento'] = int(self.kwargs['pk'])
+            if len(self.kwargs) == 2:
+                if self.kwargs['option'] == 'clonar':
+                    sequenciamento = Sequenciamento.objects.filter(id=int(self.kwargs['pk'])).values().first()
+                    data['contrato'] = sequenciamento['contrato_id']
+                    data['tipo_sequenciamento'] = sequenciamento['tipo_sequenciamento_id']
+                    data['responsavel'] = sequenciamento['responsavel_id']
+                    data['finalidade'] = sequenciamento['finalidade']
+                    data['material_biologico'] = sequenciamento['material_biologico']
+                    data['descricao_material_biologico'] = sequenciamento['descricao_material_biologico']
+                    data['numero_amostras'] = sequenciamento['numero_amostras']
+                    data['prioridade'] = sequenciamento['prioridade']
+                    data['detalhamento_material'] = sequenciamento['detalhamento_material']
+            else:
+                data['tipo_sequenciamento'] = int(self.kwargs['pk'])
 
         return data
 

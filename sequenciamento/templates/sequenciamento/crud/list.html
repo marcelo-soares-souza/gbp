@@ -73,6 +73,7 @@
                     {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
                       <a href="{{ sequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
                     {% endif %}
+                    <a href="{% url 'new_sequenciamento' %}clonar/{{sequenciamento.id}}" class="btn btn-sm btn-success">Clonar</a>
                     <a href="{% url 'new_tarefasequenciamento' %}{{sequenciamento.id}}" class="btn btn-sm btn-info">Adicionar Tarefa</a>
                 </p>
 

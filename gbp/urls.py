@@ -197,6 +197,8 @@ urlpatterns = [
         name='new_sequenciamento'),
     url(r'^sequenciamento/new/(?P<pk>\d+)/$', SequenciamentoCreate.as_view(),
         name='new_sequenciamento'),
+    url(r'^sequenciamento/new/(?P<option>[\w\-]+)/(?P<pk>\d+)/$', SequenciamentoCreate.as_view(),
+        name='new_sequenciamento'),
     url(r'^sequenciamento/list/tipo/(?P<pk>\d+)$', SequenciamentoList.as_view(),
         name='list_sequenciamento'),
     url(r'^sequenciamento/list/', SequenciamentoList.as_view(),
