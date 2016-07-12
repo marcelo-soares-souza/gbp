@@ -62,14 +62,14 @@ class SequenciamentoCreate(LoggedInMixin, CreateView):
     success_url = reverse_lazy('list_sequenciamento')
 
     def get_context_data(self, **kwargs):
-        context = super(SequenciamentoCreate,
-                        self).get_context_data(**kwargs)
-        context["sequenciamentos"] = Sequenciamento.objects.all(
-        ).order_by('material_biologico')
+        context = super(SequenciamentoCreate, self).get_context_data(**kwargs)
+        context["sequenciamentos"] = Sequenciamento.objects.all().order_by('material_biologico')
+
         return context
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
+
         return super(SequenciamentoCreate, self).form_valid(form)
 
     def get_initial(self):
