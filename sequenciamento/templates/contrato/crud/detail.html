@@ -28,7 +28,11 @@
 
     <p><b>Código do Pedido do Gestor</b> <br/> <div class='text-highlight'>{{ contrato.codigo_pedido_gestor }}&nbsp;</div></p>
 
-    <p><b>Objetivo</b> <br/> <div class='text-highlight'>{{ contrato.objetivo }}&nbsp;</div></p>
+    {% if contrato.objetivo %}
+      <p><b>Objetivo</b> <br/> <div class='text-highlight'>{{ contrato.objetivo }}&nbsp;</div></p>
+    {% endif %}
+
+    <p><b>Descrição</b> <br/> <div class='text-highlight'>{{ contrato.descricao }}&nbsp;</div></p>
 
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ contrato.data_cadastro }}&nbsp;</div></p>
 

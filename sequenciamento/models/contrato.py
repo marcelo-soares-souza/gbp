@@ -28,6 +28,7 @@ class Contrato(models.Model, TemplateModelMixin):
 
     projeto = models.ForeignKey(Projeto)
     objetivo = models.TextField(null=True, blank=True)
+    descricao = models.TextField(null=True, blank=True)
     status_contrato = models.CharField(max_length=64, choices=STATUS_CONTRATO, null=True, blank=True)
     status_pagamento = models.CharField(max_length=64, choices=STATUS_PAGAMENTO, null=True, blank=True)
     empresa_executora = models.CharField(max_length=256, null=True, blank=True)
