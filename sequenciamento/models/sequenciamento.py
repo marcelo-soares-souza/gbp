@@ -26,6 +26,8 @@ class Sequenciamento(models.Model, TemplateModelMixin):
 
     colaborador = models.ManyToManyField(User, blank=True, related_name='colaborador_sequenciamento')
 
+    numero = models.PositiveIntegerField(unique=True, null=True, blank=True)
+
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
     criado_por = models.ForeignKey(User, null=True, blank=True)

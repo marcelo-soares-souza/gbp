@@ -39,7 +39,7 @@
             <ul class="list-group">
               <li class="list-group-item">
 
-                <h3><a href="{{ sequenciamento.get_detail_url }}">{{ sequenciamento.material_biologico }}</a></h3>
+                <h3><a href="{{ sequenciamento.get_detail_url }}">{% if sequenciamento.numero %} {{ sequenciamento.numero }}: {% endif %} {{ sequenciamento.material_biologico }}</a></h3>
 
                 <p><b>Tipo: </b> <div class='text-highlight'> {{ sequenciamento.tipo_sequenciamento }}&nbsp;</div></p>
                 <p><b>Responsável: </b> <div class='text-highlight'> {{ sequenciamento.responsavel|verifyfullname }}&nbsp;</div></p>

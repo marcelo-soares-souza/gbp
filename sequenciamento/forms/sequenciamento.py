@@ -7,11 +7,12 @@ class SequenciamentoForm(forms.ModelForm):
 
     class Meta:
         model = Sequenciamento
-        fields = ('contrato', 'material_biologico', 'tipo_sequenciamento',
+        fields = ('numero', 'contrato', 'material_biologico', 'tipo_sequenciamento',
                   'responsavel', 'finalidade', 'descricao_material_biologico',
                   'numero_amostras', 'prioridade', 'detalhamento_material', 'colaborador')
 
         labels = {
+            'numero': 'Número',
             'contrato': 'Contrato',
             'material_biologico': 'Matérial Biológico',
             'tipo_sequenciamento': 'Tipo de Sequenciamento',
