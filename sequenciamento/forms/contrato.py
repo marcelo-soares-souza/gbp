@@ -7,9 +7,10 @@ class ContratoForm(forms.ModelForm):
 
     class Meta:
         model = Contrato
-        fields = ('projeto', 'empresa_executora', 'status_contrato', 'status_pagamento', 'data_contratacao', 'status_cgen', 'ttm', 'contato_gestor', 'codigo_pedido_gestor', 'objetivo', 'descricao')
+        fields = ('numero', 'projeto', 'empresa_executora', 'status_contrato', 'status_pagamento', 'data_contratacao', 'status_cgen', 'ttm', 'contato_gestor', 'codigo_pedido_gestor', 'objetivo', 'descricao')
 
         labels = {
+            'numero': 'Número',
             'projeto': 'Projeto',
             'empresa_executora': 'Empresa Executora',
             'status_contrato': 'Status do Contrato',

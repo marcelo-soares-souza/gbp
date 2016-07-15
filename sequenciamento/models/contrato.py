@@ -26,6 +26,7 @@ class Contrato(models.Model, TemplateModelMixin):
         ('TTM - Não Preparado', 'TTM - Não Preparado')
     )
 
+    numero = models.PositiveIntegerField(unique=True, null=True, blank=True)
     projeto = models.ForeignKey(Projeto)
     objetivo = models.TextField(null=True, blank=True)
     descricao = models.TextField(null=True, blank=True)

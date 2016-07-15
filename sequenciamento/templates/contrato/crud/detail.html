@@ -8,7 +8,7 @@
 
     {% include "base/menu-sequenciamentos.html" %} <br/>
 
-    <h2>{{ contrato.empresa_executora }}</h2>
+    <h2>{% if contrato.numero %} {{ contrato.numero }}: {% endif %} {{ contrato.empresa_executora }}</h2>
 
     <hr/>
 
