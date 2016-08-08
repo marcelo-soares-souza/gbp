@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 from projeto.views.atividade import AtividadeCreate, AtividadeDelete, AtividadeDetail, AtividadeList, AtividadeUpdate
-from projeto.views.home import Home, Permission
+from projeto.views.home import Home, Permission, About
 from projeto.views.instituicao import InstituicaoProjetoCreate, InstituicaoProjetoDelete, InstituicaoProjetoDetail, InstituicaoProjetoList, InstituicaoProjetoUpdate
 from projeto.views.metaprojeto import MetaProjetoCreate, MetaProjetoDelete, MetaProjetoDetail, MetaProjetoList, MetaProjetoUpdate
 from projeto.views.objetivo import ObjetivoProjetoCreate, ObjetivoProjetoDelete, ObjetivoProjetoDetail, ObjetivoProjetoList, ObjetivoProjetoUpdate
@@ -24,6 +24,9 @@ urlpatterns = [
 
     url(r'^$', Home.as_view(), name='home'),
     url(r'^permission/$', Permission.as_view(), name='permission_denied'),
+
+    # General Info about LBB
+    url(r'^about/$', About.as_view(), name='about'),
 
     # Views de Projeto
     url(r'^projeto/new/$', ProjetoCreate.as_view(), name='new_projeto'),

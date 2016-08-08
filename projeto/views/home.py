@@ -7,3 +7,7 @@ class Home(TemplateView):
 
 class Permission(TemplateView):
     template_name = "base/permission.html"
+
+
+class About(TemplateView):
+    template_name = "base/about.html"

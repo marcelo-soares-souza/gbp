@@ -1,6 +1,6 @@
 # __init__.py
 
-from projeto.views.home import Home, Permission
+from projeto.views.home import Home, Permission, About
 from projeto.views.instituicao import InstituicaoProjetoList, InstituicaoProjetoDetail, InstituicaoProjetoCreate, InstituicaoProjetoUpdate, InstituicaoProjetoDelete
 from projeto.views.projeto import ProjetoList, ProjetoDetail, ProjetoCreate, ProjetoUpdate, ProjetoDelete
 from projeto.views.objetivo import ObjetivoProjetoList, ObjetivoProjetoDetail, ObjetivoProjetoCreate, ObjetivoProjetoUpdate, ObjetivoProjetoDelete
@@ -12,7 +12,7 @@ from projeto.views.planoacao import PlanoAcaoList, PlanoAcaoDetail, PlanoAcaoCre
 from projeto.views.atividade import AtividadeList, AtividadeDetail, AtividadeCreate, AtividadeUpdate, AtividadeDelete
 from projeto.views.tarefa import TarefaList, TarefaDetail, TarefaCreate, TarefaUpdate, TarefaDelete
 
-__all__ = ['Home', 'Permission',
+__all__ = ['Home', 'Permission', 'About',
            'InstituicaoProjetoList', 'InstituicaoProjetoDetail', 'InstituicaoProjetoCreate', 'InstituicaoProjetoUpdate', 'InstituicaoProjetoDelete',
            'ProjetoList', 'ProjetoDetail', 'ProjetoCreate', 'ProjetoUpdate', 'ProjetoDelete',
            'ObjetivoProjetoList', 'ObjetivoProjetoDetail', 'ObjetivoProjetoCreate', 'ObjetivoProjetoUpdate', 'ObjetivoProjetoDelete',
