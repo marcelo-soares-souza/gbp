@@ -13,39 +13,11 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
           <li><a href="{% url 'about' %}">Sobre</a></li>
-
         {% if request.user.is_authenticated %}
-
-        <li class="menu-item dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projetos<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-                  <li class="menu-item dropdown"><a href="{% url 'new_projeto' %}">Adicionar</a></li>
-                  <li class="menu-item dropdown"><a href="{% url 'list_projeto' %}">Listar/Editar</a></li>
-          </ul>
-        </li>
-
-        <li class="menu-item dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sequenciamento<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-              <li class="menu-item dropdown"><a href="{% url 'dashboard_sequenciamento' %}">Dashboard</a></li>
-              <li class="menu-item dropdown"><a href="{% url 'new_tarefasequenciamento' %}">Adicionar</a></li>
-              <li class="menu-item dropdown"><a href="{% url 'list_tarefasequenciamento' %}">Listar/Editar</a></li>
-          </ul>
-        </li>
-        {% if request.user.is_superuser %}
-          <li class="menu-item dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li class="menu-item dropdown"><a href="/admin/auth/user/">Usuários</a></li>
-            </ul>
-          </li>
-        {% endif %}
-
           <li><a href="{% url 'logout' %}">Logout ({{ request.user.username }})</a></li>
         {% else %}
           <li><a href="{% url 'login' %}">Login</a></li>
         {% endif %}
-
       </ul>
     </div>
 

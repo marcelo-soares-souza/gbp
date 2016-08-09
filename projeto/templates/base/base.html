@@ -32,10 +32,16 @@
 
   {% include "base/menu.html" %}
 
-  <div class="container">
-    {% bootstrap_messages %}
-    {% block content %}
-    {% endblock content %}
+  <div class="row">
+    {% include "base/menu-internal.html" %}
+
+    <div class="col-sm-2">
+      <div class="container">
+        {% bootstrap_messages %}
+        {% block content %}
+        {% endblock content %}
+      </div>
+    </div>
   </div>
 
   <br/>

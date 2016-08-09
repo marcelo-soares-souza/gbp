@@ -1,6 +1,6 @@
 {% extends "base/base.html" %}
 
-{% block content %}    
+{% block content %}
     <div class="jumbotron">
         {% if request.user.is_authenticated %}
           <h4>Bem-vindo, {{ request.user }}</h4>
@@ -12,6 +12,5 @@
         <img src="/static/files/img/logo.png" alt="Logo EMBRAPA Agroenergia"/>
 
     </div>
-    
-{% endblock content %}
 
+{% endblock content %}

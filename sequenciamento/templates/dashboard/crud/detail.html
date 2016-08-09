@@ -17,7 +17,7 @@
           <select id="listar_sequenciamento" class="form-control" name="listar_sequenciamento" onChange="redirectUrl()">
             <option value="0">Todos os Sequenciamentos</option>
             {% for sequenciamento in sequenciamentos_list %}
-              <option value="{{sequenciamento.id}}">{{sequenciamento}}</option>
+              <option value="{{sequenciamento.id}}">{{sequenciamento|truncatechars:36}}</option>
             {% endfor %}
           </select>
         </div>
