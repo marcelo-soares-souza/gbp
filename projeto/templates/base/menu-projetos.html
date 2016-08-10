@@ -2,38 +2,38 @@
   <ul class="nav nav-tabs" id="myTab" >
             {% if request.user.is_authenticated %}
               {% if 'new' in request.resolver_match.url_name %}
-                <li class="tab-title"><a id="new_projeto" href="{% url 'new_projeto' %}#">Projetos</a></li>
-                <li class="tab-title"><a id="new_objetivo_projeto" href="{% url 'new_objetivo_projeto' %}#">Obj. Específicos</a>
-                <li class="tab-title"><a id="new_resultado_projeto" href="{% url 'new_resultado_projeto' %}#">Resultados</a></li>
-                <li class="tab-title"><a id="new_projetocomponente_projeto" href="{% url 'new_projetocomponente_projeto' %}#">PCs</a></li>
-                <li class="tab-title"><a id="new_metaprojeto_projeto" href="{% url 'new_metaprojeto_projeto' %}#">Metas</a></li>
-                <li class="tab-title"><a id="new_planoacao_projeto" href="{% url 'new_planoacao_projeto' %}#">PAs</a></li>
-                <li class="tab-title"><a id="new_atividade_projeto" href="{% url 'new_atividade_projeto' %}#">Atividades</a></li>
-                <li class="tab-title"><a id="new_tarefa_projeto" href="{% url 'new_tarefa_projeto' %}#">Tarefas</a></li>
-                <li class="tab-title"><a id="new_instituicao_projeto" href="{% url 'new_instituicao_projeto' %}#">Instituições</a></li>
-                <li class="tab-title"><a id="new_palavrachave_projeto" href="{% url 'new_palavrachave_projeto' %}#">Keywords</a></li>
+                <li class="tab-title"><a id="new_projeto" href="{% url 'new_projeto' %}#">Projeto</a></li>
+                <li class="tab-title"><a id="new_objetivo_projeto" href="{% url 'new_objetivo_projeto' %}#">Objetivo</a>
+                <li class="tab-title"><a id="new_resultado_projeto" href="{% url 'new_resultado_projeto' %}#">Resultado</a></li>
+                <li class="tab-title"><a id="new_projetocomponente_projeto" href="{% url 'new_projetocomponente_projeto' %}#">PC</a></li>
+                <li class="tab-title"><a id="new_metaprojeto_projeto" href="{% url 'new_metaprojeto_projeto' %}#">Meta</a></li>
+                <li class="tab-title"><a id="new_planoacao_projeto" href="{% url 'new_planoacao_projeto' %}#">PA</a></li>
+                <li class="tab-title"><a id="new_atividade_projeto" href="{% url 'new_atividade_projeto' %}#">Atividade</a></li>
+                <li class="tab-title"><a id="new_tarefa_projeto" href="{% url 'new_tarefa_projeto' %}#">Tarefa</a></li>
+                <li class="tab-title"><a id="new_instituicao_projeto" href="{% url 'new_instituicao_projeto' %}#">Instituição</a></li>
+                <li class="tab-title"><a id="new_palavrachave_projeto" href="{% url 'new_palavrachave_projeto' %}#">Chave</a></li>
               {% elif 'list' in request.resolver_match.url_name %}
-                <li class="tab-title"><a id="list_projeto" href="{% url 'list_projeto' %}#">Projetos {{ count_projeto }}</a></li>
-                <li class="tab-title"><a id="list_objetivo_projeto" href="{% url 'list_objetivo_projeto' %}#">Obj. Específicos {{ count_objetivo }}</a>
-                <li class="tab-title"><a id="list_resultado_projeto" href="{% url 'list_resultado_projeto' %}#">Resultados {{ count_resultado }}</a></li>
-                <li class="tab-title"><a id="list_projetocomponente_projeto" href="{% url 'list_projetocomponente_projeto' %}#">PCs {{ count_projetocomponente }}</a></li>
-                <li class="tab-title"><a id="list_metaprojeto_projeto" href="{% url 'list_metaprojeto_projeto' %}#">Metas {{ count_metaprojeto }}</a></li>
-                <li class="tab-title"><a id="list_planoacao_projeto" href="{% url 'list_planoacao_projeto' %}#">PAs {{ count_planoacao }}</a></li>
-                <li class="tab-title"><a id="list_atividade_projeto" href="{% url 'list_atividade_projeto' %}#">Atividades {{ count_atividade }}</a></li>
-                <li class="tab-title"><a id="list_tarefa_projeto" href="{% url 'list_tarefa_projeto' %}#">Tarefas {{ count_tarefa }}</a></li>
-                <li class="tab-title"><a id="list_instituicao_projeto" href="{% url 'list_instituicao_projeto' %}#">Instituições {{ count_instituicao }}</a></li>
-                <li class="tab-title"><a id="list_palavrachave_projeto" href="{% url 'list_palavrachave_projeto' %}#">Keywords {{ count_palavrachave }}</a></li>
+                <li class="tab-title"><a id="list_projeto" href="{% url 'list_projeto' %}#">Projeto {{ count_projeto }}</a></li>
+                <li class="tab-title"><a id="list_objetivo_projeto" href="{% url 'list_objetivo_projeto' %}#">Objetivo {{ count_objetivo }}</a>
+                <li class="tab-title"><a id="list_resultado_projeto" href="{% url 'list_resultado_projeto' %}#">Resultado {{ count_resultado }}</a></li>
+                <li class="tab-title"><a id="list_projetocomponente_projeto" href="{% url 'list_projetocomponente_projeto' %}#">PC {{ count_projetocomponente }}</a></li>
+                <li class="tab-title"><a id="list_metaprojeto_projeto" href="{% url 'list_metaprojeto_projeto' %}#">Meta {{ count_metaprojeto }}</a></li>
+                <li class="tab-title"><a id="list_planoacao_projeto" href="{% url 'list_planoacao_projeto' %}#">PA {{ count_planoacao }}</a></li>
+                <li class="tab-title"><a id="list_atividade_projeto" href="{% url 'list_atividade_projeto' %}#">Atividade {{ count_atividade }}</a></li>
+                <li class="tab-title"><a id="list_tarefa_projeto" href="{% url 'list_tarefa_projeto' %}#">Tarefa {{ count_tarefa }}</a></li>
+                <li class="tab-title"><a id="list_instituicao_projeto" href="{% url 'list_instituicao_projeto' %}#">Instituição {{ count_instituicao }}</a></li>
+                <li class="tab-title"><a id="list_palavrachave_projeto" href="{% url 'list_palavrachave_projeto' %}#">Chave {{ count_palavrachave }}</a></li>
               {% elif 'detail' in request.resolver_match.url_name %}
-                <li class="tab-title"><a id="detail_projeto" href="{% url 'list_projeto' %}#">Projetos {{ count_projeto }}</a></li>
-                <li class="tab-title"><a id="detail_objetivo_projeto" href="{% url 'list_objetivo_projeto' %}#">Obj. Específicos {{ count_objetivo }}</a>
-                <li class="tab-title"><a id="detail_resultado_projeto" href="{% url 'list_resultado_projeto' %}#">Resultados {{ count_resultado }}</a></li>
-                <li class="tab-title"><a id="detail_projetocomponente_projeto" href="{% url 'list_projetocomponente_projeto' %}#">PCs {{ count_projetocomponente }}</a></li>
-                <li class="tab-title"><a id="detail_metaprojeto_projeto" href="{% url 'list_metaprojeto_projeto' %}#">Metas {{ count_metaprojeto }}</a></li>
-                <li class="tab-title"><a id="detail_planoacao_projeto" href="{% url 'list_planoacao_projeto' %}#">PAs {{ count_planoacao }}</a></li>
-                <li class="tab-title"><a id="detail_atividade_projeto" href="{% url 'list_atividade_projeto' %}#">Atividades {{ count_atividade }}</a></li>
-                <li class="tab-title"><a id="detail_tarefa_projeto" href="{% url 'list_tarefa_projeto' %}#">Tarefas {{ count_tarefa }}</a></li>
-                <li class="tab-title"><a id="detail_instituicao_projeto" href="{% url 'list_instituicao_projeto' %}#">Instituições {{ count_instituicao }}</a></li>
-                <li class="tab-title"><a id="detail_palavrachave_projeto" href="{% url 'list_palavrachave_projeto' %}#">Keywords {{ count_palavrachave }}</a></li>
+                <li class="tab-title"><a id="detail_projeto" href="{% url 'list_projeto' %}#">Projeto {{ count_projeto }}</a></li>
+                <li class="tab-title"><a id="detail_objetivo_projeto" href="{% url 'list_objetivo_projeto' %}#">Objetivo {{ count_objetivo }}</a>
+                <li class="tab-title"><a id="detail_resultado_projeto" href="{% url 'list_resultado_projeto' %}#">Resultado {{ count_resultado }}</a></li>
+                <li class="tab-title"><a id="detail_projetocomponente_projeto" href="{% url 'list_projetocomponente_projeto' %}#">PC {{ count_projetocomponente }}</a></li>
+                <li class="tab-title"><a id="detail_metaprojeto_projeto" href="{% url 'list_metaprojeto_projeto' %}#">Meta {{ count_metaprojeto }}</a></li>
+                <li class="tab-title"><a id="detail_planoacao_projeto" href="{% url 'list_planoacao_projeto' %}#">PA {{ count_planoacao }}</a></li>
+                <li class="tab-title"><a id="detail_atividade_projeto" href="{% url 'list_atividade_projeto' %}#">Atividade {{ count_atividade }}</a></li>
+                <li class="tab-title"><a id="detail_tarefa_projeto" href="{% url 'list_tarefa_projeto' %}#">Tarefa {{ count_tarefa }}</a></li>
+                <li class="tab-title"><a id="detail_instituicao_projeto" href="{% url 'list_instituicao_projeto' %}#">Instituição {{ count_instituicao }}</a></li>
+                <li class="tab-title"><a id="detail_palavrachave_projeto" href="{% url 'list_palavrachave_projeto' %}#">Chave {{ count_palavrachave }}</a></li>
               {% endif %}
             {% endif %}
   </ul>
