@@ -11,3 +11,7 @@ class Permission(TemplateView):
 
 class About(TemplateView):
     template_name = "base/about.html"
+
+
+class Location(TemplateView):
+    template_name = "base/location.html"
