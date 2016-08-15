@@ -106,3 +106,8 @@ body {
 .texto {
   text-align: justify;
 }
+
+.navbar-default {
+  padding-bottom: 3px;
+  padding-top: 3px;
+}

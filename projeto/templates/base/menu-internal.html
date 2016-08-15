@@ -30,6 +30,16 @@
             </ul>
           </li>
 
+          <li class="menu-item dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ferramentas<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li class="menu-item dropdown"><a href="https://lbb.cnpae.embrapa.br/arquivos/" target="_blank">Arquivos (Pydio)</a></li>
+                <li class="menu-item dropdown"><a href="https://lbb.cnpae.embrapa.br/gitlab/" target="_blank">Código (GitLab)</a></li>
+                <li class="menu-item dropdown"><a href="https://lbb.cnpae.embrapa.br/jbrowse/" target="_blank">jBrowse</a></li>
+
+            </ul>
+          </li>
+
           {% if request.user.is_superuser %}
             <li class="menu-item dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar<b class="caret"></b></a>
