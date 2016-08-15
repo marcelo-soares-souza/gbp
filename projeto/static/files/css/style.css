@@ -102,3 +102,7 @@ body {
     padding-bottom: 12px;
   }
 }
+
+.texto {
+  text-align: justify;
+}
