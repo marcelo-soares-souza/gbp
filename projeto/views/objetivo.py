@@ -65,7 +65,6 @@ class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoCreate, self).get_context_data(**kwargs)
-        # context["objetivos"] = Objetivo.objects.all().order_by('numero')
         context["projetos"] = Objetivo.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
