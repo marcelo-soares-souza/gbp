@@ -33,7 +33,11 @@
   {% include "base/menu.html" %}
 
   <div class="row">
-    {% include "base/menu-internal.html" %}
+    {% if request.user.is_authenticated %}
+      {% include "base/menu-internal.html" %}
+    {% else %}
+      <div class="col-sm-1"></div>
+    {% endif %}
 
     <div class="col-sm-1">
       <div class="container" style="max-width: 1024px;">
