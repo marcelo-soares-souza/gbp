@@ -1,5 +1,120 @@
+{% if request.user.is_authenticated %}
 <div class="col-sm-2">
-  {% if request.user.is_authenticated %}
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-2 col-md-2">
+            <div class="panel-group" id="accordion">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseProjetos">Projetos</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseProjetos" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_projeto' %}">Adicionar</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_projeto' %}">Listar/Editar</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSequenciamento">Sequenciamento</a>
+                        </h4>
+                    </div>
+                    <div id="collapseSequenciamento" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-flash text-danger"></span>&nbsp;&nbsp;<a href="{% url 'dashboard_sequenciamento' %}">Dashboard</a>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_sequenciamento' %}">Adicionar</a>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_sequenciamento' %}">Listar/Editar</a>
+                                  </td>
+                              </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFerramentas">Ferramentas</a>
+                        </h4>
+                    </div>
+                    <div id="collapseFerramentas" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-folder-open text-warning"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/arquivos/" target="_blank">Arquivos</a>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-download text-primary"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/gitlab/" target="_blank">Código</a></li>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-stats text-success"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/jbrowse/" target="_blank">jBrowse</a></li>
+                                  </td>
+                              </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% if request.user.is_superuser %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseAdministrar">Administrar</a>
+                        </h4>
+                    </div>
+                    <div id="collapseAdministrar" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-user text-primary"></span>&nbsp;&nbsp;<a href="/admin/auth/user/">Usuários</a>
+                                  </td>
+                              </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!--
   <div class="sidebar-nav">
     <div class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
@@ -48,28 +163,9 @@
               </ul>
             </li>
           {% endif %}
-
-          <!--
-          <li class="active"><a href="#">Menu Item 1</a></li>
-          <li><a href="#">Menu Item 2</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Menu Item 4</a></li>
-          <li><a href="#">Reviews <span class="badge">1,118</span></a></li>
-        -->
         </ul>
-      </div><!--/.nav-collapse -->
+      </div>
     </div>
   </div>
-  {% endif %}
+-->
 </div>
