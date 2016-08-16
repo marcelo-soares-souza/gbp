@@ -142,11 +142,10 @@ body {
 }
 
 #lbb {
-  font-weight: bolder;
   color: #8EB5E1;
   margin-top: 16px;
   margin-right: 380px;
   float: right;
-  max-width: 500px;
+  max-width: 520px;
   min-height: 60px;
 }
