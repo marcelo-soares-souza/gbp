@@ -1,18 +1,18 @@
+<div id="header">
+  <div id="logo">
+    <img src="/static/files/img/embrapa.png" alt="Logo EMBRAPA Agroenergia"/>
+  </div>
+
+  <div id="lbb">
+    <h3>Laboratório de Bioinformática em Bioenergia</h3>
+  </div>
+</div>
+
 <div class="navbar navbar-default">
-  <img style="float: right;" src="/static/files/img/embrapa.png" alt="Logo EMBRAPA Agroenergia"/>
-
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{% url 'home' %}">Início</a>
-    </div>
-
     <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" style="margin-left: 86px;">
+          <li><a href="/">Início</a></li>
           <li><a href="{% url 'about' %}">Sobre</a></li>
           <li><a href="{% url 'location' %}">Localização</a></li>
         {% if request.user.is_authenticated %}
@@ -22,6 +22,5 @@
         {% endif %}
       </ul>
     </div>
-
   </div>
 </div>
