@@ -120,12 +120,16 @@ body {
     margin-right: 0;
     padding-left: 0px;
     padding-right: 0px;
-
 }
 
 .navbar-nav > li > a {
   padding-bottom: 0px;
   padding-top: 0px;
+}
+
+.jumbotron {
+    padding-bottom: 40px;
+    padding-top: 40px;
 }
 
 #header {
@@ -142,9 +146,9 @@ body {
 }
 
 #lbb {
-  color: #8EB5E1;
-  margin-top: 16px;
-  margin-right: 380px;
+  color: #004380;
+  margin-top: 28px;
+  margin-right: 570px;
   float: right;
   max-width: 520px;
   min-height: 60px;
