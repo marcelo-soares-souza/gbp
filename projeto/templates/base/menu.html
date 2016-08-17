@@ -1,37 +1,57 @@
 <div id="header">
   <div id="logo">
-    <img src="/static/files/img/embrapa.png" alt="Logo EMBRAPA Agroenergia"/>
+    <a href="/"><img src="/static/files/img/embrapa.png" alt="Logo EMBRAPA Agroenergia"/></a>
   </div>
 
   <div id="lbb">
     <h3 style="font-weight: bolder;">Laboratório de Bioinformática em Bioenergia</h3>
   </div>
 </div>
-
+<!--
+          Inicial
+          Projetos
+          Negócios do LBB
+          Capacitação
+          Produção
+          Notícias
+          Ferramentas
+          Links
+-->
 <div class="navbar navbar-default">
   <div class="container">
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav" style="margin-left: 75px;">
-          <li><a href="/">Início</a></li>
-          <li><a href="{% url 'about' %}">Sobre</a></li>
-          <li><a href="{% url 'location' %}">Localização</a></li>
-
           <li class="menu-item dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bioinformática<b class="caret"></b></a>
-
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inicial<b class="caret"></b></a>
           <ul class="dropdown-menu">
+
             <li class="menu-item dropdown-submenu">
-              <a tabindex="0">Marcadores Moleculares</a>
+              <a tabindex="0">Sobre o LBB</a>
               <ul class="dropdown-menu">
-                <li><a tabindex="0">INDELS</a></li>
-                <li><a tabindex="0">PAVs</a></li>
-                <li><a tabindex="0">SNPs</a></li>
-                <li><a tabindex="0">SSRs</a></li>
+                <li><a href="{% url 'about' %}">A Bioinformática e o LBB</a></li>
+                <li><a tabindex="0">Missão</a></li>
+                <li><a tabindex="0">Visão</a></li>
+                <li><a tabindex="0">Equipe</a></li>
+                <li><a tabindex="0">Agenda</a></li>
+                <li><a tabindex="0">Infraestrutura</a></li>
+                <li><a tabindex="0">Parceiros</a></li>
               </ul>
             </li>
+
+            <li class="menu-item dropdown-submenu">
+              <a tabindex="0">Colaboração</a>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0">Colaboração</a></li>
+                <li><a tabindex="0">Estágios e Bolsas</a></li>
+              </ul>
+            </li>
+
+            <li><a href="{% url 'location' %}">Como Chegar</a></li>
+            <li><a tabindex="0">Contato</a></li>
+            <li><a tabindex="0">Mapa do Site</a></li>
+
           </ul>
           </li>
-
         {% if request.user.is_authenticated %}
           <li><a href="{% url 'logout' %}">Logout ({{ request.user.username }})</a></li>
         {% else %}
