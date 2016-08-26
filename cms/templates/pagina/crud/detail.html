@@ -10,7 +10,7 @@
 
     <hr/>
 
-    <p><b>Texto:</b> <br/> <div class='text-highlight'> {{ pagina.texto }}&nbsp;</div></p>
+    {{ pagina.texto | safe }}&nbsp;
 
 
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ pagina.data_cadastro }}&nbsp;</div></p>

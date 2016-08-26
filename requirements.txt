@@ -5,3 +5,4 @@ django-localflavor==1.3
 https://github.com/halfnibble/django-smart-selects/archive/master.zip
 django-sortable-listview==0.41
 psycopg2==2.6.2
+django-ckeditor==5.1.0
