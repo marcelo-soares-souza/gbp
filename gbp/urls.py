@@ -18,6 +18,8 @@ from sequenciamento.views.tarefasequenciamento import TarefaSequenciamentoCreate
 from sequenciamento.views.tiposequenciamento import TipoSequenciamentoCreate, TipoSequenciamentoDelete, TipoSequenciamentoDetail, TipoSequenciamentoList, TipoSequenciamentoUpdate
 from sequenciamento.views.contrato import ContratoCreate, ContratoDelete, ContratoDetail, ContratoList, ContratoUpdate
 from sequenciamento.views.dashboard import DashboardList
+from cms.views import PaginaCreate, PaginaDelete, PaginaDetail, PaginaList, PaginaUpdate, PaginaContent
+
 from projeto.views import objetivo, resultado, projetocomponente, metaprojeto, planoacao, atividade, tarefa
 
 urlpatterns = [
@@ -253,6 +255,16 @@ urlpatterns = [
     # View Dashboard Sequenciamento
     url(r'^sequenciamento/dashboard/(?P<pk>\d+)/$', DashboardList.as_view(), name='dashboard_sequenciamento'),
     url(r'^sequenciamento/dashboard/', DashboardList.as_view(), name='dashboard_sequenciamento'),
+
+    # Views de Páginas
+    url(r'^pagina/$', PaginaList.as_view(), name='home_pagina'),
+    url(r'^pagina/new/$', PaginaCreate.as_view(), name='new_pagina'),
+    url(r'^pagina/list/', PaginaList.as_view(), name='list_pagina'),
+    url(r'^pagina/detail/(?P<pk>\d+)/$', PaginaDetail.as_view(), name='detail_pagina'),
+    url(r'^pagina/update/(?P<pk>\d+)/$', PaginaUpdate.as_view(), name='update_pagina'),
+    url(r'^pagina/delete/(?P<pk>\d+)/$', PaginaDelete.as_view(), name='delete_pagina'),
+
+    url(r'^cms/(?P<pk>\d+)/$', PaginaContent.as_view(), name='content_pagina'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),

@@ -62,6 +62,31 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCMS">CMS</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseCMS" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_pagina' %}">Adicionar</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_pagina' %}">Listar/Editar</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFerramentas">Ferramentas</a>
                         </h4>
                     </div>
@@ -87,6 +112,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 {% if request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">

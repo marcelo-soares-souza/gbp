@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'smart_selects',
     'projeto',
     'sequenciamento',
+    'cms',
 )
 
 MIDDLEWARE_CLASSES = (

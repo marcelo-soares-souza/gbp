@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ pagina }}</title> {% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+    <h3>{{ pagina }}</h3	>
+
+      <p class="texto">
+        {{ pagina.texto }}
+      </p>
+    </div>
+{% endblock content %}
