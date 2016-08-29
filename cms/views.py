@@ -8,10 +8,8 @@ from projeto.views.login import LoggedInMixin
 
 
 class PaginaList(LoggedInMixin, SortableListView):
-    allowed_sort_fields = {'titulo': {'default_direction': '',
-                                       'verbose_name': 'Titulo'},
-                           'data_atualizado': {'default_direction': '',
-                                               'verbose_name': 'Atualizado Em'}}
+    allowed_sort_fields = {'titulo': {'default_direction': '', 'verbose_name': 'Titulo'},
+                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'titulo'
     paginate_by = 5
