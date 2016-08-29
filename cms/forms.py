@@ -1,11 +1,11 @@
 from django import forms
-from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 from .models import Pagina
 
 
 class PaginaForm(forms.ModelForm):
-    texto = forms.CharField(widget=CKEditorWidget())
+    texto = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Pagina

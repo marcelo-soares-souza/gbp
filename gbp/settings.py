@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'sortable_listview',
     'smart_selects',
     'ckeditor',
+    'ckeditor_uploader',
     'projeto',
     'sequenciamento',
     'cms',
@@ -185,7 +186,13 @@ CKEDITOR_CONFIGS = {
             ['Bold', 'Italic', 'Underline', 'TextColor'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['Link', 'Unlink'],
-            ['RemoveFormat', 'Source']
+            ['RemoveFormat', 'Source'],
+            ['Image']
         ]
     }
 }
+
+ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+MEDIA_ROOT = os.path.join(ENV_PATH, 'media/')
+MEDIA_URL = "/media/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
