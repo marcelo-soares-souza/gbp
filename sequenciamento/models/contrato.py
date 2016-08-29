@@ -35,7 +35,7 @@ class Contrato(models.Model, TemplateModelMixin):
     empresa_executora = models.CharField(max_length=256, null=True, blank=True)
     data_contratacao = models.DateField(null=True, blank=True, default=timezone.now)
     status_cgen = models.CharField(max_length=64, choices=STATUS_CGEN, null=True, blank=True)
-    ttm = models.CharField(max_length=256, null=True, blank=True)
+    ttm = models.CharField(max_length=256, choices=STATUS_CGEN, null=True, blank=True)
     contato_gestor = models.CharField(max_length=256, null=True, blank=True)
     codigo_pedido_gestor = models.CharField(max_length=256, null=True, blank=True)
 
