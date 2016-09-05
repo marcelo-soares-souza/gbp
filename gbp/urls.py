@@ -315,6 +315,9 @@ urlpatterns = [
 
     # CkEditor
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
+    # Attachments
+    url(r'^attachments/', include('attachments.urls', namespace='attachments')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

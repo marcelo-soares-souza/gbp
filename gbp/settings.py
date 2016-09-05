@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'smart_selects',
     'ckeditor',
     'ckeditor_uploader',
+    'attachments',
     'projeto',
     'sequenciamento',
     'cms',
