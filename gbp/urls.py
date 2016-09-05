@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
+# URLs Projeto
 from projeto.views.atividade import AtividadeCreate, AtividadeDelete, AtividadeDetail, AtividadeList, AtividadeUpdate
 from projeto.views.home import Home, Permission, About, Location
 from projeto.views.instituicao import InstituicaoProjetoCreate, InstituicaoProjetoDelete, InstituicaoProjetoDetail, InstituicaoProjetoList, InstituicaoProjetoUpdate
@@ -15,14 +16,24 @@ from projeto.views.projeto import ProjetoCreate, ProjetoDelete, ProjetoDetail, P
 from projeto.views.projetocomponente import ProjetoComponenteCreate, ProjetoComponenteDelete, ProjetoComponenteDetail, ProjetoComponenteList, ProjetoComponenteUpdate
 from projeto.views.resultado import ResultadoProjetoCreate, ResultadoProjetoDelete, ResultadoProjetoDetail, ResultadoProjetoList, ResultadoProjetoUpdate
 from projeto.views.tarefa import TarefaCreate, TarefaDelete, TarefaDetail, TarefaList, TarefaUpdate
+from projeto.views import objetivo, resultado, projetocomponente, metaprojeto, planoacao, atividade, tarefa
+
+# URLs Sequenciamento
 from sequenciamento.views.sequenciamento import SequenciamentoCreate, SequenciamentoDelete, SequenciamentoDetail, SequenciamentoList, SequenciamentoUpdate
 from sequenciamento.views.tarefasequenciamento import TarefaSequenciamentoCreate, TarefaSequenciamentoDelete, TarefaSequenciamentoDetail, TarefaSequenciamentoList, TarefaSequenciamentoUpdate
 from sequenciamento.views.tiposequenciamento import TipoSequenciamentoCreate, TipoSequenciamentoDelete, TipoSequenciamentoDetail, TipoSequenciamentoList, TipoSequenciamentoUpdate
 from sequenciamento.views.contrato import ContratoCreate, ContratoDelete, ContratoDetail, ContratoList, ContratoUpdate
 from sequenciamento.views.dashboard import DashboardList
+
+# URLs CMS
 from cms.views import PaginaCreate, PaginaDelete, PaginaDetail, PaginaList, PaginaUpdate, PaginaContent
+
+# URLs Citometria
 from citometria.views import CitometriaCreate, CitometriaDelete, CitometriaDetail, CitometriaList, CitometriaUpdate
-from projeto.views import objetivo, resultado, projetocomponente, metaprojeto, planoacao, atividade, tarefa
+
+# URLs Metabolomica
+from metabolomica.views.sample import SampleCreate, SampleDelete, SampleDetail, SampleList, SampleUpdate
+from metabolomica.views.experiment import ExperimentCreate, ExperimentDelete, ExperimentDetail, ExperimentList, ExperimentUpdate
 
 urlpatterns = [
 
@@ -275,6 +286,22 @@ urlpatterns = [
     url(r'^citometria/detail/(?P<pk>\d+)/$', CitometriaDetail.as_view(), name='detail_citometria'),
     url(r'^citometria/update/(?P<pk>\d+)/$', CitometriaUpdate.as_view(), name='update_citometria'),
     url(r'^citometria/delete/(?P<pk>\d+)/$', CitometriaDelete.as_view(), name='delete_citometria'),
+
+    # Views de Sample
+    url(r'^metabolomica/sample$', SampleList.as_view(), name='home_sample'),
+    url(r'^metabolomica/sample/new/$', SampleCreate.as_view(), name='new_sample'),
+    url(r'^metabolomica/sample/list/', SampleList.as_view(), name='list_sample'),
+    url(r'^metabolomica/sample/detail/(?P<pk>\d+)/$', SampleDetail.as_view(), name='detail_sample'),
+    url(r'^metabolomica/sample/update/(?P<pk>\d+)/$', SampleUpdate.as_view(), name='update_sample'),
+    url(r'^metabolomica/sample/delete/(?P<pk>\d+)/$', SampleDelete.as_view(), name='delete_sample'),
+
+    # Views de Experiment
+    url(r'^metabolomica/experiment$', ExperimentList.as_view(), name='home_experiment'),
+    url(r'^metabolomica/experiment/new/$', ExperimentCreate.as_view(), name='new_experiment'),
+    url(r'^metabolomica/experiment/list/', ExperimentList.as_view(), name='list_experiment'),
+    url(r'^metabolomica/experiment/detail/(?P<pk>\d+)/$', ExperimentDetail.as_view(), name='detail_experiment'),
+    url(r'^metabolomica/experiment/update/(?P<pk>\d+)/$', ExperimentUpdate.as_view(), name='update_experiment'),
+    url(r'^metabolomica/experiment/delete/(?P<pk>\d+)/$', ExperimentDelete.as_view(), name='delete_experiment'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),

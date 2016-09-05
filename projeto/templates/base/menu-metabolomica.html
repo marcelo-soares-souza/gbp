@@ -1,0 +1,15 @@
+<script> $(document).ready(function() { $('.nav-tabs a[id="{{request.resolver_match.url_name}}"]').tab('show'); }); </script>
+{% if request.user.is_authenticated %}
+  <ul class="nav nav-tabs" id="myTab" >
+    {% if 'new' in request.resolver_match.url_name %}
+        <li class="tab-title"><a id="new_sample" href="{% url 'new_sample' %}#">Sample</a></li>
+        <li class="tab-title"><a id="new_experiment" href="{% url 'new_experiment' %}#">Experiment</a></li>
+    {% elif 'detail' in request.resolver_match.url_name %}
+        <li class="tab-title"><a id="detail_sample" href="{% url 'list_sample' %}#">Sample</a></li>
+        <li class="tab-title"><a id="detail_experiment" href="{% url 'list_experiment' %}#">Experiment</a></li>
+    {% else %} 
+        <li class="tab-title"><a id="list_sample" href="{% url 'list_sample' %}#">Sample</a></li>
+        <li class="tab-title"><a id="list_experiment" href="{% url 'list_experiment' %}#">Experiment</a></li>
+    {% endif %}
+  </ul>
+{% endif %}

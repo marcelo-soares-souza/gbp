@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ experiment.empresa_executora }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <h2>{{ experiment.name }}</h2>
+
+    <hr/>
+
+    <p><b>Description:</b> <br/> <div class='text-highlight'>{{ experiment.description }}&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ experiment.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="/metabolomica{{ experiment.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+          {% if request.user == experiment.criado_por or request.user.is_superuser %}
+            <a href="/metabolomica{{ experiment.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+          {% endif %}
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Voltar</a>
+        {% endbuttons %}
+      </p>
+
+{% endblock content %}

@@ -112,6 +112,31 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseMetabolomica">Metabolomica</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseMetabolomica" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_sample' %}">Adicionar</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_sample' %}">Listar/Editar</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFerramentas">Ferramentas</a>
                         </h4>
                     </div>

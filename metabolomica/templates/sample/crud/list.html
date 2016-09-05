@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todos os Sample</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        <a href="{% url 'new_sample' %}" class="btn btn-sm btn-success">Adicionar</a>
+      </div>
+    </div>
+
+    {% if not samples %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_sample' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for sample in samples %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="/metabolomica{{ sample.get_detail_url }}">{{ sample.name }}</a></h3>
+                <p><b>Description: </b> <br/> <div class='text-highlight'> {{ sample.description }}&nbsp;</div></p>
+
+                <br/>
+
+                <p>
+                    <a href="/metabolomica{{ sample.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if request.user == sample.criado_por or request.user.is_superuser %}
+                      <a href="/metabolomica{{ sample.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ sample.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

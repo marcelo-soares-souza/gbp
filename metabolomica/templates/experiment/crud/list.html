@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todos os Experiment</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        <a href="{% url 'new_experiment' %}" class="btn btn-sm btn-success">Adicionar</a>
+      </div>
+    </div>
+
+    {% if not experiments %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_experiment' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for experiment in experiments %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="/metabolomica{{ experiment.get_detail_url }}">{{ experiment.name }}</a></h3>
+                <p><b>Description: </b> <br/> <div class='text-highlight'> {{ experiment.description }}&nbsp;</div></p>
+
+                <br/>
+
+                <p>
+                    <a href="/metabolomica{{ experiment.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if request.user == experiment.criado_por or request.user.is_superuser %}
+                      <a href="/metabolomica{{ experiment.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ experiment.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

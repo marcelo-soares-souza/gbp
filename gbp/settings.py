@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'sequenciamento',
     'cms',
     'citometria',
+    'metabolomica',
 )
 
 MIDDLEWARE_CLASSES = (
