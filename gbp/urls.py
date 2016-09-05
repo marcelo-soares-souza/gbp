@@ -21,7 +21,7 @@ from sequenciamento.views.tiposequenciamento import TipoSequenciamentoCreate, Ti
 from sequenciamento.views.contrato import ContratoCreate, ContratoDelete, ContratoDetail, ContratoList, ContratoUpdate
 from sequenciamento.views.dashboard import DashboardList
 from cms.views import PaginaCreate, PaginaDelete, PaginaDetail, PaginaList, PaginaUpdate, PaginaContent
-
+from citometria.views import CitometriaCreate, CitometriaDelete, CitometriaDetail, CitometriaList, CitometriaUpdate
 from projeto.views import objetivo, resultado, projetocomponente, metaprojeto, planoacao, atividade, tarefa
 
 urlpatterns = [
@@ -267,6 +267,14 @@ urlpatterns = [
     url(r'^pagina/delete/(?P<pk>\d+)/$', PaginaDelete.as_view(), name='delete_pagina'),
 
     url(r'^cms/(?P<pk>\d+)/$', PaginaContent.as_view(), name='content_pagina'),
+
+    # Views de Citometria
+    url(r'^citometria/$', CitometriaList.as_view(), name='home_citometria'),
+    url(r'^citometria/new/$', CitometriaCreate.as_view(), name='new_citometria'),
+    url(r'^citometria/list/', CitometriaList.as_view(), name='list_citometria'),
+    url(r'^citometria/detail/(?P<pk>\d+)/$', CitometriaDetail.as_view(), name='detail_citometria'),
+    url(r'^citometria/update/(?P<pk>\d+)/$', CitometriaUpdate.as_view(), name='update_citometria'),
+    url(r'^citometria/delete/(?P<pk>\d+)/$', CitometriaDelete.as_view(), name='delete_citometria'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),

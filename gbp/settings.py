@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'projeto',
     'sequenciamento',
     'cms',
+    'citometria',
 )
 
 MIDDLEWARE_CLASSES = (

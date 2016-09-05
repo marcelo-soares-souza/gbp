@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ citometria }}</title> {% endblock title %}
+
+{% block content %}
+
+    <h2>{{ citometria }}</h2>
+
+    <hr/>
+
+    {{ citometria.texto | safe }}&nbsp;
+
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ citometria.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+    {% if request.user == citometria.criado_por or request.user.is_superuser %}
+      <p>
+        <a href="{{ citometria.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ citometria.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+        <a href="{% url 'list_citometria' %}" class="btn btn-sm btn-info">Voltar</a>
+      </p>
+    {% endif %}
+
+{% endblock content %}
