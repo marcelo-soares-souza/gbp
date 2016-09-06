@@ -78,4 +78,4 @@ class SampleUpdate(LoggedInMixin, UpdateView):
 class SampleDelete(LoggedInMixin, DeleteView):
     template_name = 'sample/crud/delete.html'
     model = Sample
-    success_url = reverse_lazy('new_sample')
+    success_url = reverse_lazy('list_sample')

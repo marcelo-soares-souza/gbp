@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Citometria',
+            name='Fddb',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('organismo', models.CharField(choices=[('BR174', 'BR174'), ('COARI', 'Coari'), ('Manicoré', 'Manicoré')], default='BR174', max_length=64)),
@@ -28,9 +28,9 @@ class Migration(migrations.Migration):
                 ('criado_por', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'verbose_name': 'citometria',
+                'verbose_name': 'fddb',
                 'ordering': ['organismo'],
-                'verbose_name_plural': 'citometrias',
+                'verbose_name_plural': 'fddbs',
             },
             bases=(models.Model, projeto.models.template.TemplateModelMixin),
         ),

@@ -62,21 +62,26 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCMS">CMS</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFddb">FDDB</a>
                         </h4>
                     </div>
 
-                    <div id="collapseCMS" class="panel-collapse collapse">
+                    <div id="collapseFddb" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_pagina' %}">Adicionar</a>
+                                        <span class="glyphicon glyphicon-flash text-danger"></span>&nbsp;&nbsp;<a href="{% url 'home_fddb' %}">Ver</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_pagina' %}">Listar/Editar</a>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_fddb' %}">Adicionar</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_fddb' %}">Listar/Editar</a>
                                     </td>
                                 </tr>
                             </table>
@@ -87,32 +92,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCitometria">Citometria</a>
-                        </h4>
-                    </div>
-
-                    <div id="collapseCitometria" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_citometria' %}">Adicionar</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_citometria' %}">Listar/Editar</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseMetabolomica">Metabolomica</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseMetabolomica">Metabolômica</a>
                         </h4>
                     </div>
 
@@ -168,6 +148,31 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCMS">CMS</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseCMS" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_pagina' %}">Adicionar</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_pagina' %}">Listar/Editar</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseAdministrar">Administrar</a>
                         </h4>
                     </div>
@@ -190,59 +195,4 @@
     </div>
 </div>
 {% endif %}
-
-<!--
-  <div class="sidebar-nav">
-    <div class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <span class="visible-xs navbar-brand">Sidebar menu</span>
-      </div>
-      <div class="navbar-collapse collapse sidebar-navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class="menu-item dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Projetos<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                    <li class="menu-item dropdown"><a href="{% url 'new_projeto' %}">Adicionar</a></li>
-                    <li class="menu-item dropdown"><a href="{% url 'list_projeto' %}">Listar/Editar</a></li>
-            </ul>
-          </li>
-
-          <li class="menu-item dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sequenciamento<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li class="menu-item dropdown"><a href="{% url 'dashboard_sequenciamento' %}">Dashboard</a></li>
-                <li class="menu-item dropdown"><a href="{% url 'new_tarefasequenciamento' %}">Adicionar</a></li>
-                <li class="menu-item dropdown"><a href="{% url 'list_tarefasequenciamento' %}">Listar/Editar</a></li>
-            </ul>
-          </li>
-
-          <li class="menu-item dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ferramentas<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li class="menu-item dropdown"><a href="https://lbb.cnpae.embrapa.br/arquivos/" target="_blank">Arquivos (Pydio)</a></li>
-                <li class="menu-item dropdown"><a href="https://lbb.cnpae.embrapa.br/gitlab/" target="_blank">Código (GitLab)</a></li>
-                <li class="menu-item dropdown"><a href="https://lbb.cnpae.embrapa.br/jbrowse/" target="_blank">jBrowse</a></li>
-
-            </ul>
-          </li>
-
-          {% if request.user.is_superuser %}
-            <li class="menu-item dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                  <li class="menu-item dropdown"><a href="/admin/auth/user/">Usuários</a></li>
-              </ul>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
-  </div>
--->
 </div>

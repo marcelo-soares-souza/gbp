@@ -1,0 +1,16 @@
+{% for fddb in fddbs %}
+  <center>
+    <ul class="list-group">
+      <li class="list-group-item">
+
+        <h3>{{ fddb }}</h3>
+
+        <br/>
+        <a href="/media/fddb/{{ fddb.organismo }}_{{ fddb.folha }}_{{ fddb.complemento }}.jpg" target="_blank">
+          <img src="/media/fddb/{{ fddb.organismo }}_{{ fddb.folha }}_{{ fddb.complemento }}_low.jpg" width="200"/>
+        </a>
+        <br/><br/>
+      </li>
+    </ul>
+  </center>
+{% endfor %}

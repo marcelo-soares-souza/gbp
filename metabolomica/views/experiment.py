@@ -78,4 +78,4 @@ class ExperimentUpdate(LoggedInMixin, UpdateView):
 class ExperimentDelete(LoggedInMixin, DeleteView):
     template_name = 'experiment/crud/delete.html'
     model = Experiment
-    success_url = reverse_lazy('new_experiment')
+    success_url = reverse_lazy('list_experiment')

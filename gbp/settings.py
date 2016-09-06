@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     'projeto',
     'sequenciamento',
     'cms',
-    'citometria',
+    'fddb',
     'metabolomica',
 )
 

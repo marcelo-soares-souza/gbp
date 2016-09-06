@@ -14,4 +14,4 @@ tests/report/
 *~
 *.sqlite3
 *.swp
-gbp/media/uploads
+gbp/media/*
