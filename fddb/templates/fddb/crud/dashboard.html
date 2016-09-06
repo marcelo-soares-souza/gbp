@@ -87,6 +87,8 @@
           $('#acesso').on('change', function () {
             if ($(this).val() != 0) {
               $('#folha').show();
+              $('#folha').val(256);
+              $('.fddb-content').hide();
             }
             else {
               $('.fddb-content').hide();
