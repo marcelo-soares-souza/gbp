@@ -1,3 +1,5 @@
+{% load gbp_filters %}
+
 {% if request.user.is_authenticated %}
 <div class="col-sm-2">
   <div class="container">
@@ -5,6 +7,7 @@
         <div class="col-sm-2 col-md-2">
             <div class="panel-group" id="accordion">
 
+              {% if request.user|has_group:'Geral' or request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -58,14 +61,15 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
 
+                {% if request.user|has_group:'FDDB' or request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFddb">FDDB</a>
                         </h4>
                     </div>
-
                     <div id="collapseFddb" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
@@ -74,23 +78,13 @@
                                         <span class="glyphicon glyphicon-flash text-danger"></span>&nbsp;&nbsp;<a href="{% url 'home_fddb' %}">Ver</a>
                                     </td>
                                 </tr>
-                                <!--
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_fddb' %}">Adicionar</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_fddb' %}">Listar/Editar</a>
-                                    </td>
-                                </tr>
-                                -->
                             </table>
                         </div>
                     </div>
                 </div>
+                {% endif %}
 
+                {% if request.user|has_group:'Metabolômica' or request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -115,7 +109,9 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
 
+                {% if request.user|has_group:'Geral' or request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -144,7 +140,7 @@
                         </div>
                     </div>
                 </div>
-
+                {% endif %}
 
                 {% if request.user.is_superuser %}
                 <div class="panel panel-default">
@@ -184,6 +180,11 @@
                               <tr>
                                   <td>
                                       <span class="glyphicon glyphicon-user text-primary"></span>&nbsp;&nbsp;<a href="/admin/auth/user/">Usuários</a>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-eye-open text-success"></span>&nbsp;&nbsp;<a href="/admin/auth/group/">Grupos</a>
                                   </td>
                               </tr>
                             </table>
