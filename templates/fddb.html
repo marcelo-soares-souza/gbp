@@ -1,5 +1,6 @@
-{% for fddb in fddbs %}
-  <center>
+<center>
+{% if fddbs %}
+  {% for fddb in fddbs %}
     <ul class="list-group">
       <li class="list-group-item">
 
@@ -12,5 +13,9 @@
         <br/><br/>
       </li>
     </ul>
-  </center>
-{% endfor %}
+  {% endfor %}
+{% else %}
+  <br/><br/>
+  <h3>Nenhum Dado Encontrado</h3>
+{% endif %}
+</center>
