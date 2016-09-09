@@ -9,8 +9,8 @@ class Permission(TemplateView):
     template_name = "base/permission.html"
 
 
-class About(TemplateView):
-    template_name = "base/content/about.html"
+class jBrowse(TemplateView):
+    template_name = "base/content/jbrowse.html"
 
 
 class Location(TemplateView):
