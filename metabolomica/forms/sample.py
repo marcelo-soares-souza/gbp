@@ -11,5 +11,5 @@ class SampleForm(forms.ModelForm):
 
         labels = {
             'name': 'Name',
-            'descrition': 'Description'
+            'description': 'Description'
         }
