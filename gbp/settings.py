@@ -147,19 +147,19 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/tmp/django-debug.log',
+            'filename': '/tmp/efernandes-django-debug.log',
             'formatter': 'verbose'
         },
         'projeto': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/tmp/django-projeto-debug.log',
+            'filename': '/tmp/efernandes-django-projeto-debug.log',
             'formatter': 'verbose'
         },
         'sequenciamento': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/tmp/django-sequenciamento-debug.log',
+            'filename': '/tmp/efernandes-django-sequenciamento-debug.log',
             'formatter': 'verbose'
         },
     },
