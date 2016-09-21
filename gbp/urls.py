@@ -35,6 +35,7 @@ from fddb.views import FddbCreate, FddbDelete, FddbDetail, FddbList, FddbUpdate,
 from metabolomica.views.sample import SampleCreate, SampleDelete, SampleDetail, SampleList, SampleUpdate
 from metabolomica.views.experiment import ExperimentCreate, ExperimentDelete, ExperimentDetail, ExperimentList, ExperimentUpdate
 from metabolomica.views.equipment import EquipmentCreate, EquipmentDelete, EquipmentDetail, EquipmentList, EquipmentUpdate
+from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, ResultList, ResultUpdate
 
 urlpatterns = [
 
@@ -312,6 +313,14 @@ urlpatterns = [
     url(r'^metabolomica/equipment/detail/(?P<pk>\d+)/$', EquipmentDetail.as_view(), name='detail_equipment'),
     url(r'^metabolomica/equipment/update/(?P<pk>\d+)/$', EquipmentUpdate.as_view(), name='update_equipment'),
     url(r'^metabolomica/equipment/delete/(?P<pk>\d+)/$', EquipmentDelete.as_view(), name='delete_equipment'),
+
+    # Views de Result
+    url(r'^metabolomica/result$', ResultList.as_view(), name='home_result'),
+    url(r'^metabolomica/result/new/$', ResultCreate.as_view(), name='new_result'),
+    url(r'^metabolomica/result/list/', ResultList.as_view(), name='list_result'),
+    url(r'^metabolomica/result/detail/(?P<pk>\d+)/$', ResultDetail.as_view(), name='detail_result'),
+    url(r'^metabolomica/result/update/(?P<pk>\d+)/$', ResultUpdate.as_view(), name='update_result'),
+    url(r'^metabolomica/result/delete/(?P<pk>\d+)/$', ResultDelete.as_view(), name='delete_result'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),
