@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 
 # URLs Projeto
 from projeto.views.atividade import AtividadeCreate, AtividadeDelete, AtividadeDetail, AtividadeList, AtividadeUpdate
-from projeto.views.home import Home, Permission, jBrowse, Location
+from projeto.views.home import Home, Permission, jBrowse, Location, Timeline
 from projeto.views.instituicao import InstituicaoProjetoCreate, InstituicaoProjetoDelete, InstituicaoProjetoDetail, InstituicaoProjetoList, InstituicaoProjetoUpdate
 from projeto.views.metaprojeto import MetaProjetoCreate, MetaProjetoDelete, MetaProjetoDetail, MetaProjetoList, MetaProjetoUpdate
 from projeto.views.objetivo import ObjetivoProjetoCreate, ObjetivoProjetoDelete, ObjetivoProjetoDetail, ObjetivoProjetoList, ObjetivoProjetoUpdate
@@ -43,6 +43,7 @@ urlpatterns = [
     # General Info about LBB
     url(r'^jbrowse/$', jBrowse.as_view(), name='jbrowse'),
     url(r'^location/$', Location.as_view(), name='location'),
+    url(r'^timeline/$', Timeline.as_view(), name='timeline'),
 
     # Views de Projeto
     url(r'^projeto/new/$', ProjetoCreate.as_view(), name='new_projeto'),

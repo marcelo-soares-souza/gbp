@@ -199,3 +199,9 @@ ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 MEDIA_ROOT = os.path.join(ENV_PATH, 'media/')
 MEDIA_URL = "/media/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# Expire Session (Logout) in 60 Minutes
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 60 * 60
+SESSION_IDLE_TIMEOUT = 60 * 60
