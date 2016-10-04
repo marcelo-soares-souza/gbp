@@ -8,8 +8,12 @@ from projeto.views.login import LoggedInMixin
 
 
 class EquipmentList(LoggedInMixin, SortableListView):
-    allowed_sort_fields = {'name': {'default_direction': '', 'verbose_name': 'Name'},
-                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
+    allowed_sort_fields = {
+        'name':
+        {'default_direction': '', 'verbose_name': 'Name'},
+        'data_atualizado':
+        {'default_direction': '', 'verbose_name': 'Atualizado Em'}
+                          }
 
     default_sort_field = 'name'
     paginate_by = 5
@@ -23,7 +27,8 @@ class EquipmentList(LoggedInMixin, SortableListView):
 
     def get_queryset(self):
         if self.kwargs:
-            queryset = self.model._default_manager.filter(metabolomica_id=int(self.kwargs['pk']))
+            queryset = self.model._default_manager.filter(
+                                   metabolomica_id=int(self.kwargs['pk']))
         else:
             queryset = self.model._default_manager.all()
 
@@ -53,7 +58,6 @@ class EquipmentCreate(LoggedInMixin, CreateView):
     template_name = 'equipment/crud/form.html'
     form_class = EquipmentForm
     success_url = reverse_lazy('list_equipment')
-
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user

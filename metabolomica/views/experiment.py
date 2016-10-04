@@ -8,8 +8,12 @@ from projeto.views.login import LoggedInMixin
 
 
 class ExperimentList(LoggedInMixin, SortableListView):
-    allowed_sort_fields = {'name': {'default_direction': '', 'verbose_name': 'Name'},
-                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
+    allowed_sort_fields = {
+                  'name':
+                  {'default_direction': '', 'verbose_name': 'Name'},
+                  'data_atualizado':
+                  {'default_direction': '', 'verbose_name': 'Atualizado Em'}
+                           }
 
     default_sort_field = 'name'
     paginate_by = 5
@@ -23,7 +27,9 @@ class ExperimentList(LoggedInMixin, SortableListView):
 
     def get_queryset(self):
         if self.kwargs:
-            queryset = self.model._default_manager.filter(metabolomica_id=int(self.kwargs['pk']))
+            queryset = self.model._default_manager.filter(
+                                   metabolomica_id=int(self.kwargs['pk'])
+                                                          )
         else:
             queryset = self.model._default_manager.all()
 

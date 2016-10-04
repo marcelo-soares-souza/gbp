@@ -8,8 +8,12 @@ from projeto.views.login import LoggedInMixin
 
 
 class ResultList(LoggedInMixin, SortableListView):
-    allowed_sort_fields = {'name': {'default_direction': '', 'verbose_name': 'Name'},
-                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
+    allowed_sort_fields = {
+               'name':
+               {'default_direction': '', 'verbose_name': 'Name'},
+               'data_atualizado':
+               {'default_direction': '', 'verbose_name': 'Atualizado Em'}
+                           }
 
     default_sort_field = 'name'
     paginate_by = 5
@@ -23,7 +27,9 @@ class ResultList(LoggedInMixin, SortableListView):
 
     def get_queryset(self):
         if self.kwargs:
-            queryset = self.model._default_manager.filter(metabolomica_id=int(self.kwargs['pk']))
+            queryset = self.model._default_manager.filter(
+                                   metabolomica_id=int(self.kwargs['pk'])
+                                                          )
         else:
             queryset = self.model._default_manager.all()
 
@@ -54,7 +60,6 @@ class ResultCreate(LoggedInMixin, CreateView):
     form_class = ResultForm
     success_url = reverse_lazy('list_result')
 
-
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
         return super(ResultCreate, self).form_valid(form)
@@ -80,4 +85,3 @@ class ResultDelete(LoggedInMixin, DeleteView):
     template_name = 'result/crud/delete.html'
     model = Result
     success_url = reverse_lazy('list_result')
-
