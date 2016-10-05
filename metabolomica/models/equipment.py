@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from projeto.model.template import TemplateModelMixin
+from projeto.models.template import TemplateModelMixin
 
 
 class Equipment(models.Model, TemplateModelMixin):
@@ -16,8 +16,8 @@ class Equipment(models.Model, TemplateModelMixin):
 
     class Meta:
         ordering = ['name']
-        name_verbose = 'equipment'
-        name_verbose_plural = 'equipments'
+        verbose_name = 'equipment'
+        verbose_name_plural = 'equipments'
 
     def __str__(self):
-        return '%' % (self.name)
+        return '%s' % (self.name)
