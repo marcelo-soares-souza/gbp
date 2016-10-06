@@ -14,12 +14,12 @@ class Result(models.Model, TemplateModelMixin):
     equip_mode = models.CharField(max_length=40)  # MS Mode
 
     # Generic Data
-    data_criado = models.DateTimeField(auto_add_now=True, blank=True)
+    data_criado = models.DateTimeField(auto_now_add=True, blank=True)
     data_modificado = models.DateTimeField(auto_now=True, blank=True)
     criado_por = models.ForeignKey(User, null=True, blank=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['sample_code']
         verbose_name = 'result'
         verbose_name_plural = 'results'
 

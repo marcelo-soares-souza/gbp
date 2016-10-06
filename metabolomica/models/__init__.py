@@ -3,5 +3,7 @@
 
 from metabolomica.models.sample import Sample
 from metabolomica.models.experiment import Experiment
+from metabolomica.models.equipment import Equipment
+from metabolomica.models.result import Result
 
-__all__ = ['sample', 'experiment']
+__all__ = ['sample', 'experiment', 'equipment', 'result']
