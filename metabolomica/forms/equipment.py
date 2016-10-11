@@ -1,12 +1,12 @@
 from django import forms
 
-from metabolomica.models import Sample
+from metabolomica.models import Equipment
 
 
-class SampleForm(forms.ModelForm):
+class EquipmentForm(forms.ModelForm):
 
     class Meta:
-        model = Sample
+        model = Equipment
         fields = ('name', 'description')
 
         labels = {

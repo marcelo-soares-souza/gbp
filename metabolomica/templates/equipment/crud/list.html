@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todos os Equipments</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        <a href="{% url 'new_equipment' %}" class="btn btn-sm btn-success">Adicionar</a>
+      </div>
+    </div>
+
+    {% if not equipments %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_equipment' %}">Cadastrar?</a> </h4>$
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for equipment in equipments %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="/metabolomica{{ equipment.get_detail_url }}">{{ equipment.name }}</a></h3>
+                <p><b>Description: </b> <br/> <div class='text-highlight'> {{ equipment.description }}&nbsp;</div$
+
+                <br/>
+
+                <p>
+                    <a href="/metabolomica{{ equipment.get_update_url }}" class="btn btn-sm btn-warning">Editar</$
+                    {% if request.user == equipment.criado_por or request.user.is_superuser %}
+                      <a href="/metabolomica{{ equipment.get_delete_url }}" class="btn btn-sm btn-danger">Apagar<$
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ equipment.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}
