@@ -9,13 +9,17 @@ class ResultForm(forms.ModelForm):
 
         model = Result
         fields = (
-             'sample_code',
+             'name',
+             'sample',
              'experimental_condition',
+             'equipment',
              'equip_mode',
              )
 
         labels = {
-            'sample_code': 'Sample Code',
+            'name': 'Name',
+            'sample': 'Sample',
             'experimental_condition': 'Experimental Condition',
+            'equipment': 'Equipment',
             'equip_mode': 'Equipment Mode',
         }
