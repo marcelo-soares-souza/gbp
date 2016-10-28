@@ -1,25 +1,28 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
-
-{% block title %} <title>Apagar {{ object }}</title> {% endblock title %}
+<!-- Apagar Delete -->
+{% block title %} <title>Delete {{ object }}</title> {% endblock title %}
 
 {% block content %}
 
 {% if request.user == experiment.criado_por or request.user.is_superuser %}
   <form action="" method="post">{% csrf_token %}
-    <h3>Deseja Apagar "{{ object }}"?</h3>
+    <!-- Deseja Apagar -->
+    <h3>Are you sure you want to delete "{{ object }}"?</h3>
 
     <br/>
 
     {% buttons %}
-        <button type="submit" class="btn btn-danger">Remover</button>
-        <a href="javascript:window.history.go(-1)" class="btn btn-info"></span> Voltar</a>
+        <!-- Remover Delete,Voltar Back  -->
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="javascript:window.history.go(-1)" class="btn btn-info"></span> Back</a>
     {% endbuttons %}
 
   </form>
 {% else %}
-  <div class="jumbotron"><h4>Você não possui autorização para Remover este Dado<h4></div>
+  <! Você não possui autorização para Remover este Dado -->
+  <div class="jumbotron"><h4>You don't have the required permission to delete this file<h4></div>
 {% endif %}
 
 {% endblock content %}

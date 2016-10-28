@@ -1,8 +1,8 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
-
-{% block title %} <title>Listar Todos os Experiment</title> {% endblock title %}
+<!-- Listar Todos os Experiment -->
+{% block title %} <title>List all Experiments</title> {% endblock title %}
 
 {% block content %}
 
@@ -10,13 +10,14 @@
 
     <div style="min-width: 50%; float: right;">
       <div style="float: right;">
-        <a href="{% url 'new_experiment' %}" class="btn btn-sm btn-success">Adicionar</a>
+        <!-- Adicionar Add -->
+        <a href="{% url 'new_experiment' %}" class="btn btn-sm btn-success">Add</a>
       </div>
     </div>
 
     {% if not experiments %}
-
-      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_experiment' %}">Cadastrar?</a> </h4></div>
+      <!-- Nenhum Dado Cadastrado, Cadastrar? Add? -->
+      <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_experiment' %}">Add?</a> </h4></div>
 
     {% else %}
 
@@ -31,9 +32,11 @@
                 <br/>
 
                 <p>
-                    <a href="/metabolomica{{ experiment.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    <!-- Editar Update -->
+                    <a href="/metabolomica{{ experiment.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
                     {% if request.user == experiment.criado_por or request.user.is_superuser %}
-                      <a href="/metabolomica{{ experiment.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                      <!-- Apagar Delete -->
+                      <a href="/metabolomica{{ experiment.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
                     {% endif %}
                 </p>
 

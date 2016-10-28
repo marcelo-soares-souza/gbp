@@ -7,9 +7,10 @@ class ExperimentForm(forms.ModelForm):
 
     class Meta:
         model = Experiment
-        fields = ('name', 'description')
+        fields = ('name', 'project', 'description')
 
         labels = {
             'name': 'Name',
+            'project': 'Project',
             'description': 'Description'
         }
