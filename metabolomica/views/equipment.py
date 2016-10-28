@@ -12,8 +12,8 @@ class EquipmentList(LoggedInMixin, SortableListView):
         'name':
         {'default_direction': '', 'verbose_name': 'Name'},
         'data_atualizado':
-        {'default_direction': '', 'verbose_name': 'Atualizado Em'}
-                          }
+        {'default_direction': '', 'verbose_name': 'Modified'}
+                           }  # Atualizado Em Modified
 
     default_sort_field = 'name'
     paginate_by = 5
