@@ -9,4 +9,13 @@
     <br/>
     {{ pagina.texto | safe }}
     <br/>
+
+    {% if request.user == pagina.criado_por or request.user.is_superuser %}
+      <hr/>
+      <p>
+        <a href="{{ pagina.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ pagina.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+        <a href="{% url 'list_pagina' %}" class="btn btn-sm btn-info">Voltar</a>
+      </p>
+    {% endif %}
 {% endblock content %}
