@@ -39,7 +39,8 @@ from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, 
 
 urlpatterns = [
 
-    url(r'^$', Home.as_view(), name='home'),
+    # url(r'^$', Home.as_view(), name='home'),
+    url(r'^$', PaginaContent.as_view(), {'pk': 5 }, name='home'),
     url(r'^permission/$', Permission.as_view(), name='permission_denied'),
 
     # General Info about LBB
