@@ -6,7 +6,8 @@ from projeto.models.template import TemplateModelMixin
 
 class Sample(models.Model, TemplateModelMixin):
 
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64)  # Sample Code
+    # Description: Sample Species, Biological Sample
     description = models.TextField(null=True, blank=True)
 
     # Generic Data

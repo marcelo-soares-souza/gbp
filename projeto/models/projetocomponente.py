@@ -25,7 +25,7 @@ class ProjetoComponente(models.Model, TemplateModelMixin):
     class Meta:
         ordering = ['nome']
         verbose_name = 'projeto componente'
-        verbose_name_plural = 'projetos componentees'
+        verbose_name_plural = 'projetos componentes'
 
     def __str__(self):
         return 'PC%d: %s' % (self.numero, self.nome)

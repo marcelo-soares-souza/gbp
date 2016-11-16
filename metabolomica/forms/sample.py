@@ -10,6 +10,6 @@ class SampleForm(forms.ModelForm):
         fields = ('name', 'description')
 
         labels = {
-            'name': 'Name',
+            'name': 'Sample Code',
             'description': 'Description'
         }

@@ -12,19 +12,24 @@
 
     <hr/>
 
-    <p><b>Description:</b> <br/> <div class='text-highlight'>{{ result.description }}&nbsp;</div></p>
+    <p><b>Sample:</b> <br/> <div class='text-highlight'>{{ result.sample }}&nbsp;</div></p>
+    <p><b>Experimental Condition:</b> <br/> <div class='text-highlight'>{{ result.experimental_condition }}&nbsp;</div></p>
+    <p><b>Equipment:</b> <br/> <div class='text-highlight'>{{ result.equipment }}&nbsp;</div></p>
+    <p><b>Equipment Mode:</b> <br/> <div class='text-highlight'>{{ result.equip_mode }}&nbsp;</div></p>
 
-    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
+    <!-- Cadastrado: Added:-->
+    <p><b>Added:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
 
     <hr/>
 
       <p>
         {% buttons %}
-          <a href="/metabolomica{{ result.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+          <!-- Editar Update, Apagar Delete, Voltar Back -->
+          <a href="/metabolomica{{ result.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
           {% if request.user == result.criado_por or request.user.is_superuser %}
-            <a href="/metabolomica{{ result.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+            <a href="/metabolomica{{ result.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
           {% endif %}
-            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Voltar</a>
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Back</a>
         {% endbuttons %}
       </p>
 

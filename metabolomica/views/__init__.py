@@ -1,4 +1,5 @@
 # __init__.py
+# flake8: noqa
 
 from metabolomica.views.sample import SampleList, SampleDetail, SampleCreate, SampleUpdate, SampleDelete
 from metabolomica.views.experiment import ExperimentList, ExperimentDetail, ExperimentCreate, ExperimentUpdate, ExperimentDelete
