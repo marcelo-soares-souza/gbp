@@ -200,8 +200,8 @@ MEDIA_ROOT = os.path.join(ENV_PATH, 'media/')
 MEDIA_URL = "/media/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
-# Expire Session (Logout) in 60 Minutes
+# Expire Session (Logout) in 24 Hours
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_COOKIE_AGE = 60 * 60
-SESSION_IDLE_TIMEOUT = 60 * 60
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 24 * 60 * 60
+SESSION_IDLE_TIMEOUT = 24 * 60 * 60
