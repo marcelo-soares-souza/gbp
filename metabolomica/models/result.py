@@ -9,7 +9,7 @@ from projeto.models.template import TemplateModelMixin
 class Result(models.Model, TemplateModelMixin):
 
     name = models.CharField(max_length=120)
-    sample = models.ForeignKey(Sample, null=True, blank=True, related_name='sample_autocomplete')  # Replicate
+    sample = models.ForeignKey(Sample, null=True, blank=True)  # Replicate
     experimental_condition = models.TextField(null=True, blank=True)
     equipment = models.ForeignKey(Equipment, null=True, blank=True)
     analytical_method = models.CharField(max_length=40, null=True, blank=True)

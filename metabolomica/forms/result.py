@@ -1,16 +1,9 @@
 from django import forms
 
-# from dal import autocomplete
-
-from metabolomica.models import Result  #, Sample
+from metabolomica.models import Result
 
 
 class ResultForm(forms.ModelForm):
-# ModelChoiceField validates that the given id exists in the queryset.
-#    sample = forms.ModelChoiceField(
-#        queryset=Sample.objects.all(),
-#        widget=autocomplete.ModelSelect2(url='sample_autocomplete')
-#    )
 
     class Meta:
         model = Result
@@ -43,7 +36,3 @@ class ResultForm(forms.ModelForm):
             'raw_data': 'Result Raw Data',
             'process_data': 'Processed Data'
         }
-
-#        widgets = {
-#            'sample': autocomplete.ModelSelect2(url='sample_autocomplete')
-#        }
