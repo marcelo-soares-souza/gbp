@@ -5,7 +5,7 @@
 {% block title %} <title>List all Results</title> {% endblock title %}
 
 {% block content %}
-
+{% load static %}
     {% include "base/menu-metabolomica.html" %} <br/>
 
     <div style="min-width: 50%; float: right;">
@@ -48,5 +48,10 @@
         {% include 'base/pagination.html' %}
 
     {% endif %}
-
 {% endblock content %}
+
+{% block footer %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+
+{{ form.media }}
+{% endblock %}

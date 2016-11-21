@@ -9,10 +9,17 @@ from projeto.models.template import TemplateModelMixin
 class Result(models.Model, TemplateModelMixin):
 
     name = models.CharField(max_length=120)
-    sample = models.ForeignKey(Sample, null=True, blank=True)  # Sample Code
+    sample = models.ForeignKey(Sample, null=True, blank=True, related_name='sample_autocomplete')  # Replicate
     experimental_condition = models.TextField(null=True, blank=True)
     equipment = models.ForeignKey(Equipment, null=True, blank=True)
-    equip_mode = models.CharField(max_length=40)  # MS Mode
+    analytical_method = models.CharField(max_length=40, null=True, blank=True)
+    equip_mode = models.CharField(max_length=40, null=True, blank=True)  # MS Mode
+    extr_method = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Extraction data
+    parameters_lc_ms = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Analytical Parameters - LC and MS
+    lc_raw_data = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Analytical Method - LC raw data
+    ms_raw_data = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Analytical Method - MS raw data
+    raw_data = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Result raw data
+    process_data = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Processed data
 
     # Generic Data
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)

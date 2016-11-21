@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 
@@ -84,3 +85,16 @@ class ResultDelete(LoggedInMixin, DeleteView):
     template_name = 'result/crud/delete.html'
     model = Result
     success_url = reverse_lazy('list_result')
+
+
+class FileUpload(LoggedInMixin, DetailView):
+    def model_form_upload(request):
+        if request.method == 'POST':
+            form = DocumentForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+        else:
+            form = DocumentForm()
+        return render(request, 'crud/detail.html', {
+            'form': form
+        })

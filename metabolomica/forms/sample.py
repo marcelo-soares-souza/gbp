@@ -7,9 +7,17 @@ class SampleForm(forms.ModelForm):
 
     class Meta:
         model = Sample
-        fields = ('name', 'description')
+        fields = (
+            'name',
+            'lab_code',
+            'species',
+            'bio_sample',
+            'criado_por')
 
         labels = {
-            'name': 'Sample Code',
-            'description': 'Description'
+            'name': 'Replicates',
+            'lab_code': 'Lab Code',
+            'species': 'Species',
+            'bio_sample': 'Biological Sample',
+            'criado_por': 'User'
         }

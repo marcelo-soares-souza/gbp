@@ -9,7 +9,6 @@ class Experiment(models.Model, TemplateModelMixin):
 
     project = models.ForeignKey(Projeto, null=True, blank=True)
     name = models.CharField(max_length=64)
-    description = models.TextField(null=True, blank=True)
 
     # Generic Data
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)

@@ -1,5 +1,8 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+
+from dal import autocomplete
+
 from sortable_listview import SortableListView
 
 from metabolomica.forms import SampleForm
@@ -84,3 +87,21 @@ class SampleDelete(LoggedInMixin, DeleteView):
     template_name = 'sample/crud/delete.html'
     model = Sample
     success_url = reverse_lazy('list_sample')
+
+
+class SampleAutocomplete(autocomplete.Select2QuerySetView):
+    template_name = 'sample/crud/select2_outside_admin.html'
+    model = Sample
+    sucess_url = reverse_lazy('sample_autocomplete')
+
+#    def get_object(self):
+#        return Sample.objects.first()
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return Sample.objects.none()
+
+        qs = Sample.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+        return qs

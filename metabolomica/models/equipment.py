@@ -9,6 +9,7 @@ class Equipment(models.Model, TemplateModelMixin):
     name = models.CharField(max_length=64)
     # Description: Equipment model code, System, Brand
     description = models.TextField(null=True, blank=True)
+    system = models.CharField(max_length=64, null=True, blank=True)
 
     # Generic Data
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)

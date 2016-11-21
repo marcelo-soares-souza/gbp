@@ -5,6 +5,7 @@
 {% block title %} <title>Add/Update Result</title> {% endblock title %}
 
 {% block content %}
+{% load static %}
     <!-- Editando Updating -->
     {% if 'update' in request.resolver_match.url_name %}
       <ul class="nav nav-tabs" id="myTab" ><li class="active"><a href="#"> Updating {{ result }}</a></li></ul>
@@ -35,5 +36,4 @@
       $(function() { $('#id_data_contratacao').datepicker({ language: 'en-US' }); });
     });
  </script>
-
 {% endblock content %}
