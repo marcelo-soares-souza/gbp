@@ -16,8 +16,15 @@ class SampleForm(forms.ModelForm):
 
         labels = {
             'name': 'Replicates',
-            'lab_code': 'Lab Code',
+            'lab_code': 'Sample Lab Code',
             'species': 'Species',
             'bio_sample': 'Biological Sample',
             'criado_por': 'User'
+        }
+
+        widgets = {
+            'name' : forms.TextInput(
+                attrs = {'placeholder': 
+                'B-biological/T-technical/A-analytical'}
+            )
         }

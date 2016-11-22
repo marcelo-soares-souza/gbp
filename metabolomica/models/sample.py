@@ -5,11 +5,10 @@ from projeto.models.template import TemplateModelMixin
 
 
 class Sample(models.Model, TemplateModelMixin):
-
-    name = models.CharField(max_length=64)  # Replicates, was Sample Code
-    lab_code = models.CharField(max_length=64, null=True, blank=True)
-    species = models.CharField(max_length=64, null=True, blank=True)
-    bio_sample = models.CharField(max_length=64, null=True, blank=True)
+    name = models.CharField(max_length=64)  # Relabeled as Replicates, was Sample Code
+    lab_code = models.CharField(max_length=64, blank=True)
+    species = models.CharField(max_length=64, blank=True)
+    bio_sample = models.CharField(max_length=64, blank=True)
 
     # Generic Data
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
