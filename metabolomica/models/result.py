@@ -10,10 +10,11 @@ class Result(models.Model, TemplateModelMixin):
 
     name = models.CharField(max_length=120)
     sample = models.ForeignKey(Sample, null=True, blank=True)  # Replicate
-    experimental_condition = models.TextField(null=True, blank=True)
-    equipment = models.ForeignKey(Equipment, null=True, blank=True)
-    analytical_method = models.CharField(max_length=40, null=True, blank=True)
+    experimental_condition = models.TextField(blank=True)
+    equipment = models.ManyToManyField(Equipment, blank=True,
+                                      related_name='result_equipment')
     equip_mode = models.CharField(max_length=40, null=True, blank=True)  # MS Mode
+    analytical_method = models.CharField(max_length=40, blank=True)
     extr_method = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Extraction data
     parameters_lc_ms = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Analytical Parameters - LC and MS
     lc_raw_data = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Analytical Method - LC raw data

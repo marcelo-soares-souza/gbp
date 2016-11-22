@@ -14,9 +14,22 @@
 
     <p><b>Sample:</b> <br/> <div class='text-highlight'>{{ result.sample }}&nbsp;</div></p>
     <p><b>Experimental Condition:</b> <br/> <div class='text-highlight'>{{ result.experimental_condition }}&nbsp;</div></p>
-    <p><b>Equipment:</b> <br/> <div class='text-highlight'>{{ result.equipment }}&nbsp;</div></p>
+<!--    <p><b>Equipments:</b> <br/> <div class='text-highlight'>{{ result.equipment }}&nbsp;</div></p> -->
+
+    {% if result.equipment.all %}
+    <p><b>Equipments: </b>
+    <div class='text-highlight'>
+      {% for equipment in result.equipment.all %}
+      {% if not forloop.first %}, {% endif %}
+        {{equipment}}
+      {% endfor %}
+        &nbsp;
+      </div>
+       </p>
+     {% endif %}
+
+    <b>Equipment Mode:</b> <br/> <div class='text-highlight'>{{ result.equip_mode }}&nbsp;</div></p>
     <p><b>Analytical Method:</b> <br/> <div class='text-highlight'>{{ result.analytical_method }}&nbsp;</div></p>
-    <p><b>Equipment Mode:</b> <br/> <div class='text-highlight'>{{ result.equip_mode }}&nbsp;</div></p>
 
     <!-- Cadastrado: Added:-->
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>

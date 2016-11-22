@@ -7,9 +7,10 @@ class EquipmentForm(forms.ModelForm):
 
     class Meta:
         model = Equipment
-        fields = ('name', 'system')
+        fields = (
+            'name',
+        )
 
         labels = {
-            'name': 'Name',
-            'system': 'System',
+            'name': 'System'
         }
