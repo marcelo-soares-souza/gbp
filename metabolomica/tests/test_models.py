@@ -10,8 +10,8 @@ from metabolomica.models import Sample, Experiment, Equipment, Result
 class SampleModelTest(TestCase):
 
     def test_name(self):
-        sample = Sample(name="Sample")
-        self.assertEqual(str(sample), sample.name)
+        sample = Sample(lab_code="Sample")
+        self.assertEqual(str(sample), sample.lab_code)
 
     def test_verbose_name_plural(self):
         self.assertEqual(str(Sample._meta.verbose_name_plural), "samples")

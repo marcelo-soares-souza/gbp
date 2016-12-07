@@ -10,13 +10,13 @@ from projeto.views.login import LoggedInMixin
 
 class SampleList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {
-                'name':
+                'lab_code':
                 {'default_direction': '', 'verbose_name': 'Name'},
                 'data_atualizado':
                 {'default_direction': '', 'verbose_name': 'Modified'}
                            }
 
-    default_sort_field = 'name'
+    default_sort_field = 'lab_code'
     paginate_by = 5
 
     template_name = 'sample/crud/list.html'

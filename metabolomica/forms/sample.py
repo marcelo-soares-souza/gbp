@@ -8,22 +8,24 @@ class SampleForm(forms.ModelForm):
     class Meta:
         model = Sample
         fields = (
-            'name',
+            'database',
             'lab_code',
+            'replicate',
             'species',
             'bio_sample',
             'criado_por')
 
         labels = {
-            'name': 'Replicates',
+            'database': 'Database',
             'lab_code': 'Sample Lab Code',
+            'replicate': 'Replicate',
             'species': 'Species',
             'bio_sample': 'Biological Sample',
             'criado_por': 'User'
         }
 
         widgets = {
-            'name' : forms.TextInput(
+            'replicate': forms.TextInput(
                 attrs = {'placeholder': 
                 'B-biological/T-technical/A-analytical'}
             )

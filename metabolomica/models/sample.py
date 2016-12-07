@@ -1,12 +1,15 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from metabolomica.models.database import Database
+
 from projeto.models.template import TemplateModelMixin
 
 
 class Sample(models.Model, TemplateModelMixin):
-    name = models.CharField(max_length=64)  # Relabeled as Replicates, was Sample Code
-    lab_code = models.CharField(max_length=64, blank=True)
+    database = models.ForeignKey(Database, null=True, blank=True)
+    lab_code = models.CharField(max_length=64)
+    replicate = models.CharField(max_length=64, blank=True)
     species = models.CharField(max_length=64, blank=True)
     bio_sample = models.CharField(max_length=64, blank=True)
 
@@ -16,9 +19,9 @@ class Sample(models.Model, TemplateModelMixin):
     criado_por = models.ForeignKey(User, null=True, blank=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['lab_code']
         verbose_name = 'sample'
         verbose_name_plural = 'samples'
 
     def __str__(self):
-        return '%s' % (self.name)
+        return '%s' % (self.lab_code)
