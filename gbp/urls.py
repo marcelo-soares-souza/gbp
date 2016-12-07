@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
+from django_filters.views import FilterView
 # URLs Projeto
 from projeto.views.atividade import AtividadeCreate, AtividadeDelete, AtividadeDetail, AtividadeList, AtividadeUpdate
 from projeto.views.home import Home, Permission, jBrowse, Location, Timeline
@@ -36,6 +37,9 @@ from metabolomica.views.sample import SampleCreate, SampleDelete, SampleDetail, 
 from metabolomica.views.experiment import ExperimentCreate, ExperimentDelete, ExperimentDetail, ExperimentList, ExperimentUpdate
 from metabolomica.views.equipment import EquipmentCreate, EquipmentDelete, EquipmentDetail, EquipmentList, EquipmentUpdate
 from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, ResultList, ResultUpdate
+from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
+from metabolomica.filters.result_filter import ResultFilter
+
 
 urlpatterns = [
 
@@ -324,6 +328,18 @@ urlpatterns = [
     url(r'^metabolomica/result/update/(?P<pk>\d+)/$', ResultUpdate.as_view(), name='update_result'),
     url(r'^metabolomica/result/delete/(?P<pk>\d+)/$', ResultDelete.as_view(), name='delete_result'),
 
+    # Views de Database
+    url(r'^metabolomica/database$', DatabaseList.as_view(), name='home_database'),
+    url(r'^metabolomica/database/new/$', DatabaseCreate.as_view(), name='new_database'),
+    url(r'^metabolomica/database/list/', DatabaseList.as_view(), name='list_database'),
+    url(r'^metabolomica/database/detail/(?P<pk>\d+)/$', DatabaseDetail.as_view(), name='detail_database'),
+    url(r'^metabolomica/database/update/(?P<pk>\d+)/$', DatabaseUpdate.as_view(), name='update_database'),
+    url(r'^metabolomica/database/delete/(?P<pk>\d+)/$', DatabaseDelete.as_view(), name='delete_database'),
+
+    # Busca
+    url(r'^metabolomica/$', FilterView.as_view(filterset_class=ResultFilter,
+        template_name='metabolomica/result_list.html'), name='metabolomica'),
+                                
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),

@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'ckeditor_uploader',
     'attachments',
+    'widget_tweaks',
     'projeto',
     'sequenciamento',
     'cms',

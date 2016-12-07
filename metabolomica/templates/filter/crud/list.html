@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Páginas</title> {% endblock title %}
+
+{% block content %}
+
+    <div style="float: right;"><a href="{% url 'new_fddb' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
+    {% if not fddb %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_fddb' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for fddb in fddb %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ fddb.get_detail_url }}">{{ fddb }}</a></h3>
+
+                <br/>
+
+                {% if request.user == fddb.criado_por or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ fddb.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ fddb.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ fddb.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

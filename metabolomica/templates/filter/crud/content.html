@@ -1,0 +1,12 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ fddb }}</title> {% endblock title %}
+
+{% block content %}
+    <h3>{{ fddb }}</h3>
+    <br/>
+    {{ fddb.texto | safe }}
+    <br/>
+{% endblock content %}
