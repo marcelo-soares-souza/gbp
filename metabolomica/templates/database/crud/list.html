@@ -1,0 +1,52 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+<!-- Listar Todos os Database -->
+{% block title %} <title>List all Databases</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        <!-- Adicionar Add -->
+        <a href="{% url 'new_database' %}" class="btn btn-sm btn-success">Add</a>
+      </div>
+    </div>
+
+    {% if not databases %}
+      <!-- Nenhum Dado Cadastrado, Cadastrar? -->
+      <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_database' %}">Add?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for database in databases %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="/metabolomica{{ database.get_detail_url }}">{{ database.name }}</a></h3>
+<!--                <p><b>Name: </b> <br/> <div class='text-highlight'> {{ database.name }}&nbsp;</div></p> -->
+
+                <br/>
+
+                <p>
+                    <!-- Editar Update, Apagar Delete -->
+                    <a href="/metabolomica{{ database.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+                    {% if request.user == database.criado_por or request.user.is_superuser %}
+                      <a href="/metabolomica{{ database.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ database.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}
