@@ -9,13 +9,13 @@ from projeto.views.login import LoggedInMixin
 
 class EquipmentList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {
-        'name':
+        'system':
         {'default_direction': '', 'verbose_name': 'Name'},
         'data_atualizado':
         {'default_direction': '', 'verbose_name': 'Modified'}
                            }  # Atualizado Em Modified
 
-    default_sort_field = 'name'
+    default_sort_field = 'system'
     paginate_by = 5
 
     template_name = 'equipment/crud/list.html'

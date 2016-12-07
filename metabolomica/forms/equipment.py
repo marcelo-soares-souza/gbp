@@ -9,8 +9,10 @@ class EquipmentForm(forms.ModelForm):
         model = Equipment
         fields = (
             'name',
+            'description'
         )
 
         labels = {
-            'name': 'System'
+            'name': 'System',
+            'description': 'Description'
         }

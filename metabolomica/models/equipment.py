@@ -7,6 +7,7 @@ from projeto.models.template import TemplateModelMixin
 class Equipment(models.Model, TemplateModelMixin):
 
     name = models.CharField(max_length=64, blank=True)
+    description = models.TextField(blank=True)
 
     # Generic Data
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
