@@ -9,7 +9,6 @@
     {% include "base/menu-metabolomica.html" %} <br/>
 
     <h2>{{ result.name }}</h2>
-
     <hr/>
 
     <p><b>Sample:</b> <br/> <div class='text-highlight'>{{ result.sample }}&nbsp;</div></p>
@@ -30,7 +29,7 @@
 
     <b>Equipment Mode:</b> <br/> <div class='text-highlight'>{{ result.equip_mode }}&nbsp;</div></p>
     <p><b>Analytical Method:</b> <br/> <div class='text-highlight'>{{ result.analytical_method }}&nbsp;</div></p>
-
+    <p><b>Analytical Parameters:</b> <br/> <div class='text-highlight'>{{ result.parameters_lc_ms.uploaded_file.url }}&nbsp;</div></p>
     <!-- Cadastrado: Added:-->
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
 
