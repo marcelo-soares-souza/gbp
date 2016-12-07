@@ -14,11 +14,11 @@ class SequenciamentoForm(forms.ModelForm):
         labels = {
             'numero': 'Número',
             'contrato': 'Contrato',
-            'material_biologico': 'Matérial Biológico',
+            'material_biologico': 'Material Biológico',
             'tipo_sequenciamento': 'Tipo de Sequenciamento',
             'responsavel': 'Responsável',
             'finalidade': 'Finalidade',
-            'descricao_material_biologico': 'Descrição do Matérial Biológico',
+            'descricao_material_biologico': 'Descrição do Material Biológico',
             'numero_amostras': 'Número de Amostras',
             'prioridade': 'Prioridade',
             'detalhamento_material': 'Detalhamento do Material',
