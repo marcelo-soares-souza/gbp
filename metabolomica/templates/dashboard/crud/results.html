@@ -1,0 +1,90 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>Dashboard Results</title> {% endblock title %}
+
+{% block content %}
+
+<style> .panel-heading { cursor: pointer; } </style>
+
+<div style="min-width: 30%; float: right; padding-top: 24px;">
+  <div style="float: right;">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-md-12">
+          <select id="listar_result" class="form-control" name="listar_result" onChange="redirectUrl()">
+            <option value="0">All</option>
+            {% for result in results_list %}
+              <option value="{{result.id}}">{{result|truncatechars:36}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/><br/><br/>
+
+{% for result in results %}
+
+    <hr/>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne{{ result.id }}" data-toggle="collapse" data-target="#collapseOne{{ result.id }}">
+          <h4 class="panel-title">             
+              {{ result.name }}
+          </h4>
+        </div>
+
+        <div id="collapseOne{{ result.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne{{ result.id }}">
+          <div class="panel-body">
+    
+            <p><b>name</b> <br/> <div class='text-highlight'>{{ result.name }}&nbsp;</div></p>
+            <p><b>sample</b> <br/> <div class='text-highlight'>{{ result.sample }}&nbsp;</div></p>
+            <p><b>experimental_condition</b> <br/> <div class='text-highlight'>{{ result.experimental_condition }}&nbsp;</div></p>
+            <p><b>equipment</b> <br/> <div class='text-highlight'>{{ result.equipment }}&nbsp;</div></p>
+            <p><b>analytical_method</b> <br/> <div class='text-highlight'>{{ result.analytical_method }}&nbsp;</div></p>
+            <p><b>equip_mode</b> <br/> <div class='text-highlight'>{{ result.equip_mode }}&nbsp;</div></p>
+            <p><b>extr_method</b> <br/> <div class='text-highlight'>{{ result.extr_method }}&nbsp;</div></p>
+            <p><b>parameters_lc_ms</b> <br/> <div class='text-highlight'>{{ result.parameters_lc_ms }}&nbsp;</div></p>
+            <p><b>lc_raw_data</b> <br/> <div class='text-highlight'>{{ result.lc_raw_data }}&nbsp;</div></p>
+            <p><b>ms_raw_data</b> <br/> <div class='text-highlight'>{{ result.ms_raw_data }}&nbsp;</div></p>
+            <p><b>raw_data</b> <br/> <div class='text-highlight'>{{ result.raw_data }}&nbsp;</div></p>
+            <p><b>process_data</b> <br/> <div class='text-highlight'>{{ result.process_data }}&nbsp;</div></p>
+            <p><b>Created:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <hr/>
+{% endfor %}
+
+<script>
+  $(function(){
+
+    $('#listar_result').val({{result_id}});
+
+    $('#listar_result').on('change', function () {
+
+    if ($(this).val() != 0) {
+      var url = '/metabolomica/dashboard-result/' + $(this).val() + '/';
+
+      if (url) {
+        window.location = url;
+      }
+    }
+    else {
+      window.location = '{% url 'dashboard_result' %}';
+    }
+
+    return false;
+  });
+});
+</script>
+
+{% endblock content %}

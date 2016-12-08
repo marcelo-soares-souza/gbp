@@ -7,7 +7,7 @@ from django.contrib.auth import views as auth_views
 from django_filters.views import FilterView
 # URLs Projeto
 from projeto.views.atividade import AtividadeCreate, AtividadeDelete, AtividadeDetail, AtividadeList, AtividadeUpdate
-from projeto.views.home import Home, Permission, jBrowse, Location, Timeline
+from projeto.views.home import Permission, jBrowse, Location, Timeline
 from projeto.views.instituicao import InstituicaoProjetoCreate, InstituicaoProjetoDelete, InstituicaoProjetoDetail, InstituicaoProjetoList, InstituicaoProjetoUpdate
 from projeto.views.metaprojeto import MetaProjetoCreate, MetaProjetoDelete, MetaProjetoDetail, MetaProjetoList, MetaProjetoUpdate
 from projeto.views.objetivo import ObjetivoProjetoCreate, ObjetivoProjetoDelete, ObjetivoProjetoDetail, ObjetivoProjetoList, ObjetivoProjetoUpdate
@@ -38,13 +38,12 @@ from metabolomica.views.experiment import ExperimentCreate, ExperimentDelete, Ex
 from metabolomica.views.equipment import EquipmentCreate, EquipmentDelete, EquipmentDetail, EquipmentList, EquipmentUpdate
 from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, ResultList, ResultUpdate
 from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
-from metabolomica.filters.result_filter import ResultFilter
-
+from metabolomica.views.dashboard import DashboardMetabolomica, DashboardExperimentList, DashboardResultList
 
 urlpatterns = [
 
     # url(r'^$', Home.as_view(), name='home'),
-    url(r'^$', PaginaContent.as_view(), {'pk': 5 }, name='home'),
+    url(r'^$', PaginaContent.as_view(), {'pk': 5}, name='home'),
     url(r'^permission/$', Permission.as_view(), name='permission_denied'),
 
     # General Info about LBB
@@ -336,10 +335,13 @@ urlpatterns = [
     url(r'^metabolomica/database/update/(?P<pk>\d+)/$', DatabaseUpdate.as_view(), name='update_database'),
     url(r'^metabolomica/database/delete/(?P<pk>\d+)/$', DatabaseDelete.as_view(), name='delete_database'),
 
-    # Busca
-    url(r'^metabolomica/$', FilterView.as_view(filterset_class=ResultFilter,
-        template_name='metabolomica/result_list.html'), name='metabolomica'),
-                                
+    # Views DashBoard Metabolomica
+    url(r'^metabolomica/dashboard/', DashboardMetabolomica.as_view(), name='dashboard_metabolomica'),
+    url(r'^metabolomica/dashboard-experiment/(?P<pk>\d+)/$', DashboardExperimentList.as_view(), name='dashboard_experiment'),
+    url(r'^metabolomica/dashboard-experiment/', DashboardExperimentList.as_view(), name='dashboard_experiment'),
+    url(r'^metabolomica/dashboard-result/(?P<pk>\d+)/$', DashboardResultList.as_view(), name='dashboard_result'),
+    url(r'^metabolomica/dashboard-result/', DashboardResultList.as_view(), name='dashboard_result'),
+
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),

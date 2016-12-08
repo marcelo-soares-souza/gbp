@@ -11,7 +11,7 @@ class ResultFilter(django_filters.FilterSet):
     database = django_filters.CharFilter(lookup_expr='icontains')
     experiment = django_filters.CharFilter(lookup_expr='icontains')
     sample = django_filters.CharFilter(lookup_expr='iexact')
-    
+
     class Meta:
         model = Result
         fields = {
