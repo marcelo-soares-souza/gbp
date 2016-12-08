@@ -9,13 +9,13 @@
 
 <style> .panel-heading { cursor: pointer; } </style>
 
-<div style="min-width: 30%; float: right; padding-top: 24px;">
+<div style="min-width: 20%; float: right; padding-top: 24px;">
   <div style="float: right;">
     <div class="form-horizontal">
       <div class="form-group">
         <div class="col-md-12">
           <select id="listar_result" class="form-control" name="listar_result" onChange="redirectUrl()">
-            <option value="0">All</option>
+            <option value="0">All Results</option>
             {% for result in results_list %}
               <option value="{{result.id}}">{{result|truncatechars:36}}</option>
             {% endfor %}
@@ -26,11 +26,27 @@
   </div>
 </div>
 
+<div style="min-width: 20%; float: right; padding-top: 24px;">
+  <div style="float: right;">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-md-12">
+          <select id="listar_result_sample" class="form-control" name="listar_result_sample" onChange="redirectUrl()">
+            <option value="0">All Samples</option>
+            {% for sample in samples_list %}
+              <option value="{{sample.id}}">{{sample|truncatechars:36}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <br/><br/><br/>
+<hr/>
 
 {% for result in results %}
-
-    <hr/>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
       <div class="panel panel-default">
@@ -68,22 +84,36 @@
   $(function(){
 
     $('#listar_result').val({{result_id}});
+    $('#listar_result_sample').val({{sample_id}});
+
+    $('#listar_result_sample').on('change', function () {
+      if ($(this).val() != 0) {
+        var url = '/metabolomica/dashboard-result/sample/' + $(this).val() + '/';
+        if (url) {
+          window.location = url;
+        }
+      }
+      else {
+        window.location = '{% url 'dashboard_result' %}';
+      }
+
+      return false;
+    });
 
     $('#listar_result').on('change', function () {
-
-    if ($(this).val() != 0) {
-      var url = '/metabolomica/dashboard-result/' + $(this).val() + '/';
-
-      if (url) {
-        window.location = url;
+      if ($(this).val() != 0) {
+        var url = '/metabolomica/dashboard-result/' + $(this).val() + '/';
+        if (url) {
+          window.location = url;
+        }
       }
-    }
-    else {
-      window.location = '{% url 'dashboard_result' %}';
-    }
+      else {
+        window.location = '{% url 'dashboard_result' %}';
+      }
 
-    return false;
-  });
+      return false;
+    });
+
 });
 </script>
 
