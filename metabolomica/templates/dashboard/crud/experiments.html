@@ -41,7 +41,7 @@
 
         <div id="collapseOne{{ experiment.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne{{ experiment.id }}">
           <div class="panel-body">
-            <p><b>Project</b> <br/> <div class='text-highlight'>{{ experiment.project }}&nbsp;</div></p>
+            <p><b>Project:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' experiment.project.id %}">{{ experiment.project }}</a>&nbsp;</div></p>
             <p><b>Name:</b> <br/> <div class='text-highlight'>{{ experiment.name }}&nbsp;</div></p>
             <p><b>Description:</b> <br/> <div class='text-highlight'>{{ experiment.description }}&nbsp;</div></p>
             <p><b>Created:</b> <br/> <div class='text-highlight'>{{ experiment.data_cadastro }}&nbsp;</div></p>

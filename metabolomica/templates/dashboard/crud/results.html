@@ -60,7 +60,7 @@
           <div class="panel-body">
             <p><b>User:</b> <br/> <div class='text-highlight'>{{ result.criado_por|verifyfullname }}&nbsp;</div></p>
             <p><b>Result:</b> <br/> <div class='text-highlight'>{{ result.name }}&nbsp;</div></p>
-            <p><b>Sample:</b> <br/> <div class='text-highlight'>{{ result.sample }}&nbsp;</div></p>
+            <p><b>Sample:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample }}</a>&nbsp;</div></p>
             <p><b>Experimental Condition:</b> <br/> <div class='text-highlight'>{{ result.experimental_condition }}&nbsp;</div></p>
             {% if result.equipment.all %}
               <p><b>Equipments:</b>
@@ -69,7 +69,7 @@
                     {% if not forloop.first %}
                       ,
                     {% endif %}
-                    {{ equipment }}
+                    <a href="{% url 'detail_equipment' equipment.id %}">{{ equipment }}</a>
                   {% endfor %}
                   &nbsp;
                 </div>

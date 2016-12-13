@@ -11,16 +11,14 @@
     <h2>{{ result.name }}</h2>
     <hr/>
 
-    <p><b>Sample:</b> <br/> <div class='text-highlight'>{{ result.sample }}&nbsp;</div></p>
+<p><b>Sample:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample }}</a>&nbsp;</div></p>
     <p><b>Experimental Condition:</b> <br/> <div class='text-highlight'>{{ result.experimental_condition }}&nbsp;</div></p>
-<!--    <p><b>Equipments:</b> <br/> <div class='text-highlight'>{{ result.equipment }}&nbsp;</div></p> -->
-
     {% if result.equipment.all %}
     <p><b>Equipments: </b>
     <div class='text-highlight'>
       {% for equipment in result.equipment.all %}
       {% if not forloop.first %}, {% endif %}
-        {{equipment}}
+        <a href="{% url 'detail_equipment' equipment.id %}">{{ equipment }}</a>
       {% endfor %}
         &nbsp;
       </div>
