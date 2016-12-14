@@ -14,6 +14,7 @@ class DashboardDetail(LoggedInMixin, DetailView):
         context = super(DashboardDetail, self).get_context_data(**kwargs)
         context['samples'] = Sample.objects.filter(database_id=int(self.kwargs['pk']))
         context['results'] = Result.objects.select_related('sample').filter(sample__in = context['samples'])
+        context['sample_id'] = 0
 
         return context
 
