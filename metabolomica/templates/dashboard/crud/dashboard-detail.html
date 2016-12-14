@@ -10,8 +10,26 @@
   <h2>{{ database.name }}</h2>
   <hr/>
 
-  <div style="min-width: 100%; float: right; padding-top: 24px;">
+  <div style="min-width: 20%; float: right; padding-top: 24px;">
+    <div style="float: right;">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-12">
+            <select id="listar_result" class="form-control" name="listar_result" onChange="redirectUrl()">
+              <option value="0">All Results</option>
+              {% for result in results %}
+                <option value="{{result.id}}">{{result|truncatechars:36}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="min-width: 75%; float: right; padding-top: 24px;">
     <div style="float: left;">
+      <input type="checkbox" name="database" id="database" value="1">&nbsp;&nbsp;Database<br>
       <input type="checkbox" name="equipment" id="equipment" value="1">&nbsp;&nbsp;Equipment<br>
       <input type="checkbox" name="bio_sample" id="bio_sample" value="1">&nbsp;&nbsp;Bio Sample<br>
     </div>
@@ -31,11 +49,13 @@
     </div>
   </div>
 
+
   <div class="dashboard">
     <table class="table table-striped">
       <thead>
         <tr>
           <th class="database">Database</th>
+          <th class="lab_code">Sample</th>
           <th class="name">Result</th>
           <th class="experimental_condition">Condition</th>
           <th class="equipment">Equipment</th>
@@ -47,7 +67,6 @@
           <th class="ms_raw_data">MS Data</th>
           <th class="raw_data">Raw Data</th>
           <th class="process_data">Process Data</th>
-          <th class="lab_code">Lab Code</th>
           <th class="replicate">Replicate</th>
           <th class="species">Species</th>
           <th class="bio_sample">Bio Sample</th>
@@ -55,8 +74,9 @@
       </thead>
       <tbody>
       {% for result in results %}
-        <tr class="sample-{{result.sample.id}}">
+        <tr class="sample-{{result.sample.id}} result-{{result.id}}">
           <td class="database">{{result.sample.database}}</td>
+          <td class="lab_code"><a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample.lab_code }}</a></td>
           <td class="name"><a href="{% url 'detail_result' result.id %}">{{ result.name }}</a></td>
           <td class="experimental_condition">{{result.experimental_condition}}</td>
           <td class="equipment">
@@ -73,7 +93,6 @@
           <td class="ms_raw_data">{{result.ms_raw_data}}</td>
           <td class="raw_data">{{result.raw_data}}</td>
           <td class="process_data">{{result.process_data}}</td>
-          <td class="lab_code"><a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample.lab_code }}</a></td>
           <td class="replicate">{{result.sample.replicate}}</td>
           <td class="species">{{result.sample.species}}</td>
           <td class="bio_sample">{{result.sample.bio_sample}}</td>
@@ -85,6 +104,7 @@
 
  <script type="text/javascript">
     $(document).ready(function() {
+        $('.database').hide();
         $('.equipment').hide();
         $('.bio_sample').hide();
         $('.process_data').hide();
@@ -96,6 +116,12 @@
         $('.ms_raw_data').hide();
         $('.raw_data').hide();
 
+        $('#database').change(function() {
+            if($("#database").is(':checked'))
+              $('.database').show();
+            else
+              $('.database').hide();
+        });
 
         $('#equipment').change(function() {
             if($("#equipment").is(':checked'))
@@ -111,8 +137,6 @@
               $('.bio_sample').hide();
         });
 
-        $('#listar_result_sample').val({{sample_id}});
-
         $('#listar_result_sample').on('change', function () {
           $('tbody tr').hide();
 
@@ -124,9 +148,34 @@
           {
             $('.sample-' + $(this).val()).show();
           }
+
+          $('#listar_result').val(0);
+          $('#listar_result_sample').val($(this).val());
+
           return false;
         });
+
+        $('#listar_result').on('change', function () {
+          $('tbody tr').hide();
+
+          if ($(this).val() == 0)
+          {
+            $('tbody tr').show();
+          }
+          else
+          {
+            $('.result-' + $(this).val()).show();
+          }
+
+          $('#listar_result').val($(this).val());
+          $('#listar_result_sample').val(0);
+
+          return false;
+        });
+
     });
+
+
  </script>
 
 {% endblock content %}
