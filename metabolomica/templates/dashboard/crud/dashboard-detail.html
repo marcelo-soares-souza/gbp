@@ -3,56 +3,79 @@
 {% load bootstrap3 %}
 {% load gbp_filters %}
 
-{% block title %} <title>Databases Results/Samples</title> {% endblock title %}
+{% block title %} <title>Database {{database.name}}</title> {% endblock title %}
 
 {% block content %}
 
-  <h2>{{ database.name }} Results</h2>
+  <h2>{{ database.name }}</h2>
   <hr/>
+  <input type="checkbox" name="equipment" id="equipment" value="1">&nbsp;&nbsp;Equipment<br>
 
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Database</th>
-          <th>name</th>
-          <th>experimental_condition</th>
-          <th>equipment</th>
-          <th>analytical_method</th>
-          <th>equip_mode</th>
-          <th>extr_method</th>
-          <th>parameters_lc_ms</th>
-          <th>lc_raw_data</th>
-          <th>ms_raw_data</th>
-          <th>raw_data</th>
-          <th>process_data</th>
-          <th>Sample Lab Code</th>
-          <th>Sample Replicate</th>
-          <th>Sample Species</th>
-          <th>Sample Bio Sample</th>
+          <th class="database">Database</th>
+          <th class="name">Name</th>
+          <th class="experimental_condition">Condition</th>
+          <th class="equipment">Equipment</th>
+          <th class="analytical_method">Analytical Method</th>
+          <th class="equip_mode">Equip Mode</th>
+          <th class="extr_method">Extr Method</th>
+          <th class="parameters_lc_ms">Parameters LC MS</th>
+          <th class="lc_raw_data">LC Data</th>
+          <th class="ms_raw_data">MS Data</th>
+          <th class="raw_data">Raw Data</th>
+          <th class="process_data">Process Data</th>
+          <th class="lab_code">Lab Code</th>
+          <th class="replicate">Replicate</th>
+          <th class="species">Species</th>
+          <th class="bio_sample">Bio Sample</th>
         </tr>
       </thead>
       <tbody>
       {% for result in results %}
         <tr>
-          <td>{{result.name}}</td>
-          <td>{{result.experimental_condition}}</td>
-          <td>{{result.equipment}}</td>
-          <td>{{result.analytical_method}}</td>
-          <td>{{result.equip_mode}}</td>
-          <td>{{result.extr_method}}</td>
-          <td>{{result.parameters_lc_ms}}</td>
-          <td>{{result.lc_raw_data}}</td>
-          <td>{{result.ms_raw_data}}</td>
-          <td>{{result.raw_data}}</td>
-          <td>{{result.process_data}}</td>
-          <td>{{result.sample.database}}</td>
-          <td>{{result.sample.lab_code}}</td>
-          <td>{{result.sample.replicate}}</td>
-          <td>{{result.sample.species}}</td>
-          <td>{{result.sample.bio_sample}}</td>
+          <td class="database">{{result.sample.database}}</td>
+          <td class="name">{{result.name}}</td>
+          <td class="experimental_condition">{{result.experimental_condition}}</td>
+          <td class="equipment">{{result.equipment}}</td>
+          <td class="analytical_method">{{result.analytical_method}}</td>
+          <td class="equip_mode">{{result.equip_mode}}</td>
+          <td class="extr_method">{{result.extr_method}}</td>
+          <td class="parameters_lc_ms">{{result.parameters_lc_ms}}</td>
+          <td class="lc_raw_data">{{result.lc_raw_data}}</td>
+          <td class="ms_raw_data">{{result.ms_raw_data}}</td>
+          <td class="raw_data">{{result.raw_data}}</td>
+          <td class="process_data">{{result.process_data}}</td>
+          <td class="lab_code">{{result.sample.lab_code}}</td>
+          <td class="replicate">{{result.sample.replicate}}</td>
+          <td class="species">{{result.sample.species}}</td>
+          <td class="bio_sample">{{result.sample.bio_sample}}</td>
         </tr>
       {% endfor %}
       </tbody>
     </table>
+
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $('.equipment').hide();
+        $('.analytical_method').hide();
+        $('.equip_mode').hide();
+        $('.extr_method').hide();
+        $('.parameters_lc_ms').hide();
+        $('.lc_raw_data').hide();
+        $('.ms_raw_data').hide();
+        $('.raw_data').hide();
+
+
+	$('#equipment').change(function() {
+            if($("#equipment").is(':checked'))
+              $('.equipment').show();
+            else
+              $('.equipment').hide();
+        });
+
+    });
+ </script>
 
 {% endblock content %}
