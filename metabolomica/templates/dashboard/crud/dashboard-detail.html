@@ -10,12 +10,13 @@
   <h2>{{ database.name }}</h2>
   <hr/>
   <input type="checkbox" name="equipment" id="equipment" value="1">&nbsp;&nbsp;Equipment<br>
-
+  <input type="checkbox" name="bio_sample" id="bio_sample" value="1">&nbsp;&nbsp;Bio Sample<br>
+  <div class="dashboard">
     <table class="table table-striped">
       <thead>
         <tr>
           <th class="database">Database</th>
-          <th class="name">Name</th>
+          <th class="name">Experiment</th>
           <th class="experimental_condition">Condition</th>
           <th class="equipment">Equipment</th>
           <th class="analytical_method">Analytical Method</th>
@@ -36,9 +37,14 @@
       {% for result in results %}
         <tr>
           <td class="database">{{result.sample.database}}</td>
-          <td class="name">{{result.name}}</td>
+          <td class="name"><a href="{% url 'detail_result' result.id %}">{{ result.name }}</a></td>
           <td class="experimental_condition">{{result.experimental_condition}}</td>
-          <td class="equipment">{{result.equipment}}</td>
+          <td class="equipment">
+            {% for equipment in result.equipment.all %}
+              {% if not forloop.first %}, {% endif %}
+              <a href="{% url 'detail_equipment' equipment.id %}">{{ equipment }}</a>
+            {% endfor %}
+          </td>
           <td class="analytical_method">{{result.analytical_method}}</td>
           <td class="equip_mode">{{result.equip_mode}}</td>
           <td class="extr_method">{{result.extr_method}}</td>
@@ -47,7 +53,7 @@
           <td class="ms_raw_data">{{result.ms_raw_data}}</td>
           <td class="raw_data">{{result.raw_data}}</td>
           <td class="process_data">{{result.process_data}}</td>
-          <td class="lab_code">{{result.sample.lab_code}}</td>
+          <td class="lab_code"><a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample.lab_code }}</a></td>
           <td class="replicate">{{result.sample.replicate}}</td>
           <td class="species">{{result.sample.species}}</td>
           <td class="bio_sample">{{result.sample.bio_sample}}</td>
@@ -55,10 +61,13 @@
       {% endfor %}
       </tbody>
     </table>
+ </div>
 
  <script type="text/javascript">
     $(document).ready(function() {
         $('.equipment').hide();
+        $('.bio_sample').hide();
+        $('.process_data').hide();
         $('.analytical_method').hide();
         $('.equip_mode').hide();
         $('.extr_method').hide();
@@ -73,6 +82,13 @@
               $('.equipment').show();
             else
               $('.equipment').hide();
+        });
+
+	$('#bio_sample').change(function() {
+            if($("#bio_sample").is(':checked'))
+              $('.bio_sample').show();
+            else
+              $('.bio_sample').hide();
         });
 
     });
