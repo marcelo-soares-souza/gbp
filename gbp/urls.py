@@ -38,7 +38,7 @@ from metabolomica.views.experiment import ExperimentCreate, ExperimentDelete, Ex
 from metabolomica.views.equipment import EquipmentCreate, EquipmentDelete, EquipmentDetail, EquipmentList, EquipmentUpdate
 from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, ResultList, ResultUpdate
 from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
-from metabolomica.views.dashboard import DashboardMetabolomica, DashboardExperimentList, DashboardResultList, DashboardResultSampleList
+from metabolomica.views.dashboard import DashboardMetabolomica, DashboardExperimentList, DashboardResultList, DashboardResultSampleList, DashboardDetail
 
 urlpatterns = [
 
@@ -337,6 +337,7 @@ urlpatterns = [
 
     # Views DashBoard Metabolomica
     url(r'^metabolomica/dashboard/', DashboardMetabolomica.as_view(), name='dashboard_metabolomica'),
+    url(r'^metabolomica/dashboard-detail/(?P<pk>\d+)/$', DashboardDetail.as_view(), name='dashboard_detail'),
     url(r'^metabolomica/dashboard-experiment/(?P<pk>\d+)/$', DashboardExperimentList.as_view(), name='dashboard_experiment'),
     url(r'^metabolomica/dashboard-experiment/', DashboardExperimentList.as_view(), name='dashboard_experiment'),
     url(r'^metabolomica/dashboard-result/sample/(?P<pk>\d+)/$', DashboardResultSampleList.as_view(), name='dashboard_result_sample'),

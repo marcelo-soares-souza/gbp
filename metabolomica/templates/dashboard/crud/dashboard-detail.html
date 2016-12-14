@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>Databases Results/Samples</title> {% endblock title %}
+
+{% block content %}
+
+  <h2>{{ database.name }} Results</h2>
+  <hr/>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Database</th>
+          <th>name</th>
+          <th>experimental_condition</th>
+          <th>equipment</th>
+          <th>analytical_method</th>
+          <th>equip_mode</th>
+          <th>extr_method</th>
+          <th>parameters_lc_ms</th>
+          <th>lc_raw_data</th>
+          <th>ms_raw_data</th>
+          <th>raw_data</th>
+          <th>process_data</th>
+          <th>Sample Lab Code</th>
+          <th>Sample Replicate</th>
+          <th>Sample Species</th>
+          <th>Sample Bio Sample</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for result in results %}
+        <tr>
+          <td>{{result.name}}</td>
+          <td>{{result.experimental_condition}}</td>
+          <td>{{result.equipment}}</td>
+          <td>{{result.analytical_method}}</td>
+          <td>{{result.equip_mode}}</td>
+          <td>{{result.extr_method}}</td>
+          <td>{{result.parameters_lc_ms}}</td>
+          <td>{{result.lc_raw_data}}</td>
+          <td>{{result.ms_raw_data}}</td>
+          <td>{{result.raw_data}}</td>
+          <td>{{result.process_data}}</td>
+          <td>{{result.sample.database}}</td>
+          <td>{{result.sample.lab_code}}</td>
+          <td>{{result.sample.replicate}}</td>
+          <td>{{result.sample.species}}</td>
+          <td>{{result.sample.bio_sample}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+{% endblock content %}

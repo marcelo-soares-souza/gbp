@@ -1,12 +1,30 @@
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 
 from projeto.views.login import LoggedInMixin
-from metabolomica.models import Experiment, Result, Sample
+from metabolomica.models import Experiment, Result, Sample, Database
 
+class DashboardDetail(LoggedInMixin, DetailView):
+    template_name = 'dashboard/crud/dashboard-detail.html'
+    context_object_name = 'database'
+    model = Database
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardDetail, self).get_context_data(**kwargs)
+        context['samples'] = Sample.objects.filter(database_id=int(self.kwargs['pk']))
+        context['results'] = Result.objects.select_related('sample').filter(sample__in = context['samples'])
+
+        return context
 
 class DashboardMetabolomica(LoggedInMixin, TemplateView):
     template_name = 'dashboard/crud/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardMetabolomica, self).get_context_data(**kwargs)
+        context['databases'] = Database.objects.all()
+
+        return context
 
 class DashboardExperimentList(LoggedInMixin, ListView):
     template_name = 'dashboard/crud/experiments.html'
