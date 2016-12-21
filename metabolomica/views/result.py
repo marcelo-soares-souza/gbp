@@ -75,7 +75,7 @@ class ResultUpdate(LoggedInMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(ResultUpdate, self).get_context_data(**kwargs)
-        context["results"] = Result.objects.all().order_by('numero')
+        context["results"] = Result.objects.all().order_by('data_atualizado')
         return context
 
     success_url = reverse_lazy('list_result')
@@ -87,12 +87,13 @@ class ResultDelete(LoggedInMixin, DeleteView):
     success_url = reverse_lazy('list_result')
 
 
-class FileUpload(LoggedInMixin, DetailView):
+class ResultFileUpload(LoggedInMixin, DetailView):
     def model_form_upload(request):
         if request.method == 'POST':
             form = DocumentForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
+                return redirect('result/crud/detail.html')
         else:
             form = DocumentForm()
         return render(request, 'crud/detail.html', {

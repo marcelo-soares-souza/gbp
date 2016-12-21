@@ -75,7 +75,7 @@ class DatabaseUpdate(LoggedInMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(DatabaseUpdate, self).get_context_data(**kwargs)
-        context["databases"] = Database.objects.all().order_by('numero')
+        context["databases"] = Database.objects.all().order_by('data_atualizado')
         return context
 
     success_url = reverse_lazy('list_database')

@@ -75,7 +75,7 @@ class SampleUpdate(LoggedInMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(SampleUpdate, self).get_context_data(**kwargs)
-        context["samples"] = Sample.objects.all().order_by('numero')
+        context["samples"] = Sample.objects.all().order_by('data_atualizado')
         return context
 
     success_url = reverse_lazy('list_sample')

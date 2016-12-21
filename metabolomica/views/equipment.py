@@ -74,7 +74,7 @@ class EquipmentUpdate(LoggedInMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EquipmentUpdate, self).get_context_data(**kwargs)
-        context["equipments"] = Equipment.objects.all().order_by('numero')
+        context["equipments"] = Equipment.objects.all().order_by('data_atualizado')
         return context
 
     success_url = reverse_lazy('list_equipment')
