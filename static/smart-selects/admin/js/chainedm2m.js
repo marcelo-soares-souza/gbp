@@ -30,10 +30,22 @@
             },
 
             fill_field: function(val, initial_value, elem_id, url, initial_parent, auto_choose){
+                function trigger_chosen_updated() {
+                    if ($.fn.chosen !== undefined) {
+                        $(elem_id).trigger('chosen:updated');
+                    }
+                }
+
                 if (!val || val === ''){
                     $(elem_id).html('');
+                    trigger_chosen_updated();
                     return;
                 }
+
+                // Make sure that these are always an arrays
+                val = [].concat(val);
+                initial_parent = [].concat(initial_parent);
+
                 var target_url = url + "/" + val + "/";
                 $.getJSON(target_url, function(j){
                     var options = '';
@@ -47,7 +59,7 @@
                         $(elem_id).width(width + 'px');
 
                     // if val and initial_parent have any common values, we need to set selected options.
-                    if($(val).filter(initial_parent).length > 0) {
+                    if($(val).filter(initial_parent).length >= 0) {
                         for (i = 0; i < initial_value.length; i++) {
                             $(elem_id + ' option[value="'+ initial_value[i] +'"]').attr('selected', 'selected');
                         }
@@ -58,9 +70,7 @@
 
                     $(elem_id).trigger('change');
 
-                    if ($.fn.chosen !== undefined) {
-                        $(elem_id).trigger('chosen:updated');
-                    }
+                    trigger_chosen_updated();
                 });
             },
 

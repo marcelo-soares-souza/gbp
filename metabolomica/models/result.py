@@ -11,8 +11,7 @@ class Result(models.Model, TemplateModelMixin):
     name = models.CharField(max_length=120)
     sample = models.ForeignKey(Sample, null=True, blank=True)
     experimental_condition = models.TextField(blank=True)
-    equipment = models.ManyToManyField(Equipment, blank=True,
-                                      related_name='result_equipment')
+    equipment = models.ManyToManyField(Equipment, blank=True, related_name='result_equipment')
     analytical_method = models.CharField(max_length=40, blank=True)
     equip_mode = models.CharField(max_length=40, null=True, blank=True)  # MS Mode
     extr_method = models.FileField(upload_to='documents/%Y/%m/%d/', null=True, blank=True)  # Extraction data
