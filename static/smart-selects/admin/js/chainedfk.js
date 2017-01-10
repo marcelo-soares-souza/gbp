@@ -31,7 +31,7 @@
                 if (!val || val === ''){
                     var options = '<option value="">' + empty_label +'</option>';
                     $(elem_id).html(options);
-                    $(elem_id + ' option:first').attr('selected', 'selected');
+                    $(elem_id + ' option:first').prop('selected', true);
                     $(elem_id).trigger('change');
                     return;
                 }
@@ -44,12 +44,13 @@
                     $(elem_id).html(options);
                     if (navigator.appVersion.indexOf("MSIE") != -1)
                         $(elem_id).width(width + 'px');
-                    $(elem_id + ' option:first').attr('selected', 'selected');
                     if(init_value){
-                        $(elem_id + ' option[value="'+ init_value +'"]').attr('selected', 'selected');
+                        $(elem_id + ' option[value="'+ init_value +'"]').prop('selected', true);
+                    } else {
+                        $(elem_id + ' option:first').prop('selected', true);
                     }
                     if(auto_choose && j.length == 1){
-                        $(elem_id + ' option[value="'+ j[0].value +'"]').attr('selected', 'selected');
+                        $(elem_id + ' option[value="'+ j[0].value +'"]').prop('selected', true);
                     }
                     $(elem_id).trigger('change');
                 });

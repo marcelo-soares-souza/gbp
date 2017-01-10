@@ -4,6 +4,7 @@ from django.views.generic import ListView, TemplateView, DetailView
 from projeto.views.login import LoggedInMixin
 from metabolomica.models import Experiment, Result, Sample, Database
 
+
 class DashboardDetail(LoggedInMixin, DetailView):
     template_name = 'dashboard/crud/dashboard-detail.html'
     context_object_name = 'database'
@@ -18,6 +19,7 @@ class DashboardDetail(LoggedInMixin, DetailView):
 
         return context
 
+
 class DashboardMetabolomica(LoggedInMixin, TemplateView):
     template_name = 'dashboard/crud/dashboard.html'
 
@@ -26,6 +28,7 @@ class DashboardMetabolomica(LoggedInMixin, TemplateView):
         context['databases'] = Database.objects.all()
 
         return context
+
 
 class DashboardExperimentList(LoggedInMixin, ListView):
     template_name = 'dashboard/crud/experiments.html'
@@ -52,6 +55,7 @@ class DashboardExperimentList(LoggedInMixin, ListView):
             context['experiment_id'] = self.kwargs['pk']
 
         return context
+
 
 class DashboardResultList(LoggedInMixin, ListView):
     template_name = 'dashboard/crud/results.html'
@@ -80,6 +84,7 @@ class DashboardResultList(LoggedInMixin, ListView):
             context['result_id'] = self.kwargs['pk']
 
         return context
+
 
 class DashboardResultSampleList(LoggedInMixin, ListView):
     template_name = 'dashboard/crud/results.html'
