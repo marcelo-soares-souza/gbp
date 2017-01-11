@@ -75,7 +75,7 @@ class ExperimentUpdate(LoggedInMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(ExperimentUpdate, self).get_context_data(**kwargs)
-        context["experiments"] = Experiment.objects.all().order_by('numero')
+        context["experiments"] = Experiment.objects.all().order_by('data_atualizado')
         return context
 
     success_url = reverse_lazy('list_experiment')
