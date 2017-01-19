@@ -5,7 +5,7 @@ from projeto.models import Projeto
 from projeto.models.template import TemplateModelMixin
 
 
-class Experiment(models.Model, TemplateModelMixin):
+class Approach(models.Model, TemplateModelMixin):
 
     project = models.ForeignKey(Projeto, null=True, blank=True)
     name = models.CharField(max_length=64)
@@ -18,8 +18,8 @@ class Experiment(models.Model, TemplateModelMixin):
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'experiment'
-        verbose_name_plural = 'experiments'
+        verbose_name = 'approach'
+        verbose_name_plural = 'approaches'
 
     def __str__(self):
         return '%s' % (self.name)

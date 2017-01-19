@@ -2,13 +2,13 @@
 
 {% load bootstrap3 %}
 <!-- Cadastrar/Atualizar -->
-{% block title %} <title>Add/Update Experiment</title> {% endblock title %}
+{% block title %} <title>Add/Update Approach</title> {% endblock title %}
 
 {% block content %}
 
     {% if 'update' in request.resolver_match.url_name %}
       <!-- Editando Updating -->
-      <ul class="nav nav-tabs" id="myTab" ><li class="active"><a href="#"> Updating {{ experiment }}</a></li></ul>
+      <ul class="nav nav-tabs" id="myTab" ><li class="active"><a href="#"> Updating {{ approach }}</a></li></ul>
     {% else %}
       {% include "base/menu-metabolomica.html" %}
     {% endif %}

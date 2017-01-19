@@ -12,8 +12,8 @@
           {% render_field filter.form.username class="form-control" %}
         </div>
         <div class="form-group col-sm-4 col-md-3">
-          {{ filter.form.experiment.label_tag }}
-          {% render_field filter.form.experiment class="form-control" %}
+          {{ filter.form.approach.label_tag }}
+          {% render_field filter.form.approach class="form-control" %}
         </div>
         <div class="form-group col-sm-4 col-md-3">
           {{ filter.form.user.label_tag }}
@@ -45,7 +45,7 @@
     <thead>
       <tr>
         <th>Project</th>
-        <th>Experiment</th>
+        <th>Approach</th>
         <th>Equipment</th>
         <th>Sample</th>
       </tr>
@@ -54,7 +54,7 @@
       {% for user in filter.qs %}
         <tr>
           <td>{{ result.project }}</td>
-          <td>{{ result.experiment }}</td>
+          <td>{{ result.approach }}</td>
           <td>{{ result.equipment }}</td>
           <td>{{ result.sample }}</td>
           <td>

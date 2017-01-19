@@ -1,12 +1,12 @@
 from django import forms
 
-from metabolomica.models import Experiment
+from metabolomica.models import Approach
 
 
-class ExperimentForm(forms.ModelForm):
+class ApproachForm(forms.ModelForm):
 
     class Meta:
-        model = Experiment
+        model = Approach
         fields = ('project',
                   'name',
                   'description')
