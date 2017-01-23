@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ approach.empresa_executora }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <h2>{{ approach.name }}</h2>
+
+    <hr/>
+    <p><b>Project:</b> <br/> <div class='text-highlight'>{{ approach.project }}&nbsp;</div></p>
+    <p><b>Added:</b> <br/> <div class='text-highlight'>{{ approach.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <!-- Editar Update, Apagar Delete, Voltar Back -->
+          <a href="/metabolomica{{ approach.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+          {% if request.user == approach.criado_por or request.user.is_superuser %}
+            <a href="/metabolomica{{ approach.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+          {% endif %}
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Back</a>
+        {% endbuttons %}
+      </p>
+
+{% endblock content %}

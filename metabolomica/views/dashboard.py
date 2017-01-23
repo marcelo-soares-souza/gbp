@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView
 
 from projeto.views.login import LoggedInMixin
-from metabolomica.models import Experiment, Result, Sample, Database
+from metabolomica.models import Approach, Result, Sample, Database
 
 
 class DashboardDetail(LoggedInMixin, DetailView):
@@ -30,13 +30,13 @@ class DashboardMetabolomica(LoggedInMixin, TemplateView):
         return context
 
 
-class DashboardExperimentList(LoggedInMixin, ListView):
-    template_name = 'dashboard/crud/experiments.html'
-    context_object_name = 'experiments'
-    model = Experiment
+class DashboardApproachList(LoggedInMixin, ListView):
+    template_name = 'dashboard/crud/approaches.html'
+    context_object_name = 'approaches'
+    model = Approach
     fields = '__all__'
 
-    success_url = reverse_lazy('dashboard_experiment')
+    success_url = reverse_lazy('dashboard_approach')
 
     def get_queryset(self):
         if self.kwargs:
@@ -47,12 +47,12 @@ class DashboardExperimentList(LoggedInMixin, ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        context = super(DashboardExperimentList, self).get_context_data(**kwargs)
-        context['experiments_list'] = Experiment.objects.all()
-        context['experiment_id'] = 0
+        context = super(DashboardApproachList, self).get_context_data(**kwargs)
+        context['approaches_list'] = Approach.objects.all()
+        context['approach_id'] = 0
 
         if self.kwargs:
-            context['experiment_id'] = self.kwargs['pk']
+            context['approach_id'] = self.kwargs['pk']
 
         return context
 

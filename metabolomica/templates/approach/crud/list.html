@@ -1,0 +1,52 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+<!-- Listar Todos os Approach -->
+{% block title %} <title>List all Approaches</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        <!-- Adicionar Add -->
+        <a href="{% url 'new_approach' %}" class="btn btn-sm btn-success">Add</a>
+      </div>
+    </div>
+
+    {% if not approaches %}
+      <!-- Nenhum Dado Cadastrado, Cadastrar? Add? -->
+      <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_approach' %}">Add?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for approach in approaches %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="/metabolomica{{ approach.get_detail_url }}">{{ approach.name }}</a></h3>
+
+                <br/>
+
+                <p>
+                    <!-- Editar Update -->
+                    <a href="/metabolomica{{ approach.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+                    {% if request.user == approach.criado_por or request.user.is_superuser %}
+                      <!-- Apagar Delete -->
+                      <a href="/metabolomica{{ approach.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ approach.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

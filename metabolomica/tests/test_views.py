@@ -50,24 +50,24 @@ class MetabolomicaSampleDeleteTest(TestCase):
 
 
 # Experiment Tests
-class MetabolomicaExperimentHomeTest(TestCase):
+class MetabolomicaApproachHomeTest(TestCase):
 
     def test_home_http_response_code(self):
-        response = self.client.get(reverse('home_experiment'), follow=True)
+        response = self.client.get(reverse('home_approach'), follow=True)
         self.assertEqual(response.status_code, 200)
 
 
-class MetabolomicaExperimentNewTest(TestCase):
+class MetabolomicaApproachNewTest(TestCase):
 
     def test_new_http_response_code(self):
-        response = self.client.get(reverse('new_experiment'), follow=True)
+        response = self.client.get(reverse('new_approach'), follow=True)
         self.assertEqual(response.status_code, 200)
 
 
-class MetabolomicaExperimentListTest(TestCase):
+class MetabolomicaApproachListTest(TestCase):
 
     def test_list_http_response_code(self):
-        response = self.client.get(reverse('list_experiment'), follow=True)
+        response = self.client.get(reverse('list_approach'), follow=True)
         self.assertEqual(response.status_code, 200)
 
 

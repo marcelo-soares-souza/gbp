@@ -34,11 +34,11 @@ from fddb.views import FddbCreate, FddbDelete, FddbDetail, FddbList, FddbUpdate,
 
 # URLs Metabolomica
 from metabolomica.views.sample import SampleCreate, SampleDelete, SampleDetail, SampleList, SampleUpdate
-from metabolomica.views.experiment import ExperimentCreate, ExperimentDelete, ExperimentDetail, ExperimentList, ExperimentUpdate
+from metabolomica.views.approach import ApproachCreate, ApproachDelete, ApproachDetail, ApproachList, ApproachUpdate
 from metabolomica.views.equipment import EquipmentCreate, EquipmentDelete, EquipmentDetail, EquipmentList, EquipmentUpdate
 from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, ResultList, ResultUpdate
 from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
-from metabolomica.views.dashboard import DashboardMetabolomica, DashboardExperimentList, DashboardResultList, DashboardResultSampleList, DashboardDetail
+from metabolomica.views.dashboard import DashboardMetabolomica, DashboardApproachList, DashboardResultList, DashboardResultSampleList, DashboardDetail
 
 urlpatterns = [
 
@@ -303,13 +303,13 @@ urlpatterns = [
     url(r'^metabolomica/sample/update/(?P<pk>\d+)/$', SampleUpdate.as_view(), name='update_sample'),
     url(r'^metabolomica/sample/delete/(?P<pk>\d+)/$', SampleDelete.as_view(), name='delete_sample'),
 
-    # Views de Experiment
-    url(r'^metabolomica/experiment$', ExperimentList.as_view(), name='home_experiment'),
-    url(r'^metabolomica/experiment/new/$', ExperimentCreate.as_view(), name='new_experiment'),
-    url(r'^metabolomica/experiment/list/', ExperimentList.as_view(), name='list_experiment'),
-    url(r'^metabolomica/experiment/detail/(?P<pk>\d+)/$', ExperimentDetail.as_view(), name='detail_experiment'),
-    url(r'^metabolomica/experiment/update/(?P<pk>\d+)/$', ExperimentUpdate.as_view(), name='update_experiment'),
-    url(r'^metabolomica/experiment/delete/(?P<pk>\d+)/$', ExperimentDelete.as_view(), name='delete_experiment'),
+    # Views de Approach
+    url(r'^metabolomica/approach$', ApproachList.as_view(), name='home_approach'),
+    url(r'^metabolomica/approach/new/$', ApproachCreate.as_view(), name='new_approach'),
+    url(r'^metabolomica/approach/list/', ApproachList.as_view(), name='list_approach'),
+    url(r'^metabolomica/approach/detail/(?P<pk>\d+)/$', ApproachDetail.as_view(), name='detail_approach'),
+    url(r'^metabolomica/approach/update/(?P<pk>\d+)/$', ApproachUpdate.as_view(), name='update_approach'),
+    url(r'^metabolomica/approach/delete/(?P<pk>\d+)/$', ApproachDelete.as_view(), name='delete_approach'),
 
     # Views de Equipment
     url(r'^metabolomica/equipment$', EquipmentList.as_view(), name='home_equipment'),
@@ -338,8 +338,8 @@ urlpatterns = [
     # Views DashBoard Metabolomica
     url(r'^metabolomica/dashboard/', DashboardMetabolomica.as_view(), name='dashboard_metabolomica'),
     url(r'^metabolomica/dashboard-detail/(?P<pk>\d+)/$', DashboardDetail.as_view(), name='dashboard_detail'),
-    url(r'^metabolomica/dashboard-experiment/(?P<pk>\d+)/$', DashboardExperimentList.as_view(), name='dashboard_experiment'),
-    url(r'^metabolomica/dashboard-experiment/', DashboardExperimentList.as_view(), name='dashboard_experiment'),
+    url(r'^metabolomica/dashboard-approach/(?P<pk>\d+)/$', DashboardApproachList.as_view(), name='dashboard_approach'),
+    url(r'^metabolomica/dashboard-approach/', DashboardList.as_view(),name='dashboard_approach'),
     url(r'^metabolomica/dashboard-result/sample/(?P<pk>\d+)/$', DashboardResultSampleList.as_view(), name='dashboard_result_sample'),
     url(r'^metabolomica/dashboard-result/(?P<pk>\d+)/$', DashboardResultList.as_view(), name='dashboard_result'),
     url(r'^metabolomica/dashboard-result/', DashboardResultList.as_view(), name='dashboard_result'),
