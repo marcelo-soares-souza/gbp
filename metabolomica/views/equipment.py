@@ -16,7 +16,7 @@ class EquipmentList(LoggedInMixin, SortableListView):
                            }  # Atualizado Em Modified
 
     default_sort_field = 'system'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'equipment/crud/list.html'
     context_object_name = 'equipments'
