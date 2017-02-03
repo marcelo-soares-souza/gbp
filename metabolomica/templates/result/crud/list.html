@@ -23,20 +23,21 @@
 
         {% include 'base/sort_links.html' %}
         {% for result in results %}
-            <ul class="list-group">
+             <ul class="list-group">
               <li class="list-group-item">
 
-                <h3><a href="/metabolomica{{ result.get_detail_url }}">{{ result.name }}</a></h3>
-                <p><b>Experimental Condition: </b> <br/> <div class='text-highlight'> {{ result.experimental_condition }}&nbsp;</div></p>
+                <h4><a href="/metabolomica{{ result.get_detail_url }}">{{ result.name }}</a></h4>
 
-                <br/>
-
-                <p>
+                <p><b>Experimental Condition: </b> <br/>
+                <div class='text-highlight'> {{ result.experimental_condition }}&nbsp;
+                  <span class="btn">
                     <!-- Editar Update, Apagar Delete -->
                     <a href="/metabolomica{{ result.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
                     {% if request.user == result.criado_por or request.user.is_superuser %}
                       <a href="/metabolomica{{ result.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
                     {% endif %}
+                  </span>
+                </div>
                 </p>
 
                 <div class="data-atualizado">{{ result.data_atualizado }}</div>
