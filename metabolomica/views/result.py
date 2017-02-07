@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from sortable_listview import SortableListView
 
@@ -17,7 +17,7 @@ class ResultList(LoggedInMixin, SortableListView):
                            }  # Atualizado Em Modified
 
     default_sort_field = 'name'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'result/crud/list.html'
     context_object_name = 'results'
@@ -90,12 +90,12 @@ class ResultDelete(LoggedInMixin, DeleteView):
 class ResultFileUpload(LoggedInMixin, DetailView):
     def model_form_upload(request):
         if request.method == 'POST':
-            form = DocumentForm(request.POST, request.FILES)
+            form = ResultForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect('result/crud/detail.html')
         else:
-            form = DocumentForm()
-        return render(request, 'crud/detail.html', {
+            form = ResultForm()
+        return render(request, 'result/crud/detail.html', {
             'form': form
         })

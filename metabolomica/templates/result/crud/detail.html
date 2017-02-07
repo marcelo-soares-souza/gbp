@@ -11,23 +11,62 @@
     <h2>{{ result.name }}</h2>
     <hr/>
 
-<p><b>Sample:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample }}</a>&nbsp;</div></p>
+    <p><b>Sample:</b> <br/> <div class='text-highlight'>
+      <a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample }}</a>&nbsp;</div></p>
+
     <p><b>Experimental Condition:</b> <br/> <div class='text-highlight'>{{ result.experimental_condition }}&nbsp;</div></p>
+
     {% if result.equipment.all %}
-    <p><b>Equipments: </b>
-    <div class='text-highlight'>
-      {% for equipment in result.equipment.all %}
-      {% if not forloop.first %}, {% endif %}
-        <a href="{% url 'detail_equipment' equipment.id %}">{{ equipment }}</a>
-      {% endfor %}
-        &nbsp;
-      </div>
-       </p>
+      <p><b>Equipments:</b>
+      <div class='text-highlight'>
+        {% for equipment in result.equipment.all %}
+          {% if not forloop.first %}, {% endif %}
+            <a href="{% url 'detail_equipment' equipment.id %}">{{ equipment }}</a>
+        {% endfor %}&nbsp;
+        </div></p>
      {% endif %}
 
     <b>Equipment Mode:</b> <br/> <div class='text-highlight'>{{ result.equip_mode }}&nbsp;</div></p>
+
+    <p><b>Extraction Method:</b> <br/> <div class='text-highlight'>
+      {% if result.extr_method %}
+        <a href="{{ result.extr_method.url }}">{{ result.extr_method }}</a>&nbsp;
+      {% endif %}&nbsp; 
+    </div></p>
+
     <p><b>Analytical Method:</b> <br/> <div class='text-highlight'>{{ result.analytical_method }}&nbsp;</div></p>
-    <p><b>Analytical Parameters:</b> <br/> <div class='text-highlight'>{{ result.parameters_lc_ms.uploaded_file.url }}&nbsp;</div></p>
+
+    <p><b>Analytical Parameters:</b> <br/> <div class='text-highlight'>
+      {% if result.parameters_lc_ms %}
+        <a href="{{ result.parameters_lc_ms.url }}">{{ result.parameters_lc_ms }}</a>&nbsp;
+      {% endif %}&nbsp;
+    </div></p>
+
+
+    <p><b>Analytical Method - LC Raw Data:</b><br/><div class='text-highlight'>
+      {% if result.lc_raw_data %}
+        <a href="{{ result.lc_raw_data.url }}">{{ result.lc_raw_data }}</a>&nbsp;
+      {% endif %}&nbsp;
+    </div></p>
+
+    <p><b>Analytical Method - MS Raw Data:</b> <br/> <div class='text-highlight'>
+      {% if result.ms_raw_data %}
+        <a href="{{ result.ms_raw_data }}">{{ result.ms_raw_data }}</a>&nbsp;
+      {% endif %}&nbsp;
+    </div></p>
+
+    <p><b>Result Raw Data:</b> <br/> <div class='text-highlight'>
+      {% if result.raw_data %}
+        <a href="{{ result.raw_data.url }}">{{ result.raw_data }}</a>&nbsp;
+      {% endif %}&nbsp;
+    </div></p>
+
+    <p><b>Processed Data:</b> <br/> <div class='text-highlight'>
+      {% if result.process_data %}
+        <a href="result.process_data.url">{{ result.process_data }}</a>&nbsp;
+      {% endif %}&nbsp;
+    </div><p>      
+
     <!-- Cadastrado: Added:-->
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
 
@@ -50,3 +89,4 @@
 
 {{ form.media }}
 {% endblock %}
+

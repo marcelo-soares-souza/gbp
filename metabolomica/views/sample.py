@@ -17,7 +17,7 @@ class SampleList(LoggedInMixin, SortableListView):
                            }
 
     default_sort_field = 'lab_code'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'sample/crud/list.html'
     context_object_name = 'samples'

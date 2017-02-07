@@ -17,7 +17,7 @@ class DatabaseList(LoggedInMixin, SortableListView):
                            }
 
     default_sort_field = 'name'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'database/crud/list.html'
     context_object_name = 'databases'

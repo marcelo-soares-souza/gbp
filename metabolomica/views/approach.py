@@ -16,7 +16,7 @@ class ApproachList(LoggedInMixin, SortableListView):
                            }  # Atualizado Em Modified
 
     default_sort_field = 'name'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'approach/crud/list.html'
     context_object_name = 'approaches'
