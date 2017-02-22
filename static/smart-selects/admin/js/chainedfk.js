@@ -27,32 +27,47 @@
                 win.close();
             },
             fill_field: function(val, init_value, elem_id, url, empty_label, auto_choose){
+                var $selectField = $(elem_id);
+                var options = [];
                 url = url + "/" + val+ "/";
+
+                var empty_option =  $('<option></option>')
+                    .attr('value', '')
+                    .text(empty_label);
+
                 if (!val || val === ''){
-                    var options = '<option value="">' + empty_label +'</option>';
-                    $(elem_id).html(options);
-                    $(elem_id + ' option:first').prop('selected', true);
-                    $(elem_id).trigger('change');
+                    empty_option.prop('selected', true);
+                    options.push(empty_option);
+
+                    $selectField.html(options);
+                    $selectField.trigger('change');
                     return;
                 }
                 $.getJSON(url, function(j){
-                    var options = '<option value="">' + empty_label +'</option>';
-                    for (var i = 0; i < j.length; i++) {
-                        options += '<option value="' + j[i].value + '">' + j[i].display + '<'+'/option>';
+                    auto_choose = j.length == 1 && auto_choose;
+                    // Append empty label as the first option
+                    if (!(init_value || auto_choose)) {
+                        empty_option.prop('selected', true);
                     }
-                    var width = $(elem_id).outerWidth();
-                    $(elem_id).html(options);
+                    options.push(empty_option);
+
+                    // Append each option to the select
+                    $.each(j, function (index, optionData) {
+                        var option = $('<option></option>')
+                            .prop('value', optionData.value)
+                            .text(optionData.display);
+                        if (auto_choose || init_value && optionData.value == init_value) {
+                            option.prop('selected', true);
+                        }
+                        options.push(option);
+                    });
+
+                    $selectField.html(options);
+                    var width = $selectField.outerWidth();
                     if (navigator.appVersion.indexOf("MSIE") != -1)
-                        $(elem_id).width(width + 'px');
-                    if(init_value){
-                        $(elem_id + ' option[value="'+ init_value +'"]').prop('selected', true);
-                    } else {
-                        $(elem_id + ' option:first').prop('selected', true);
-                    }
-                    if(auto_choose && j.length == 1){
-                        $(elem_id + ' option[value="'+ j[0].value +'"]').prop('selected', true);
-                    }
-                    $(elem_id).trigger('change');
+                        $selectField.width(width + 'px');
+
+                    $selectField.trigger('change');
                 });
             },
             init: function(chainfield, url, id, init_value, empty_label, auto_choose) {
