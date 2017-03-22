@@ -3,7 +3,7 @@
 {% load bootstrap3 %}
 {% load gbp_filters %}
 
-{% block title %} <title>{{ sample.empresa_executora }}</title> {% endblock title %}
+{% block title %} <title>{{ sample.name }}</title> {% endblock title %}
 
 {% block content %}
 
@@ -15,17 +15,14 @@
     <p><b>Database:</b> <br/> <div class='text-highlight'>{{ sample.database }}&nbsp;</div></p>
     <p><b>Species:</b> <br/> <div class='text-highlight'>{{ sample.species }}&nbsp;</div></p>
     <p><b>User:</b> <br/> <div class='text-highlight'>{{ sample.criado_por|verifyfullname }}&nbsp;</div></p>
-    <!-- Cadastrado: Added:-->
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ sample.data_cadastro }}&nbsp;</div></p>
 
     <hr/>
 
       <p>
         {% buttons %}
-          <!-- Editar Update, Apagar Delete, Voltar Back -->
           <a href="/metabolomica{{ sample.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
           {% if request.user == sample.criado_por or request.user.is_superuser %}
-            <!-- Apagar Delete -->
             <a href="/metabolomica{{ sample.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
           {% endif %}
             <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Back</a>

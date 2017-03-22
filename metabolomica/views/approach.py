@@ -8,12 +8,8 @@ from projeto.views.login import LoggedInMixin
 
 
 class ApproachList(LoggedInMixin, SortableListView):
-    allowed_sort_fields = {
-                  'name':
-                  {'default_direction': '', 'verbose_name': 'Name'},
-                  'data_atualizado':
-                  {'default_direction': '', 'verbose_name': 'Modified'}
-                           }  # Atualizado Em Modified
+    allowed_sort_fields = {'name': {'default_direction': '', 'verbose_name': 'Name'},
+                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Modified'}}
 
     default_sort_field = 'name'
     paginate_by = 10
@@ -27,9 +23,7 @@ class ApproachList(LoggedInMixin, SortableListView):
 
     def get_queryset(self):
         if self.kwargs:
-            queryset = self.model._default_manager.filter(
-                                   metabolomica_id=int(self.kwargs['pk'])
-                                                          )
+            queryset = self.model._default_manager.filter(metabolomica_id=int(self.kwargs['pk']))
         else:
             queryset = self.model._default_manager.all()
 

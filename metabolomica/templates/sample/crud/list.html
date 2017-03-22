@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
-<!-- Listar Todos os Sample -->
+
 {% block title %} <title>List all Samples</title> {% endblock title %}
 
 {% block content %}
@@ -10,13 +10,12 @@
 
     <div style="min-width: 50%; float: right;">
       <div style="float: right;">
-        <!-- Adicionar Add -->
         <a href="{% url 'new_sample' %}" class="btn btn-sm btn-success">Add</a>
       </div>
     </div>
 
     {% if not samples %}
-      <!-- Nenhum Dado Cadastrado, Cadastrar? -->
+
       <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_sample' %}">Add?</a> </h4></div>
 
     {% else %}
@@ -29,8 +28,8 @@
                 <h4><a href="/metabolomica{{ sample.get_detail_url }}">{{ sample.lab_code }}</a></h4>
 
                 <p><b>Species: </b> <br/>
-                <div class='text-highlight'> {{ sample.species }}&nbsp;
-                   <!-- Editar Update, Apagar Delete -->
+
+		<div class='text-highlight'> {{ sample.species }}&nbsp;
                    <span class="btn">
                       <a href="/metabolomica{{ sample.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
                       {% if request.user == sample.criado_por or request.user.is_superuser %}

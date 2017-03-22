@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% load bootstrap3 %}
-<!-- Listar Todos os Result -->
+
 {% block title %} <title>List all Results</title> {% endblock title %}
 
 {% block content %}
@@ -10,13 +10,13 @@
 
     <div style="min-width: 50%; float: right;">
       <div style="float: right;">
-        <!-- Adicionar Add -->
+
         <a href="{% url 'new_result' %}" class="btn btn-sm btn-success">Add</a>
       </div>
     </div>
 
     {% if not results %}
-      <!-- Nenhum Dado Cadastrado. Cadastrar? -->
+
       <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_result' %}">Add?</a> </h4></div>
 
     {% else %}
@@ -31,7 +31,7 @@
                 <p><b>Experimental Condition: </b> <br/>
                 <div class='text-highlight'> {{ result.experimental_condition }}&nbsp;
                   <span class="btn">
-                    <!-- Editar Update, Apagar Delete -->
+
                     <a href="/metabolomica{{ result.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
                     {% if request.user == result.criado_por or request.user.is_superuser %}
                       <a href="/metabolomica{{ result.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>

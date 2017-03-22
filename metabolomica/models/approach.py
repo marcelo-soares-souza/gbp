@@ -1,13 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from projeto.models import Projeto
 from projeto.models.template import TemplateModelMixin
 
 
 class Approach(models.Model, TemplateModelMixin):
 
-    project = models.ForeignKey(Projeto, null=True, blank=True)
     name = models.CharField(max_length=64)
     description = models.TextField(blank=True)
 
