@@ -12,7 +12,7 @@ class Approach(models.Model, TemplateModelMixin):
     # Generic Data
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
-    criado_por = models.ForeignKey(User, null=True, blank=True)
+    criado_por = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ['name']
