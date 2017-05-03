@@ -334,7 +334,7 @@ urlpatterns = [
     url(r'^metabolomica/database/detail/(?P<pk>\d+)/$', DatabaseDetail.as_view(), name='detail_database'),
     url(r'^metabolomica/database/update/(?P<pk>\d+)/$', DatabaseUpdate.as_view(), name='update_database'),
     url(r'^metabolomica/database/delete/(?P<pk>\d+)/$', DatabaseDelete.as_view(), name='delete_database'),
-
+    
     # Views DashBoard Metabolomica
     url(r'^metabolomica/dashboard/', DashboardMetabolomica.as_view(), name='dashboard_metabolomica'),
     url(r'^metabolomica/dashboard-detail/(?P<pk>\d+)/$', DashboardDetail.as_view(), name='dashboard_detail'),
@@ -349,7 +349,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 
     # Interface Admin e Auth
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 
     # Chained - Smart Select
     url(r'^chaining/', include('smart_selects.urls')),
