@@ -7,8 +7,7 @@ class ApproachForm(forms.ModelForm):
 
     class Meta:
         model = Approach
-        fields = ('project',
-                  'name',
+        fields = ('name',
                   'description')
 
         labels = {
