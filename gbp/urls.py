@@ -4,7 +4,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from django_filters.views import FilterView
 # URLs Projeto
 from projeto.views.atividade import AtividadeCreate, AtividadeDelete, AtividadeDetail, AtividadeList, AtividadeUpdate
 from projeto.views.home import Permission, jBrowse, Location, Timeline
@@ -348,7 +347,7 @@ urlpatterns = [
     url(r'^metabolomica/dashboard/', DashboardMetabolomica.as_view(), name='dashboard_metabolomica'),
     url(r'^metabolomica/dashboard-detail/(?P<pk>\d+)/$', DashboardDetail.as_view(), name='dashboard_detail'),
     url(r'^metabolomica/dashboard-approach/(?P<pk>\d+)/$', DashboardApproachList.as_view(), name='dashboard_approach'),
-    url(r'^metabolomica/dashboard-approach/', DashboardList.as_view(),name='dashboard_approach'),
+    url(r'^metabolomica/dashboard-approach/', DashboardList.as_view(), name='dashboard_approach'),
     url(r'^metabolomica/dashboard-result/sample/(?P<pk>\d+)/$', DashboardResultSampleList.as_view(), name='dashboard_result_sample'),
     url(r'^metabolomica/dashboard-result/(?P<pk>\d+)/$', DashboardResultList.as_view(), name='dashboard_result'),
     url(r'^metabolomica/dashboard-result/', DashboardResultList.as_view(), name='dashboard_result'),
