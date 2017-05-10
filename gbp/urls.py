@@ -39,6 +39,7 @@ from metabolomica.views.equipment import EquipmentCreate, EquipmentDelete, Equip
 from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, ResultList, ResultUpdate
 from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
 from metabolomica.views.dashboard import DashboardMetabolomica, DashboardApproachList, DashboardResultList, DashboardResultSampleList, DashboardDetail
+from metabolomica.views.species import SpeciesCreate, SpeciesDelete, SpeciesDetail, SpeciesList, SpeciesUpdate
 
 urlpatterns = [
 
@@ -334,7 +335,15 @@ urlpatterns = [
     url(r'^metabolomica/database/detail/(?P<pk>\d+)/$', DatabaseDetail.as_view(), name='detail_database'),
     url(r'^metabolomica/database/update/(?P<pk>\d+)/$', DatabaseUpdate.as_view(), name='update_database'),
     url(r'^metabolomica/database/delete/(?P<pk>\d+)/$', DatabaseDelete.as_view(), name='delete_database'),
-    
+
+    # Views de Species
+    url(r'^metabolomica/species$', SpeciesList.as_view(), name='home_species'),
+    url(r'^metabolomica/species/new/$', SpeciesCreate.as_view(), name='new_species'),
+    url(r'^metabolomica/species/list/$', SpeciesList.as_view(), name='list_species'),
+    url(r'^metabolomica/species/detail/(?P<pk>\d+)/$', SpeciesDetail.as_view(), name='detail_species'),
+    url(r'^metabolomica/species/update/(?P<pk>\d+)/$', SpeciesUpdate.as_view(), name='update_species'),
+    url(r'^metabolomica/species/delete/(?P<pk>\d+)/$', SpeciesDelete.as_view(), name='delete_species'),
+
     # Views DashBoard Metabolomica
     url(r'^metabolomica/dashboard/', DashboardMetabolomica.as_view(), name='dashboard_metabolomica'),
     url(r'^metabolomica/dashboard-detail/(?P<pk>\d+)/$', DashboardDetail.as_view(), name='dashboard_detail'),

@@ -6,5 +6,6 @@ from metabolomica.forms.approach import ApproachForm
 from metabolomica.forms.equipment import EquipmentForm
 from metabolomica.forms.result import ResultForm
 from metabolomica.forms.database import DatabaseForm
+from metabolomica.forms.species import SpeciesForm
 
-__all__ = ['sampleform', 'approachform', 'equipmentform', 'resultform', 'databaseform']
+__all__ = ['sampleform', 'approachform', 'equipmentform', 'resultform', 'databaseform', 'speciesform']

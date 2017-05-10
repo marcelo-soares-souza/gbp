@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ species.name }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <h2>{{ species.name }}</h2>
+
+    <hr/>
+    <p><b>Name:</b> <br/> <div class='text-highlight'>{{ species.name }} &nbsp;</div></p>
+    <p><b>Scientific name:</b> <br/> <div class='text-highlight'>{{ species.scientific_name }}&nbsp;</div></p>
+	<p><b>Strain/Cultivar/Variety:</b> <br/> <div class='text-highlight'>{{ species.strain }} &nbsp;</div></p>
+    <p><b>Added:</b> <br/> <div class='text-highlight'>{{ species.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="/metabolomica{{ species.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+          {% if request.user == species.criado_por or request.user.is_superuser %}
+            <a href="/metabolomica{{ species.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+          {% endif %}
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Back</a>
+        {% endbuttons %}
+      </p>
+
+{% endblock content %}

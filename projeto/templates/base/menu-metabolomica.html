@@ -7,18 +7,21 @@
         <li class="tab-title"><a id="new_equipment" href="{% url 'new_equipment' %}#">Equipment</a></li>
         <li class="tab-title"><a id="new_sample" href="{% url 'new_sample' %}#">Sample</a></li>
         <li class="tab-title"><a id="new_result" href="{% url 'new_result' %}#">Result</a></li>
+        <li class="tab-title"><a id="new_species" href="{% url 'new_species' %}#">Species</a></li> 
     {% elif 'detail' in request.resolver_match.url_name %}
         <li class="tab-title"><a id="detail_database" href="{% url 'list_database' %}#">Database</a></li>
         <li class="tab-title"><a id="detail_approach" href="{% url 'list_approach' %}#">Approach</a></li>
         <li class="tab-title"><a id="detail_equipment" href="{% url 'list_equipment' %}#">Equipment</a></li>
         <li class="tab-title"><a id="detail_sample" href="{% url 'list_sample' %}#">Sample</a></li>
         <li class="tab-title"><a id="detail_result" href="{% url 'list_result' %}#">Result</a></li>
+        <li class="tab-title"><a id="detail_species" href="{% url 'list_species' %}#">Species</a></li>
     {% else %} 
         <li class="tab-title"><a id="list_database" href="{% url 'list_database' %}#">Database</a></li>
         <li class="tab-title"><a id="list_approach" href="{% url 'list_approach' %}#">Approach</a></li>
         <li class="tab-title"><a id="list_equipment" href="{% url 'list_equipment' %}#">Equipment</a></li>
         <li class="tab-title"><a id="list_sample" href="{% url 'list_sample' %}#">Sample</a></li>
         <li class="tab-title"><a id="list_result" href="{% url 'list_result' %}#">Result</a></li>
+        <li class="tab-title"><a id="list_species" href="{% url 'list_species' %}#">Species</a></li>
     {% endif %}
   </ul>
 {% endif %}
