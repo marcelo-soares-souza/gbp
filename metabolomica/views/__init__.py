@@ -6,6 +6,7 @@ from metabolomica.views.approach import ApproachList, ApproachDetail, ApproachCr
 from metabolomica.views.equipment import EquipmentList, EquipmentDetail, EquipmentCreate, EquipmentUpdate, EquipmentDelete
 from metabolomica.views.result import ResultList, ResultDetail, ResultCreate, ResultUpdate, ResultDelete
 from metabolomica.views.database import DatabaseList, DatabaseDetail, DatabaseCreate, DatabaseUpdate, DatabaseDelete
+from metabolomica.views.species import SpeciesList, SpeciesDetail, SpeciesCreate, SpeciesUpdate, SpeciesDelete
 
 
 __all__ = [
@@ -14,4 +15,5 @@ __all__ = [
            'EquipmentList', 'EquipmentDetail', 'EquipmentCreate', 'EquipmentUpdate', 'EquipmentDelete',
            'ResultList', 'ResultDetail', 'ResultCreate', 'ResultUpdate', 'ResultDelete',
            'DatabaseList', 'DatabaseDetail', 'DatabaseCreate', 'DatabaseUpdate', 'DatabaseDelete',
+           'SpeciesList', 'SpeciesDetail', 'SpeciesCreate', 'SpeciesUpdate', 'SpeciesDelete',
            ]
