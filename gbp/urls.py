@@ -39,6 +39,7 @@ from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, 
 from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
 from metabolomica.views.dashboard import DashboardMetabolomica, DashboardApproachList, DashboardResultList, DashboardResultSampleList, DashboardDetail
 from metabolomica.views.species import SpeciesCreate, SpeciesDelete, SpeciesDetail, SpeciesList, SpeciesUpdate
+from metabolomica.views.formula import FormulaCreate, FormulaDelete, FormulaDetail, FormulaList, FormulaUpdate
 
 urlpatterns = [
 
@@ -342,6 +343,14 @@ urlpatterns = [
     url(r'^metabolomica/species/detail/(?P<pk>\d+)/$', SpeciesDetail.as_view(), name='detail_species'),
     url(r'^metabolomica/species/update/(?P<pk>\d+)/$', SpeciesUpdate.as_view(), name='update_species'),
     url(r'^metabolomica/species/delete/(?P<pk>\d+)/$', SpeciesDelete.as_view(), name='delete_species'),
+
+    # Views de Formula
+    url(r'^metabolomica/formula$', FormulaList.as_view(), name='home_formula'),
+    url(r'^metabolomica/formula/new/$', FormulaCreate.as_view(), name='new_formula'),
+    url(r'^metabolomica/formula/list/$', FormulaList.as_view(), name='list_formula'),
+    url(r'^metabolomica/formula/detail/(?P<pk>\d+)/$', FormulaDetail.as_view(), name='detail_formula'),
+    url(r'^metabolomica/formula/update/(?P<pk>\d+)/$', FormulaUpdate.as_view(), name='update_formula'),
+    url(r'^metabolomica/formula/delete/(?P<pk>\d+)/$', FormulaDelete.as_view(), name='delete_formula'),
 
     # Views DashBoard Metabolomica
     url(r'^metabolomica/dashboard/', DashboardMetabolomica.as_view(), name='dashboard_metabolomica'),

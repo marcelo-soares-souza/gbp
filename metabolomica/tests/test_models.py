@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from metabolomica.models import Sample, Approach, Equipment, Result, Species
+from metabolomica.models import Sample, Approach, Equipment, Result, Species, Formula
 
 
 #
@@ -55,3 +55,13 @@ class SpeciesModelTest(TestCase):
 
     def test_species_verbose_name_plural(self):
         self.assertEqual(str(Species._meta.verbose_name_plural), "species")
+
+
+class FormulaModelTest(TestCase):
+
+    def test_formula_common_name(self):
+        formula = Formula(common_name="Formula")
+        self.assertEqual(str(formula), formula.common_name)
+
+    def test_formula_verbose_name_plural(self):
+        self.assertEqual(str(Formula._meta.verbose_name_plural), "formulae")

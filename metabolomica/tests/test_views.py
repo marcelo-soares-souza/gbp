@@ -198,3 +198,41 @@ class MetabolomicaSpeciesDeleteTest(TestCase):
     def test_delete_http_response_code(self):
         response = self.client.get(reverse('delete_species', kwargs={'pk': 1}), follow=True)
         self.assertEqual(response.status_code, 200)
+
+
+# Formula Tests
+class MetabolomicaFormulaHomeTest(TestCase):
+
+    def test_home_http_response_code(self):
+        response = self.client.get(reverse('home_formula'), follow=True)
+
+
+class MetabolomicaFormulaNewTest(TestCase):
+
+    def test_new_http_response_code(self):
+        response = self.client.get(reverse('new_formula'), follow=True)
+
+
+class MetabolomicaFormulaListTest(TestCase):
+
+    def test_list_http_response(self):
+        response = self.client.get(reverse('list_formula'), follow=True)
+
+
+class MetabolomicaFormulaDetailTest(TestCase):
+
+    def test_detail_http_response(self):
+        response = self.client.get(reverse('detail_formula', kwargs={'pk':1}), follow=True)
+
+
+class MetabolomicaFormulaUpdateTest(TestCase):
+
+    def test_update_http_response(self):
+        response = self.client.get(reverse('update_formula', kwargs={'pk':1}), follow=True)
+
+
+class MetabolomicaFormulaDeleteTest(TestCase):
+
+    def test_delete_http_response(self):
+        response = self.client.get(reverse('delete_formula', kwargs={'pk':1}), follow=True)
+
