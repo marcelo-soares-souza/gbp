@@ -8,6 +8,7 @@ from metabolomica.views.result import ResultList, ResultDetail, ResultCreate, Re
 from metabolomica.views.database import DatabaseList, DatabaseDetail, DatabaseCreate, DatabaseUpdate, DatabaseDelete
 from metabolomica.views.species import SpeciesList, SpeciesDetail, SpeciesCreate, SpeciesUpdate, SpeciesDelete
 from metabolomica.views.formula import FormulaList, FormulaDetail, FormulaCreate, FormulaUpdate, FormulaDelete
+from metabolomica.views.analytical import AnalyticalList, AnalyticalDetail, AnalyticalCreate, AnalyticalUpdate, AnalyticalDelete
 
 
 __all__ = [
@@ -18,4 +19,5 @@ __all__ = [
            'DatabaseList', 'DatabaseDetail', 'DatabaseCreate', 'DatabaseUpdate', 'DatabaseDelete',
            'SpeciesList', 'SpeciesDetail', 'SpeciesCreate', 'SpeciesUpdate', 'SpeciesDelete',
            'FormulaList', 'FormulaDetail', 'FormulaCreate', 'FormulaUpdate', 'FormulaDelete',
+           'AnalyticalList', 'AnalyticalDetail', 'AnalyticalCreate', 'AnalyticalUpdate', 'AnalyticalDelete',
            ]

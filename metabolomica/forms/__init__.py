@@ -8,5 +8,6 @@ from metabolomica.forms.result import ResultForm
 from metabolomica.forms.database import DatabaseForm
 from metabolomica.forms.species import SpeciesForm
 from metabolomica.forms.formula import FormulaForm
+from metabolomica.forms.analytical import AnalyticalForm
 
-__all__ = ['sampleform', 'approachform', 'equipmentform', 'resultform', 'databaseform', 'speciesform', 'formulaform']
+__all__ = ['sampleform', 'approachform', 'equipmentform', 'resultform', 'databaseform', 'speciesform', 'formulaform', 'analyticalform']
