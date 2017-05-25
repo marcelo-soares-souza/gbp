@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>List all Formula</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+
+        <a href="{% url 'new_formula' %}" class="btn btn-sm btn-success">Add</a>
+      </div>
+    </div>
+
+    {% if not formula %}
+
+      <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_formula' %}">Add?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for formula in formula %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h4> <a href="/metabolomica{{ formula.get_detail_url }}">{{ formula.common_name }}</a> </h4>
+                <p><b>Common Name: </b> <br/>
+                <div class='text-highlight'> <i>{{ formula.common_name }}</i>&nbsp; {{ formula.strain }}
+                <p>
+                    <a href="/metabolomica{{ formula.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+                    {% if request.user == formula.criado_por or request.user.is_superuser %}
+
+                      <a href="/metabolomica{{ formula.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ formula.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+	{% endblock content %}

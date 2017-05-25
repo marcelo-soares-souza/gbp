@@ -6,5 +6,8 @@ from metabolomica.models.approach import Approach
 from metabolomica.models.equipment import Equipment
 from metabolomica.models.result import Result
 from metabolomica.models.database import Database
+from metabolomica.models.species import Species
+from metabolomica.models.formula import Formula
+from metabolomica.models.analytical import Analytical
 
-__all__ = ['sample', 'approach', 'equipment', 'result', 'database']
+__all__ = ['sample', 'approach', 'equipment', 'result', 'database', 'species', 'formula', 'analytical']

@@ -4,7 +4,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from django_filters.views import FilterView
 # URLs Projeto
 from projeto.views.atividade import AtividadeCreate, AtividadeDelete, AtividadeDetail, AtividadeList, AtividadeUpdate
 from projeto.views.home import Permission, jBrowse, Location, Timeline
@@ -39,6 +38,9 @@ from metabolomica.views.equipment import EquipmentCreate, EquipmentDelete, Equip
 from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, ResultList, ResultUpdate
 from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
 from metabolomica.views.dashboard import DashboardMetabolomica, DashboardApproachList, DashboardResultList, DashboardResultSampleList, DashboardDetail
+from metabolomica.views.species import SpeciesCreate, SpeciesDelete, SpeciesDetail, SpeciesList, SpeciesUpdate
+from metabolomica.views.formula import FormulaCreate, FormulaDelete, FormulaDetail, FormulaList, FormulaUpdate
+from metabolomica.views.analytical import AnalyticalCreate, AnalyticalDelete, AnalyticalDetail, AnalyticalList, AnalyticalUpdate
 
 urlpatterns = [
 
@@ -334,12 +336,36 @@ urlpatterns = [
     url(r'^metabolomica/database/detail/(?P<pk>\d+)/$', DatabaseDetail.as_view(), name='detail_database'),
     url(r'^metabolomica/database/update/(?P<pk>\d+)/$', DatabaseUpdate.as_view(), name='update_database'),
     url(r'^metabolomica/database/delete/(?P<pk>\d+)/$', DatabaseDelete.as_view(), name='delete_database'),
-    
+
+    # Views de Species
+    url(r'^metabolomica/species$', SpeciesList.as_view(), name='home_species'),
+    url(r'^metabolomica/species/new/$', SpeciesCreate.as_view(), name='new_species'),
+    url(r'^metabolomica/species/list/$', SpeciesList.as_view(), name='list_species'),
+    url(r'^metabolomica/species/detail/(?P<pk>\d+)/$', SpeciesDetail.as_view(), name='detail_species'),
+    url(r'^metabolomica/species/update/(?P<pk>\d+)/$', SpeciesUpdate.as_view(), name='update_species'),
+    url(r'^metabolomica/species/delete/(?P<pk>\d+)/$', SpeciesDelete.as_view(), name='delete_species'),
+
+    # Views de Formula
+    url(r'^metabolomica/formula$', FormulaList.as_view(), name='home_formula'),
+    url(r'^metabolomica/formula/new/$', FormulaCreate.as_view(), name='new_formula'),
+    url(r'^metabolomica/formula/list/$', FormulaList.as_view(), name='list_formula'),
+    url(r'^metabolomica/formula/detail/(?P<pk>\d+)/$', FormulaDetail.as_view(), name='detail_formula'),
+    url(r'^metabolomica/formula/update/(?P<pk>\d+)/$', FormulaUpdate.as_view(), name='update_formula'),
+    url(r'^metabolomica/formula/delete/(?P<pk>\d+)/$', FormulaDelete.as_view(), name='delete_formula'),
+
+    # Views de Analytical
+    url(r'^metabolomica/analytical$', AnalyticalList.as_view(), name='home_analytical'),
+    url(r'^metabolomica/analytical/new/$', AnalyticalCreate.as_view(), name='new_analytical'),
+    url(r'^metabolomica/analytical/list/$', AnalyticalList.as_view(), name='list_analytical'),
+    url(r'^metabolomica/analytical/detail/(?P<pk>\d+)/$', AnalyticalDetail.as_view(), name='detail_analytical'),
+    url(r'^metabolomica/analytical/update/(?P<pk>\d+)/$', AnalyticalUpdate.as_view(), name='update_analytical'),
+    url(r'^metabolomica/analytica/delete/(?P<pk>\d+)/$', AnalyticalDelete.as_view(), name='delete_analytical'),
+
     # Views DashBoard Metabolomica
     url(r'^metabolomica/dashboard/', DashboardMetabolomica.as_view(), name='dashboard_metabolomica'),
     url(r'^metabolomica/dashboard-detail/(?P<pk>\d+)/$', DashboardDetail.as_view(), name='dashboard_detail'),
     url(r'^metabolomica/dashboard-approach/(?P<pk>\d+)/$', DashboardApproachList.as_view(), name='dashboard_approach'),
-    url(r'^metabolomica/dashboard-approach/', DashboardList.as_view(),name='dashboard_approach'),
+    url(r'^metabolomica/dashboard-approach/', DashboardList.as_view(), name='dashboard_approach'),
     url(r'^metabolomica/dashboard-result/sample/(?P<pk>\d+)/$', DashboardResultSampleList.as_view(), name='dashboard_result_sample'),
     url(r'^metabolomica/dashboard-result/(?P<pk>\d+)/$', DashboardResultList.as_view(), name='dashboard_result'),
     url(r'^metabolomica/dashboard-result/', DashboardResultList.as_view(), name='dashboard_result'),

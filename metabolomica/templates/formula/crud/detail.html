@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ formula.name }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <h2>{{ formula.name }}</h2>
+
+    <hr/>
+    <p><b>Common Name:</b> <br/> <div class='text-highlight'>{{ formula.common_name }} &nbsp;</div></p>
+    <p><b>Chemical Formula:</b> <br/> <div class='text-highlight'>{{ formula.chemical_formula }}&nbsp;</div></p>
+    <p><b>Added:</b> <br/> <div class='text-highlight'>{{ formula.data_cadastro }}&nbsp;</div></p>
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="/metabolomica{{ formula.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+          {% if request.user == formula.criado_por or request.user.is_superuser %}
+            <a href="/metabolomica{{ formula.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+          {% endif %}
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Back</a>
+        {% endbuttons %}
+      </p>
+
+{% endblock content %}
+
