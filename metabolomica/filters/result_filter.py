@@ -1,5 +1,3 @@
-from django.contrib.auth.models import User
-
 import django_filters
 
 from metabolomica.models import Result
@@ -14,8 +12,4 @@ class ResultFilter(django_filters.FilterSet):
 
     class Meta:
         model = Result
-        fields = {
-        'user',
-        'database',
-        'experiment',
-        }
+        fields = {'user', 'database', 'experiment'}

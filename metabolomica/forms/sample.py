@@ -26,7 +26,6 @@ class SampleForm(forms.ModelForm):
 
         widgets = {
             'replicate': forms.TextInput(
-                attrs = {'placeholder': 
-                'B-biological/T-technical/A-analytical'}
+                attrs={'placeholder': 'B-biological/T-technical/A-analytical'}
             )
         }

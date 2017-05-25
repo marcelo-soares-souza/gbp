@@ -9,7 +9,7 @@ from projeto.views.login import LoggedInMixin
 
 class EquipmentList(LoggedInMixin, SortableListView):
     allowed_sort_fields = {'system': {'default_direction': '', 'verbose_name': 'Name'},
-                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Modified'}} 
+                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Modified'}}
 
     default_sort_field = 'system'
     paginate_by = 10

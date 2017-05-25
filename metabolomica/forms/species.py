@@ -22,7 +22,6 @@ class SpeciesForm(forms.ModelForm):
 
         widgets = {
             'strain': forms.TextInput(
-                attrs = {'placeholder':
-                'Strain/Cultivar/Variety'}
+                attrs={'placeholder': 'Strain/Cultivar/Variety'}
             )
         }
