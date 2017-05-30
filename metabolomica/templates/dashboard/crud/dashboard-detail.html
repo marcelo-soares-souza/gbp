@@ -6,11 +6,12 @@
 {% block title %} <title>Database {{database.name}}</title> {% endblock title %}
 
 {% block content %}
-
-  <form id="searchform" action="{% url 'dashboard_detail' database.id %}" method="get" accept-charset="utf-8" style="float: right;">
-    <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
-    <button type="submit" class="btn btn-default btn-success">Search</button>
-  </form>
+  <div style="padding-top: 16px; float: right;">
+    <form id="searchform" action="{% url 'dashboard_detail' database.id %}" method="get" accept-charset="utf-8" style="float: right;">
+      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+      <button type="submit" class="btn btn-default btn-success">Search</button>
+    </form>
+  </div>
 
   <h2>{{ database.name }}</h2>
   <hr/>
@@ -30,17 +31,12 @@
         </div>
       </div>
     </div>
-  </div>
--->
-   <div style="padding-top: 8px;">
-    <div style="float: right;">
-      <input type="checkbox" name="database" id="database" value="1">&nbsp;&nbsp;Database&nbsp;&nbsp;
-      <input type="checkbox" name="equipment" id="equipment" value="1">&nbsp;&nbsp;Equipment&nbsp;&nbsp;
-      <input type="checkbox" name="bio_sample" id="bio_sample" value="1">&nbsp;&nbsp;Bio Sample&nbsp;&nbsp;
     </div>
-  </div>
-
-    <!--
+  -->
+    <label class="checkbox-inline"><input type="checkbox" name="database" id="database" value="1">Database</label>
+    <label class="checkbox-inline"><input type="checkbox" name="equipment" id="equipment" value="1">Equipment</label>
+    <label class="checkbox-inline"><input type="checkbox" name="bio_sample" id="bio_sample" value="1">Bio Sample</label>
+  <!--
     <div style="float: right;">
       <div class="form-horizontal">
         <div class="form-group">
@@ -108,13 +104,23 @@
       {% endfor %}
       </tbody>
     </table>
+
+    {% if results.count <= 0 %}
+      <center>No Data Found.</center>
+    {% endif %}
  </div>
 
  <script type="text/javascript">
     $(document).ready(function() {
-        $('.database').hide();
-        $('.equipment').hide();
-        $('.bio_sample').hide();
+        if(!$("#database").is(':checked'))
+          $('.database').hide();
+
+        if(!$("#equipment").is(':checked'))
+          $('.equipment').hide();
+
+        if(!$("#bio_sample").is(':checked'))
+          $('.bio_sample').hide();
+
         $('.process_data').hide();
         $('.analytical_method').hide();
         $('.equip_mode').hide();
@@ -145,6 +151,7 @@
               $('.bio_sample').hide();
         });
 
+        /*
         $('#listar_result_sample').on('change', function () {
           $('.dashboard tbody tr').hide();
 
@@ -180,7 +187,7 @@
 
           return false;
         });
-
+        */
     });
 
 

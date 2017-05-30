@@ -6,7 +6,7 @@ django-bootstrap3==8.2.3
 django-bootstrap3-datetimepicker-2==2.4.2
 django-ckeditor==5.2.2
 django-filter==1.0.4
-django-localflavor==1.4.1
+django-localflavor==1.5
 django-smart-selects==1.5.2
 django-sortable-listview==0.41
 django-widget-tweaks==1.4.1

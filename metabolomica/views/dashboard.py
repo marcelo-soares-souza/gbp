@@ -25,7 +25,10 @@ class DashboardDetail(LoggedInMixin, DetailView):
         if query:
             context['results'] = context['results'].filter(equipment__name__icontains=query) | \
                                  context['results'].filter(experimental_condition__icontains=query) | \
-                                 context['results'].filter(sample__species__icontains=query)
+                                 context['results'].filter(sample__species__icontains=query) | \
+                                 context['results'].filter(name__icontains=query) | \
+                                 context['results'].filter(sample__lab_code__icontains=query) | \
+                                 context['results'].filter(sample__replicate__icontains=query)
 
             context['results'] = context['results'].distinct()
 
