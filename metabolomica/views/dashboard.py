@@ -4,6 +4,9 @@ from django.views.generic import ListView, TemplateView, DetailView
 from projeto.views.login import LoggedInMixin
 from metabolomica.models import Approach, Result, Sample, Database
 
+import logging
+logger = logging.getLogger('metabolomica')
+
 
 class DashboardDetail(LoggedInMixin, DetailView):
     template_name = 'dashboard/crud/dashboard-detail.html'
@@ -16,6 +19,15 @@ class DashboardDetail(LoggedInMixin, DetailView):
         context['samples'] = Sample.objects.filter(database_id=int(self.kwargs['pk']))
         context['results'] = Result.objects.select_related('sample').filter(sample__in=context['samples'])
         context['sample_id'] = 0
+
+        query = self.request.GET.get('q')
+
+        if query:
+            context['results'] = context['results'].filter(equipment__name__icontains=query) | \
+                                 context['results'].filter(experimental_condition__icontains=query) | \
+                                 context['results'].filter(sample__species__icontains=query)
+
+            context['results'] = context['results'].distinct()
 
         return context
 

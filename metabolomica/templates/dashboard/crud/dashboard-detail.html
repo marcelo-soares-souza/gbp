@@ -7,9 +7,14 @@
 
 {% block content %}
 
+  <form id="searchform" action="{% url 'dashboard_detail' database.id %}" method="get" accept-charset="utf-8" style="float: right;">
+    <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+    <button type="submit" class="btn btn-default btn-success">Search</button>
+  </form>
+
   <h2>{{ database.name }}</h2>
   <hr/>
-
+  <!--
   <div style="min-width: 20%; float: right; padding-top: 24px;">
     <div style="float: right;">
       <div class="form-horizontal">
@@ -26,13 +31,16 @@
       </div>
     </div>
   </div>
-
-  <div style="min-width: 75%; float: right; padding-top: 24px;">
-    <div style="float: left;">
-      <input type="checkbox" name="database" id="database" value="1">&nbsp;&nbsp;Database<br>
-      <input type="checkbox" name="equipment" id="equipment" value="1">&nbsp;&nbsp;Equipment<br>
-      <input type="checkbox" name="bio_sample" id="bio_sample" value="1">&nbsp;&nbsp;Bio Sample<br>
+-->
+   <div style="padding-top: 8px;">
+    <div style="float: right;">
+      <input type="checkbox" name="database" id="database" value="1">&nbsp;&nbsp;Database&nbsp;&nbsp;
+      <input type="checkbox" name="equipment" id="equipment" value="1">&nbsp;&nbsp;Equipment&nbsp;&nbsp;
+      <input type="checkbox" name="bio_sample" id="bio_sample" value="1">&nbsp;&nbsp;Bio Sample&nbsp;&nbsp;
     </div>
+  </div>
+
+    <!--
     <div style="float: right;">
       <div class="form-horizontal">
         <div class="form-group">
@@ -48,7 +56,7 @@
       </div>
     </div>
   </div>
-
+  -->
 
   <div class="dashboard">
     <table class="table table-striped">
