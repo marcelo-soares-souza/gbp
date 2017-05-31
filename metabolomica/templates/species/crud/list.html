@@ -26,9 +26,10 @@
             <ul class="list-group">
               <li class="list-group-item">
 
-                <h4> <a href="/metabolomica{{ species.get_detail_url }}">{{ species.name }}</a> </h4>
+                <h3> <a href="/metabolomica{{ species.get_detail_url }}">{{ species.name }}</a> </h3><br/>
 				<p><b>Scientific Name: </b> <br/>
-				<div class='text-highlight'> <i>{{ species.scientific_name }}</i>&nbsp; {{ species.strain }}
+				<div class='text-highlight'> <i>{{ species.scientific_name }}</i>&nbsp; {{ species.strain }}</div>
+                </br>
                 <p>
                     <a href="/metabolomica{{ species.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
                     {% if request.user == species.criado_por or request.user.is_superuser %}

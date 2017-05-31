@@ -25,18 +25,17 @@
             <ul class="list-group">
               <li class="list-group-item">
 
-                <h4><a href="/metabolomica{{ sample.get_detail_url }}">{{ sample.lab_code }}</a></h4>
-
+                <h3><a href="/metabolomica{{ sample.get_detail_url }}">{{ sample.lab_code }}</a></h3>
+                </br>
                 <p><b>Species: </b> <br/>
 
-		<div class='text-highlight'> {{ sample.species }}&nbsp;
-                   <span class="btn">
+		<div class='text-highlight'> {{ sample.species }}&nbsp;</div><br/>
+                <p>
                       <a href="/metabolomica{{ sample.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
                       {% if request.user == sample.criado_por or request.user.is_superuser %}
                         <a href="/metabolomica{{ sample.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
                       {% endif %}
                    </span>
-                </div>
                 </p>
 
                 <div class="data-atualizado">{{ sample.data_atualizado }}</div>

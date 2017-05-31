@@ -25,14 +25,15 @@
 
             <ul class="list-group">
               <li class="list-group-item">
-                <span class="btn">
-                  <h4><a href="/metabolomica{{equipment.get_detail_url }}">{{ equipment.name }}</a></h4>
+
+                  <h3><a href="/metabolomica{{equipment.get_detail_url }}">{{ equipment.name }}</a></h4>
+                  <br/>
+                  <p>
                     <a href="/metabolomica{{ equipment.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
                     {% if request.user == equipment.criado_por or request.user.is_superuser %}
                       <a href="/metabolomica{{ equipment.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
                     {% endif %}
-                </span>
-                </p>
+                  </p>
 
                 <div class="data-atualizado">{{ equipment.data_atualizado }}</div>
 
