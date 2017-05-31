@@ -10,7 +10,6 @@
 
     <h2>{{ result.name }}</h2>
     <hr/>
-
     <p><b>Sample:</b> <br/> <div class='text-highlight'>
       <a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample }}</a>&nbsp;</div></p>
 
@@ -28,10 +27,66 @@
 
     <b>Equipment Mode:</b> <br/> <div class='text-highlight'>{{ result.equip_mode }}&nbsp;</div></p>
 
+    {% if csv %}
+    <p><b>Result:</b> <br/>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Ret. Time</th>
+              <th>Peak</th>
+              <th>Meas. mz</th>
+              <th>Formula</th>
+              <th>Adduct</th>
+              <th>Score</th>
+              <th>Err ppm</th>
+              <th>Noise</th>
+              <th>Resolution</th>
+              <th>Intensity</th>
+              <th>Theo. mz</th>
+              <th>mono. mass</th>
+              <th>Neut. form.</th>
+              <th>Exp. evidence</th>
+              <th>Comp. name</th>
+              <th>OBS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for c in csv %}
+            <tr>
+              <td>{{ c.Retention_Time }}
+              <td>{{ c.Peak }}
+              <td>{{ c.Measured_mz }}
+              <td>{{ c.Ion_formula }}
+              <td>{{ c.Adduct }}
+              <td>{{ c.Score }}
+              <td>{{ c.Error_ppm }}
+              <td>{{ c.Signal_noise }}
+              <td>{{ c.Resolution }}
+              <td>{{ c.Intensity }}
+              <td>{{ c.Theoretical_mz }}
+              <td>{{ c.monoisotopic_mass }}
+              <td>{{ c.Neutral_formula }}
+              <td>{{ c.Experimental_evidence }}
+              <td>{{ c.Compound_name }}
+              <td>{{ c.Observation }}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </p>
+      {% endif %}
+
+      {% if result.raw_data %}
+      <p><b>Result Raw Data (CSV):</b> <br/> <div class='text-highlight'>
+          <a href="{{ result.raw_data.url }}">{{ result.raw_data }}</a>&nbsp;
+      </div></p>
+      {% endif %}
+
+    <!--
     <p><b>Extraction Method:</b> <br/> <div class='text-highlight'>
       {% if result.extr_method %}
         <a href="{{ result.extr_method.url }}">{{ result.extr_method }}</a>&nbsp;
-      {% endif %}&nbsp; 
+      {% endif %}&nbsp;
     </div></p>
 
     <p><b>Analytical Method:</b> <br/> <div class='text-highlight'>{{ result.analytical_method }}&nbsp;</div></p>
@@ -55,17 +110,12 @@
       {% endif %}&nbsp;
     </div></p>
 
-    <p><b>Result Raw Data:</b> <br/> <div class='text-highlight'>
-      {% if result.raw_data %}
-        <a href="{{ result.raw_data.url }}">{{ result.raw_data }}</a>&nbsp;
-      {% endif %}&nbsp;
-    </div></p>
-
     <p><b>Processed Data:</b> <br/> <div class='text-highlight'>
       {% if result.process_data %}
         <a href="result.process_data.url">{{ result.process_data }}</a>&nbsp;
       {% endif %}&nbsp;
-    </div><p>      
+    </div><p>
+    -->
 
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
 
@@ -87,4 +137,3 @@
 
 {{ form.media }}
 {% endblock %}
-

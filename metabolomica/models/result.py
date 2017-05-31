@@ -14,12 +14,13 @@ class Result(models.Model, TemplateModelMixin):
     equipment = models.ManyToManyField(Equipment, blank=True, related_name='result_equipment')
     analytical_method = models.CharField(max_length=40, blank=True)
     equip_mode = models.CharField(max_length=40, null=True, blank=True)  # MS Mode
-    extr_method = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Extraction data
-    parameters_lc_ms = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Analytical Parameters - LC and MS
-    lc_raw_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Analytical Method - LC raw data
-    ms_raw_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Analytical Method - MS raw data
-    raw_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Result raw data
-    process_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Processed data
+    raw_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)  # Result raw data
+
+    # extr_method = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Extraction data
+    # parameters_lc_ms = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Analytical Parameters - LC and MS
+    # lc_raw_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Analytical Method - LC raw data
+    # ms_raw_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Analytical Method - MS raw data
+    # process_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Processed data
 
     # Generic Data
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)

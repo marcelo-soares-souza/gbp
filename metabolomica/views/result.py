@@ -1,3 +1,7 @@
+import os
+import csv
+
+from django.conf import settings
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
@@ -6,6 +10,9 @@ from sortable_listview import SortableListView
 from metabolomica.forms import ResultForm
 from metabolomica.models import Result
 from projeto.views.login import LoggedInMixin
+
+import logging
+logger = logging.getLogger('metabolomica')
 
 
 class ResultList(LoggedInMixin, SortableListView):
@@ -48,6 +55,19 @@ class ResultDetail(LoggedInMixin, DetailView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_result')
+
+    def get_context_data(self, **kwargs):
+        context = super(ResultDetail, self).get_context_data(**kwargs)
+
+        if context['result'].raw_data:
+            reader = csv.DictReader(open(os.path.join(settings.BASE_DIR, 'media', str(context['result'].raw_data))), delimiter=';')
+            result = []
+            for line in reader:
+                result.append(line)
+
+            context['csv'] = result
+
+        return context
 
 
 class ResultCreate(LoggedInMixin, CreateView):
