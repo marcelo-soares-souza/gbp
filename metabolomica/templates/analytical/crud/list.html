@@ -11,23 +11,23 @@
     <div style="min-width: 50%; float: right;">
       <div style="float: right;">
 
-        <a href="{% url 'new_species' %}" class="btn btn-sm btn-success">Add</a>
+        <a href="{% url 'new_analytical' %}" class="btn btn-sm btn-success">Add</a>
       </div>
     </div>
 
-    {% if not species %}
+    {% if not analyticals %}
 
-      <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_species' %}">Add?</a> </h4></div>
+      <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_analytical' %}">Add?</a> </h4></div>
 
     {% else %}
 
         {% include 'base/sort_links.html' %}
-        {% for species in species %}
+        {% for analytical in analyticals %}
             <ul class="list-group">
               <li class="list-group-item">
 
                 <h3> <a href="/metabolomica{{ species.get_detail_url }}">{{ species.name }}</a> </h4>
-				
+
                 <p><b>Scientific Name: </b> <br/>
 		<div class='text-highlight'> <i>{{ species.scientific_name }}</i>&nbsp; {{ species.strain }}</div>
 
@@ -52,4 +52,3 @@
     {% endif %}
 
 {% endblock content %}
-

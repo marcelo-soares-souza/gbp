@@ -69,7 +69,7 @@ class FormulaUpdate(LoggedInMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(FormulaUpdate, self).get_context_data(**kwargs)
-        context["formula"] = Formula.objects.all().order_by('data_atualizado')
+        context["formulas"] = Formula.objects.all().order_by('data_atualizado')
         return context
 
     success_url = reverse_lazy('list_formula')
