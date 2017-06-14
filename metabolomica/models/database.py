@@ -5,6 +5,7 @@ from projeto.models.template import TemplateModelMixin
 
 
 class Database(models.Model, TemplateModelMixin):
+
     name = models.CharField(max_length=64)
     description = models.TextField(blank=True)
 

@@ -16,12 +16,6 @@ class Result(models.Model, TemplateModelMixin):
     equip_mode = models.CharField(max_length=40, null=True, blank=True)  # MS Mode
     raw_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)  # Result raw data
 
-    # extr_method = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Extraction data
-    # parameters_lc_ms = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Analytical Parameters - LC and MS
-    # lc_raw_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Analytical Method - LC raw data
-    # ms_raw_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Analytical Method - MS raw data
-    # process_data = models.FileField(upload_to='bmdb/%Y/%m/%d/', null=True, blank=True)  # Processed data
-
     # Generic Data
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)

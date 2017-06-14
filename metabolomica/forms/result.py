@@ -15,11 +15,6 @@ class ResultForm(forms.ModelForm):
              'equip_mode',
              'analytical_method',
              'raw_data',
-             # 'parameters_lc_ms',
-             # 'extr_method',
-             # 'lc_raw_data',
-             # 'ms_raw_data',
-             # 'process_data'
         )
 
         labels = {
@@ -30,9 +25,4 @@ class ResultForm(forms.ModelForm):
             'equip_mode': 'MS Mode',
             'analytical_method': 'Analytical Method',
             'raw_data': 'Result Raw Data',
-            # 'extr_method': 'Extraction Method',
-            # 'parameters_lc_ms': 'Analytical Parameters - LC and MS',
-            # 'lc_raw_data': 'Analytical Method - LC Raw Data',
-            # 'ms_raw_data': 'Analytical Method - MS Raw Data',
-            # 'process_data': 'Processed Data'
         }

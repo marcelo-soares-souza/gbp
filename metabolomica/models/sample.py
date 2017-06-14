@@ -7,6 +7,7 @@ from projeto.models.template import TemplateModelMixin
 
 
 class Sample(models.Model, TemplateModelMixin):
+
     database = models.ForeignKey(Database, null=True, blank=True, on_delete=models.SET_NULL)
     lab_code = models.CharField(max_length=64)
     replicate = models.CharField(max_length=64, blank=True)

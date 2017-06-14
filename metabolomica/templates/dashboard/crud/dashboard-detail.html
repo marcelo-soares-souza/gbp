@@ -15,44 +15,10 @@
 
   <h2>{{ database.name }}</h2>
   <hr/>
-  <!--
-  <div style="min-width: 20%; float: right; padding-top: 24px;">
-    <div style="float: right;">
-      <div class="form-horizontal">
-        <div class="form-group">
-          <div class="col-md-12">
-            <select id="listar_result" class="form-control" name="listar_result" onChange="redirectUrl()">
-              <option value="0">All Results</option>
-              {% for result in results %}
-                <option value="{{result.id}}">{{result|truncatechars:36}}</option>
-              {% endfor %}
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-  -->
+  
     <label class="checkbox-inline"><input type="checkbox" name="database" id="database" value="1">Database</label>
     <label class="checkbox-inline"><input type="checkbox" name="equipment" id="equipment" value="1">Equipment</label>
     <label class="checkbox-inline"><input type="checkbox" name="bio_sample" id="bio_sample" value="1">Bio Sample</label>
-  <!--
-    <div style="float: right;">
-      <div class="form-horizontal">
-        <div class="form-group">
-          <div class="col-md-12">
-            <select id="listar_result_sample" class="form-control" name="listar_result_sample" onChange="redirectUrl()">
-              <option value="0">All Samples</option>
-              {% for sample in samples %}
-                <option value="{{sample.id}}">{{sample|truncatechars:36}}</option>
-              {% endfor %}
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  -->
 
   <div class="dashboard">
     <table class="table table-striped">
@@ -148,43 +114,6 @@
               $('.bio_sample').hide();
         });
 
-        /*
-        $('#listar_result_sample').on('change', function () {
-          $('.dashboard tbody tr').hide();
-
-          if ($(this).val() == 0)
-          {
-            $('tbody tr').show();
-          }
-          else
-          {
-            $('.sample-' + $(this).val()).show();
-          }
-
-          $('#listar_result').val(0);
-          $('#listar_result_sample').val($(this).val());
-
-          return false;
-        });
-
-        $('#listar_result').on('change', function () {
-          $('.dashboard tbody tr').hide();
-
-          if ($(this).val() == 0)
-          {
-            $('tbody tr').show();
-          }
-          else
-          {
-            $('.result-' + $(this).val()).show();
-          }
-
-          $('#listar_result').val($(this).val());
-          $('#listar_result_sample').val(0);
-
-          return false;
-        });
-        */
     });
 
 
