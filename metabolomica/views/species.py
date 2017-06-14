@@ -69,7 +69,7 @@ class SpeciesUpdate(LoggedInMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(SpeciesUpdate, self).get_context_data(**kwargs)
-        context["species"] = Species.objects.all().order_by('data_atualizado')
+        context["specieses"] = Species.objects.all().order_by('data_atualizado')
         return context
 
     success_url = reverse_lazy('list_species')
