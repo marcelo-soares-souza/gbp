@@ -35,7 +35,6 @@
                       {% if request.user == sample.criado_por or request.user.is_superuser %}
                         <a href="/metabolomica{{ sample.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
                       {% endif %}
-                   </span>
                 </p>
 
                 <div class="data-atualizado">{{ sample.data_atualizado }}</div>
