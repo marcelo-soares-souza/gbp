@@ -1,3 +1,5 @@
+import collections
+
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
@@ -9,8 +11,9 @@ from projeto.views.login import LoggedInMixin
 
 
 class DatabaseList(LoggedInMixin, SortableListView):
-    allowed_sort_fields = {'name': {'default_direction': '', 'verbose_name': 'Name'},
-                           'data_atualizado': {'default_direction': '', 'verbose_name': 'Modified'}}
+    allowed_sort_fields = collections.OrderedDict()
+    allowed_sort_fields['name'] = {'default_direction': '', 'verbose_name': 'Name'}
+    allowed_sort_fields['modified'] = {'default_direction': '', 'verbose_name': 'Modified'}
 
     default_sort_field = 'name'
     paginate_by = 10
