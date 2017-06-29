@@ -55,7 +55,10 @@ class PaginaUpdate(LoggedInMixin, UpdateView):
     form_class = PaginaForm
     model = Pagina
 
-    success_url = reverse_lazy('list_pagina')
+    # success_url = reverse_lazy('detail_pagina')
+
+    def get_success_url(self):
+        return reverse_lazy('detail_pagina', kwargs={'pk': self.get_object().pk})
 
     def get_context_data(self, **kwargs):
         context = super(PaginaUpdate, self).get_context_data(**kwargs)
