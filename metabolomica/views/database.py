@@ -25,24 +25,6 @@ class DatabaseList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_database')
 
-    def get_queryset(self):
-        if self.kwargs:
-            queryset = self.model._default_manager.filter(metabolomica_id=int(self.kwargs['pk']))
-        else:
-            queryset = self.model._default_manager.all()
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(DatabaseList, self).get_context_data(**kwargs)
-        context['metabolomicas'] = Database.objects.all()
-        context['metabolomica_id'] = 0
-
-        if self.kwargs:
-            context['metabolomica_id'] = self.kwargs['pk']
-
-        return context
-
 
 class DatabaseDetail(LoggedInMixin, DetailView):
     template_name = 'database/crud/detail.html'
@@ -82,4 +64,5 @@ class DatabaseUpdate(LoggedInMixin, UpdateView):
 class DatabaseDelete(LoggedInMixin, DeleteView):
     template_name = 'database/crud/delete.html'
     model = Database
+
     success_url = reverse_lazy('list_database')

@@ -24,24 +24,6 @@ class SpeciesList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_species')
 
-    def get_queryset(self):
-        if self.kwargs:
-            queryset = self.model._default_manager.filter(metabolomica_id=int(self.kwargs['pk']))
-        else:
-            queryset = self.model._default_manager.all()
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(SpeciesList, self).get_context_data(**kwargs)
-        context['metabolomicas'] = Species.objects.all()
-        context['metabolomica_id'] = 0
-
-        if self.kwargs:
-            context['metabolomica_id'] = self.kwargs['pk']
-
-        return context
-
 
 class SpeciesDetail(LoggedInMixin, DetailView):
     template_name = 'species/crud/detail.html'
@@ -81,4 +63,5 @@ class SpeciesUpdate(LoggedInMixin, UpdateView):
 class SpeciesDelete(LoggedInMixin, DeleteView):
     template_name = 'species/crud/delete.html'
     model = Species
+
     success_url = reverse_lazy('list_species')

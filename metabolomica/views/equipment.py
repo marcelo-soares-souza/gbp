@@ -11,10 +11,10 @@ from projeto.views.login import LoggedInMixin
 
 class EquipmentList(LoggedInMixin, SortableListView):
     allowed_sort_fields = collections.OrderedDict()
-    allowed_sort_fields['system'] = {'default_direction': '', 'verbose_name': 'Name'}
+    allowed_sort_fields['name'] = {'default_direction': '', 'verbose_name': 'Name'}
     allowed_sort_fields['data_atualizado'] = {'default_direction': '', 'verbose_name': 'Modified'}
 
-    default_sort_field = 'system'
+    default_sort_field = 'name'
     paginate_by = 10
 
     template_name = 'equipment/crud/list.html'
@@ -23,24 +23,6 @@ class EquipmentList(LoggedInMixin, SortableListView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_equipment')
-
-    def get_queryset(self):
-        if self.kwargs:
-            queryset = self.model._default_manager.filter(metabolomica_id=int(self.kwargs['pk']))
-        else:
-            queryset = self.model._default_manager.all()
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(EquipmentList, self).get_context_data(**kwargs)
-        context['metabolomicas'] = Equipment.objects.all()
-        context['metabolomica_id'] = 0
-
-        if self.kwargs:
-            context['metabolomica_id'] = self.kwargs['pk']
-
-        return context
 
 
 class EquipmentDetail(LoggedInMixin, DetailView):
@@ -81,4 +63,5 @@ class EquipmentUpdate(LoggedInMixin, UpdateView):
 class EquipmentDelete(LoggedInMixin, DeleteView):
     template_name = 'equipment/crud/delete.html'
     model = Equipment
+
     success_url = reverse_lazy('list_equipment')
