@@ -24,24 +24,6 @@ class AnalyticalList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_analytical')
 
-    def get_queryset(self):
-        if self.kwargs:
-            queryset = self.model._default_manager.filter(metabolomica_id=int(self.kwargs['pk']))
-        else:
-            queryset = self.model._default_manager.all()
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(AnalyticalList, self).get_context_data(**kwargs)
-        context['metabolomicas'] = Analytical.objects.all()
-        context['metabolomica_id'] = 0
-
-        if self.kwargs:
-            context['metabolomica_id'] = self.kwargs['pk']
-
-        return context
-
 
 class AnalyticalDetail(LoggedInMixin, DetailView):
     template_name = 'analytical/crud/detail.html'
@@ -81,4 +63,5 @@ class AnalyticalUpdate(LoggedInMixin, UpdateView):
 class AnalyticalDelete(LoggedInMixin, DeleteView):
     template_name = 'analytical/crud/delete.html'
     model = Analytical
+
     success_url = reverse_lazy('list_analytical')

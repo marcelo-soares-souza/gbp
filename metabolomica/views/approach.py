@@ -24,24 +24,6 @@ class ApproachList(LoggedInMixin, SortableListView):
 
     success_url = reverse_lazy('list_approach')
 
-    def get_queryset(self):
-        if self.kwargs:
-            queryset = self.model._default_manager.filter(metabolomica_id=int(self.kwargs['pk']))
-        else:
-            queryset = self.model._default_manager.all()
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(ApproachList, self).get_context_data(**kwargs)
-        context['metabolomicas'] = Approach.objects.all()
-        context['metabolomica_id'] = 0
-
-        if self.kwargs:
-            context['metabolomica_id'] = self.kwargs['pk']
-
-        return context
-
 
 class ApproachDetail(LoggedInMixin, DetailView):
     template_name = 'approach/crud/detail.html'
@@ -81,4 +63,5 @@ class ApproachUpdate(LoggedInMixin, UpdateView):
 class ApproachDelete(LoggedInMixin, DeleteView):
     template_name = 'approach/crud/delete.html'
     model = Approach
+
     success_url = reverse_lazy('list_approach')
