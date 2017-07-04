@@ -13,7 +13,7 @@
     <hr/>
     <p><b>Name:</b> <br/> <div class='text-highlight'>{{ species.name }} &nbsp;</div></p>
     <p><b>Scientific name:</b> <br/> <div class='text-highlight'>{{ species.scientific_name }}&nbsp;</div></p>
-	<p><b>Strain/Cultivar/Variety:</b> <br/> <div class='text-highlight'>{{ species.strain }} &nbsp;</div></p>
+	<p><b>Strain/Cultivar/Variety:</b> <br/> <div class='text-highlight'>{{ species.strain|default_if_none:"" }} &nbsp;</div></p>
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ species.data_cadastro }}&nbsp;</div></p>
 
     <hr/>
