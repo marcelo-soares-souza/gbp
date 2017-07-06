@@ -13,7 +13,7 @@
     <p><b>Sample:</b> <br/> <div class='text-highlight'>
       <a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample }}</a>&nbsp;</div></p>
 
-    <p><b>Experimental Condition:</b> <br/> <div class='text-highlight'>{{ result.experimental_condition }}&nbsp;</div></p>
+    <p><b>Experimental Condition:</b> <br/> <div class='text-highlight'>{{ result.experimental_condition|default_if_none:"" }}&nbsp;</div></p>
 
     {% if result.equipment.all %}
       <p><b>Equipments:</b>

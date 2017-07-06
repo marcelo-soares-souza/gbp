@@ -13,7 +13,7 @@
     <hr/>
 
     <p><b>Name:</b> <br/> <div class='text-highlight'>{{ database.name }}&nbsp;</div></p>
-    <p><b>Description:</b> <br/> <div class='text-highlight'>{{ database.description }}&nbsp;</div></p>
+    <p><b>Description:</b> <br/> <div class='text-highlight'>{{ database.description|default_if_none:"" }}&nbsp;</div></p>
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ database.data_cadastro }}&nbsp;</div></p>
 
     <hr/>

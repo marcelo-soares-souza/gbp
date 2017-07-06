@@ -29,7 +29,7 @@
                 <h3><a href="/metabolomica{{ result.get_detail_url }}">{{ result.name }}</a></h3>
                 <br/>
                 <p><b>Experimental Condition: </b> <br/>
-                <div class='text-highlight'> {{ result.experimental_condition }}&nbsp;</div><br/>
+                <div class='text-highlight'> {{ result.experimental_condition|default_if_none:"" }}&nbsp;</div><br/>
                 <p>
                     <a href="/metabolomica{{ result.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
                     {% if request.user == result.criado_por or request.user.is_superuser %}
