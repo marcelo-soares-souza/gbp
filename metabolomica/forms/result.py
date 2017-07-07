@@ -24,7 +24,7 @@ class ResultForm(forms.ModelForm):
             'equipment': 'Equipments',
             'equip_mode': 'MS Mode',
             'analytical_method': 'Analytical Method',
-            'raw_data': 'Result Raw Data',
+            'raw_data': 'File Upload',
         }
 
         widgets = {
