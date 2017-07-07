@@ -13,7 +13,9 @@
     <hr/>
 
     <p><b>Database:</b> <br/> <div class='text-highlight'>{{ sample.database }}&nbsp;</div></p>
+	<p><b>Replicate:</b> <br/> <div class='text-highlight'>{{ sample.replicate|default_if_none:"" }}&nbsp;</div></p>
     <p><b>Species:</b> <br/> <div class='text-highlight'>{{ sample.species_scientific_name|default_if_none:"" }}&nbsp;</div></p>
+	<p><b>Biological sample:</b> <br/> <div class='text-highlight'>{{ sample.bio_sample|default_if_none:"" }}&nbsp;</div></p>
     <p><b>User:</b> <br/> <div class='text-highlight'>{{ sample.criado_por|verifyfullname }}&nbsp;</div></p>
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ sample.data_cadastro }}&nbsp;</div></p>
 
