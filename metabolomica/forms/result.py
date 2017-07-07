@@ -18,11 +18,17 @@ class ResultForm(forms.ModelForm):
         )
 
         labels = {
-            'name': 'Name',
+            'name': 'Result title',
             'sample': 'Sample',
             'experimental_condition': 'Experimental Condition',
             'equipment': 'Equipments',
             'equip_mode': 'MS Mode',
             'analytical_method': 'Analytical Method',
             'raw_data': 'Result Raw Data',
+        }
+
+        widgets = {
+            'name': forms.TextInput(
+                attrs={'placeholder': 'Result title'}
+            )
         }
