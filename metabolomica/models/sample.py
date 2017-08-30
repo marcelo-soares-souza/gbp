@@ -10,7 +10,7 @@ from projeto.models.template import TemplateModelMixin
 class Sample(models.Model, TemplateModelMixin):
 
     database = models.ForeignKey(Database, null=True, blank=True, on_delete=models.SET_NULL)
-    lab_code = models.CharField(max_length=64)
+    lab_code = models.CharField(max_length=64, unique=True)
     replicate = models.CharField(max_length=64, blank=True)
     species = models.ForeignKey(Species, null=True, blank=True, on_delete=models.SET_NULL)
     bio_sample = models.CharField(max_length=64, blank=True)

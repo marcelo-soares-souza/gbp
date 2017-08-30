@@ -6,7 +6,7 @@ from projeto.models.template import TemplateModelMixin
 
 class Equipment(models.Model, TemplateModelMixin):
 
-    name = models.CharField(max_length=64, blank=True)
+    name = models.CharField(max_length=64, unique=True)
     description = models.TextField(blank=True)
 
     # Generic Data
