@@ -17,7 +17,7 @@
     <p><b>Responsável: </b> <br/> <div class='text-highlight'> {{ atividade.responsavel|verifyfullname }}&nbsp;</div></p>
     <p><b>Peso no Plano de Ação: <br/> <div class='text-highlight'> </b> {{ atividade.peso_planoacao }}&nbsp;</div></p>
     <p><b>Data Início: </b> <br/> <div class='text-highlight'> {{ atividade.data_inicio }}&nbsp;</div></p>
-    <p><b>Data Fim: </b <br/> <div class='text-highlight'>  {{ atividade.data_fim }}&nbsp;</div></p>
+    <p><b>Data Fim: </b> <br/> <div class='text-highlight'>  {{ atividade.data_fim }}&nbsp;</div></p>
 
     <p><b>Colaborador(es): </b> <br/> <div class='text-highlight'>
     {% for colaborador in atividade.colaborador.all %}{% if not forloop.first %}, {% endif %}
