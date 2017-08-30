@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>{{ species.name }}</title> {% endblock title %}
+{% block title %} <i><title>{{ species.scientific_name }}</title></i> {% endblock title %}
 
 {% block content %}
 
@@ -11,9 +11,9 @@
     <h2>{{ species.name }}</h2>
 
     <hr/>
-    <p><b>Name:</b> <br/> <div class='text-highlight'>{{ species.name }} &nbsp;</div></p>
-    <p><b>Scientific name:</b> <br/> <div class='text-highlight'>{{ species.scientific_name }}&nbsp;</div></p>
-	<p><b>Strain/Cultivar/Variety:</b> <br/> <div class='text-highlight'>{{ species.strain|default_if_none:"" }} &nbsp;</div></p>
+    <p><b>Name:</b> <br/> <div class='text-highlight'>{{ species.name|default_if_none:"" }}&nbsp;</div></p>
+	<p><b>Scientific name:</b> <br/> <div class='text-highlight'><i>{{ species.scientific_name }}</i>&nbsp;</div></p>
+	<p><b>Strain/Cultivar/Variety:</b> <br/> <div class='text-highlight'>{{ species.strain|default_if_none:"" }}&nbsp;</div></p>
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ species.data_cadastro }}&nbsp;</div></p>
 
     <hr/>

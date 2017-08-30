@@ -29,7 +29,7 @@
                 </br>
                 <p><b>Species: </b> <br/>
 
-		<div class='text-highlight'> {{ sample.species }}&nbsp;</div><br/>
+				<div class='text-highlight'> <i>{{ sample.species_scientific_name }}</i>&nbsp; {{ sample.species_strain|default_if_none:"" }}</div><br/>
                 <p>
                       <a href="/metabolomica{{ sample.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
                       {% if request.user == sample.criado_por or request.user.is_superuser %}

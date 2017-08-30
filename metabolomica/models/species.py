@@ -21,4 +21,7 @@ class Species(models.Model, TemplateModelMixin):
         verbose_name_plural = 'species'
 
     def __str__(self):
-        return '%s' % (self.name)
+        if(self.strain):
+            return '%s %s' % (self.scientific_name, self.strain)
+        else:
+            return '%s' % (self.scientific_name)

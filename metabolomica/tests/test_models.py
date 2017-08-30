@@ -51,7 +51,7 @@ class SpeciesModelTest(TestCase):
 
     def test_species_name(self):
         species = Species(name="Species")
-        self.assertEqual(str(species), species.name)
+        self.assertEqual(str(species), species.scientific_name)
 
     def test_species_verbose_name_plural(self):
         self.assertEqual(str(Species._meta.verbose_name_plural), "species")

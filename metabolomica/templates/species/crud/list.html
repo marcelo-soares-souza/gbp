@@ -26,9 +26,9 @@
             <ul class="list-group">
               <li class="list-group-item">
 
-                <h3> <a href="/metabolomica{{ species.get_detail_url }}">{{ species.name }}</a> </h3><br/>
-				<p><b>Scientific Name: </b> <br/>
-				<div class='text-highlight'> <i>{{ species.scientific_name }}</i>&nbsp; {{ species.strain|default_if_none:"" }}</div>
+				  <h3> <a href="/metabolomica{{ species.get_detail_url }}"><i>{{ species.scientific_name }}</i>&nbsp; {{ species.strain|default_if_none:"" }}</a> </h3><br/>
+				<p><b>Name: </b> <br/>
+				<div class='text-highlight'>{{ species.name }}</div>
                 </br>
                 <p>
                     <a href="/metabolomica{{ species.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
