@@ -1,3 +1,5 @@
+# flake8: noqa
+
 {% extends 'base.html' %}
 
 {% load widget_tweaks %}
