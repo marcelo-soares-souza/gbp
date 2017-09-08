@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from metabolomica.models import Equipment, Sample
+from metabolomica.models.analytical import Analytical
+from metabolomica.models.equipment import Equipment
+from metabolomica.models.sample import Sample
 
 from projeto.models.template import TemplateModelMixin
 
@@ -9,10 +11,10 @@ from projeto.models.template import TemplateModelMixin
 class Result(models.Model, TemplateModelMixin):
 
     name = models.CharField(max_length=120)
-    sample = models.ForeignKey(Sample, null=True, blank=True, on_delete=models.CASCADE)
+    sample = models.ForeignKey(Sample, null=True, blank=True, related_name='result_sample', on_delete=models.CASCADE)
     experimental_condition = models.TextField(blank=True)
     equipment = models.ManyToManyField(Equipment, blank=True, related_name='result_equipment')
-    analytical_method = models.CharField(max_length=40, blank=True)
+    analytical_method = models.ForeignKey(Analytical, blank=True, null=True, related_name='result_analytical', on_delete=models.SET_NULL)
     equip_mode = models.CharField(max_length=40, null=True, blank=True)  # MS Mode
     raw_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)  # Result raw data
 
