@@ -17,6 +17,7 @@ class Result(models.Model, TemplateModelMixin):
     analytical_method = models.ForeignKey(Analytical, blank=True, null=True, related_name='result_analytical', on_delete=models.SET_NULL)
     equip_mode = models.CharField(max_length=40, null=True, blank=True)  # MS Mode
     raw_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)  # Result raw data
+    image = models.ImageField(upload_to='bmdb/raw/%Y/%m/%d/', height_field=None, width_field=None, max_length=None, null=True, blank=True)
 
     # Generic Data
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)

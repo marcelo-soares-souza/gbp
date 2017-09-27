@@ -77,10 +77,16 @@
       {% endif %}
 
       {% if result.raw_data %}
-      <p><b>File Upload (.CSV):</b> <br/> <div class='text-highlight'>
-          <a href="{{ result.raw_data.url }}">{{ result.raw_data }}</a>&nbsp;
-      </div></p>
+        <p><b>File Upload (.CSV):</b> <br/> <div class='text-highlight'>
+            <a href="{{ result.raw_data.url }}">{{ result.raw_data }}</a>&nbsp;
+        </div></p>
       {% endif %}
+
+	  {% if result.image %}
+	    <p>
+		  <img src="{{ result.image.url }}"/>
+		</p>
+	  {% endif %}
 
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
 
