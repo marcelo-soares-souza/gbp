@@ -23,8 +23,8 @@ class ResultForm(forms.ModelForm):
             'sample': 'Sample',
             'experimental_condition': 'Experimental Condition',
             'equipment': 'Equipments',
-            'equip_mode': 'MS Mode',
             'analytical_method': 'Analytical Method',
+            'equip_mode': 'MS Mode',
             'raw_data': 'File Upload',
             'image': 'Image Upload',
         }

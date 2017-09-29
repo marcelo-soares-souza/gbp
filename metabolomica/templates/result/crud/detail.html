@@ -26,6 +26,12 @@
      {% endif %}
 
     <b>Equipment Mode:</b> <br/> <div class='text-highlight'>{{ result.equip_mode }}&nbsp;</div></p>
+    
+	  {% if result.image %}
+	    <p>
+		  <img src="{{ result.image.url }}"/>
+		</p>
+	  {% endif %}
 
     {% if csv %}
     <p><b>Processed data:</b> <br/>
@@ -81,12 +87,6 @@
             <a href="{{ result.raw_data.url }}">{{ result.raw_data }}</a>&nbsp;
         </div></p>
       {% endif %}
-
-	  {% if result.image %}
-	    <p>
-		  <img src="{{ result.image.url }}"/>
-		</p>
-	  {% endif %}
 
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
 
