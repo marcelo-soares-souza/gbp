@@ -114,6 +114,49 @@ class MetabolomicaEquipmentDeleteTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
+# MS Mode Tests
+class MetabolomicaMsModeHomeTest(TestCase):
+
+    def test_home_http_response_code(self):
+        response = self.client.get(reverse('home_ms_mode'), follow=True)
+        self.assertEqual(response.status_code, 200)
+
+
+class MetabolomicaMsModeNewTest(TestCase):
+
+    def test_new_http_response_code(self):
+        response = self.client.get(reverse('new_ms_mode'), follow=True)
+        self.assertEqual(response.status_code, 200)
+
+
+class MetabolomicaMsModeListTest(TestCase):
+
+    def test_list_http_response_code(self):
+        response = self.client.get(reverse('list_ms_mode'), follow=True)
+        self.assertEqual(response.status_code, 200)
+
+
+class MetabolomicaMsModeDetailTest(TestCase):
+
+    def test_detail_http_response_code(self):
+        response = self.client.get(reverse('detail_ms_mode', kwargs={'pk': 1}), follow=True)
+        self.assertEqual(response.status_code, 200)
+
+
+class MetabolomicaMsModeUpdateTest(TestCase):
+
+    def test_update_http_response_code(self):
+        response = self.client.get(reverse('update_ms_mode', kwargs={'pk': 1}), follow=True)
+        self.assertEqual(response.status_code, 200)
+
+
+class MetabolomicaMsModeDeleteTest(TestCase):
+
+    def test_delete_http_response_code(self):
+        response = self.client.get(reverse('delete_ms_mode', kwargs={'pk': 1}), follow=True)
+        self.assertEqual(response.status_code, 200)
+
+
 # Result Tests
 class MetabolomicaResultHomeTest(TestCase):
 

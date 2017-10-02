@@ -35,6 +35,7 @@ from fddb.views import FddbCreate, FddbDelete, FddbDetail, FddbList, FddbUpdate,
 from metabolomica.views.sample import SampleCreate, SampleDelete, SampleDetail, SampleList, SampleUpdate
 from metabolomica.views.approach import ApproachCreate, ApproachDelete, ApproachDetail, ApproachList, ApproachUpdate
 from metabolomica.views.equipment import EquipmentCreate, EquipmentDelete, EquipmentDetail, EquipmentList, EquipmentUpdate
+from metabolomica.views.ms_mode import MsModeCreate, MsModeDelete, MsModeDetail, MsModeList, MsModeUpdate
 from metabolomica.views.result import ResultCreate, ResultDelete, ResultDetail, ResultList, ResultUpdate
 from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
 from metabolomica.views.dashboard import DashboardMetabolomica, DashboardApproachList, DashboardResultList, DashboardResultSampleList, DashboardDetail
@@ -320,6 +321,15 @@ urlpatterns = [
     url(r'^metabolomica/equipment/detail/(?P<pk>\d+)/$', EquipmentDetail.as_view(), name='detail_equipment'),
     url(r'^metabolomica/equipment/update/(?P<pk>\d+)/$', EquipmentUpdate.as_view(), name='update_equipment'),
     url(r'^metabolomica/equipment/delete/(?P<pk>\d+)/$', EquipmentDelete.as_view(), name='delete_equipment'),
+
+
+    # Views de MS Mode
+    url(r'^metabolomica/ms_mode$', MsModeList.as_view(), name='home_ms_mode'),
+    url(r'^metabolomica/ms_mode/new/$', MsModeCreate.as_view(), name='new_ms_mode'),
+    url(r'^metabolomica/ms_mode/list/', MsModeList.as_view(), name='list_ms_mode'),
+    url(r'^metabolomica/ms_mode/detail/(?P<pk>\d+)/$', MsModeDetail.as_view(), name='detail_ms_mode'),
+    url(r'^metabolomica/ms_mode/update/(?P<pk>\d+)/$', MsModeUpdate.as_view(), name='update_ms_mode'),
+    url(r'^metabolomica/ms_mode/delete/(?P<pk>\d+)/$', MsModeDelete.as_view(), name='delete_ms_mode'),
 
     # Views de Result
     url(r'^metabolomica/result$', ResultList.as_view(), name='home_result'),
