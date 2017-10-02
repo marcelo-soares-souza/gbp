@@ -16,7 +16,15 @@ class Result(models.Model, TemplateModelMixin):
     equipment = models.ManyToManyField(Equipment, blank=True, related_name='result_equipment')
     analytical_method = models.ForeignKey(Analytical, blank=True, null=True, related_name='result_analytical', on_delete=models.SET_NULL)
     equip_mode = models.CharField(max_length=40, null=True, blank=True)  # MS Mode
-    raw_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)  # Result raw data
+
+    # Upload Fields
+    lc_method = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
+    ms_method = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
+    parameters = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
+    processed_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
+    raw_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
+    sample_preparation = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
+    csv = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
     image = models.ImageField(upload_to='bmdb/raw/%Y/%m/%d/', height_field=None, width_field=None, max_length=None, null=True, blank=True)
 
     # Generic Data

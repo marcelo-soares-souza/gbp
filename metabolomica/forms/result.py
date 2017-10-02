@@ -12,9 +12,15 @@ class ResultForm(forms.ModelForm):
             'sample',
             'experimental_condition',
             'equipment',
-            'equip_mode',
             'analytical_method',
+            'equip_mode',
+            'lc_method',
+            'ms_method',
+            'parameters',
+            'processed_data',
             'raw_data',
+            'sample_preparation',
+            'csv',
             'image',
         )
 
@@ -25,7 +31,13 @@ class ResultForm(forms.ModelForm):
             'equipment': 'Equipments',
             'analytical_method': 'Analytical Method',
             'equip_mode': 'MS Mode',
+            'lc_method': 'LC Method (Instrument)',
+            'ms_method': 'MS Method (Instrument)',
+            'parameters': 'Parameters',
+            'processed_data': 'Processed Data',
             'raw_data': 'File Upload',
+            'sample_preparation': 'Sample Preparation',
+            'csv': 'CSV Upload',
             'image': 'Image Upload',
         }
 

@@ -82,9 +82,44 @@
       </p>
       {% endif %}
 
+      {% if result.csv %}
+        <p><b>CSV Upload:</b> <br/> <div class='text-highlight'>
+            <a href="{{ result.csv.url }}">{{ result.csv }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.lc_method %}
+        <p><b>LC Method:</b> <br/> <div class='text-highlight'>
+            <a href="{{ result.lc_method.url }}">{{ result.lc_method }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.ms_method %}
+        <p><b>MS Method:</b> <br/> <div class='text-highlight'>
+            <a href="{{ result.ms_method.url }}">{{ result.ms_method }}</a>
+        </div></p>
+
+      {% if result.parameters %}
+        <p><b>Parameters:</b> <br/> <div class='text-highlight'>
+            <a href="{{ result.parameters.url }}">{{ result.parameters }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.processed_data %}
+        <p><b>Processed Data:</b><br/> <div class='text-highlight'>
+            <a href="{{ result.processed_data.url }}">{{ result.processed_data }}</a>
+        </div></p>
+      {% endif %}
+
       {% if result.raw_data %}
-        <p><b>File Upload (.CSV):</b> <br/> <div class='text-highlight'>
-            <a href="{{ result.raw_data.url }}">{{ result.raw_data }}</a>&nbsp;
+        <p><b>Raw Data:</b><br/> <div class='text-highlight'>
+            <a href="{{ result.raw_data.url }}">{{ result.raw_data }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.sample_preparation %}
+        <p><b>Sample Preparation:</b><br/> <div class='text-highlight'>
+            <a href="{{ result.sample_preparation.url }}">{{ result.sample_preparation }}</a>
         </div></p>
       {% endif %}
 
