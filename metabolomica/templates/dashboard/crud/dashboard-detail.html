@@ -30,7 +30,7 @@
           <th class="experimental_condition">Condition</th>
           <th class="equipment">Equipment</th>
           <th class="analytical_method">Analytical Method</th>
-          <th class="equip_mode">Equip Mode</th>
+          <th class="ms_mode">MS Mode</th>
           <th class="extr_method">Extr Method</th>
           <th class="parameters_lc_ms">Parameters LC MS</th>
           <th class="lc_raw_data">LC Data</th>
@@ -53,7 +53,7 @@
             {% for equipment in result.equipment.all %}{% if not forloop.first %}, {% endif %}<a href="{% url 'detail_equipment' equipment.id %}">{{ equipment }}</a>{% endfor %}
           </td>
           <td class="analytical_method">{{result.analytical_method}}</td>
-          <td class="equip_mode">{{result.equip_mode}}</td>
+          <td class="ms_mode">{{result.ms_mode}}</td>
           <td class="extr_method">{{result.extr_method}}</td>
           <td class="parameters_lc_ms">{{result.parameters_lc_ms}}</td>
           <td class="lc_raw_data">{{result.lc_raw_data}}</td>
@@ -86,7 +86,7 @@
 
         $('.process_data').hide();
         $('.analytical_method').hide();
-        $('.equip_mode').hide();
+        $('.ms_mode').hide();
         $('.extr_method').hide();
         $('.parameters_lc_ms').hide();
         $('.lc_raw_data').hide();
