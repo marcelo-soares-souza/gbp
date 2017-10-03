@@ -21,7 +21,7 @@ class Sample(models.Model, TemplateModelMixin):
     criado_por = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
-        ordering = ['lab_code']
+        ordering = ['-data_atualizado']
         verbose_name = 'sample'
         verbose_name_plural = 'samples'
 
