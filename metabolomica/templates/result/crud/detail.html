@@ -25,7 +25,7 @@
         </div></p>
      {% endif %}
 
-    <b>MS Mode:</b> <br/> <div class='text-highlight'>{{ result.ms_mode }}&nbsp;</div></p>
+    <b>MS Mode:</b> <br/> <div class='text-highlight'>{{ result.ms_mode|default_if_none:"" }}&nbsp;</div></p>
     
 	  {% if result.image %}
 	    <p>
@@ -33,7 +33,7 @@
 		</p>
 	  {% endif %}
 
-    {% if csv %}
+    {% if result.csv %}
     <p><b>Processed data:</b> <br/>
         <table class="table table-striped" style="font-size: 12px;">
           <thead>
@@ -98,6 +98,7 @@
         <p><b>MS Method:</b> <br/> <div class='text-highlight'>
             <a href="{{ result.ms_method.url }}">{{ result.ms_method }}</a>
         </div></p>
+      {% endif %}
 
       {% if result.parameters %}
         <p><b>Parameters:</b> <br/> <div class='text-highlight'>
