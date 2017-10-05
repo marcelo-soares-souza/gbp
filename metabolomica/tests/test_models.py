@@ -44,7 +44,7 @@ class MsModeModelTest(TestCase):
         self.assertEqual(str(ms_mode), ms_mode.name)
 
     def test_ms_mode_verbose_name_plural(self):
-        self.assertEqual(str(MsMode._meta.verbose_name_plural), "MS Mode")
+        self.assertEqual(str(MsMode._meta.verbose_name_plural), "MS Modes")
 
 
 class ResultModelTest(TestCase):
