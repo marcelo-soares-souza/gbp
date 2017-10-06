@@ -33,7 +33,7 @@
 		</p>
 	  {% endif %}
 
-    {% if result.csv %}
+    {% if csv %}
     <p><b>Processed data:</b> <br/>
         <table class="table table-striped" style="font-size: 12px;">
           <thead>
@@ -106,9 +106,9 @@
         </div></p>
       {% endif %}
 
-      {% if result.processed_data %}
-        <p><b>Processed Data:</b><br/> <div class='text-highlight'>
-            <a href="{{ result.processed_data.url }}">{{ result.processed_data }}</a>
+      {% if result.sample_preparation %}
+        <p><b>Sample Preparation:</b><br/> <div class='text-highlight'>
+            <a href="{{ result.sample_preparation.url }}">{{ result.sample_preparation }}</a>
         </div></p>
       {% endif %}
 
@@ -118,11 +118,12 @@
         </div></p>
       {% endif %}
 
-      {% if result.sample_preparation %}
-        <p><b>Sample Preparation:</b><br/> <div class='text-highlight'>
-            <a href="{{ result.sample_preparation.url }}">{{ result.sample_preparation }}</a>
+      {% if result.processed_data %}
+        <p><b>Processed Data:</b><br/> <div class='text-highlight'>
+            <a href="{{ result.processed_data.url }}">{{ result.processed_data }}</a>
         </div></p>
       {% endif %}
+
 
     <p><b>Added:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
 

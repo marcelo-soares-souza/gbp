@@ -16,9 +16,9 @@ class ResultForm(forms.ModelForm):
             'lc_method',
             'ms_method',
             'parameters',
-            'processed_data',
-            'raw_data',
             'sample_preparation',
+            'raw_data',
+            'processed_data',
             'csv',
             'image',
         )
@@ -32,9 +32,9 @@ class ResultForm(forms.ModelForm):
             'lc_method': 'LC Method (Instrument)',
             'ms_method': 'MS Method (Instrument)',
             'parameters': 'Parameters',
-            'processed_data': 'Processed Data',
-            'raw_data': 'File Upload',
             'sample_preparation': 'Sample Preparation',
+            'raw_data': 'File Upload',
+            'processed_data': 'Processed Data',
             'csv': 'CSV Upload',
             'image': 'Image Upload',
         }

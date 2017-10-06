@@ -22,9 +22,9 @@ class Result(models.Model, TemplateModelMixin):
     lc_method = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
     ms_method = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
     parameters = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
-    processed_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
-    raw_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
     sample_preparation = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
+    raw_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
+    processed_data = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
     csv = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
     image = models.ImageField(upload_to='bmdb/raw/%Y/%m/%d/', height_field=None, width_field=None, max_length=None, null=True, blank=True)
 
