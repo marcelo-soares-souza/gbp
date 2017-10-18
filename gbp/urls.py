@@ -369,7 +369,7 @@ urlpatterns = [
     url(r'^metabolomica/analytical/list/$', AnalyticalList.as_view(), name='list_analytical'),
     url(r'^metabolomica/analytical/detail/(?P<pk>\d+)/$', AnalyticalDetail.as_view(), name='detail_analytical'),
     url(r'^metabolomica/analytical/update/(?P<pk>\d+)/$', AnalyticalUpdate.as_view(), name='update_analytical'),
-    url(r'^metabolomica/analytica/delete/(?P<pk>\d+)/$', AnalyticalDelete.as_view(), name='delete_analytical'),
+    url(r'^metabolomica/analytical/delete/(?P<pk>\d+)/$', AnalyticalDelete.as_view(), name='delete_analytical'),
 
     # Views DashBoard Metabolomica
     url(r'^metabolomica/dashboard/', DashboardMetabolomica.as_view(), name='dashboard_metabolomica'),

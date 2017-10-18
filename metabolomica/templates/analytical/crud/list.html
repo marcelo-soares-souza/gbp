@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>List all Species</title> {% endblock title %}
+{% block title %} <title>List all Analytical Methods</title> {% endblock title %}
 
 {% block content %}
 
@@ -26,22 +26,22 @@
             <ul class="list-group">
               <li class="list-group-item">
 
-                <h3> <a href="/metabolomica{{ species.get_detail_url }}">{{ species.name }}</a> </h4>
+                <h3> <a href="/metabolomica{{ analytical.get_detail_url }}">{{ analytical.name }}</a> </h4>
 
                 <p><b>Scientific Name: </b> <br/>
-		<div class='text-highlight'> <i>{{ species.scientific_name }}</i>&nbsp; {{ species.strain }}</div>
+		<div class='text-highlight'> <i>{{ analytical.description }}</div>
 
                 <br/>
 
                 <p>
-                    <a href="/metabolomica{{ species.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
-                    {% if request.user == species.criado_por or request.user.is_superuser %}
+                    <a href="/metabolomica{{ analytical.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+                    {% if request.user == analytical.criado_por or request.user.is_superuser %}
 
-                      <a href="/metabolomica{{ species.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+                      <a href="/metabolomica{{ analytical.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
                     {% endif %}
                 </p>
 
-                <div class="data-atualizado">{{ species.data_atualizado }}</div>
+                <div class="data-atualizado">{{ analytical.data_atualizado }}</div>
 
               </li>
             </ul>

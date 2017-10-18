@@ -6,7 +6,7 @@ from projeto.models.template import TemplateModelMixin
 
 class Analytical(models.Model, TemplateModelMixin):
 
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     description = models.TextField(blank=True)
 
     # Generic Attributes
@@ -16,8 +16,8 @@ class Analytical(models.Model, TemplateModelMixin):
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'analytical approach'
-        verbose_name_plural = 'analytical approaches'
+        verbose_name = 'analytical method'
+        verbose_name_plural = 'analytical methods'
 
     def __str__(self):
         return '%s' % (self.name)
