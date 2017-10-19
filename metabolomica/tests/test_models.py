@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from metabolomica.models import Sample, Approach, Equipment, MsMode, Result, Species, Formula, Analytical
+from metabolomica.models import Sample, Approach, Equipment, Result, Species, Formula, Analytical
 
 
 #
@@ -35,16 +35,6 @@ class EquipmentModelTest(TestCase):
 
     def test_equipment_verbose_name_plural(self):
         self.assertEqual(str(Equipment._meta.verbose_name_plural), "equipments")
-
-
-class MsModeModelTest(TestCase):
-
-    def test_ms_mode_name(self):
-        ms_mode = MsMode(name="MS Mode")
-        self.assertEqual(str(ms_mode), ms_mode.name)
-
-    def test_ms_mode_verbose_name_plural(self):
-        self.assertEqual(str(MsMode._meta.verbose_name_plural), "MS Modes")
 
 
 class ResultModelTest(TestCase):

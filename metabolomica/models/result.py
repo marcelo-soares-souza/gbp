@@ -3,7 +3,6 @@ from django.db import models
 
 from metabolomica.models.analytical import Analytical
 from metabolomica.models.equipment import Equipment
-from metabolomica.models.ms_mode import MsMode
 from metabolomica.models.sample import Sample
 
 from projeto.models.template import TemplateModelMixin
@@ -16,7 +15,6 @@ class Result(models.Model, TemplateModelMixin):
     experimental_condition = models.TextField(blank=True)
     equipment = models.ManyToManyField(Equipment, blank=True, related_name='result_equipment')
     analytical_method = models.ForeignKey(Analytical, blank=True, null=True, related_name='result_analytical', on_delete=models.SET_NULL)
-    ms_mode = models.ForeignKey(MsMode, null=True, blank=True, related_name='result_ms_mode', on_delete=models.SET_NULL)
 
     # Upload Fields
     lc_method = models.FileField(upload_to='bmdb/raw/%Y/%m/%d/', null=True, blank=True)
