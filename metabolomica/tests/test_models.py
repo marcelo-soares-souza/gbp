@@ -84,4 +84,4 @@ class AnalyticalModeltTest(TestCase):
         self.assertEqual(str(analytical), analytical.name)
 
     def test_analytical_verbose_name_plural(self):
-        self.assertEqual(str(Analytical._meta.verbose_name_plural), "analytical approaches")
+        self.assertEqual(str(Analytical._meta.verbose_name_plural), "analytical methods")
