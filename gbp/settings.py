@@ -91,9 +91,9 @@ WSGI_APPLICATION = 'gbp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lbb_gbp_production',
-        'USER': 'lbb_gbp_production',
-        'PASSWORD': 'lbb_gbp_production',
+        'NAME': 'lbb_gbp_production_new',
+        'USER': 'lbb_gbp_production_new',
+        'PASSWORD': 'lbb_gbp_production_new',
         'HOST': '10.188.181.10',
         'PORT': '5432',
     }
