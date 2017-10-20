@@ -33,7 +33,7 @@ class ResultForm(forms.ModelForm):
             'ms_method': 'MS Method (Instrument)',
             'parameters': 'Parameters',
             'sample_preparation': 'Sample Preparation',
-            'raw_data': 'File Upload',
+            'raw_data': 'Raw Data',
             'processed_data': 'Processed Data',
             'csv': 'CSV Upload',
             'image': 'Image Upload',
