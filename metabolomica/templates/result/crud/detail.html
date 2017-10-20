@@ -29,6 +29,9 @@
 	    <p>
 		  <img src="{{ result.image.url }}"/>
 		</p>
+        <p><b>Image:</b><br/> <div class='text-highlight'>
+          <a href="{{ result.image.url }}">{{ result.image }}</a>
+        </div></p>
 	  {% endif %}
 
     {% if csv %}
