@@ -43,8 +43,8 @@ class ResultDetail(LoggedInMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ResultDetail, self).get_context_data(**kwargs)
 
-        if context['result'].raw_data:
-            reader = csv.DictReader(open(os.path.join(settings.BASE_DIR, 'media', str(context['result'].raw_data))), delimiter=';')
+        if context['result'].csv:
+            reader = csv.DictReader(open(os.path.join(settings.BASE_DIR, 'media', str(context['result'].csv))), delimiter=';')
             result = []
             for line in reader:
                 result.append(line)
