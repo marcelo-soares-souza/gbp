@@ -13,7 +13,7 @@ class Result(models.Model, TemplateModelMixin):
     name = models.CharField(max_length=120)
     sample = models.ForeignKey(Sample, null=True, blank=True, related_name='result_sample', on_delete=models.CASCADE)
     experimental_condition = models.TextField(blank=True)
-    equipment = models.ManyToManyField(Equipment, blank=True, related_name='result_equipment')
+    equipment = models.ManyToManyField(Equipment, blank=True, related_name='result_equipment', help_text="Hold 'Crtl' or 'Shift' for multiple selection.")
     analytical_method = models.ForeignKey(Analytical, blank=True, null=True, related_name='result_analytical', on_delete=models.SET_NULL)
 
     # Upload Fields
