@@ -16,8 +16,8 @@ class Analytical(models.Model, TemplateModelMixin):
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'analytical method'
-        verbose_name_plural = 'analytical methods'
+        verbose_name = 'analytical'
+        verbose_name_plural = 'analyticals'
 
     def __str__(self):
         return '%s' % (self.name)

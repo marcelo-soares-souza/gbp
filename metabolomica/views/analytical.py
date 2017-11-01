@@ -18,7 +18,7 @@ class AnalyticalList(LoggedInMixin, SortableListView):
     paginate_by = 10
 
     template_name = 'analytical/crud/list.html'
-    context_object_name = 'analytical approaches'
+    context_object_name = 'analyticals'
     model = Analytical
     fields = '__all__'
 
@@ -54,7 +54,7 @@ class AnalyticalUpdate(LoggedInMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(AnalyticalUpdate, self).get_context_data(**kwargs)
-        context["analytical approaches"] = Analytical.objects.all().order_by('data_atualizado')
+        context["analyticals"] = Analytical.objects.all().order_by('data_atualizado')
         return context
 
     success_url = reverse_lazy('list_analytical')
