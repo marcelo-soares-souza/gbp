@@ -59,7 +59,7 @@
           <td class="raw_data">{{result.raw_data}}</td>
           <td class="process_data">{{result.process_data}}</td>
           <td class="replicate">{{result.sample.replicate}}</td>
-          <td class="species"><i>{{result.sample.species}}</i>&nbsp;{{result.sample.species.strain}}</td>
+          <td class="species"><i>{{result.sample.species.scientific_name}}</i>&nbsp;{{ result.sample.species.strain|default_if_none:"" }}</td>
           <td class="bio_sample">{{result.sample.bio_sample}}</td>
         </tr>
       {% endfor %}
