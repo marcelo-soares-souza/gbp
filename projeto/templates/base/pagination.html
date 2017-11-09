@@ -2,7 +2,7 @@
   <ul class="pagination">
     {% if page_obj.has_previous %}
       <li><a href="?page=1&amp;{{ current_sort_query }}&amp;{{ current_querystring }}">Primeiro</a></li>
-      <li><a href="?page={{ page_obj.previous_page_number }}&amp;{{ current_sort_query }}&amp;{{ current_querystring }}">Anterior</a></li>
+      <li><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
     {% else %}
       <li class="disabled"><span>Primeiro</span></li>
       <li class="disabled"><span>Anterior</span></li>
