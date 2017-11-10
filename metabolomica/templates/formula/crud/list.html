@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %} <title>List all Formula</title> {% endblock title %}
+{% block title %} <title>List all Formulae</title> {% endblock title %}
 
 {% block content %}
 
@@ -28,8 +28,8 @@
 
                 <h3><a href="/metabolomica{{ formula.get_detail_url }}">{{ formula.common_name }}</a></h3>
                 <br/>
-                <p><b>Common Name: </b> <br/>
-                <div class='text-highlight'> <i>{{ formula.common_name }}</i>&nbsp; {{ formula.strain }}</div>
+                <p><b>Chemical Formula: </b> <br/>
+                <div class='text-highlight'>{{ formula.chemical_formula }}&nbsp;</div>
                 <br/>
                 <p>
                     <a href="/metabolomica{{ formula.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
