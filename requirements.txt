@@ -9,7 +9,7 @@ django-filter==1.1.0
 django-js-asset==0.1.1
 django-localflavor==1.5.2
 django-smart-selects==1.5.2
-django-sortable-listview==0.42
+django-sortable-listview==0.41
 django-widget-tweaks==1.4.1
 flake8==3.5.0
 image==1.5.16
