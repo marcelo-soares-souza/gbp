@@ -26,9 +26,9 @@
      {% endif %}
     
 	  {% if result.image %}
-	    <p>
-		  <img src="{{ result.image.url }}"/>
-		</p>
+        <p>
+		  <img src="{{ result.image.url }}" class="img-thumbnail"/>
+        </p>
         <p><b>Image:</b><br/> <div class='text-highlight'>
           <a href="{{ result.image.url }}">{{ result.image }}</a>
         </div></p>
