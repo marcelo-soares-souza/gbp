@@ -12,8 +12,8 @@ from projeto.views.login import LoggedInMixin
 
 class SampleList(LoggedInMixin, SortableListView):
     allowed_sort_fields = collections.OrderedDict()
-    allowed_sort_fields['lab_code'] = {'default_direction': '', 'verbose_name': 'Name'}
-    allowed_sort_fields['data_atualizado'] = {'default_direction': '', 'verbose_name': 'Modified'}
+    allowed_sort_fields['lab_code'] = {'default_direction': '', 'verbose_name': 'Lab Code'}
+    allowed_sort_fields['data_atualizado'] = {'default_direction': '', 'verbose_name': 'Updated'}
 
     default_sort_field = 'lab_code'
     paginate_by = 10

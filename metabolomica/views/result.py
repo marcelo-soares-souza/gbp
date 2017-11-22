@@ -18,8 +18,8 @@ logger = logging.getLogger('metabolomica')
 
 class ResultList(LoggedInMixin, SortableListView):
     allowed_sort_fields = collections.OrderedDict()
-    allowed_sort_fields['name'] = {'default_direction': '', 'verbose_name': 'Name'}
-    allowed_sort_fields['data_atualizado'] = {'default_direction': '', 'verbose_name': 'Modified'}
+    allowed_sort_fields['name'] = {'default_direction': '', 'verbose_name': 'Title'}
+    allowed_sort_fields['data_atualizado'] = {'default_direction': '', 'verbose_name': 'Updated'}
 
     default_sort_field = 'name'
     paginate_by = 10
