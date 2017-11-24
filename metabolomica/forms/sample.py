@@ -12,16 +12,14 @@ class SampleForm(forms.ModelForm):
             'lab_code',
             'replicate',
             'species',
-            'bio_sample',
-            'criado_por')
+            'bio_sample')
 
         labels = {
             'database': 'Database',
             'lab_code': 'Sample Lab Code',
             'replicate': 'Replicate',
             'species': 'Species',
-            'bio_sample': 'Biological Sample',
-            'criado_por': 'User'
+            'bio_sample': 'Biological Sample'
         }
 
         widgets = {
