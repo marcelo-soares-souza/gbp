@@ -1,10 +1,12 @@
+{% load gbp_filters %}
+
 <script> $(document).ready(function() { $('.nav-tabs a[id="{{request.resolver_match.url_name}}"]').tab('show'); }); </script>
 {% if request.user.is_authenticated %}
   <ul class="nav nav-tabs" id="myTab" >
     {% if 'new' in request.resolver_match.url_name %}
       <li class="tab-title"><a id="new_sample" href="{% url 'new_sample' %}#">Sample</a></li>
       <li class="tab-title"><a id="new_result" href="{% url 'new_result' %}#">Result</a></li>
-        {% if request.user.is_superuser %}
+        {% if request.user|has_group:'Metabolômica' or request.user.is_superuser %}
           <li class="tab-title"><a id="new_database" href="{% url 'new_database' %}#">Database</a></li>
           <li class="tab-title"><a id="new_approach" href="{% url 'new_approach' %}#">Approach</a></li>
           <li class="tab-title"><a id="new_equipment" href="{% url 'new_equipment' %}#">Equipment</a></li>
@@ -15,25 +17,25 @@
     {% elif 'detail' in request.resolver_match.url_name %}
       <li class="tab-title"><a id="detail_sample" href="{% url 'list_sample' %}#">Sample</a></li>
       <li class="tab-title"><a id="detail_result" href="{% url 'list_result' %}#">Result</a></li>
-        {% if request.user.is_superuser %}
+        {% if request.user|has_group:'Metabolômica' or request.user.is_superuser %}
           <li class="tab-title"><a id="detail_database" href="{% url 'list_database' %}#">Database</a></li>
           <li class="tab-title"><a id="detail_approach" href="{% url 'list_approach' %}#">Approach</a></li>
           <li class="tab-title"><a id="detail_equipment" href="{% url 'list_equipment' %}#">Equipment</a></li>
 	      <li class="tab-title"><a id="detail_analytical" href="{% url 'list_analytical' %}#">Analytical Method</a></li>
           <li class="tab-title"><a id="detail_species" href="{% url 'list_species' %}#">Species</a></li>
           <li class="tab-title"><a id="detail_formula" href="{% url 'list_formula' %}#">Formula</a></li>
-		{% endif %}
+	{% endif %}
     {% else %} 
       <li class="tab-title"><a id="list_sample" href="{% url 'list_sample' %}#">Sample</a></li>
       <li class="tab-title"><a id="list_result" href="{% url 'list_result' %}#">Result</a></li>
-		{% if request.user.is_superuser %}
+        {% if request.user|has_group:'Metabolômica' or request.user.is_superuser %}
           <li class="tab-title"><a id="list_database" href="{% url 'list_database' %}#">Database</a></li>
           <li class="tab-title"><a id="list_approach" href="{% url 'list_approach' %}#">Approach</a></li>
           <li class="tab-title"><a id="list_equipment" href="{% url 'list_equipment' %}#">Equipment</a></li>
           <li class="tab-title"><a id="list_analytical" href="{% url 'list_analytical' %}#">Analytical Method</a></li>
           <li class="tab-title"><a id="list_species" href="{% url 'list_species' %}#">Species</a></li>
           <li class="tab-title"><a id="list_formula" href="{% url 'list_formula' %}#">Formula</a></li>
-	    {% endif %}
+        {% endif %}
     {% endif %}
   </ul>
 {% endif %}
