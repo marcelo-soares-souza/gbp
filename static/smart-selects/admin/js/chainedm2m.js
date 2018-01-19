@@ -43,8 +43,20 @@
                     }
                 }
 
+                // SelectBox is a global var from djangojs "admin/js/SelectBox.js"
+                // Clear cache to avoid the elements duplication
+                if (typeof SelectBox !== 'undefined') {
+                    if (typeof SelectBox.cache[cache_to] !== 'undefined') {
+                        SelectBox.cache[cache_to].splice(0);
+                    }
+                    if (typeof SelectBox.cache[cache_from] !== 'undefined') {
+                        SelectBox.cache[cache_from].splice(0);
+                    }
+                }
+
                 if (!val || val === ''){
                     $selectField.html('');
+                    $selectedto.html('');
                     trigger_chosen_updated();
                     return;
                 }
@@ -139,6 +151,15 @@
                     var oldDismissAddAnotherPopup = dismissAddAnotherPopup;
                     dismissAddAnotherPopup = function(win, newId, newRepr) {
                         oldDismissAddAnotherPopup(win, newId, newRepr);
+                        if ("#" + windowname_to_id(win.name) == chainfield) {
+                            $(chainfield).change();
+                        }
+                    };
+                }
+                if (typeof(dismissRelatedLookupPopup) !== 'undefined') {
+                    var oldDismissRelatedLookupPopup = dismissRelatedLookupPopup;
+                    dismissRelatedLookupPopup = function(win, chosenId) {
+                        oldDismissRelatedLookupPopup(win, chosenId);
                         if ("#" + windowname_to_id(win.name) == chainfield) {
                             $(chainfield).change();
                         }

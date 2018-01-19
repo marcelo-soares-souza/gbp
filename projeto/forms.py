@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import Textarea, TextInput
-from localflavor.br.forms import BRCNPJField, BRPhoneNumberField, BRStateSelect, BRZipCodeField
+from localflavor.br.forms import BRCNPJField,  BRStateSelect, BRZipCodeField
+from phonenumber_field.modelfields import PhoneNumberField
 
 from .models import Atividade, Instituicao, MetaProjeto, Objetivo, PalavraChave, PlanoAcao, Projeto, ProjetoComponente, Resultado, Tarefa
 
@@ -9,7 +10,7 @@ class InstituicaoForm(forms.ModelForm):
 
     cep = BRZipCodeField(label='CEP')
     estado = BRStateSelect()
-    telefone = BRPhoneNumberField()
+    telefone = PhoneNumberField()
     cnpj = BRCNPJField(label='CNPJ')
 
     class Meta:
