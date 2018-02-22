@@ -27,7 +27,7 @@ class Atividade(models.Model, TemplateModelMixin):
     data_fim = models.DateField(blank=True, default=timezone.now)
 
     # Relacionamentos
-    projeto = models.ForeignKey(Projeto)
+    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
     planoacao = ChainedForeignKey(
         PlanoAcao,
@@ -38,13 +38,13 @@ class Atividade(models.Model, TemplateModelMixin):
     )
 
     responsavel = models.ForeignKey(
-        User, null=True, blank=True, related_name='responsavel_atividade')
+        User, null=True, blank=True, related_name='responsavel_atividade', on_delete=models.CASCADE)
     colaborador = models.ManyToManyField(
         User, blank=True, related_name='colaborador_atividade')
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
-    criado_por = models.ForeignKey(User, null=True, blank=True)
+    criado_por = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['nome']

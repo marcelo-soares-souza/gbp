@@ -20,15 +20,14 @@ class PlanoAcao(models.Model, TemplateModelMixin):
     # Atributos
     numero = models.PositiveIntegerField(default=1)
     nome = models.CharField(max_length=100, validators=[MinLengthValidator(2)])
-    responsavel = models.ForeignKey(
-        User, null=True, blank=True, related_name='responsavel_plano')
+    responsavel = models.ForeignKey(User, null=True, blank=True, related_name='responsavel_plano', on_delete=models.CASCADE)
     codigo_seg = models.CharField(max_length=32, validators=[
                                   MinLengthValidator(2)], blank=True)
     data_inicio = models.DateField(blank=True, default=timezone.now)
     data_fim = models.DateField(blank=True, default=timezone.now)
 
     # Relacionamentos
-    projeto = models.ForeignKey(Projeto)
+    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
     projeto_componente = ChainedForeignKey(
         ProjetoComponente,
@@ -46,7 +45,7 @@ class PlanoAcao(models.Model, TemplateModelMixin):
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
-    criado_por = models.ForeignKey(User, null=True, blank=True)
+    criado_por = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['nome']

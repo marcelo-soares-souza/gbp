@@ -13,9 +13,9 @@ class Sequenciamento(models.Model, TemplateModelMixin):
         ('Urgente', 'Urgente')
     )
 
-    contrato = models.ForeignKey(Contrato)
-    tipo_sequenciamento = models.ForeignKey(TipoSequenciamento)
-    responsavel = models.ForeignKey(User, null=True, blank=True, related_name='responsavel_sequenciamento')
+    contrato = models.ForeignKey(Contrato, on_delete=models.CASCADE)
+    tipo_sequenciamento = models.ForeignKey(TipoSequenciamento, on_delete=models.CASCADE)
+    responsavel = models.ForeignKey(User, null=True, blank=True, related_name='responsavel_sequenciamento', on_delete=models.CASCADE)
 
     finalidade = models.TextField(null=True, blank=True)
     material_biologico = models.CharField(validators=[MinLengthValidator(5)], max_length=256)
@@ -30,7 +30,7 @@ class Sequenciamento(models.Model, TemplateModelMixin):
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
-    criado_por = models.ForeignKey(User, null=True, blank=True)
+    criado_por = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['material_biologico']

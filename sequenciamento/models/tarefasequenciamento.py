@@ -22,16 +22,16 @@ class TarefaSequenciamento(models.Model, TemplateModelMixin):
         ('Finalizado', 'Finalizado'),
     )
 
-    sequenciamento = models.ForeignKey(Sequenciamento)
+    sequenciamento = models.ForeignKey(Sequenciamento, on_delete=models.CASCADE)
 
     tarefa = models.CharField(max_length=64, choices=TAREFAS)
     status = models.CharField(max_length=64, choices=STATUS)
-    responsavel = models.ForeignKey(User, related_name='responsavel_tarefasequenciamento')
+    responsavel = models.ForeignKey(User, related_name='responsavel_tarefasequenciamento', on_delete=models.CASCADE)
     observacao = models.TextField(null=True, blank=True)
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
-    criado_por = models.ForeignKey(User, null=True, blank=True)
+    criado_por = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['tarefa']

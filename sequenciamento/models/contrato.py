@@ -27,7 +27,7 @@ class Contrato(models.Model, TemplateModelMixin):
     )
 
     numero = models.PositiveIntegerField(unique=True, null=True, blank=True)
-    projeto = models.ForeignKey(Projeto)
+    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
     objetivo = models.TextField(null=True, blank=True)
     descricao = models.TextField(null=True, blank=True)
     status_contrato = models.CharField(max_length=64, choices=STATUS_CONTRATO, null=True, blank=True)
@@ -41,7 +41,7 @@ class Contrato(models.Model, TemplateModelMixin):
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
-    criado_por = models.ForeignKey(User, null=True, blank=True)
+    criado_por = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['projeto']

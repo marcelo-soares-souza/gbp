@@ -40,20 +40,19 @@ class Projeto(models.Model, TemplateModelMixin):
     objetivo_geral = models.TextField(blank=True)
     resumo = models.TextField(blank=True)
     status = models.CharField(max_length=64, choices=STATUS, default='PLAN')
-    lider = models.ForeignKey(
-        User, null=True, blank=True, related_name='lider')
+    lider = models.ForeignKey(User, null=True, blank=True, related_name='lider', on_delete=models.CASCADE)
 
     instituicao_proponente = models.ForeignKey(
-        Instituicao, related_name='proponente', null=True, blank=True)
+        Instituicao, related_name='proponente', null=True, blank=True, on_delete=models.CASCADE)
     instituicao_executora = models.ForeignKey(
-        Instituicao, related_name='executora', null=True, blank=True)
+        Instituicao, related_name='executora', null=True, blank=True, on_delete=models.CASCADE)
     projeto_relacionado = models.ForeignKey(
-        'self', related_name='relacionado', null=True, blank=True)
+        'self', related_name='relacionado', null=True, blank=True, on_delete=models.CASCADE)
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
     criado_por = models.ForeignKey(
-        User, null=True, blank=True, related_name='criado')
+        User, null=True, blank=True, related_name='criado', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['sigla']

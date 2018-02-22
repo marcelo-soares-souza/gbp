@@ -15,7 +15,7 @@ class Resultado(models.Model, TemplateModelMixin):
 
     numero = models.PositiveIntegerField(default=1)
     descricao = models.TextField()
-    projeto = models.ForeignKey(Projeto)
+    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
     objetivo = ChainedManyToManyField(
         Objetivo,
@@ -25,7 +25,7 @@ class Resultado(models.Model, TemplateModelMixin):
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
-    criado_por = models.ForeignKey(User, null=True, blank=True)
+    criado_por = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['numero']

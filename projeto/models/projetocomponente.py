@@ -14,13 +14,12 @@ class ProjetoComponente(models.Model, TemplateModelMixin):
 
     numero = models.PositiveIntegerField(default=1)
     nome = models.CharField(max_length=256, validators=[MinLengthValidator(5)])
-    responsavel = models.ForeignKey(
-        User, null=True, blank=True, related_name='responsavel')
-    projeto = models.ForeignKey(Projeto)
+    responsavel = models.ForeignKey(User, null=True, blank=True, related_name='responsavel', on_delete=models.CASCADE)
+    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
-    criado_por = models.ForeignKey(User, null=True, blank=True)
+    criado_por = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['nome']
