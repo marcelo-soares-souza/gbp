@@ -18,7 +18,7 @@ image==1.5.19
 mccabe==0.6.1
 olefile==0.45.1
 packaging==17.1
-phonenumberslite==8.9.0
+phonenumberslite==8.9.1
 Pillow==5.0.0
 psycopg2==2.7.4
 psycopg2-binary==2.7.4

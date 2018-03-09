@@ -32,13 +32,14 @@
                         </div>
                     </div>
                 </div>
-
+<!--
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseSequenciamento">Sequenciamento</a>
                         </h4>
                     </div>
+
                     <div id="collapseSequenciamento" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
@@ -52,17 +53,52 @@
                                       <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_sequenciamento' %}">Adicionar</a>
                                   </td>
                               </tr>
-                              <tr>
-                                  <td>
-                                      <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_sequenciamento' %}">Listar/Editar</a>
-                                  </td>
-                              </tr>
+
                             </table>
                         </div>
                     </div>
                 </div>
+-->
                 {% endif %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFddb">Banco de Dados</a>
+                        </h4>
+                    </div>
 
+                    <div id="collapseFddb" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                      <li class="menu-item dropdown-submenu glyphicon glyphicon-flash text-danger">
+                                        <a tabindex="0">FDDB</a>
+                                        <ul class="dropdown-menu dropdown-center">
+                                          <li class="dropdown-li"><a href="{% url 'home_fddb' %}">Ver</a></li>
+                                        </ul>
+                                      </li>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <li class="menu-item dropdown-submenu glyphicon glyphicon-tint text-info">
+                                    <a tabindex="0">BMDB</a>
+                                    <ul class="dropdown-menu dropdown-center">
+                                      <li><a href="{% url 'dashboard_metabolomica' %}">Databases</a></li>
+                                      <li><a href="{% url 'new_sample' %}">Add raw data</a></li>
+                                      <li><a href="{% url 'list_sample' %}">Database</a></li>
+                                    </ul>
+                                  </li>
+                                </td>
+                              </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+<!--
                 {% if request.user|has_group:'FDDB' or request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -97,7 +133,7 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-flash text-danger"></span>&nbsp;&nbsp;<a href="{% url 'dashboard_metabolomica' %}">Search Databases</a>
+                                        <span class="glyphicon glyphicon-flash text-danger"></span>&nbsp;&nbsp;<a href="{% url 'dashboard_metabolomica' %}">Databases</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -115,7 +151,7 @@
                     </div>
                 </div>
                 {% endif %}
-
+!-->
                 {% if request.user|has_group:'Geral' or request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -123,9 +159,41 @@
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFerramentas">Ferramentas</a>
                         </h4>
                     </div>
+
                     <div id="collapseFerramentas" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
+
+                              <tr>
+                                <td>
+                                  <li class="menu-item dropdown-submenu glyphicon glyphicon-th text-danger">
+                                    <a tabindex="0">Sequencias</a>
+                                    <ul class="dropdown-menu dropdown-center">
+                                      <li><a href="{% url 'dashboard_sequenciamento' %}">Dashboard</a></li>
+                                      <li><a href="{% url 'new_sequenciamento' %}">Adicionar</a></li>
+                                    </ul>
+                                  </li>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td>
+                                  <li class="menu-item dropdown-submenu glyphicon glyphicon-book">
+                                    <a tabindex="0">NCBI Blast</a>
+                                    <ul class="dropdown-menu dropdown-center">
+                                      <li><a href="https://lbb.cnpae.embrapa.br/sequenceserver/">All</a></li>
+                                      <li><a href="https://lbb.cnpae.embrapa.br/sequenceserver-patents/">Patents</a></li>
+                                      <li><a href="https://lbb.cnpae.embrapa.br/sequenceserver-humicola/">Humicola</a></li>
+                                    </ul>
+                                  </li>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-stats text-success"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/jbrowse/" target="_blank">jBrowse</a>
+                                  </td>
+                              </tr>
                               <tr>
                                   <td>
                                       <span class="glyphicon glyphicon-folder-open text-warning"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/arquivos/" target="_blank">Arquivos</a>
@@ -136,43 +204,17 @@
                                       <span class="glyphicon glyphicon-download text-primary"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/gitlab/" target="_blank">Código</a>
                                   </td>
                               </tr>
+                              {% if request.user.is_superuser %}
                               <tr>
                                   <td>
-                                      <span class="glyphicon glyphicon-stats text-success"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/jbrowse/" target="_blank">jBrowse</a>
+                                    <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_pagina' %}">CMS LBB</a>
                                   </td>
                               </tr>
+                              {% endif %}
                             </table>
                         </div>
                     </div>
                 </div>
-                {% endif %}
-
-                {% if request.user.is_superuser %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCMS">CMS</a>
-                        </h4>
-                    </div>
-
-                    <div id="collapseCMS" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_pagina' %}">Adicionar</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_pagina' %}">Listar/Editar</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -197,7 +239,6 @@
                     </div>
                 </div>
                 {% endif %}
-
             </div>
         </div>
     </div>

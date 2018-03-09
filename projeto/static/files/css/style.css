@@ -156,10 +156,14 @@ body {
 }
 
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-    border-bottom: 1px solid #ddd;   
+    border-bottom: 1px solid #ddd;
 }
 
 .dashboard .table > tbody > tr > td, .dashboard .table > tbody > tr > th, .dashboard .table > tfoot > tr > td, .dashboard .table > thead > tr > th  {
     text-align: center;
     padding: 24px 24px 24px 24px;
+}
+
+.dropdown-center {
+    text-align: center !important;
 }
