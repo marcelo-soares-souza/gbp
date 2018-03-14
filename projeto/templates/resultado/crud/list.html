@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load gbp_filters %}
 
 {% load bootstrap3 %}
 
@@ -9,9 +10,11 @@
     {% include "base/menu-projetos.html" %} <br/>
 
     <div style="min-width: 60%; float: right;">
-      <div style="float: right;">
-        <a href="{% url 'new_resultado_projeto' %}" class="btn btn-sm btn-success">Adicionar</a>
-      </div>
+      {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
+        <div style="float: right;">
+          <a href="{% url 'new_resultado_projeto' %}" class="btn btn-sm btn-success">Adicionar</a>
+        </div>
+      {% endif %}
 
       <div style="float: left;">
         <div class="form-horizontal"><div class="form-group">

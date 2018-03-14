@@ -1,10 +1,12 @@
 {% extends "base/base.html" %}
+{% load gbp_filters %}
 
 {% load bootstrap3 %}
 
 {% block title %} <title>Listar Páginas</title> {% endblock title %}
 
 {% block content %}
+  {% if request.user.is_superuser %}
 
     <div style="float: right;"><a href="{% url 'new_pagina' %}" class="btn btn-sm btn-success">Adicionar</a></div>
 
@@ -40,5 +42,7 @@
         {% include 'base/pagination.html' %}
 
     {% endif %}
-
+  {% else %}
+    <center><h3>Você não possui permissão</h3></center>
+  {% endif %}
 {% endblock content %}

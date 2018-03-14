@@ -1,18 +1,22 @@
 {% extends "base/base_bmdb.html" %}
+{% load gbp_filters %}
 
 {% load bootstrap3 %}
-{% load gbp_filters %}
 
 {% block title %} <title>Dashboard Approaches</title> {% endblock title %}
 
 {% block content %}
     <div class="jumbotron">
       <p class="texto">
-        <h3>
-          {% for database in databases %}
-            <a href="/metabolomica/dashboard-detail/{{database.id}}">{{database}}</a><br/><br/>
-          {% endfor %}
-        </h3>
+        {% if request.user|has_group:'Editor BMDB' or request.user|has_group:'Admin BMDB' or request.user.is_superuser %}
+          <h3>
+            {% for database in databases %}
+              <a href="/metabolomica/dashboard-detail/{{database.id}}">{{database}}</a><br/><br/>
+            {% endfor %}
+          </h3>
+        {% else %}
+          <h3>Você não possui permissão</h3>
+        {% endif %}
       </p>
     </div>
 {% endblock content %}

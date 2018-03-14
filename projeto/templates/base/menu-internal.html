@@ -7,7 +7,7 @@
         <div class="col-sm-2 col-md-2">
             <div class="panel-group" id="accordion">
 
-              {% if request.user|has_group:'Geral' or request.user.is_superuser %}
+              {% if request.user|has_group:'Editor Projetos' or request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -18,11 +18,13 @@
                     <div id="collapseProjetos" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
+                                {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_projeto' %}">Adicionar</a>
                                     </td>
                                 </tr>
+                                {% endif %}
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_projeto' %}">Listar/Editar</a>
@@ -32,34 +34,9 @@
                         </div>
                     </div>
                 </div>
-<!--
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSequenciamento">Sequenciamento</a>
-                        </h4>
-                    </div>
-
-                    <div id="collapseSequenciamento" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table">
-                              <tr>
-                                  <td>
-                                      <span class="glyphicon glyphicon-flash text-danger"></span>&nbsp;&nbsp;<a href="{% url 'dashboard_sequenciamento' %}">Dashboard</a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_sequenciamento' %}">Adicionar</a>
-                                  </td>
-                              </tr>
-
-                            </table>
-                        </div>
-                    </div>
-                </div>
--->
                 {% endif %}
+
+                {% if request.user|has_group:'Editor FDDB' or request.user|has_group:'Admin FDDB' or request.user|has_group:'Editor BMDB' or request.user|has_group:'Admin BMDB' or request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -70,6 +47,7 @@
                     <div id="collapseFddb" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
+                              {% if request.user|has_group:'Editor FDDB' or request.user|has_group:'Admin FDDB' or request.user.is_superuser %}
                                 <tr>
                                     <td>
                                       <li class="menu-item dropdown-submenu glyphicon glyphicon-flash text-danger">
@@ -80,79 +58,31 @@
                                       </li>
                                     </td>
                                 </tr>
+                                {% endif %}
 
-                                <tr>
-                                  <td>
-                                    <li class="menu-item dropdown-submenu glyphicon glyphicon-tint text-info">
-                                    <a tabindex="0">BMDB</a>
-                                    <ul class="dropdown-menu dropdown-center">
-                                      <li><a href="{% url 'dashboard_metabolomica' %}">Databases</a></li>
-                                      <li><a href="{% url 'new_sample' %}">Add raw data</a></li>
-                                      <li><a href="{% url 'list_sample' %}">Database</a></li>
-                                    </ul>
-                                  </li>
-                                </td>
-                              </tr>
-
-                            </table>
-                        </div>
-                    </div>
-                </div>
-<!--
-                {% if request.user|has_group:'FDDB' or request.user.is_superuser %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFddb">FDDB</a>
-                        </h4>
-                    </div>
-                    <div id="collapseFddb" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table">
-                                <tr>
+                                {% if request.user|has_group:'Editor BMDB' or request.user|has_group:'Admin BMDB' or request.user.is_superuser %}
+                                  <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-flash text-danger"></span>&nbsp;&nbsp;<a href="{% url 'home_fddb' %}">Ver</a>
+                                      <li class="menu-item dropdown-submenu glyphicon glyphicon-tint text-info">
+                                        <a tabindex="0">BMDB</a>
+                                        <ul class="dropdown-menu dropdown-center">
+                                          <li><a href="{% url 'dashboard_metabolomica' %}">Databases</a></li>
+                                          {% if request.user|has_group:'Admin BMDB' or request.user.is_superuser %}
+                                            <li><a href="{% url 'new_sample' %}">Add raw data</a></li>
+                                            <li><a href="{% url 'list_sample' %}">List/Edit</a></li>
+                                          {% endif %}
+                                        </ul>
+                                      </li>
                                     </td>
-                                </tr>
+                                  </tr>
+                                {% endif %}
+
                             </table>
                         </div>
                     </div>
                 </div>
                 {% endif %}
 
-                {% if request.user|has_group:'Metabolômica' or request.user.is_superuser %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseBMDB">BMDB</a>
-                        </h4>
-                    </div>
-
-                    <div id="collapseBMDB" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-flash text-danger"></span>&nbsp;&nbsp;<a href="{% url 'dashboard_metabolomica' %}">Databases</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_sample' %}">Add raw data</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_sample' %}">Database</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-!-->
-                {% if request.user|has_group:'Geral' or request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -163,23 +93,26 @@
                     <div id="collapseFerramentas" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
-
-                              <tr>
-                                <td>
-                                  <li class="menu-item dropdown-submenu glyphicon glyphicon-th text-danger">
-                                    <a tabindex="0">Sequencias</a>
-                                    <ul class="dropdown-menu dropdown-center">
-                                      <li><a href="{% url 'dashboard_sequenciamento' %}">Dashboard</a></li>
-                                      <li><a href="{% url 'new_sequenciamento' %}">Adicionar</a></li>
-                                    </ul>
-                                  </li>
-                                </td>
-                              </tr>
+                              {% if request.user|has_group:'Editor Sequenciamento' or request.user|has_group:'Admin Sequenciamento' or request.user.is_superuser %}
+                                <tr>
+                                  <td>
+                                    <li class="menu-item dropdown-submenu glyphicon glyphicon-th text-danger">
+                                      <a tabindex="0">Sequencia</a>
+                                      <ul class="dropdown-menu dropdown-center">
+                                        <li><a href="{% url 'dashboard_sequenciamento' %}">Dashboard</a></li>
+                                        {% if request.user|has_group:'Admin Sequenciamento' or request.user.is_superuser %}
+                                          <li><a href="{% url 'new_sequenciamento' %}">Adicionar</a></li>
+                                        {% endif %}
+                                      </ul>
+                                    </li>
+                                  </td>
+                                </tr>
+                              {% endif %}
 
                               <tr>
                                 <td>
                                   <li class="menu-item dropdown-submenu glyphicon glyphicon-book">
-                                    <a tabindex="0">NCBI Blast</a>
+                                    <a tabindex="0">Blast</a>
                                     <ul class="dropdown-menu dropdown-center">
                                       <li><a href="https://lbb.cnpae.embrapa.br/sequenceserver/">All</a></li>
                                       <li><a href="https://lbb.cnpae.embrapa.br/sequenceserver-patents/">Patents</a></li>
@@ -215,29 +148,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseAdministrar">Administrar</a>
-                        </h4>
-                    </div>
-                    <div id="collapseAdministrar" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table">
-                              <tr>
-                                  <td>
-                                      <span class="glyphicon glyphicon-user text-primary"></span>&nbsp;&nbsp;<a href="/admin/auth/user/">Usuários</a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <span class="glyphicon glyphicon-eye-open text-success"></span>&nbsp;&nbsp;<a href="/admin/auth/group/">Grupos</a>
-                                  </td>
-                              </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                {% if request.user.is_superuser %}
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseAdministrar">Administrar</a>
+                          </h4>
+                      </div>
+                      <div id="collapseAdministrar" class="panel-collapse collapse">
+                          <div class="panel-body">
+                              <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user text-primary"></span>&nbsp;&nbsp;<a href="/admin/auth/user/">Usuários</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-eye-open text-success"></span>&nbsp;&nbsp;<a href="/admin/auth/group/">Grupos</a>
+                                    </td>
+                                </tr>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
                 {% endif %}
             </div>
         </div>

@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load gbp_filters %}
 
 {% load bootstrap3 %}
 
@@ -9,6 +10,7 @@
     {% include "base/menu-projetos.html" %} <br/>
 
     <form class="form-horizontal" method="POST">
+      {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}
 
@@ -18,6 +20,9 @@
               <a href="javascript:window.history.go(-1)" class="btn btn-default btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
             {% endbuttons %}
         </div>
+        {% else %}
+          <center><b>Você não possui permissão<b/></center>
+        {% endif %}
     </form>
 
 {% endblock content %}
