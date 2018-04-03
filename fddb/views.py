@@ -1,6 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 from django.shortcuts import render
 
 from fddb.forms import FddbForm
@@ -14,12 +13,12 @@ def FDDBAjax(request, acesso, folha):
     return render(request, 'fddb.html', {'fddbs': fddbs})
 
 
-class FddbDashBoard(LoggedInMixin, SortableListView):
+class FddbDashBoard(LoggedInMixin, ListView):
     allowed_sort_fields = {'organismo': {'default_direction': '', 'verbose_name': 'Organismo'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'organismo'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'fddb/crud/dashboard.html'
     context_object_name = 'fddb'
@@ -29,12 +28,12 @@ class FddbDashBoard(LoggedInMixin, SortableListView):
     success_url = reverse_lazy('list_fddb')
 
 
-class FddbList(LoggedInMixin, SortableListView):
+class FddbList(LoggedInMixin, ListView):
     allowed_sort_fields = {'organismo': {'default_direction': '', 'verbose_name': 'Organismo'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'organismo'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'fddb/crud/list.html'
     context_object_name = 'fddb'

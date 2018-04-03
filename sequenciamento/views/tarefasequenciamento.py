@@ -1,22 +1,20 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from projeto.views.login import CreatedByRequiredMixin, ListResponsavelRequiredMixin, LoggedInMixin, ResponsavelRequiredMixin
 from sequenciamento.forms import TarefaSequenciamentoForm
 from sequenciamento.models import Sequenciamento, TarefaSequenciamento
 
-
 # import logging
 # logger = logging.getLogger('sequenciamento')
 
 
-class TarefaSequenciamentoList(LoggedInMixin, ListResponsavelRequiredMixin, SortableListView):
+class TarefaSequenciamentoList(LoggedInMixin, ListResponsavelRequiredMixin, ListView):
     allowed_sort_fields = {'tarefa': {'default_direction': '', 'verbose_name': 'Tarefa'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'tarefa'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'tarefasequenciamento/crud/list.html'
     context_object_name = 'tarefasequenciamentos'

@@ -151,7 +151,7 @@
                                       <span class="glyphicon glyphicon-download text-primary"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/gitlab/" target="_blank">Código</a>
                                   </td>
                               </tr>
-                              {% if request.user.is_superuser %}
+                              {% if request.user|has_group:'Admin CMS' or request.user.is_superuser %}
                                 <tr>
                                   <td>
                                     <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_pagina' %}">CMS LBB</a>

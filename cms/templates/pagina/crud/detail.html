@@ -1,5 +1,6 @@
 {% extends "base/base.html" %}
 
+{% load gbp_filters %}
 {% load bootstrap3 %}
 
 {% block title %} <title>{{ pagina }}</title> {% endblock title %}
@@ -17,7 +18,7 @@
 
     <hr/>
 
-    {% if request.user == pagina.criado_por or request.user.is_superuser %}
+    {% if request.user|has_group:'Admin CMS' or request.user == pagina.criado_por or request.user.is_superuser %}
       <p>
         <a href="{{ pagina.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
         <a href="{{ pagina.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>

@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'localflavor',
     'bootstrap3',
-    'sortable_listview',
     'smart_selects',
     'ckeditor',
     'ckeditor_uploader',

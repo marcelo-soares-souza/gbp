@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
+
 from django.db.models import Count
 from django.shortcuts import render
 
@@ -10,18 +10,17 @@ from projeto.views.login import LoggedInMixin
 
 
 def ObjetivosAjax(request, pk):
-    # objetivos = Objetivo.objects.all()
     objetivos = Objetivo.objects.filter(projeto_id=int(pk)).order_by('numero')
 
     return render(request, 'objetivos.html', {'objetivos': objetivos})
 
 
-class ObjetivoProjetoList(LoggedInMixin, SortableListView):
+class ObjetivoProjetoList(LoggedInMixin, ListView):
     allowed_sort_fields = {'descricao': {'default_direction': '', 'verbose_name': 'Descrição'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'descricao'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'objetivo/crud/list.html'
     context_object_name = 'objetivos'

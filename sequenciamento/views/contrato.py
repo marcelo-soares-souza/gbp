@@ -1,18 +1,17 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from projeto.views.login import LoggedInMixin
 from sequenciamento.forms import ContratoForm
 from sequenciamento.models import Contrato
 
 
-class ContratoList(LoggedInMixin, SortableListView):
+class ContratoList(LoggedInMixin, ListView):
     allowed_sort_fields = {'empresa_executora': {'default_direction': '', 'verbose_name': 'Empresa Executora'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'empresa_executora'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'contrato/crud/list.html'
     context_object_name = 'contratos'

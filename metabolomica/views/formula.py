@@ -1,15 +1,14 @@
 import collections
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from metabolomica.forms import FormulaForm
 from metabolomica.models import Formula
 from projeto.views.login import LoggedInMixin
 
 
-class FormulaList(LoggedInMixin, SortableListView):
+class FormulaList(LoggedInMixin, ListView):
     allowed_sort_fields = collections.OrderedDict()
     allowed_sort_fields['common_name'] = {'default_direction': '', 'verbose_name': 'Common Name'}
     allowed_sort_fields['chemical_formula'] = {'default_direction': '', 'verbose_name': 'Chemical Formula'}

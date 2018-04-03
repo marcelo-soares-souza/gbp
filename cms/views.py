@@ -1,18 +1,17 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from cms.forms import PaginaForm
 from cms.models import Pagina
 from projeto.views.login import LoggedInMixin
 
 
-class PaginaList(LoggedInMixin, SortableListView):
+class PaginaList(LoggedInMixin, ListView):
     allowed_sort_fields = {'titulo': {'default_direction': '', 'verbose_name': 'Titulo'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'titulo'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'pagina/crud/list.html'
     context_object_name = 'pagina'
@@ -20,6 +19,20 @@ class PaginaList(LoggedInMixin, SortableListView):
     fields = '__all__'
 
     success_url = reverse_lazy('list_pagina')
+
+    def get_context_data(self, **kwargs):
+        context = super(PaginaList, self).get_context_data(**kwargs)
+
+        context['pagina'] = Pagina.objects.all()
+
+        query = self.request.GET.get('q')
+
+        if query:
+            context['pagina'] = context['pagina'].filter(titulo__icontains=query) | \
+                                context['pagina'].filter(texto__icontains=query)
+            context['pagina'] = context['pagina'].distinct()
+
+        return context
 
 
 class PaginaDetail(LoggedInMixin, DetailView):

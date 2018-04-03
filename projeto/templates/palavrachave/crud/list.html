@@ -11,6 +11,7 @@
 
     {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
       <div style="float: right;"><a href="{% url 'new_palavrachave_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+      <br/><br/>
     {% endif %}
 
     {% if not palavraschave %}

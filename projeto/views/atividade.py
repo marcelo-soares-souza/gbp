@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
+
 from django.db.models import Count
 from django.shortcuts import render
 
@@ -21,12 +21,12 @@ def AtividadePlanoAcaoAjax(request, pk):
     return render(request, 'atividades.html', {'atividades': atividades})
 
 
-class AtividadeList(LoggedInMixin, SortableListView):
+class AtividadeList(LoggedInMixin, ListView):
     allowed_sort_fields = {'nome': {'default_direction': '', 'verbose_name': 'Nome'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'nome'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'atividade/crud/list.html'
     context_object_name = 'atividades'

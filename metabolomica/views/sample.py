@@ -1,16 +1,14 @@
 import collections
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from metabolomica.forms import SampleForm
 from metabolomica.models import Sample
 from projeto.views.login import LoggedInMixin
 
 
-class SampleList(LoggedInMixin, SortableListView):
+class SampleList(LoggedInMixin, ListView):
     allowed_sort_fields = collections.OrderedDict()
     allowed_sort_fields['lab_code'] = {'default_direction': '', 'verbose_name': 'Lab Code'}
     allowed_sort_fields['data_atualizado'] = {'default_direction': '', 'verbose_name': 'Updated'}

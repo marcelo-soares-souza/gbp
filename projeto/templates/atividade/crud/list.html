@@ -11,9 +11,7 @@
 
     <div style="min-width: 60%; float: right;">
       {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
-        <div style="float: right;">
-          <a href="{% url 'new_atividade_projeto' %}" class="btn btn-sm btn-success">Adicionar</a>
-        </div>
+        <div style="float: right;"><a href="{% url 'new_atividade_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
       {% endif %}
 
       <div style="float: left;">
@@ -29,6 +27,7 @@
         </div></div>
       </div>
     </div>
+    <br/><br/>
 
     {% if not atividades %}
 

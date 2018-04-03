@@ -1,23 +1,19 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from projeto.views.login import ColaboradorRequiredMixin, ListColaboradorRequiredMixin, LoggedInMixin
 from sequenciamento.forms import SequenciamentoForm
 from sequenciamento.models import Sequenciamento, TipoSequenciamento
 
-# import logging
-# logger = logging.getLogger('sequenciamento')
 
-
-class SequenciamentoList(LoggedInMixin, ListColaboradorRequiredMixin, SortableListView):
+class SequenciamentoList(LoggedInMixin, ListColaboradorRequiredMixin, ListView):
     allowed_sort_fields = {'material_biologico': {'default_direction': '',
                                                   'verbose_name': 'Material Biológico'},
                            'data_atualizado': {'default_direction': '',
                                                'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'material_biologico'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'sequenciamento/crud/list.html'
     context_object_name = 'sequenciamentos'

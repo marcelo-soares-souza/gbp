@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
+
 from django.db.models import Count
 from django.shortcuts import render
 
@@ -15,12 +15,12 @@ def ResultadosAjax(request, pk):
     return render(request, 'resultados.html', {'resultados': resultados})
 
 
-class ResultadoProjetoList(LoggedInMixin, SortableListView):
+class ResultadoProjetoList(LoggedInMixin, ListView):
     allowed_sort_fields = {'numero': {'default_direction': '', 'verbose_name': 'Numero'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'numero'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'resultado/crud/list.html'
     context_object_name = 'resultados'

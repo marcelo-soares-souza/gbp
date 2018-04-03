@@ -5,8 +5,7 @@ import csv
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from metabolomica.forms import ResultForm
 from metabolomica.models import Result
@@ -16,7 +15,7 @@ import logging
 logger = logging.getLogger('metabolomica')
 
 
-class ResultList(LoggedInMixin, SortableListView):
+class ResultList(LoggedInMixin, ListView):
     allowed_sort_fields = collections.OrderedDict()
     allowed_sort_fields['name'] = {'default_direction': '', 'verbose_name': 'Title'}
     allowed_sort_fields['data_atualizado'] = {'default_direction': '', 'verbose_name': 'Updated'}

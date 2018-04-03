@@ -1,25 +1,19 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from projeto.forms import PalavraChaveForm
 from projeto.models import PalavraChave
 from projeto.views.login import LoggedInMixin
 
 
-#
-# View de PalavraChave - métodos
-#
-
-
-class PalavraChaveList(LoggedInMixin, SortableListView):
+class PalavraChaveList(LoggedInMixin, ListView):
     allowed_sort_fields = {'palavra': {'default_direction': '',
                                        'verbose_name': 'Palavra'},
                            'data_atualizado': {'default_direction': '',
                                                'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'palavra'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'palavrachave/crud/list.html'
     context_object_name = 'palavraschave'

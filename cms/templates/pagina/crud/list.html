@@ -1,14 +1,24 @@
 {% extends "base/base.html" %}
-{% load gbp_filters %}
 
+{% load gbp_filters %}
 {% load bootstrap3 %}
 
 {% block title %} <title>Listar Páginas</title> {% endblock title %}
 
 {% block content %}
-  {% if request.user.is_superuser %}
+  {% if request.user|has_group:'Admin CMS' or
+        request.user|has_group:'Editor CMS' or
+        request.user.is_superuser %}
+
+    <div style="padding-top: 4px; float: left;">
+          <form id="searchform" action="{% url 'list_pagina' %}" method="get" accept-charset="utf-8" style="float: right;">
+            <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+            <button type="submit" class="btn btn-default btn-success">Search</button>
+          </form>
+    </div>
 
     <div style="float: right;"><a href="{% url 'new_pagina' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+    <br/><br/>
 
     {% if not pagina %}
 
@@ -43,6 +53,6 @@
 
     {% endif %}
   {% else %}
-    <center><h3>Você não possui permissão</h3></center>
+    <center><h3>Você não possui Permissão</h3></center>
   {% endif %}
 {% endblock content %}

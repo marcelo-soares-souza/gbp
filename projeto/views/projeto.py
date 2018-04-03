@@ -1,18 +1,17 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from projeto.forms import ProjetoForm
 from projeto.models import Projeto
 from projeto.views.login import LoggedInMixin
 
 
-class ProjetoList(LoggedInMixin, SortableListView):
+class ProjetoList(LoggedInMixin, ListView):
     allowed_sort_fields = {'sigla': {'default_direction': '', 'verbose_name': 'Sigla'},
                            'data_atualizado': {'default_direction': '', 'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'sigla'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'projeto/crud/list.html'
     context_object_name = 'projetos'
@@ -20,6 +19,18 @@ class ProjetoList(LoggedInMixin, SortableListView):
     fields = '__all__'
     success_url = reverse_lazy('list_projeto')
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjetoList, self).get_context_data(**kwargs)
+
+        context['projetos'] = Projeto.objects.all()
+
+        query = self.request.GET.get('q')
+
+        if query:
+            context['projetos'] = context['projetos'].filter(titulo_portugues__icontains=query)
+            context['projetos'] = context['projetos'].distinct()
+
+        return context
 
 class ProjetoDetail(LoggedInMixin, DetailView):
     template_name = 'projeto/crud/detail.html'

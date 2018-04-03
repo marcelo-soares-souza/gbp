@@ -1,11 +1,13 @@
 {% extends "base/base.html" %}
 
+{% load gbp_filters %}
 {% load bootstrap3 %}
 
 {% block title %} <title>Cadastrar/Editar Página</title> {% endblock title %}
-
 {% block content %}
-
+{% if request.user|has_group:'Admin CMS' or
+      request.user|has_group:'Editor CMS' or
+      request.user.is_superuser %}
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}
@@ -16,5 +18,7 @@
             {% endbuttons %}
         </div>
     </form>
-
+  {% else %}
+    <center><h3>Você não possui Permissão</h3></center>
+  {% endif %}
 {% endblock content %}

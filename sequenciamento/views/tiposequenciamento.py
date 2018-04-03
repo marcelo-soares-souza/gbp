@@ -1,20 +1,19 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from sortable_listview import SortableListView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 
 from projeto.views.login import CreatedByRequiredMixin, LoggedInMixin
 from sequenciamento.forms import TipoSequenciamentoForm
 from sequenciamento.models import TipoSequenciamento
 
 
-class TipoSequenciamentoList(LoggedInMixin, SortableListView):
+class TipoSequenciamentoList(LoggedInMixin, ListView):
     allowed_sort_fields = {'nome': {'default_direction': '',
                                     'verbose_name': 'Nome'},
                            'data_atualizado': {'default_direction': '',
                                                'verbose_name': 'Atualizado Em'}}
 
     default_sort_field = 'nome'
-    paginate_by = 5
+    paginate_by = 10
 
     template_name = 'tiposequenciamento/crud/list.html'
     context_object_name = 'tiposequenciamentos'
