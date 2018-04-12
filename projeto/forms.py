@@ -74,7 +74,7 @@ class ProjetoForm(forms.ModelForm):
     class Meta:
         model = Projeto
         fields = ('status', 'lider', 'seg', 'titulo_portugues', 'titulo_ingles', 'sigla', 'data_inicio',
-                  'duracao', 'hipotese', 'instituicao_proponente', 'instituicao_executora', 'objetivo_geral', 'resumo')
+                  'duracao', 'hipotese', 'instituicao_proponente', 'instituicao_executora', 'objetivo_geral', 'resumo', 'colaborador')
 
         widgets = {
             'hipotese': Textarea(attrs={'cols': '5', 'rows': '5'}),

@@ -34,6 +34,11 @@
 
     <p><b>Objetivo Geral:</b> <br/> <div class='text-highlight'> {{ projeto.objetivo_geral }}&nbsp;</div></p>
 
+    <p><b>Colaborador(es): </b> <br/> <div class='text-highlight'>
+    {% for colaborador in projeto.colaborador.all %}{% if not forloop.first %}, {% endif %}
+      {{ colaborador|verifyfullname }}{% endfor %}
+    &nbsp;</div></p>
+
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ projeto.data_cadastro }}&nbsp;</div></p>
     <p><b>Atualizado:</b> <br/> <div class='text-highlight'> {{ projeto.data_atualizado }}&nbsp;</div></p>
 

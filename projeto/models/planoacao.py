@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils import timezone
-from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField
 
 from projeto.models.projeto import Projeto
 from projeto.models.projetocomponente import ProjetoComponente
@@ -29,19 +28,8 @@ class PlanoAcao(models.Model, TemplateModelMixin):
     # Relacionamentos
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
-    projeto_componente = ChainedForeignKey(
-        ProjetoComponente,
-        chained_field="projeto",
-        chained_model_field="projeto",
-        show_all=False,
-        auto_choose=False
-    )
-
-    resultado = ChainedManyToManyField(
-        Resultado,
-        chained_field="projeto",
-        chained_model_field="projeto"
-    )
+    projeto_componente = models.ManyToManyField(ProjetoComponente, blank=True, related_name='projeto_componente')
+    resultado = models.ManyToManyField(Resultado, blank=True, related_name='resultado')
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)

@@ -49,6 +49,8 @@ class Projeto(models.Model, TemplateModelMixin):
     projeto_relacionado = models.ForeignKey(
         'self', related_name='relacionado', null=True, blank=True, on_delete=models.CASCADE)
 
+    colaborador = models.ManyToManyField(User, blank=True, related_name='colaborador_projeto')
+
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
     criado_por = models.ForeignKey(

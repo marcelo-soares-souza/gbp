@@ -80,6 +80,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'projeto.context_processors.django_version',
                 'projeto.context_processors.stats',
+                'projeto.context_processors.all_projetos',
             ],
         },
     },

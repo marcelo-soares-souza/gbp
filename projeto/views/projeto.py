@@ -32,6 +32,7 @@ class ProjetoList(LoggedInMixin, ListView):
 
         return context
 
+
 class ProjetoDetail(LoggedInMixin, DetailView):
     template_name = 'projeto/crud/detail.html'
     context_object_name = 'projeto'

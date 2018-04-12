@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils import timezone
-from smart_selects.db_fields import ChainedForeignKey
 
 from projeto.models.planoacao import PlanoAcao
 from projeto.models.projeto import Projeto
@@ -29,13 +28,7 @@ class Atividade(models.Model, TemplateModelMixin):
     # Relacionamentos
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
-    planoacao = ChainedForeignKey(
-        PlanoAcao,
-        chained_field="projeto",
-        chained_model_field="projeto",
-        show_all=False,
-        auto_choose=False
-    )
+    planoacao = models.ManyToManyField(PlanoAcao, blank=True, related_name='PlanoAcao')
 
     responsavel = models.ForeignKey(
         User, null=True, blank=True, related_name='responsavel_atividade', on_delete=models.CASCADE)

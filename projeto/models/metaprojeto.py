@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 from django.db import models
-from smart_selects.db_fields import ChainedManyToManyField
 
 from projeto.models.objetivo import Objetivo
 from projeto.models.projeto import Projeto
@@ -19,11 +18,7 @@ class MetaProjeto(models.Model, TemplateModelMixin):
                             MinLengthValidator(5)])
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
-    objetivo = ChainedManyToManyField(
-        Objetivo,
-        chained_field="projeto",
-        chained_model_field="projeto",
-    )
+    objetivo = models.ManyToManyField(Objetivo, blank=True, related_name='objetivo_metaprojeto')
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)

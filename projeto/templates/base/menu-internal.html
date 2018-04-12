@@ -6,9 +6,7 @@
     <div class="row">
         <div class="col-sm-2 col-md-2">
             <div class="panel-group" id="accordion">
-              {% if request.user|has_group:'Editor Projetos' or
-                    request.user|has_group:'Admin Projetos'  or
-                    request.user.is_superuser %}
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -19,24 +17,17 @@
                     <div id="collapseProjetos" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
-                                {% if request.user|has_group:'Admin Projetos' or
-                                      request.user.is_superuser %}
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>&nbsp;&nbsp;<a href="{% url 'new_projeto' %}">Adicionar</a>
-                                    </td>
-                                </tr>
-                                {% endif %}
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_projeto' %}">Listar/Editar</a>
-                                    </td>
-                                </tr>
+                                {% for projeto in all_projetos %}
+                                  <tr>
+                                      <td>
+                                          &nbsp;&nbsp;<a href="{% url 'detail_projeto' projeto.id %}">{{ projeto.sigla }}</a>
+                                      </td>
+                                  </tr>
+                                {% endfor %}
                             </table>
                         </div>
                     </div>
                 </div>
-                {% endif %}
 
                 {% if request.user|has_group:'Editor FDDB' or
                       request.user|has_group:'Admin FDDB' or
@@ -53,6 +44,22 @@
                     <div id="collapseFddb" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
+                              {% if request.user|has_group:'Admin Projetos' or
+                                    request.user.is_superuser %}
+                                <tr>
+                                    <td>
+                                      <li class="menu-item dropdown-submenu glyphicon glyphicon-list-alt">
+                                        <a tabindex="0">Projetos</a>
+                                        <ul class="dropdown-menu dropdown-center">
+                                          <li class="dropdown-li"><a href="{% url 'new_projeto' %}">Adicionar</a></li>
+                                          <li class="dropdown-li"><a href="{% url 'list_fddb' %}">Listar/Editar</a></li>
+                                        </ul>
+                                      </li>
+                                    </td>
+                                </tr>
+
+                              {% endif %}
+
                               {% if request.user|has_group:'Editor FDDB' or
                                     request.user|has_group:'Admin FDDB' or
                                     request.user.is_superuser %}
