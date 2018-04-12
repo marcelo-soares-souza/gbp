@@ -17,13 +17,21 @@
                     <div id="collapseProjetos" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
-                                {% for projeto in all_projetos %}
-                                  <tr>
-                                      <td>
-                                          &nbsp;&nbsp;<a href="{% url 'detail_projeto' projeto.id %}">{{ projeto.sigla }}</a>
-                                      </td>
-                                  </tr>
-                                {% endfor %}
+                                {% if all_projetos %}
+                                  {% for projeto in all_projetos %}
+                                    <tr>
+                                        <td>
+                                            &nbsp;&nbsp;<a href="{% url 'detail_projeto' projeto.id %}">{{ projeto.sigla }}</a>
+                                        </td>
+                                    </tr>
+                                  {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td>
+                                            &nbsp;&nbsp;Sem Projeto
+                                        </td>
+                                    </tr>
+                                {% endif %}
                             </table>
                         </div>
                     </div>
@@ -52,7 +60,7 @@
                                         <a tabindex="0">Projetos</a>
                                         <ul class="dropdown-menu dropdown-center">
                                           <li class="dropdown-li"><a href="{% url 'new_projeto' %}">Adicionar</a></li>
-                                          <li class="dropdown-li"><a href="{% url 'list_fddb' %}">Listar/Editar</a></li>
+                                          <li class="dropdown-li"><a href="{% url 'list_projeto' %}">Listar/Editar</a></li>
                                         </ul>
                                       </li>
                                     </td>
