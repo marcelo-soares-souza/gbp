@@ -51,8 +51,8 @@ class Projeto(models.Model, TemplateModelMixin):
 
     colaborador = models.ManyToManyField(User, blank=True, related_name='colaborador_projeto')
 
-    jbrowse = models.CharField(max_length=512, validators=[MinLengthValidator(5)], blank=True, null=True)
-    blast = models.CharField(max_length=512, validators=[MinLengthValidator(5)], blank=True, null=True)
+    jbrowse = models.CharField(max_length=512, blank=True)
+    blast = models.CharField(max_length=512, blank=True)
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
