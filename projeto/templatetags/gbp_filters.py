@@ -7,10 +7,13 @@ register = template.Library()
 
 @register.filter(name='verifyfullname')
 def verifyfullname(value):
-    if value.first_name:
-        return '%s %s' % (value.first_name, value.last_name)
+    if hasattr(value, 'first_name'):
+        if value.first_name:
+          return '%s %s' % (value.first_name, value.last_name)
+        else:
+          return '%s' % (value)
     else:
-        return value
+        return '%s' % (value)
 
 
 @register.filter(name='has_group')
