@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import Textarea, TextInput
+
 from localflavor.br.forms import BRCNPJField,  BRStateSelect, BRZipCodeField
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -38,6 +39,9 @@ class InstituicaoForm(forms.ModelForm):
 
 
 class ObjetivoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ObjetivoForm, self).__init__(*args, **kwargs)
+        self.initial['projeto'] = Objetivo.objects.latest('data_atualizado').projeto.id
 
     class Meta:
         model = Objetivo
@@ -54,6 +58,9 @@ class ObjetivoForm(forms.ModelForm):
 
 
 class ResultadoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ResultadoForm, self).__init__(*args, **kwargs)
+        self.initial['projeto'] = Resultado.objects.latest('data_atualizado').projeto.id
 
     class Meta:
         model = Resultado
