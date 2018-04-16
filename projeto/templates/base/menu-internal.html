@@ -20,10 +20,24 @@
                                 {% if all_projetos %}
                                   {% for projeto in all_projetos %}
                                     <tr>
+                                      <td>
+                                        <li class="menu-item dropdown-submenu">
+                                          <a tabindex="0">{{projeto}}</a>
+                                          <ul class="dropdown-menu dropdown-center">
+                                              <li><a href="{% url 'detail_projeto' projeto.id %}">Details</a></li>
+                                              {% if projeto.jbrowse %} <li><a href="{{ projeto.jbrowse }}">jBrowse</a></li> {% endif %}
+                                              {% if projeto.jbrowse %} <li><a href="{{ projeto.jbrowse }}">Blast</a></li> {% endif %}
+                                          </ul>
+                                        </li>
+                                      </td>
+                                    </tr>
+                                    <!--
+                                    <tr>
                                         <td>
                                             &nbsp;&nbsp;<a href="{% url 'detail_projeto' projeto.id %}">{{ projeto.sigla }}</a>
                                         </td>
                                     </tr>
+                                    -->
                                   {% endfor %}
                                 {% else %}
                                     <tr>
