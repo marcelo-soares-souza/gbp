@@ -7,9 +7,9 @@
 
 {% block content %}
 
-    {% if 'update' not in request.resolver_match.url_name %}
-      {% include "base/menu-projetos.html" %} <br/>
-    {% else %}
+    {% include "base/menu-projetos.html" %} <br/>
+
+    {% if 'update' in request.resolver_match.url_name %}
       <h4>Editando {{projeto}}</h4>
       <hr/>
     {% endif %}
