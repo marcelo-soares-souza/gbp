@@ -9,9 +9,9 @@ register = template.Library()
 def verifyfullname(value):
     if hasattr(value, 'first_name'):
         if value.first_name:
-          return '%s %s' % (value.first_name, value.last_name)
+            return '%s %s' % (value.first_name, value.last_name)
         else:
-          return '%s' % (value)
+            return '%s' % (value)
     else:
         return '%s' % (value)
 

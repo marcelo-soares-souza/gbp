@@ -38,6 +38,7 @@ def stats(request):
             'count_atividade': '(' + str(Atividade.objects.count()) + ')',
             'count_tarefa': '(' + str(Tarefa.objects.count()) + ')'}
 
+
 def all_projetos(request):
     if request.user.is_superuser:
         all_projetos = Projeto.objects.all()
