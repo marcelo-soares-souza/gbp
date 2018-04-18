@@ -25,8 +25,8 @@
                                           <a tabindex="0">{{projeto}}</a>
                                           <ul class="dropdown-menu dropdown-center">
                                               <li><a href="{% url 'detail_projeto' projeto.id %}">Details</a></li>
-                                              {% if projeto.jbrowse %} <li><a href="{{ projeto.jbrowse }}">jBrowse</a></li> {% endif %}
-                                              {% if projeto.jbrowse %} <li><a href="{{ projeto.jbrowse }}">Blast</a></li> {% endif %}
+                                              {% if projeto.jbrowse %} <li><a href="{{ projeto.jbrowse }}" target="_blank">jBrowse</a></li> {% endif %}
+                                              {% if projeto.blast %} <li><a href="{{ projeto.blast }}" target="_blank">Blast</a></li> {% endif %}
                                           </ul>
                                         </li>
                                       </td>

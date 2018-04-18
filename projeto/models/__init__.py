@@ -12,8 +12,9 @@ from projeto.models.projetocomponente import ProjetoComponente
 from projeto.models.planoacao import PlanoAcao
 from projeto.models.atividade import Atividade
 from projeto.models.tarefa import Tarefa
+from projeto.models.user import User
 
 __all__ = ['TemplateModelMixin',
            'instituicao', 'projeto', 'objetivo',
            'resultado', 'palavrachave', 'metaprojeto',
-           'projetocomponente', 'planoacao', 'atividade', 'tarefa']
+           'projetocomponente', 'planoacao', 'atividade', 'tarefa', 'user']
