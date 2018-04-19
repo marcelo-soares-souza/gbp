@@ -34,7 +34,6 @@
 
     <script>
       var value = {};
-
       {% for projeto in projetos %}
         value[{{projeto.projeto_id}}] = {{projeto.total}};
       {% endfor %}

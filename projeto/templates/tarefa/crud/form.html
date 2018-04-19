@@ -46,7 +46,6 @@
         }
 
         $('#id_projeto').on('change', function () {
-          alerta("Aqui");
           if ($(this).val() != 0) {
             if (value[$(this).val()]) {
               $('#tarefas').html('').load("/tarefa/ajax/projeto/" + $(this).val());

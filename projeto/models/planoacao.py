@@ -8,6 +8,8 @@ from projeto.models.projetocomponente import ProjetoComponente
 from projeto.models.resultado import Resultado
 from projeto.models.template import TemplateModelMixin
 
+from smart_selects.db_fields import ChainedManyToManyField
+
 
 #
 # Plano de Ação
@@ -29,7 +31,13 @@ class PlanoAcao(models.Model, TemplateModelMixin):
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
     projeto_componente = models.ManyToManyField(ProjetoComponente, blank=True, related_name='projeto_componente')
-    resultado = models.ManyToManyField(Resultado, blank=True, related_name='resultado')
+
+    resultado = ChainedManyToManyField(
+        Resultado,
+        chained_field="projeto",
+        chained_model_field="projeto",
+        auto_choose=True,
+    )
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
