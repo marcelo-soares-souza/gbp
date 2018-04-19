@@ -22,7 +22,10 @@ class ProjetoList(LoggedInMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ProjetoList, self).get_context_data(**kwargs)
 
-        context['projetos'] = Projeto.objects.all()
+        if self.request.user.is_superuser:
+            context['projetos'] = Projeto.objects.all()
+        else:
+            context['projetos'] = Projeto.objects.filter(colaborador__in=[self.request.user.id])
 
         query = self.request.GET.get('q')
 
@@ -57,7 +60,11 @@ class ProjetoCreate(LoggedInMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjetoCreate, self).get_context_data(**kwargs)
-        context['projetos'] = Projeto.objects.all()
+
+        if self.request.user.is_superuser:
+            context['projetos'] = Projeto.objects.all()
+        else:
+            context['projetos'] = Projeto.objects.filter(colaborador__in=[self.request.user.id])
 
         return context
 
@@ -71,7 +78,10 @@ class ProjetoUpdate(LoggedInMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjetoUpdate, self).get_context_data(**kwargs)
-        context['projetos'] = Projeto.objects.all()
+        if self.request.user.is_superuser:
+            context['projetos'] = Projeto.objects.all()
+        else:
+            context['projetos'] = Projeto.objects.filter(colaborador__in=[self.request.user.id])
 
         return context
 

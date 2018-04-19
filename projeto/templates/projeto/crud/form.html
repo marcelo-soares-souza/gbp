@@ -15,7 +15,9 @@
     {% endif %}
 
     {% if projetos %}
-      {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
+      {% if request.user|has_group:'Admin Projetos' or
+            request.user|has_group:'Editor Projetos' or
+            request.user.is_superuser %}
         <div class="form-horizontal">
         <div class="form-group">
             <label class="col-md-3 control-label" for="id_select_projeto">Editar Projeto</label>
@@ -35,7 +37,9 @@
     {% endif %}
   {% endif %}
 
-  {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
+      {% if request.user|has_group:'Admin Projetos' or
+            request.user|has_group:'Editor Projetos' or
+            request.user.is_superuser %}
     <form class="form-horizontal" method="POST">
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}

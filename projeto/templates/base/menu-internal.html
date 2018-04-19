@@ -55,6 +55,8 @@
                       request.user|has_group:'Admin FDDB' or
                       request.user|has_group:'Editor BMDB' or
                       request.user|has_group:'Admin BMDB' or
+                      request.user|has_group:'Editor Projetos' or
+                      request.user|has_group:'Admin Projetos' or
                       request.user.is_superuser %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -67,6 +69,7 @@
                         <div class="panel-body">
                             <table class="table">
                               {% if request.user|has_group:'Admin Projetos' or
+                                    request.user|has_group:'Editor Projetos' or
                                     request.user.is_superuser %}
                                 <tr>
                                     <td>
@@ -167,7 +170,7 @@
 
                               <tr>
                                   <td>
-                                      <span class="glyphicon glyphicon-stats text-success"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/jbrowse/" target="_blank">jBrowse</a>
+                                      <span class="glyphicon glyphicon-stats text-success"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/pagina/detail/65" target="_blank">jBrowse</a>
                                   </td>
                               </tr>
                               <tr>
