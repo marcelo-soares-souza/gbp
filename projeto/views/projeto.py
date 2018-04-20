@@ -30,7 +30,7 @@ class ProjetoList(LoggedInMixin, ListView):
         query = self.request.GET.get('q')
 
         if query:
-            context['projetos'] = context['projetos'].filter(titulo_portugues__icontains=query)
+            context['projetos'] = context['projetos'].filter(Q(titulo_portugues__icontains=query) | Q(sigla__icontains=query))
             context['projetos'] = context['projetos'].distinct()
 
         return context
