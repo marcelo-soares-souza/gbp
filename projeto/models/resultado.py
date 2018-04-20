@@ -18,7 +18,6 @@ class Resultado(models.Model, TemplateModelMixin):
     descricao = models.TextField()
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
-
     objetivo = ChainedManyToManyField(
         Objetivo,
         chained_field="projeto",
@@ -26,7 +25,6 @@ class Resultado(models.Model, TemplateModelMixin):
         auto_choose=True,
         blank=True,
     )
-
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)

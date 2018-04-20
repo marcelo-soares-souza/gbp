@@ -1,7 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 from django.db.models import Q
-
 from django.db.models import Count
 from django.shortcuts import render
 
@@ -101,6 +100,7 @@ class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
         kwargs.update({'projetos': projetos})
 
         return kwargs
+
 
 class ObjetivoProjetoUpdate(LoggedInMixin, UpdateView):
     template_name = 'objetivo/crud/form.html'

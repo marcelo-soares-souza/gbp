@@ -1,7 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 from django.db.models import Q
-
 from projeto.forms import ProjetoForm
 from projeto.models import Projeto
 from projeto.views.login import LoggedInMixin

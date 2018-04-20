@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
-
+from django.db.models import Q
 from django.db.models import Count
 from django.shortcuts import render
 
@@ -76,7 +76,7 @@ class TarefaCreate(LoggedInMixin, CreateView):
     def get_initial(self):
         try:
             return {'criado_por': self.request.user.id, 'numero': int(Tarefa.objects.latest('data_atualizado').numero) + 1}
-        except Atividade.DoesNotExist:
+        except Tarefa.DoesNotExist:
             return {'criado_por': self.request.user.id}
 
     def get_context_data(self, **kwargs):
@@ -114,6 +114,7 @@ class TarefaUpdate(LoggedInMixin, UpdateView):
         kwargs.update({'projetos': projetos})
 
         return kwargs
+
 
 class TarefaDelete(LoggedInMixin, DeleteView):
     template_name = 'tarefa/crud/delete.html'

@@ -38,9 +38,6 @@ class PalavraChaveCreate(LoggedInMixin, CreateView):
 
     success_url = reverse_lazy('new_palavrachave_projeto')
 
-    # Método responsável por listar os objetos da classe na página de form
-    # TODO: refatorar para que apresente apenas os resultados relacionados ao
-    # projeto selecionado no form
     def get_context_data(self, **kwargs):
         context = super(PalavraChaveCreate, self).get_context_data(**kwargs)
         context["palavraschave"] = PalavraChave.objects.all()
@@ -61,8 +58,6 @@ class PalavraChaveUpdate(LoggedInMixin, UpdateView):
 
     success_url = reverse_lazy('new_palavrachave_projeto')
 
-    # Método responsável por listar os objetos da classe na página
-    # TODO: refatorar! código duplicado?!
     def get_context_data(self, **kwargs):
         context = super(PalavraChaveUpdate, self).get_context_data(**kwargs)
         context["palavraschave"] = PalavraChave.objects.all()

@@ -1,6 +1,5 @@
 from django import forms
 from django.forms import Textarea, TextInput
-from django.db.models import Q
 
 from localflavor.br.forms import BRCNPJField,  BRStateSelect, BRZipCodeField
 from phonenumber_field.modelfields import PhoneNumberField
@@ -48,7 +47,7 @@ class ObjetivoForm(forms.ModelForm):
             self.initial['projeto'] = Objetivo.objects.latest('data_atualizado').projeto.id
             self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
         except Objetivo.DoesNotExist:
-            query = None
+            pass
 
     class Meta:
         model = Objetivo
@@ -73,7 +72,7 @@ class ResultadoForm(forms.ModelForm):
             self.initial['projeto'] = Resultado.objects.latest('data_atualizado').projeto.id
             self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
         except Resultado.DoesNotExist:
-            query = None
+            pass
 
     class Meta:
         model = Resultado
@@ -128,7 +127,7 @@ class ProjetoComponenteForm(forms.ModelForm):
             self.initial['projeto'] = ProjetoComponente.objects.latest('data_atualizado').projeto.id
             self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
         except ProjetoComponente.DoesNotExist:
-            query = None
+            pass
 
     class Meta:
         model = ProjetoComponente
@@ -149,7 +148,7 @@ class MetaProjetoForm(forms.ModelForm):
             self.initial['projeto'] = MetaProjeto.objects.latest('data_atualizado').projeto.id
             self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
         except MetaProjeto.DoesNotExist:
-            query = None
+            pass
 
     class Meta:
         model = MetaProjeto
@@ -169,7 +168,7 @@ class PlanoAcaoForm(forms.ModelForm):
             self.initial['projeto'] = PlanoAcao.objects.latest('data_atualizado').projeto.id
             self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
         except PlanoAcao.DoesNotExist:
-            query = None
+            pass
 
     class Meta:
         model = PlanoAcao
@@ -196,7 +195,7 @@ class AtividadeForm(forms.ModelForm):
             self.initial['projeto'] = Atividade.objects.latest('data_atualizado').projeto.id
             self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
         except Atividade.DoesNotExist:
-            query = None
+            pass
 
     class Meta:
         model = Atividade
@@ -225,7 +224,7 @@ class TarefaForm(forms.ModelForm):
             self.initial['projeto'] = Tarefa.objects.latest('data_atualizado').projeto.id
             self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
         except Tarefa.DoesNotExist:
-            query = None
+            pass
 
     class Meta:
         model = Tarefa
