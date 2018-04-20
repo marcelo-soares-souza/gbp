@@ -1,6 +1,7 @@
 from platform import python_version
 
 from django import get_version
+from django.db.models import Q
 
 from projeto.models.atividade import Atividade
 from projeto.models.instituicao import Instituicao
@@ -43,6 +44,6 @@ def all_projetos(request):
     if request.user.is_superuser:
         all_projetos = Projeto.objects.all()
     else:
-        all_projetos = Projeto.objects.filter(colaborador=request.user.id)
+        all_projetos = Projeto.objects.filter(Q(colaborador__in=[request.user.id]) | Q(criado_por=request.user.id) | Q(lider=request.user.id))
 
     return {'all_projetos': all_projetos}

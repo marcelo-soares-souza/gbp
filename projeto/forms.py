@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import Textarea, TextInput
+from django.db.models import Q
 
 from localflavor.br.forms import BRCNPJField,  BRStateSelect, BRZipCodeField
 from phonenumber_field.modelfields import PhoneNumberField
@@ -40,7 +41,10 @@ class InstituicaoForm(forms.ModelForm):
 
 class ObjetivoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
         super(ObjetivoForm, self).__init__(*args, **kwargs)
+        projetos = Projeto.objects.filter(Q(colaborador__in=[user.id]) | Q(criado_por=user.id) | Q(lider=user.id)).values_list('id', 'titulo_portugues')
+        self.fields['projeto'] = forms.ChoiceField(choices=projetos)
         self.initial['projeto'] = Objetivo.objects.latest('data_atualizado').projeto.id
 
     class Meta:

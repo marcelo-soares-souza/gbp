@@ -25,6 +25,7 @@ class MetaProjeto(models.Model, TemplateModelMixin):
         chained_field="projeto",
         chained_model_field="projeto",
         auto_choose=True,
+        blank=True,
     )
 
 

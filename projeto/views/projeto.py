@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
+from django.db.models import Q
 
 from projeto.forms import ProjetoForm
 from projeto.models import Projeto
@@ -25,7 +26,7 @@ class ProjetoList(LoggedInMixin, ListView):
         if self.request.user.is_superuser:
             context['projetos'] = Projeto.objects.all()
         else:
-            context['projetos'] = Projeto.objects.filter(colaborador__in=[self.request.user.id])
+            context['projetos'] = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
 
         query = self.request.GET.get('q')
 
@@ -64,7 +65,7 @@ class ProjetoCreate(LoggedInMixin, CreateView):
         if self.request.user.is_superuser:
             context['projetos'] = Projeto.objects.all()
         else:
-            context['projetos'] = Projeto.objects.filter(colaborador__in=[self.request.user.id])
+            context['projetos'] = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
 
         return context
 
@@ -81,7 +82,7 @@ class ProjetoUpdate(LoggedInMixin, UpdateView):
         if self.request.user.is_superuser:
             context['projetos'] = Projeto.objects.all()
         else:
-            context['projetos'] = Projeto.objects.filter(colaborador__in=[self.request.user.id])
+            context['projetos'] = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
 
         return context
 

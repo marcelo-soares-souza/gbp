@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
+from django.db.models import Q
 
 from django.db.models import Count
 from django.shortcuts import render
@@ -39,7 +40,14 @@ class ObjetivoProjetoList(LoggedInMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoList, self).get_context_data(**kwargs)
-        context['projetos'] = Projeto.objects.all()
+
+        if self.request.user.is_superuser:
+            context['projetos'] = Projeto.objects.all()
+            context['objetivos'] = Objetivo.objects.all()
+        else:
+            context['projetos'] = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+            context['objetivos'] = Objetivo.objects.filter(projeto__in=context['projetos'].all().values_list('id'))
+
         context['projeto_id'] = 0
 
         if self.kwargs:
@@ -61,10 +69,16 @@ class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'objetivo/crud/form.html'
     form_class = ObjetivoForm
     success_url = reverse_lazy('new_objetivo_projeto')
+    form = ObjetivoForm
 
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoCreate, self).get_context_data(**kwargs)
-        context["projetos"] = Objetivo.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
+
+        if self.request.user.is_superuser:
+            context["projetos"] = Objetivo.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+            context["projetos"] = Objetivo.objects.filter(projeto__in=projetos.all()).values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
 
@@ -75,6 +89,11 @@ class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
     def get_initial(self):
         return {'criado_por': self.request.user.id}
 
+    def get_form_kwargs(self):
+        kwargs = super(ObjetivoProjetoCreate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+
+        return kwargs
 
 class ObjetivoProjetoUpdate(LoggedInMixin, UpdateView):
     template_name = 'objetivo/crud/form.html'
