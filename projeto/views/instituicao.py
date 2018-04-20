@@ -36,7 +36,8 @@ class InstituicaoProjetoDetail(LoggedInMixin, DetailView):
 class InstituicaoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'instituicao/crud/form.html'
     form_class = InstituicaoForm
-    success_url = reverse_lazy('list_instituicao_projeto')
+
+    success_url = reverse_lazy('new_instituicao_projeto')
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user

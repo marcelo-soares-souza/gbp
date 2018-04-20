@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
+from django.db.models import Q
 
 from django.db.models import Count
 from django.shortcuts import render
@@ -66,7 +67,7 @@ class ResultadoProjetoCreate(LoggedInMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ResultadoProjetoCreate,
                         self).get_context_data(**kwargs)
-        # context["resultados"] = Resultado.objects.all().order_by('numero')
+
         context["projetos"] = Resultado.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
@@ -76,7 +77,21 @@ class ResultadoProjetoCreate(LoggedInMixin, CreateView):
         return super(ResultadoProjetoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return {'criado_por': self.request.user.id}
+        try:
+            return {'criado_por': self.request.user.id, 'numero': int(Resultado.objects.latest('data_atualizado').numero) + 1}
+        except Resultado.DoesNotExist:
+            return {'criado_por': self.request.user.id}
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(ResultadoProjetoCreate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class ResultadoProjetoUpdate(LoggedInMixin, UpdateView):
@@ -86,13 +101,22 @@ class ResultadoProjetoUpdate(LoggedInMixin, UpdateView):
 
     success_url = reverse_lazy('list_resultado_projeto')
 
-    # Método responsável por listar os objetos da classe na página
-    # TODO: refatorar! código duplicado?!
     def get_context_data(self, **kwargs):
         context = super(ResultadoProjetoUpdate,
                         self).get_context_data(**kwargs)
         context["resultados"] = Resultado.objects.all().order_by('numero')
         return context
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(ResultadoProjetoUpdate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class ResultadoProjetoDelete(LoggedInMixin, DeleteView):

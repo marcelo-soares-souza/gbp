@@ -10,7 +10,7 @@
     {% include "base/menu-projetos.html" %} <br/>
 
     <div style="min-width: 60%; float: right;">
-      {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
+      {% if request.user|has_group:'Admin Projetos' or request.user|has_group:'Editor Projetos' or request.user.is_superuser %}
         <div style="float: right;">
           <a href="{% url 'new_tarefa_projeto' %}" class="btn btn-sm btn-success">Adicionar</a>
         </div>
@@ -45,9 +45,19 @@
 
                 <h3><a href="{{ tarefa.get_detail_url }}">{{ tarefa }}</a></h3>
 
-                <p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' tarefa.planoacao.id %}">{{ tarefa.planoacao }}</a>&nbsp;</div></p>
+                {% if tarefa.planoacao %}
+                  <p><b>Plano de Ação associado:</b> <br/> <div class='text-highlight'>
+                    {% for planoacao in tarefa.planoacao.all %}{% if not forloop.first %}, {% endif %}
+                      <a href="{% url 'detail_planoacao_projeto' planoacao.id %}">{{ planoacao }}</a>{% endfor %}
+                      &nbsp;</div></p>
+                {% endif %}
 
-                <p> <b>Atividade associada: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_atividade_projeto' tarefa.atividade.id %}">{{ tarefa.atividade }}</a>&nbsp;</div></p>
+                {% if tarefa.atividade %}
+                  <p><b>Atividade associado:</b> <br/> <div class='text-highlight'>
+                    {% for atividade in tarefa.atividade.all %}{% if not forloop.first %}, {% endif %}
+                      <a href="{% url 'detail_atividade_projeto' atividade.id %}">{{ atividade }}</a>{% endfor %}
+                      &nbsp;</div></p>
+                {% endif %}
 
                 <br/>
 

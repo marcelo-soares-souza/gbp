@@ -68,15 +68,33 @@ class ProjetoComponenteCreate(LoggedInMixin, CreateView):
         return super(ProjetoComponenteCreate, self).form_valid(form)
 
     def get_initial(self):
-        return {'criado_por': self.request.user.id}
+        try:
+            return {'criado_por': self.request.user.id, 'numero': int(ProjetoComponente.objects.latest('data_atualizado').numero) + 1}
+        except ProjetoComponente.DoesNotExist:
+            return {'criado_por': self.request.user.id}
 
     def get_context_data(self, **kwargs):
         context = super(ProjetoComponenteCreate,
                         self).get_context_data(**kwargs)
-        # context["projetocomponentes"] = ProjetoComponente.objects.all()
-        context["projetos"] = ProjetoComponente.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
+
+        if self.request.user.is_superuser:
+            context["projetos"] = ProjetoComponente.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+            context["projetos"] = ProjetoComponente.objects.filter(projeto__in=projetos.all()).values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(ProjetoComponenteCreate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class ProjetoComponenteUpdate(LoggedInMixin, UpdateView):
@@ -91,6 +109,17 @@ class ProjetoComponenteUpdate(LoggedInMixin, UpdateView):
                         self).get_context_data(**kwargs)
         context["projetocomponentes"] = ProjetoComponente.objects.all()
         return context
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(ProjetoComponenteUpdate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class ProjetoComponenteDelete(LoggedInMixin, DeleteView):

@@ -4,7 +4,14 @@
           <li class="list-group-item">
               <h4><a href="{{ planoacao.get_detail_url }}">{{ planoacao }}</a></h4>
               <p><b>Descrição:</b> <br/> <div class='text-highlight'>{{planoacao.nome}}&nbsp;</div></p>
-              <p><b>Projeto Componente:</b> <br/> <div class='text-highlight'>{{planoacao.projeto_componente}}&nbsp;</div></p>
+
+              {% if planoacao.projeto_componente.all %}
+                <p><b>Projeto Componente:</b> <br/> <div class='text-highlight'>
+                  {% for projetocomponente in planoacao.projeto_componente.all %}{% if not forloop.first %}, {% endif %}
+                    {{ projetocomponente }}{% endfor %}
+                &nbsp;</div></p>
+              {% endif %}
+
               <p><b>Período:</b> <br/> <div class='text-highlight'>{{planoacao.data_inicio}} - {{planoacao.data_fim}}&nbsp;</div></p>
               <br/>
               <p style="float: right;">

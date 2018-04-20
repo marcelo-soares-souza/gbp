@@ -41,11 +41,14 @@ class InstituicaoForm(forms.ModelForm):
 
 class ObjetivoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
+        projetos = kwargs.pop('projetos')
         super(ObjetivoForm, self).__init__(*args, **kwargs)
-        projetos = Projeto.objects.filter(Q(colaborador__in=[user.id]) | Q(criado_por=user.id) | Q(lider=user.id)).values_list('id', 'titulo_portugues')
-        self.fields['projeto'] = forms.ChoiceField(choices=projetos)
-        self.initial['projeto'] = Objetivo.objects.latest('data_atualizado').projeto.id
+
+        try:
+            self.initial['projeto'] = Objetivo.objects.latest('data_atualizado').projeto.id
+            self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
+        except Objetivo.DoesNotExist:
+            query = None
 
     class Meta:
         model = Objetivo
@@ -63,8 +66,14 @@ class ObjetivoForm(forms.ModelForm):
 
 class ResultadoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        projetos = kwargs.pop('projetos')
         super(ResultadoForm, self).__init__(*args, **kwargs)
-        self.initial['projeto'] = Resultado.objects.latest('data_atualizado').projeto.id
+
+        try:
+            self.initial['projeto'] = Resultado.objects.latest('data_atualizado').projeto.id
+            self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
+        except Resultado.DoesNotExist:
+            query = None
 
     class Meta:
         model = Resultado
@@ -111,6 +120,15 @@ class ProjetoForm(forms.ModelForm):
 
 
 class ProjetoComponenteForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        projetos = kwargs.pop('projetos')
+        super(ProjetoComponenteForm, self).__init__(*args, **kwargs)
+
+        try:
+            self.initial['projeto'] = ProjetoComponente.objects.latest('data_atualizado').projeto.id
+            self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
+        except ProjetoComponente.DoesNotExist:
+            query = None
 
     class Meta:
         model = ProjetoComponente
@@ -123,6 +141,15 @@ class ProjetoComponenteForm(forms.ModelForm):
 
 
 class MetaProjetoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        projetos = kwargs.pop('projetos')
+        super(MetaProjetoForm, self).__init__(*args, **kwargs)
+
+        try:
+            self.initial['projeto'] = MetaProjeto.objects.latest('data_atualizado').projeto.id
+            self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
+        except MetaProjeto.DoesNotExist:
+            query = None
 
     class Meta:
         model = MetaProjeto
@@ -134,6 +161,15 @@ class MetaProjetoForm(forms.ModelForm):
 
 
 class PlanoAcaoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        projetos = kwargs.pop('projetos')
+        super(PlanoAcaoForm, self).__init__(*args, **kwargs)
+
+        try:
+            self.initial['projeto'] = PlanoAcao.objects.latest('data_atualizado').projeto.id
+            self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
+        except PlanoAcao.DoesNotExist:
+            query = None
 
     class Meta:
         model = PlanoAcao
@@ -152,6 +188,15 @@ class PlanoAcaoForm(forms.ModelForm):
 
 
 class AtividadeForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        projetos = kwargs.pop('projetos')
+        super(AtividadeForm, self).__init__(*args, **kwargs)
+
+        try:
+            self.initial['projeto'] = Atividade.objects.latest('data_atualizado').projeto.id
+            self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
+        except Atividade.DoesNotExist:
+            query = None
 
     class Meta:
         model = Atividade
@@ -172,6 +217,15 @@ class AtividadeForm(forms.ModelForm):
 
 
 class TarefaForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        projetos = kwargs.pop('projetos')
+        super(TarefaForm, self).__init__(*args, **kwargs)
+
+        try:
+            self.initial['projeto'] = Tarefa.objects.latest('data_atualizado').projeto.id
+            self.fields['projeto'] = forms.ModelChoiceField(queryset=projetos)
+        except Tarefa.DoesNotExist:
+            query = None
 
     class Meta:
         model = Tarefa

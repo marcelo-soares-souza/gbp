@@ -67,20 +67,34 @@ class TarefaCreate(LoggedInMixin, CreateView):
     template_name = 'tarefa/crud/form.html'
     form_class = TarefaForm
 
-    success_url = reverse_lazy('list_tarefa_projeto')
+    success_url = reverse_lazy('new_tarefa_projeto')
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
         return super(TarefaCreate, self).form_valid(form)
 
     def get_initial(self):
-        return {'criado_por': self.request.user.id}
+        try:
+            return {'criado_por': self.request.user.id, 'numero': int(Tarefa.objects.latest('data_atualizado').numero) + 1}
+        except Atividade.DoesNotExist:
+            return {'criado_por': self.request.user.id}
 
     def get_context_data(self, **kwargs):
         context = super(TarefaCreate, self).get_context_data(**kwargs)
         context["projetos"] = Tarefa.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(TarefaCreate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class TarefaUpdate(LoggedInMixin, UpdateView):
@@ -90,6 +104,16 @@ class TarefaUpdate(LoggedInMixin, UpdateView):
 
     success_url = reverse_lazy('list_tarefa_projeto')
 
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(TarefaUpdate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 class TarefaDelete(LoggedInMixin, DeleteView):
     template_name = 'tarefa/crud/delete.html'

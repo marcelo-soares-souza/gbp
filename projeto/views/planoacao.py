@@ -67,20 +67,34 @@ class PlanoAcaoCreate(LoggedInMixin, CreateView):
     template_name = 'planoacao/crud/form.html'
     form_class = PlanoAcaoForm
 
-    success_url = reverse_lazy('list_planoacao_projeto')
+    success_url = reverse_lazy('new_planoacao_projeto')
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
         return super(PlanoAcaoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return {'criado_por': self.request.user.id}
+        try:
+            return {'criado_por': self.request.user.id, 'numero': int(PlanoAcao.objects.latest('data_atualizado').numero) + 1}
+        except PlanoAcao.DoesNotExist:
+            return {'criado_por': self.request.user.id}
 
     def get_context_data(self, **kwargs):
         context = super(PlanoAcaoCreate, self).get_context_data(**kwargs)
         context["projetos"] = PlanoAcao.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(PlanoAcaoCreate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class PlanoAcaoUpdate(LoggedInMixin, UpdateView):
@@ -89,6 +103,17 @@ class PlanoAcaoUpdate(LoggedInMixin, UpdateView):
     model = PlanoAcao
 
     success_url = reverse_lazy('list_planoacao_projeto')
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(PlanoAcaoUpdate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class PlanoAcaoDelete(LoggedInMixin, DeleteView):

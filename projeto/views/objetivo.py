@@ -69,7 +69,6 @@ class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'objetivo/crud/form.html'
     form_class = ObjetivoForm
     success_url = reverse_lazy('new_objetivo_projeto')
-    form = ObjetivoForm
 
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoCreate, self).get_context_data(**kwargs)
@@ -87,11 +86,19 @@ class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
         return super(ObjetivoProjetoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return {'criado_por': self.request.user.id}
+        try:
+            return {'criado_por': self.request.user.id, 'numero': int(Objetivo.objects.latest('data_atualizado').numero) + 1}
+        except Objetivo.DoesNotExist:
+            return {'criado_por': self.request.user.id}
 
     def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
         kwargs = super(ObjetivoProjetoCreate, self).get_form_kwargs()
-        kwargs.update({'user': self.request.user})
+        kwargs.update({'projetos': projetos})
 
         return kwargs
 
@@ -106,6 +113,17 @@ class ObjetivoProjetoUpdate(LoggedInMixin, UpdateView):
         return context
 
     success_url = reverse_lazy('new_objetivo_projeto')
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(ObjetivoProjetoUpdate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class ObjetivoProjetoDelete(LoggedInMixin, DeleteView):

@@ -67,20 +67,34 @@ class AtividadeCreate(LoggedInMixin, CreateView):
     template_name = 'atividade/crud/form.html'
     form_class = AtividadeForm
 
-    success_url = reverse_lazy('list_atividade_projeto')
+    success_url = reverse_lazy('new_atividade_projeto')
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
         return super(AtividadeCreate, self).form_valid(form)
 
     def get_initial(self):
-        return {'criado_por': self.request.user.id}
+        try:
+            return {'criado_por': self.request.user.id, 'numero': int(Atividade.objects.latest('data_atualizado').numero) + 1}
+        except Atividade.DoesNotExist:
+            return {'criado_por': self.request.user.id}
 
     def get_context_data(self, **kwargs):
         context = super(AtividadeCreate, self).get_context_data(**kwargs)
         context["projetos"] = Atividade.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(AtividadeCreate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class AtividadeUpdate(LoggedInMixin, UpdateView):
@@ -89,6 +103,17 @@ class AtividadeUpdate(LoggedInMixin, UpdateView):
     model = Atividade
 
     success_url = reverse_lazy('list_atividade_projeto')
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(AtividadeUpdate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class AtividadeDelete(LoggedInMixin, DeleteView):

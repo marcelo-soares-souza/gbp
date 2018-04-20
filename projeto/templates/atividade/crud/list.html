@@ -10,7 +10,8 @@
     {% include "base/menu-projetos.html" %} <br/>
 
     <div style="min-width: 60%; float: right;">
-      {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
+
+      {% if request.user|has_group:'Admin Projetos' or request.user|has_group:'Editor Projetos' or request.user.is_superuser %}
         <div style="float: right;"><a href="{% url 'new_atividade_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
       {% endif %}
 
@@ -43,7 +44,13 @@
 
                 <h3><a href="{{ atividade.get_detail_url }}">{{ atividade }}</a></h3>
 
-                <p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' atividade.planoacao.id %}">{{ atividade.planoacao }}</a>&nbsp;</div></p>
+                {% if atividade.planoacao.all %}
+                  <p><b>Plano de Ação Associado:</b> <br/> <div class='text-highlight'>
+                    {% for planoacao in atividade.planoacao.all %}{% if not forloop.first %}, {% endif %}
+                      {{ planoacao }}{% endfor %}
+                  &nbsp;</div></p>
+
+                {% endif %}
 
                 <br/>
 

@@ -63,20 +63,34 @@ class MetaProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'metaprojeto/crud/form.html'
     form_class = MetaProjetoForm
 
-    success_url = reverse_lazy('list_metaprojeto_projeto')
+    success_url = reverse_lazy('new_metaprojeto_projeto')
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
         return super(MetaProjetoCreate, self).form_valid(form)
 
     def get_initial(self):
-        return {'criado_por': self.request.user.id}
+        try:
+            return {'criado_por': self.request.user.id, 'numero': int(MetaProjeto.objects.latest('data_atualizado').numero) + 1}
+        except MetaProjeto.DoesNotExist:
+            return {'criado_por': self.request.user.id}
 
     def get_context_data(self, **kwargs):
         context = super(MetaProjetoCreate, self).get_context_data(**kwargs)
         context["projetos"] = MetaProjeto.objects.values('projeto_id').annotate(total=Count('projeto_id')).order_by('projeto_id')
 
         return context
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(MetaProjetoCreate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class MetaProjetoUpdate(LoggedInMixin, UpdateView):
@@ -85,6 +99,17 @@ class MetaProjetoUpdate(LoggedInMixin, UpdateView):
     model = MetaProjeto
 
     success_url = reverse_lazy('list_metaprojeto_projeto')
+
+    def get_form_kwargs(self):
+        if self.request.user.is_superuser:
+            projetos = Projeto.objects.all()
+        else:
+            projetos = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
+
+        kwargs = super(MetaProjetoUpdate, self).get_form_kwargs()
+        kwargs.update({'projetos': projetos})
+
+        return kwargs
 
 
 class MetaProjetoDelete(LoggedInMixin, DeleteView):

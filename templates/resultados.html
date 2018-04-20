@@ -5,10 +5,12 @@
               <h4><a href="{{ resultado.get_detail_url }}">{{ resultado }}</a></h4>
               <p><b>Descrição:</b> <br/> <div class='text-highlight'>{{resultado.descricao}}&nbsp;</div></p>
 
+              {% if resultado.objetivo.all %}
               <p><b>Objetivo Associado:</b> <br/> <div class='text-highlight'>
                 {% for objetivo in resultado.objetivo.all %}{% if not forloop.first %}, {% endif %}
                   <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo }}</a>{% endfor %}
               &nbsp;</div></p>
+              {% endif %}
 
               <br/>
               <p style="float: right;">

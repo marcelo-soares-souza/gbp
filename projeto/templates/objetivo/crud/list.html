@@ -10,7 +10,7 @@
     {% include "base/menu-projetos.html" %} <br/>
 
     <div style="min-width: 60%; float: right;">
-      {% if request.user|has_group:'Admin Projetos' or request.user.is_superuser %}
+      {% if request.user|has_group:'Admin Projetos' or request.user|has_group:'Editor Projetos' or request.user.is_superuser %}
         <div style="float: right;">
           <a href="{% url 'new_objetivo_projeto' %}" class="btn btn-sm btn-success">Adicionar</a>
         </div>

@@ -25,9 +25,9 @@
       {{ colaborador|verifyfullname }}{% endfor %}
     &nbsp;</div></p>
 
-    <p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' tarefa.planoacao.id %}">{{ tarefa.planoacao }}</a>&nbsp;</div></p>
+    {% if tarefa.planoacao %}<p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' tarefa.planoacao.id %}">{{ tarefa.planoacao }}</a>&nbsp;</div></p> {% endif %}
 
-    <p> <b>Atividade associada: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_atividade_projeto' tarefa.atividade.id %}">{{ tarefa.atividade }}</a>&nbsp;</div></p>
+    {% if tarefa.atividade %}<p> <b>Atividade associada: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_atividade_projeto' tarefa.atividade.id %}">{{ tarefa.atividade }}</a>&nbsp;</div></p> {% endif %}
 
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ tarefa.data_cadastro }}&nbsp;</div></p>
 
