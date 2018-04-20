@@ -29,20 +29,16 @@ class ObjetivoProjetoList(LoggedInMixin, ListView):
 
     success_url = reverse_lazy('list_objetivo_projeto')
 
-    def get_queryset(self):
-        if self.kwargs:
-            queryset = self.model._default_manager.filter(projeto_id=int(self.kwargs['pk']))
-        else:
-            queryset = self.model._default_manager.all()
-
-        return queryset
-
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoList, self).get_context_data(**kwargs)
 
         if self.request.user.is_superuser:
             context['projetos'] = Projeto.objects.all()
-            context['objetivos'] = Objetivo.objects.all()
+
+            if self.kwargs:
+                context['objetivos'] = Objetivo.objects.filter(projeto_id=self.kwargs['pk'])
+            else:
+                context['objetivos'] = Objetivo.objects.all()
         else:
             context['projetos'] = Projeto.objects.filter(Q(colaborador__in=[self.request.user.id]) | Q(criado_por=self.request.user.id) | Q(lider=self.request.user.id))
             context['objetivos'] = Objetivo.objects.filter(projeto__in=context['projetos'].all().values_list('id'))
