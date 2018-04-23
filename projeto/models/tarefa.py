@@ -7,6 +7,8 @@ from projeto.models.planoacao import PlanoAcao
 from projeto.models.projeto import Projeto
 from projeto.models.template import TemplateModelMixin
 
+from smart_selects.db_fields import ChainedManyToManyField
+
 
 #
 # Tarefas
@@ -26,9 +28,21 @@ class Tarefa(models.Model, TemplateModelMixin):
     # Relacionamentos
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
-    planoacao = models.ManyToManyField(PlanoAcao, blank=True, related_name='planoacao')
+    planoacao = ChainedManyToManyField(
+        PlanoAcao,
+        chained_field="projeto",
+        chained_model_field="projeto",
+        auto_choose=True,
+        blank=True,
+    )
 
-    atividade = models.ManyToManyField(Atividade, blank=True, related_name='atividade')
+    atividade = ChainedManyToManyField(
+        Atividade,
+        chained_field="projeto",
+        chained_model_field="projeto",
+        auto_choose=True,
+        blank=True,
+    )
 
     responsavel = models.ForeignKey(
         User, null=True, blank=True, related_name='responsavel_tarefa', on_delete=models.CASCADE)

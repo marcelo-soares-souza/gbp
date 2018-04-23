@@ -37,7 +37,7 @@ class InstituicaoProjetoCreate(LoggedInMixin, CreateView):
     form_class = InstituicaoForm
 
     def get_success_url(self):
-        return reverse_lazy('detail_instituicao_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_instituicao_projeto', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
@@ -53,7 +53,7 @@ class InstituicaoProjetoUpdate(LoggedInMixin, UpdateView):
     model = Instituicao
 
     def get_success_url(self):
-        return reverse_lazy('detail_instituicao_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_instituicao_projeto', kwargs={'pk': self.object.pk})
 
 
 class InstituicaoProjetoDelete(LoggedInMixin, DeleteView):

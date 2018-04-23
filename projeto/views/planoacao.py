@@ -68,7 +68,7 @@ class PlanoAcaoCreate(LoggedInMixin, CreateView):
     form_class = PlanoAcaoForm
 
     def get_success_url(self):
-        return reverse_lazy('detail_planoacao_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_planoacao_projeto', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
@@ -104,7 +104,7 @@ class PlanoAcaoUpdate(LoggedInMixin, UpdateView):
     model = PlanoAcao
 
     def get_success_url(self):
-        return reverse_lazy('detail_planoacao_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_planoacao_projeto', kwargs={'pk': self.object.pk})
 
     def get_form_kwargs(self):
         if self.request.user.is_superuser:

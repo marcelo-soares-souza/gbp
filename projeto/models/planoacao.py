@@ -30,7 +30,13 @@ class PlanoAcao(models.Model, TemplateModelMixin):
     # Relacionamentos
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
 
-    projeto_componente = models.ManyToManyField(ProjetoComponente, blank=True, related_name='projeto_componente')
+    projeto_componente = ChainedManyToManyField(
+        ProjetoComponente,
+        chained_field="projeto",
+        chained_model_field="projeto",
+        auto_choose=True,
+        blank=True,
+    )
 
     resultado = ChainedManyToManyField(
         Resultado,

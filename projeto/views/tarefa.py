@@ -68,7 +68,7 @@ class TarefaCreate(LoggedInMixin, CreateView):
     form_class = TarefaForm
 
     def get_success_url(self):
-        return reverse_lazy('detail_tarefa_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_tarefa_projeto', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
@@ -104,7 +104,7 @@ class TarefaUpdate(LoggedInMixin, UpdateView):
     model = Tarefa
 
     def get_success_url(self):
-        return reverse_lazy('detail_tarefa_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_tarefa_projeto', kwargs={'pk': self.object.pk})
 
     def get_form_kwargs(self):
         if self.request.user.is_superuser:

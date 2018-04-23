@@ -50,7 +50,7 @@ class ProjetoCreate(LoggedInMixin, CreateView):
     form_class = ProjetoForm
 
     def get_success_url(self):
-        return reverse_lazy('detail_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_projeto', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
@@ -76,7 +76,7 @@ class ProjetoUpdate(LoggedInMixin, UpdateView):
     model = Projeto
 
     def get_success_url(self):
-        return reverse_lazy('detail_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_projeto', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(ProjetoUpdate, self).get_context_data(**kwargs)

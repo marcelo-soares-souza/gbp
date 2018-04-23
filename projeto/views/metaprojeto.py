@@ -64,7 +64,7 @@ class MetaProjetoCreate(LoggedInMixin, CreateView):
     form_class = MetaProjetoForm
 
     def get_success_url(self):
-        return reverse_lazy('detail_metaprojeto_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_metaprojeto_projeto', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
@@ -100,7 +100,7 @@ class MetaProjetoUpdate(LoggedInMixin, UpdateView):
     model = MetaProjeto
 
     def get_success_url(self):
-        return reverse_lazy('detail_metaprojeto_projeto', kwargs={'pk' : self.object.pk})
+        return reverse_lazy('detail_metaprojeto_projeto', kwargs={'pk': self.object.pk})
 
     def get_form_kwargs(self):
         if self.request.user.is_superuser:
