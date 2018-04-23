@@ -2,7 +2,7 @@
 
 from projeto.views.home import Home, Permission, jBrowse, Timeline
 from projeto.views.instituicao import InstituicaoProjetoList, InstituicaoProjetoDetail, InstituicaoProjetoCreate, InstituicaoProjetoUpdate, InstituicaoProjetoDelete
-from projeto.views.projeto import ProjetoList, ProjetoDetail, ProjetoCreate, ProjetoUpdate, ProjetoDelete
+from projeto.views.projeto import ProjetoList, ProjetoDetail, ProjetoCreate, ProjetoUpdate, ProjetoDelete, ProjetoDashboard
 from projeto.views.objetivo import ObjetivoProjetoList, ObjetivoProjetoDetail, ObjetivoProjetoCreate, ObjetivoProjetoUpdate, ObjetivoProjetoDelete
 from projeto.views.resultado import ResultadoProjetoList, ResultadoProjetoDetail, ResultadoProjetoCreate, ResultadoProjetoUpdate, ResultadoProjetoDelete
 from projeto.views.palavrachave import PalavraChaveList, PalavraChaveDetail, PalavraChaveCreate, PalavraChaveUpdate, PalavraChaveDelete

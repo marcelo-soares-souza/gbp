@@ -24,7 +24,7 @@
                                         <li class="menu-item dropdown-submenu">
                                           <a tabindex="0">{{projeto}}</a>
                                           <ul class="dropdown-menu dropdown-center">
-                                              <li><a href="{% url 'detail_projeto' projeto.id %}">Details</a></li>
+                                              <li><a href="{% url 'dashboard_projeto' projeto.id %}">Details</a></li>
                                               {% if projeto.jbrowse %} <li><a href="{{ projeto.jbrowse }}" target="_blank">jBrowse</a></li> {% endif %}
                                               {% if projeto.blast %} <li><a href="{{ projeto.blast }}" target="_blank">Blast</a></li> {% endif %}
                                           </ul>

@@ -12,7 +12,7 @@ from projeto.views.metaprojeto import MetaProjetoCreate, MetaProjetoDelete, Meta
 from projeto.views.objetivo import ObjetivoProjetoCreate, ObjetivoProjetoDelete, ObjetivoProjetoDetail, ObjetivoProjetoList, ObjetivoProjetoUpdate
 from projeto.views.palavrachave import PalavraChaveCreate, PalavraChaveDelete, PalavraChaveDetail, PalavraChaveList, PalavraChaveUpdate
 from projeto.views.planoacao import PlanoAcaoCreate, PlanoAcaoDelete, PlanoAcaoDetail, PlanoAcaoList, PlanoAcaoUpdate
-from projeto.views.projeto import ProjetoCreate, ProjetoDelete, ProjetoDetail, ProjetoList, ProjetoUpdate
+from projeto.views.projeto import ProjetoCreate, ProjetoDelete, ProjetoDetail, ProjetoList, ProjetoUpdate, ProjetoDashboard
 from projeto.views.projetocomponente import ProjetoComponenteCreate, ProjetoComponenteDelete, ProjetoComponenteDetail, ProjetoComponenteList, ProjetoComponenteUpdate
 from projeto.views.resultado import ResultadoProjetoCreate, ResultadoProjetoDelete, ResultadoProjetoDetail, ResultadoProjetoList, ResultadoProjetoUpdate
 from projeto.views.tarefa import TarefaCreate, TarefaDelete, TarefaDetail, TarefaList, TarefaUpdate
@@ -59,6 +59,7 @@ urlpatterns = [
     url(r'^projeto/detail/(?P<pk>\d+)/$', ProjetoDetail.as_view(), name='detail_projeto'),
     url(r'^projeto/update/(?P<pk>\d+)/$', ProjetoUpdate.as_view(), name='update_projeto'),
     url(r'^projeto/delete/(?P<pk>\d+)/$', ProjetoDelete.as_view(), name='delete_projeto'),
+    url(r'^projeto/dashboard/(?P<pk>\d+)/$', ProjetoDashboard.as_view(), name='dashboard_projeto'),
 
     # Views de Instituicao de Projeto
     url(r'^instituicao/$', InstituicaoProjetoList.as_view(),

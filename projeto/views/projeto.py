@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 from django.db.models import Q
 from projeto.forms import ProjetoForm
-from projeto.models import Projeto
+from projeto.models import Projeto, Objetivo, Resultado
 from projeto.views.login import LoggedInMixin
 
 
@@ -93,3 +93,16 @@ class ProjetoDelete(LoggedInMixin, DeleteView):
     model = Projeto
 
     success_url = reverse_lazy('list_projeto')
+
+
+class ProjetoDashboard(LoggedInMixin, DetailView):
+    template_name = 'projeto/crud/dashboard.html'
+    context_object_name = 'projeto'
+    model = Projeto
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['objetivos'] = Objetivo.objects.filter(projeto_id=context["projeto"].pk).order_by('numero')
+        context['resultados'] = Resultado.objects.filter(projeto_id=context["projeto"].pk).order_by('numero')
+        return context
