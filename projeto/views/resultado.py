@@ -61,7 +61,8 @@ class ResultadoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'resultado/crud/form.html'
     form_class = ResultadoForm
 
-    success_url = reverse_lazy('new_resultado_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_resultado_projeto', kwargs={'pk' : self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(ResultadoProjetoCreate,
@@ -98,7 +99,8 @@ class ResultadoProjetoUpdate(LoggedInMixin, UpdateView):
     form_class = ResultadoForm
     model = Resultado
 
-    success_url = reverse_lazy('list_resultado_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_resultado_projeto', kwargs={'pk' : self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(ResultadoProjetoUpdate,

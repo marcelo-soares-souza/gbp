@@ -63,7 +63,9 @@ class ObjetivoProjetoDetail(LoggedInMixin, DetailView):
 class ObjetivoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'objetivo/crud/form.html'
     form_class = ObjetivoForm
-    success_url = reverse_lazy('new_objetivo_projeto')
+
+    def get_success_url(self):
+        return reverse_lazy('detail_objetivo_projeto', kwargs={'pk' : self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoCreate, self).get_context_data(**kwargs)
@@ -103,12 +105,13 @@ class ObjetivoProjetoUpdate(LoggedInMixin, UpdateView):
     form_class = ObjetivoForm
     model = Objetivo
 
+    def get_success_url(self):
+        return reverse_lazy('detail_objetivo_projeto', kwargs={'pk' : self.object.pk})
+
     def get_context_data(self, **kwargs):
         context = super(ObjetivoProjetoUpdate, self).get_context_data(**kwargs)
         context["objetivos"] = Objetivo.objects.all().order_by('numero')
         return context
-
-    success_url = reverse_lazy('new_objetivo_projeto')
 
     def get_form_kwargs(self):
         if self.request.user.is_superuser:

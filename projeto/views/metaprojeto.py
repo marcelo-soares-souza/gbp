@@ -63,7 +63,8 @@ class MetaProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'metaprojeto/crud/form.html'
     form_class = MetaProjetoForm
 
-    success_url = reverse_lazy('new_metaprojeto_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_metaprojeto_projeto', kwargs={'pk' : self.object.pk})
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
@@ -98,7 +99,8 @@ class MetaProjetoUpdate(LoggedInMixin, UpdateView):
     form_class = MetaProjetoForm
     model = MetaProjeto
 
-    success_url = reverse_lazy('list_metaprojeto_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_metaprojeto_projeto', kwargs={'pk' : self.object.pk})
 
     def get_form_kwargs(self):
         if self.request.user.is_superuser:

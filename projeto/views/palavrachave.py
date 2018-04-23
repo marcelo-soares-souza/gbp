@@ -36,7 +36,8 @@ class PalavraChaveCreate(LoggedInMixin, CreateView):
     template_name = 'palavrachave/crud/form.html'
     form_class = PalavraChaveForm
 
-    success_url = reverse_lazy('new_palavrachave_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_palavrachave_projeto', kwargs={'pk' : self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(PalavraChaveCreate, self).get_context_data(**kwargs)
@@ -56,7 +57,8 @@ class PalavraChaveUpdate(LoggedInMixin, UpdateView):
     form_class = PalavraChaveForm
     model = PalavraChave
 
-    success_url = reverse_lazy('new_palavrachave_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_palavrachave_projeto', kwargs={'pk' : self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(PalavraChaveUpdate, self).get_context_data(**kwargs)

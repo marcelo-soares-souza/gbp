@@ -67,7 +67,8 @@ class AtividadeCreate(LoggedInMixin, CreateView):
     template_name = 'atividade/crud/form.html'
     form_class = AtividadeForm
 
-    success_url = reverse_lazy('new_atividade_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_atividade_projeto', kwargs={'pk' : self.object.pk})
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
@@ -102,7 +103,8 @@ class AtividadeUpdate(LoggedInMixin, UpdateView):
     form_class = AtividadeForm
     model = Atividade
 
-    success_url = reverse_lazy('list_atividade_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_atividade_projeto', kwargs={'pk' : self.object.pk})
 
     def get_form_kwargs(self):
         if self.request.user.is_superuser:

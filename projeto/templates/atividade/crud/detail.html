@@ -24,7 +24,12 @@
       {{ colaborador|verifyfullname }}{% endfor %}
     &nbsp;</div></p>
 
-    <p><b>Plano de Ação associado: </b> <br/> <div class='text-highlight'> <a href="{% url 'detail_planoacao_projeto' atividade.planoacao.id %}">{{ atividade.planoacao }}</a>&nbsp;</div></p>
+    {% if atividade.planoacao.all %}
+      <p><b>Plano Ação(es): </b> <br/> <div class='text-highlight'>
+      {% for planoacao in atividade.planoacao.all %}{% if not forloop.first %}, {% endif %}
+        {{ planoacao }}{% endfor %}
+      &nbsp;</div></p>
+    {% endif %}
 
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ atividade.data_cadastro }}&nbsp;</div></p>
 

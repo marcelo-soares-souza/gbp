@@ -3,7 +3,7 @@
             {% if request.user.is_authenticated %}
               {% if 'new' in request.resolver_match.url_name %}
                 <li class="tab-title"><a id="new_projeto" href="{% url 'new_projeto' %}#">Projeto</a></li>
-                <li class="tab-title"><a id="new_objetivo_projeto" href="{% url 'new_objetivo_projeto' %}#">Objetivo Específico</a>
+                <li class="tab-title"><a id="new_objetivo_projeto" href="{% url 'new_objetivo_projeto' %}#">Objetivo</a>
                 <li class="tab-title"><a id="new_resultado_projeto" href="{% url 'new_resultado_projeto' %}#">Resultado</a></li>
                 <li class="tab-title"><a id="new_projetocomponente_projeto" href="{% url 'new_projetocomponente_projeto' %}#">PC</a></li>
                 <li class="tab-title"><a id="new_metaprojeto_projeto" href="{% url 'new_metaprojeto_projeto' %}#">Meta</a></li>
@@ -14,7 +14,7 @@
 <!--                <li class="tab-title"><a id="new_palavrachave_projeto" href="{% url 'new_palavrachave_projeto' %}#">Chave</a></li> -->
               {% elif 'detail' in request.resolver_match.url_name %}
                 <li class="tab-title"><a id="detail_projeto" href="{% url 'list_projeto' %}#">Projeto {{ count_projeto }}</a></li>
-                <li class="tab-title"><a id="detail_objetivo_projeto" href="{% url 'list_objetivo_projeto' %}#">Objetivo Específico {{ count_objetivo }}</a>
+                <li class="tab-title"><a id="detail_objetivo_projeto" href="{% url 'list_objetivo_projeto' %}#">Objetivo {{ count_objetivo }}</a>
                 <li class="tab-title"><a id="detail_resultado_projeto" href="{% url 'list_resultado_projeto' %}#">Resultado {{ count_resultado }}</a></li>
                 <li class="tab-title"><a id="detail_projetocomponente_projeto" href="{% url 'list_projetocomponente_projeto' %}#">PC {{ count_projetocomponente }}</a></li>
                 <li class="tab-title"><a id="detail_metaprojeto_projeto" href="{% url 'list_metaprojeto_projeto' %}#">Meta {{ count_metaprojeto }}</a></li>
@@ -25,7 +25,7 @@
 <!--                <li class="tab-title"><a id="detail_palavrachave_projeto" href="{% url 'list_palavrachave_projeto' %}#">Chave {{ count_palavrachave }}</a></li> -->
               {% else %}
                 <li class="tab-title"><a id="list_projeto" href="{% url 'list_projeto' %}#">Projeto {{ count_projeto }}</a></li>
-                <li class="tab-title"><a id="list_objetivo_projeto" href="{% url 'list_objetivo_projeto' %}#">Objetivo Específico {{ count_objetivo }}</a>
+                <li class="tab-title"><a id="list_objetivo_projeto" href="{% url 'list_objetivo_projeto' %}#">Objetivo {{ count_objetivo }}</a>
                 <li class="tab-title"><a id="list_resultado_projeto" href="{% url 'list_resultado_projeto' %}#">Resultado {{ count_resultado }}</a></li>
                 <li class="tab-title"><a id="list_projetocomponente_projeto" href="{% url 'list_projetocomponente_projeto' %}#">PC {{ count_projetocomponente }}</a></li>
                 <li class="tab-title"><a id="list_metaprojeto_projeto" href="{% url 'list_metaprojeto_projeto' %}#">Meta {{ count_metaprojeto }}</a></li>

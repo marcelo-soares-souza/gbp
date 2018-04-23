@@ -61,7 +61,8 @@ class ProjetoComponenteCreate(LoggedInMixin, CreateView):
     template_name = 'projetocomponente/crud/form.html'
     form_class = ProjetoComponenteForm
 
-    success_url = reverse_lazy('new_projetocomponente_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_projetocomponente_projeto', kwargs={'pk' : self.object.pk})
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
@@ -102,7 +103,8 @@ class ProjetoComponenteUpdate(LoggedInMixin, UpdateView):
     form_class = ProjetoComponenteForm
     model = ProjetoComponente
 
-    success_url = reverse_lazy('new_projetocomponente_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_projetocomponente_projeto', kwargs={'pk' : self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(ProjetoComponenteUpdate,

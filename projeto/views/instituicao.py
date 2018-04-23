@@ -36,7 +36,8 @@ class InstituicaoProjetoCreate(LoggedInMixin, CreateView):
     template_name = 'instituicao/crud/form.html'
     form_class = InstituicaoForm
 
-    success_url = reverse_lazy('new_instituicao_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_instituicao_projeto', kwargs={'pk' : self.object.pk})
 
     def form_valid(self, form):
         form.instance.criado_por = self.request.user
@@ -51,7 +52,8 @@ class InstituicaoProjetoUpdate(LoggedInMixin, UpdateView):
     form_class = InstituicaoForm
     model = Instituicao
 
-    success_url = reverse_lazy('list_instituicao_projeto')
+    def get_success_url(self):
+        return reverse_lazy('detail_instituicao_projeto', kwargs={'pk' : self.object.pk})
 
 
 class InstituicaoProjetoDelete(LoggedInMixin, DeleteView):
