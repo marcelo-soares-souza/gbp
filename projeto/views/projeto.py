@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
 from django.db.models import Q
 from projeto.forms import ProjetoForm
-from projeto.models import Projeto, Objetivo, Resultado
+from projeto.models import Projeto, Objetivo, Resultado, ProjetoComponente, MetaProjeto, PlanoAcao, Atividade, Tarefa
 from projeto.views.login import LoggedInMixin
 
 
@@ -105,4 +105,9 @@ class ProjetoDashboard(LoggedInMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['objetivos'] = Objetivo.objects.filter(projeto_id=context["projeto"].pk).order_by('numero')
         context['resultados'] = Resultado.objects.filter(projeto_id=context["projeto"].pk).order_by('numero')
+        context['projetocomponentes'] = ProjetoComponente.objects.filter(projeto_id=context["projeto"].pk).order_by('numero')
+        context['metas'] = MetaProjeto.objects.filter(projeto_id=context["projeto"].pk).order_by('numero')
+        context['planoacoes'] = PlanoAcao.objects.filter(projeto_id=context["projeto"].pk).order_by('numero')
+        context['atividades'] = Atividade.objects.filter(projeto_id=context["projeto"].pk).order_by('numero')
+        context['tarefas'] = Tarefa.objects.filter(projeto_id=context["projeto"].pk).order_by('numero')
         return context

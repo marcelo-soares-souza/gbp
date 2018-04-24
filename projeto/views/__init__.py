@@ -14,7 +14,7 @@ from projeto.views.tarefa import TarefaList, TarefaDetail, TarefaCreate, TarefaU
 
 __all__ = ['Home', 'Permission', 'jBrowse', 'Timeline',
            'InstituicaoProjetoList', 'InstituicaoProjetoDetail', 'InstituicaoProjetoCreate', 'InstituicaoProjetoUpdate', 'InstituicaoProjetoDelete',
-           'ProjetoList', 'ProjetoDetail', 'ProjetoCreate', 'ProjetoUpdate', 'ProjetoDelete',
+           'ProjetoList', 'ProjetoDetail', 'ProjetoCreate', 'ProjetoUpdate', 'ProjetoDelete', 'ProjetoDashboard',
            'ObjetivoProjetoList', 'ObjetivoProjetoDetail', 'ObjetivoProjetoCreate', 'ObjetivoProjetoUpdate', 'ObjetivoProjetoDelete',
            'ResultadoProjetoList', 'ResultadoProjetoDetail', 'ResultadoProjetoCreate', 'ResultadoProjetoUpdate', 'ResultadoProjetoDelete',
            'PalavraChaveList', 'PalavraChaveDetail', 'PalavraChaveCreate', 'PalavraChaveUpdate', 'PalavraChaveDelete',

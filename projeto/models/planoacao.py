@@ -43,6 +43,7 @@ class PlanoAcao(models.Model, TemplateModelMixin):
         chained_field="projeto",
         chained_model_field="projeto",
         auto_choose=True,
+        blank=True,
     )
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)

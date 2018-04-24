@@ -78,7 +78,7 @@
         <div id="collapseTwoObjetivo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoObjetivo">
             <div class="panel-body">
               {% for objetivo in objetivos.all %}
-               <h3>Objetivo: {{ objetivo.numero }}&nbsp;</h3>
+               <h3><a href="{% url 'detail_objetivo_projeto' objetivo.id %}" target="_blank">Objetivo: {{ objetivo.numero }}</a>&nbsp;</h3>
                <p><div class='text-highlight'>{{ objetivo.descricao }}&nbsp;</div></p>
               {% endfor %}
           </div>
@@ -97,8 +97,103 @@
         <div id="collapseTwoResultado" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoResultado">
             <div class="panel-body">
               {% for resultado in resultados.all %}
-               <h3>Resultado: {{ resultado.numero }}&nbsp;</h3>
+               <h3><a href="{% url 'detail_resultado_projeto' resultado.id %}" target="_blank">Resultado: {{ resultado.numero }}</a>&nbsp;</h3>
                <p><div class='text-highlight'>{{ resultado.descricao }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if projetocomponentes.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoProjetoComponente" data-toggle="collapse" data-target="#collapseTwoProjetoComponente">
+            <h4 class="panel-title">
+                Projeto Componentes
+            </h4>
+          </div>
+  
+        <div id="collapseTwoProjetoComponente" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoProjetoComponente">
+            <div class="panel-body">
+              {% for projetocomponente in projetocomponentes.all %}
+               <h3><a href="{% url 'detail_projetocomponente_projeto' projetocomponente.id %}" target="_blank">Projeto Componente: {{ projetocomponente.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ projetocomponente.nome }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if metas.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoMeta" data-toggle="collapse" data-target="#collapseTwoMeta">
+            <h4 class="panel-title">
+                Metas
+            </h4>
+          </div>
+  
+        <div id="collapseTwoMeta" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoMeta">
+            <div class="panel-body">
+              {% for meta in metas.all %}
+               <h3><a href="{% url 'detail_metaprojeto_projeto' meta.id %}" target="_blank">Meta: {{ meta.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ meta.nome }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if planoacoes.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoPlanoAcao" data-toggle="collapse" data-target="#collapseTwoPlanoAcao">
+            <h4 class="panel-title">
+                Plano Ações
+            </h4>
+          </div>
+  
+        <div id="collapseTwoPlanoAcao" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoPlanoAcao">
+            <div class="panel-body">
+              {% for planoacao in planoacoes.all %}
+               <h3><a href="{% url 'detail_planoacao_projeto' planoacao.id %}" target="_blank">Plano Ação: {{ planoacao.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ planoacao.nome }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if atividades.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoAtividade" data-toggle="collapse" data-target="#collapseTwoAtividade">
+            <h4 class="panel-title">
+                Atividades
+            </h4>
+          </div>
+  
+        <div id="collapseTwoAtividade" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoAtividade">
+            <div class="panel-body">
+              {% for atividade in atividades.all %}
+               <h3><a href="{% url 'detail_atividade_projeto' atividade.id %}" target="_blank">Atividade: {{ atividade.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ atividade.nome }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if tarefas.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoTarefa" data-toggle="collapse" data-target="#collapseTwoTarefa">
+            <h4 class="panel-title">
+                Tarefas
+            </h4>
+          </div>
+  
+        <div id="collapseTwoTarefa" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoTarefa">
+            <div class="panel-body">
+              {% for tarefa in tarefas.all %}
+               <h3><a href="{% url 'detail_tarefa_projeto' tarefa.id %}" target="_blank">Tarefa: {{ tarefa.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ tarefa.nome }}&nbsp;</div></p>
               {% endfor %}
           </div>
         </div>

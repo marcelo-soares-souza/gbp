@@ -47,12 +47,14 @@
 
                 <p><b>Projeto Associado:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' planoacao.projeto.id %}">{{ planoacao.projeto }}</a>&nbsp;</div></p>
 
+                {% if planoacao.resultado.all %}
                 <p><b>Resultados Associados:</b> <br/> <div class='text-highlight'>
                   {% for resultado in planoacao.resultado.all %}{% if not forloop.first %}, {% endif %}
                     <a href="{% url 'detail_resultado_projeto' resultado.id %}">{{ resultado }}</a>{% endfor %}
                 &nbsp;</div></p>
+                {% endif %}
                 <br/>
-
+                
                 {% if request.user == planoacao.criado_por or request.user.is_superuser %}
                   <p>
                     <a href="{{ planoacao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>

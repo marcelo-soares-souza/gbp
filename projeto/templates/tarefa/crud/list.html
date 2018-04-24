@@ -45,14 +45,14 @@
 
                 <h3><a href="{{ tarefa.get_detail_url }}">{{ tarefa }}</a></h3>
 
-                {% if tarefa.planoacao %}
+                {% if tarefa.planoacao.all %}
                   <p><b>Plano de Ação associado:</b> <br/> <div class='text-highlight'>
                     {% for planoacao in tarefa.planoacao.all %}{% if not forloop.first %}, {% endif %}
                       <a href="{% url 'detail_planoacao_projeto' planoacao.id %}">{{ planoacao }}</a>{% endfor %}
                       &nbsp;</div></p>
                 {% endif %}
 
-                {% if tarefa.atividade %}
+                {% if tarefa.atividade.all %}
                   <p><b>Atividade associado:</b> <br/> <div class='text-highlight'>
                     {% for atividade in tarefa.atividade.all %}{% if not forloop.first %}, {% endif %}
                       <a href="{% url 'detail_atividade_projeto' atividade.id %}">{{ atividade }}</a>{% endfor %}
