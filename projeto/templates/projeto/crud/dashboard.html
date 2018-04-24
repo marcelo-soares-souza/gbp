@@ -51,8 +51,8 @@
       &nbsp;</div></p>
     {% endif %}
 
-    {% if projeto.blast %} <p><b>Blast:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.blast }}">{{ projeto.blast }}</a>&nbsp;</div></p> {% endif %}
-    {% if projeto.jbrowse %} <p><b>JBrowse:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.jbrowse }}"> {{ projeto.jbrowse }}</a>&nbsp;</div></p> {% endif %}
+    {% if projeto.blast %} <p><b>Blast:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.blast }}" target="_blank">{{ projeto.blast }}</a>&nbsp;</div></p> {% endif %}
+    {% if projeto.jbrowse %} <p><b>JBrowse:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.jbrowse }}" target="_blank"> {{ projeto.jbrowse }}</a>&nbsp;</div></p> {% endif %}
 
     <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ projeto.data_cadastro }}&nbsp;</div></p>
     <p><b>Atualizado:</b> <br/> <div class='text-highlight'> {{ projeto.data_atualizado }}&nbsp;</div></p>
@@ -61,8 +61,9 @@
     {% if request.user == projeto.criado_por or request.user == projeto.lider or request.user.is_superuser %}
       <p>
         <a href="{{ projeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
-        <a href="{{ projeto.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
-        <a href="{% url 'list_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
+        {% if request.user == projeto.criado_por or request.user.is_superuser %}
+          <a href="{{ projeto.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+        {% endif %}
       </p>
     {% endif %}
   </div></div></div>
@@ -71,7 +72,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingTwoObjetivo" data-toggle="collapse" data-target="#collapseTwoObjetivo">
             <h4 class="panel-title">
-                Objetivos
+                Objetivos ({{ objetivos.count }})
             </h4>
           </div>
   
@@ -90,7 +91,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingTwoResultado" data-toggle="collapse" data-target="#collapseTwoResultado">
             <h4 class="panel-title">
-                Resultados
+                Resultados ({{ resultados.count }})
             </h4>
           </div>
   
@@ -109,7 +110,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingTwoProjetoComponente" data-toggle="collapse" data-target="#collapseTwoProjetoComponente">
             <h4 class="panel-title">
-                Projeto Componentes
+                Projeto Componentes ({{ projetocomponentes.count }})
             </h4>
           </div>
   
@@ -128,7 +129,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingTwoMeta" data-toggle="collapse" data-target="#collapseTwoMeta">
             <h4 class="panel-title">
-                Metas
+                Metas ({{ metas.count }})
             </h4>
           </div>
   
@@ -147,7 +148,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingTwoPlanoAcao" data-toggle="collapse" data-target="#collapseTwoPlanoAcao">
             <h4 class="panel-title">
-                Plano Ações
+                Plano Ações ({{ planoacoes.count }})
             </h4>
           </div>
   
@@ -166,7 +167,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingTwoAtividade" data-toggle="collapse" data-target="#collapseTwoAtividade">
             <h4 class="panel-title">
-                Atividades
+                Atividades ({{ atividades.count }})
             </h4>
           </div>
   
@@ -185,7 +186,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingTwoTarefa" data-toggle="collapse" data-target="#collapseTwoTarefa">
             <h4 class="panel-title">
-                Tarefas
+                Tarefas ({{ tarefas.count }})
             </h4>
           </div>
   
