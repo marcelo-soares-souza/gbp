@@ -110,6 +110,7 @@
                                         <ul class="dropdown-menu dropdown-center">
                                           <li><a href="{% url 'dashboard_metabolomica' %}">Databases</a></li>
                                           {% if request.user|has_group:'Admin BMDB' or
+                                                request.user|has_group:'Editor BMDB' or
                                                 request.user.is_superuser %}
                                             <li><a href="{% url 'new_sample' %}">Add raw data</a></li>
                                             <li><a href="{% url 'list_sample' %}">List/Edit</a></li>
