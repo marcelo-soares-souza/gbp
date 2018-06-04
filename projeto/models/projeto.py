@@ -53,6 +53,7 @@ class Projeto(models.Model, TemplateModelMixin):
 
     jbrowse = models.CharField(max_length=512, blank=True)
     blast = models.CharField(max_length=512, blank=True)
+    ferramenta = models.CharField(max_length=512, blank=True)
 
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
