@@ -20,6 +20,11 @@ class Migration(migrations.Migration):
             name='jbrowse',
             field=models.TextField(blank=True),
         ),
+        migrations.AddField(
+            model_name='projeto',
+            name='resultados',
+            field=models.TextField(blank=True),
+        ),
         migrations.RemoveField(
             model_name='atividade',
             name='planoacao',
