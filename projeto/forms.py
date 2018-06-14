@@ -94,7 +94,7 @@ class ProjetoForm(forms.ModelForm):
         model = Projeto
         fields = ('status', 'lider', 'seg', 'titulo_portugues', 'titulo_ingles', 'sigla', 'data_inicio',
                   'duracao', 'hipotese', 'instituicao_proponente', 'instituicao_executora',
-                  'objetivo_geral', 'resumo', 'colaborador', 'jbrowse', 'blast')
+                  'objetivo_geral', 'resumo', 'colaborador', 'jbrowse', 'blast', 'resultados')
 
         widgets = {
             'hipotese': Textarea(attrs={'cols': '5', 'rows': '5'}),
@@ -115,6 +115,7 @@ class ProjetoForm(forms.ModelForm):
             'instituicao_executora': 'Instituição Executora',
             'jbrowse': 'JBrowse',
             'blast': 'Blast',
+            'resultados': 'Resultados'
         }
 
 
