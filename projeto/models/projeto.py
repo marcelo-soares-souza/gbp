@@ -54,8 +54,7 @@ class Projeto(models.Model, TemplateModelMixin):
     jbrowse = models.CharField(max_length=512, blank=True)
     blast = models.CharField(max_length=512, blank=True)
     resultados = models.CharField(max_length=512, blank=True)
-    quant = models.IntegerField(blank=True, default=0)
-
+    
     data_cadastro = models.DateTimeField(auto_now_add=True, blank=True)
     data_atualizado = models.DateTimeField(auto_now=True, blank=True)
     criado_por = models.ForeignKey(
