@@ -7,11 +7,11 @@ from projeto.models.instituicao import Instituicao
 from projeto.models.template import TemplateModelMixin
 
 
-'''
-Classe Modelo de Projeto. Principal classe do sistema, que possui
-todas as informações de um projeto {seja em atributos e/ou
-elacionamentos com as outras classes}
-'''
+#'''
+#Classe Modelo de Projeto. Principal classe do sistema, que possui
+#todas as informações de um projeto {seja em atributos e/ou
+#elacionamentos com as outras classes}
+#'''
 
 
 class Projeto(models.Model, TemplateModelMixin):
