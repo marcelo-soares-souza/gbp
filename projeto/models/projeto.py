@@ -13,7 +13,6 @@ todas as informações de um projeto {seja em atributos e/ou
 elacionamentos com as outras classes}
 '''
 
-
 class Projeto(models.Model, TemplateModelMixin):
     STATUS = (
         ('PLAN', 'Planejamento'),
