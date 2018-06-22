@@ -13,7 +13,6 @@ from projeto.models.template import TemplateModelMixin
 #elacionamentos com as outras classes}
 #'''
 
-
 class Projeto(models.Model, TemplateModelMixin):
     STATUS = (
         ('PLAN', 'Planejamento'),
