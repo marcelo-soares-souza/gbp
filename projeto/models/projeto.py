@@ -9,7 +9,7 @@ from projeto.models.template import TemplateModelMixin
 
 '''
 Classe Modelo de Projeto. Principal classe do sistema, que possui
-todas as informações de um projeto {seja em atributos e/ou
+todas as informacoes de um projeto {seja em atributos e/ou
 relacionamentos com as outras classes}
 '''
 
