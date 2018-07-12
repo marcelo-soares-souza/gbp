@@ -27,7 +27,7 @@
                                               <li><a href="{% url 'dashboard_projeto' projeto.id %}">Details</a></li>
                                               {% if projeto.jbrowse %} <li><a href="{{ projeto.jbrowse }}" target="_blank">jBrowse</a></li> {% endif %}
                                               {% if projeto.blast %} <li><a href="{{ projeto.blast }}" target="_blank">Blast</a></li> {% endif %}
-                                              {% if projeto.resultados %} <li><a href="{{ projeto.resultados }}" target="_parent">Resultados</a></li> {% endif %}
+                                              {% if projeto.resultados %} <li><a href="{{ projeto.resultados }}" target="div.container">Resultados</a></li> {% endif %}
                                            </ul>
                                         </li>
                                       </td>
