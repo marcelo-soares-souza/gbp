@@ -1,0 +1,118 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>FDDB</title> {% endblock title %}
+
+{% block content %}
+    <div style="min-width: 65%; float: right;">
+      <div style="float: left;">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <div class="col-md-12">
+              <select id="acesso" class="form-control" name="acesso">
+                  <option value="0">Selecione o Acesso</option>
+                  <option value="BR1">BR174</option>
+                  <option value="COA">Coari</option>
+                  <option value="MAN">Manicoré</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="float: left; padding-left: 16px;">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <div class="col-md-12">
+              <select id="folha" class="form-control" name="folha">
+                  <option value="256">Selecione A Folha</option>
+                  <option value='0'>0</option>
+                  <option value='N1'>-1</option>
+                  <option value='P1'>+1</option>
+                  <option value='N10'>-10</option>
+                  <option value='P10'>+10</option>
+                  <option value='N11'>-11</option>
+                  <option value='P11'>+11</option>
+                  <option value='P12'>+12</option>
+                  <option value='P13'>+13</option>
+                  <option value='P15'>+15</option>
+                  <option value='N16'>-16</option>
+                  <option value='N17'>-17</option>
+                  <option value='N18'>-18</option>
+                  <option value='N19'>-19</option>
+                  <option value='N2'>-2</option>
+                  <option value='P2'>+2</option>
+                  <option value='N20'>-20</option>
+                  <option value='N21'>-21</option>
+                  <option value='N22'>-22</option>
+                  <option value='N23'>-23</option>
+                  <option value='N24'>-24</option>
+                  <option value='N3'>-3</option>
+                  <option value='P3'>+3</option>
+                  <option value='N4'>-4</option>
+                  <option value='P4'>+4</option>
+                  <option value='N5'>-5</option>
+                  <option value='P5'>+5</option>
+                  <option value='N6'>-6</option>
+                  <option value='P6'>+6</option>
+                  <option value='N7'>-7</option>
+                  <option value='P7'>+7</option>
+                  <option value='N8'>-8</option>
+                  <option value='P8'>+8</option>
+                  <option value='N9'>-9</option>
+                  <option value='P9'>+9</option>
+                </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <br/><br/>
+
+    <div class="fddb-content">
+      {% include 'fddb.html' %}
+    </div>
+
+    <div class="msg" style="min-height: 300px;"></div>
+
+    <script>
+        $(function(){
+          $('.fddb-content').hide();
+
+          $('#acesso').val(0);
+          $('#folha').val(256);
+          $('#folha').hide();
+
+          $('#acesso').on('change', function () {
+            if ($(this).val() != 0) {
+              $('#folha').show();
+              $('#folha').val(256);
+              $('.fddb-content').hide();
+              $('.msg').show();
+            }
+            else {
+              $('.fddb-content').hide();
+              $('#folha').hide();
+              $('.msg').show();
+            }
+            return false;
+          });
+
+          $('#folha').on('change', function () {
+            if ($(this).val() != 256) {
+              $('.msg').hide();
+              $('.fddb-content').show();
+              $('.fddb-content').html('').load("/fddb/ajax/" + $('#acesso').val() + "/" + $('#folha').val() + "/");
+            }
+            else {
+              $('.fddb-content').hide();
+              $('.msg').show();
+            }
+
+          });
+      });
+    </script>
+{% endblock content %}

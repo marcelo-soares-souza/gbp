@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Cadastrar/Editar Tarefa de Sequenciamento</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <form class="form-horizontal" method="POST">
+        {% csrf_token %}
+
+        {% bootstrap_form form layout='horizontal' %}
+
+        <div class="modal-footer">
+            {% buttons %}
+                <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+            {% endbuttons %}
+        </div>
+
+    </form>
+
+{% endblock content %}

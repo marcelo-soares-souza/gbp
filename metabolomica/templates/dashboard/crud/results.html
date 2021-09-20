@@ -1,0 +1,131 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>Dashboard Results</title> {% endblock title %}
+
+{% block content %}
+
+<style> .panel-heading { cursor: pointer; } </style>
+
+<div style="min-width: 20%; float: right; padding-top: 24px;">
+  <div style="float: right;">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-md-12">
+          <select id="listar_result" class="form-control" name="listar_result" onChange="redirectUrl()">
+            <option value="0">All Results</option>
+            {% for result in results_list %}
+              <option value="{{result.id}}">{{result|truncatechars:36}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="min-width: 20%; float: right; padding-top: 24px;">
+  <div style="float: right;">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-md-12">
+          <select id="listar_result_sample" class="form-control" name="listar_result_sample" onChange="redirectUrl()">
+            <option value="0">All Samples</option>
+            {% for sample in samples_list %}
+              <option value="{{sample.id}}">{{sample|truncatechars:36}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/><br/><br/>
+<hr/>
+
+{% for result in results %}
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne{{ result.id }}" data-toggle="collapse" data-target="#collapseOne{{ result.id }}">
+          <h4 class="panel-title">             
+              {{ result.name }}
+          </h4>
+        </div>
+
+        <div id="collapseOne{{ result.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne{{ result.id }}">
+          <div class="panel-body">
+            <p><b>User:</b> <br/> <div class='text-highlight'>{{ result.criado_por|verifyfullname }}&nbsp;</div></p>
+            <p><b>Result:</b> <br/> <div class='text-highlight'>{{ result.name }}&nbsp;</div></p>
+            <p><b>Sample:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample }}</a>&nbsp;</div></p>
+            <p><b>Experimental Condition:</b> <br/> <div class='text-highlight'>{{ result.experimental_condition }}&nbsp;</div></p>
+            {% if result.equipment.all %}
+              <p><b>Equipments:</b>
+                <div class='text-highlight'>
+                  {% for equipment in result.equipment.all %}
+                    {% if not forloop.first %}
+                      ,
+                    {% endif %}
+                    <a href="{% url 'detail_equipment' equipment.id %}">{{ equipment }}</a>
+                  {% endfor %}
+                  &nbsp;
+                </div>
+              </p>
+            {% endif %}
+            <p><b>Analytical Method:</b> <br/> <div class='text-highlight'>{{ result.analytical_method }}&nbsp;</div></p>
+            <p><b>Extraction data:</b> <br/> <div class='text-highlight'>{{ result.extr_method }}&nbsp;</div></p>
+            <p><b>Analytical Parameters:</b> <br/> <div class='text-highlight'>{{ result.parameters_lc_ms }}&nbsp;</div></p>
+            <p><b>LC raw data:</b> <br/> <div class='text-highlight'>{{ result.lc_raw_data }}&nbsp;</div></p>
+            <p><b>MS raw data:</b> <br/> <div class='text-highlight'>{{ result.ms_raw_data }}&nbsp;</div></p>
+            <p><b>Result raw data:</b> <br/> <div class='text-highlight'>{{ result.raw_data }}&nbsp;</div></p>
+            <p><b>Processed data:</b> <br/> <div class='text-highlight'>{{ result.process_data }}&nbsp;</div></p>
+            <p><b>Created:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <hr/>
+{% endfor %}
+
+<script>
+  $(function(){
+
+    $('#listar_result').val({{result_id}});
+    $('#listar_result_sample').val({{sample_id}});
+
+    $('#listar_result_sample').on('change', function () {
+      if ($(this).val() != 0) {
+        var url = '/metabolomica/dashboard-result/sample/' + $(this).val() + '/';
+        if (url) {
+          window.location = url;
+        }
+      }
+      else {
+        window.location = '{% url 'dashboard_result' %}';
+      }
+
+      return false;
+    });
+
+    $('#listar_result').on('change', function () {
+      if ($(this).val() != 0) {
+        var url = '/metabolomica/dashboard-result/' + $(this).val() + '/';
+        if (url) {
+          window.location = url;
+        }
+      }
+      else {
+        window.location = '{% url 'dashboard_result' %}';
+      }
+
+      return false;
+    });
+
+});
+</script>
+
+{% endblock content %}

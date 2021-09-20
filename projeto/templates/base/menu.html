@@ -1,0 +1,133 @@
+<div id="header">
+  <div id="logo">
+    <a href="https://www.embrapa.br" target="_blank"><img src="/static/files/img/embrapa.png" alt="Logo EMBRAPA" width="130" heigth="49"/></a>
+  </div>
+
+  <div id="lbb">
+    <a href="/" style="color: #0F408F"><img src="/static/files/img/lbb.png" alt="LBB"/></a>
+  </div>
+
+</div>
+
+<div class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav" style="margin-left: 75px;">
+          <!-- Inicial -->
+          <li class="menu-item dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inicial<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+
+              <li class="menu-item dropdown-submenu">
+                <a href="/cms/5/">Sobre o LBB</a>
+                <ul class="dropdown-menu">
+                  <li><a href="/cms/5/">A Bioinformática e o LBB</a></li>
+                  <li><a href="/cms/54/">Equipe do LBB</a></li>
+                  <li><a href="/cms/15/">Infraestrutura</a></li>
+                  <li><a href="/cms/16/">Parceiros</a></li>
+                </ul>
+              </li>
+
+              <li class="menu-item dropdown-submenu">
+                <a tabindex="0">Oportunidades</a>
+                <ul class="dropdown-menu">
+                  <li><a href="/cms/17/">Colaboração</a></li>
+                  <li><a href="/cms/18/">Estágios e Bolsas</a></li>
+                  <li><a href="/cms/19/">Cadastro de Currículo</a></li>
+                </ul>
+              </li>
+
+              <li><a href="/cms/20/">Como Chegar</a></li>
+              <li><a href="/cms/21/">Contato</a></li>
+              <li><a href="/cms/22/">Mapa do Site</a></li>
+
+            </ul>
+          </li>
+
+          <!-- Negócios do LBB -->
+          <li class="menu-item dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Negócios do LBB<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+
+              <li class="menu-item dropdown-submenu">
+
+                <li class="menu-item dropdown-submenu">
+                  <a tabindex="0">Organismos (Bioenergia)</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/cms/24/">Plantas</a></li>
+                    <li><a href="/cms/6/">Microrganismos</a></li>
+                    <li><a href="/cms/25/">Algas</a></li>
+                  </ul>
+                </li>
+
+                <li class="menu-item dropdown-submenu">
+                  <a tabindex="0">Temas</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/cms/27/">Bioinformática</a></li>
+                    <li><a href="/cms/28/">BioTI</a></li>
+                  </ul>
+                </li>
+
+                <li class="menu-item dropdown-submenu">
+                  <a tabindex="0">Serviços internos</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/cms/29/">Análises de Bioinformática</a></li>
+                    <li><a href="/cms/31/">Desenvolvimento de Sistemas</a></li>
+                  </ul>
+                </li>
+
+                <li class="menu-item dropdown-submenu">
+                  <a tabindex="0">TT</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/cms/35/">Divulgação</a></li>
+                    <li><a href="/cms/36/">Capacitação</a></li>
+                  </ul>
+                </li>
+
+                <li class="menu-item dropdown-submenu">
+                  <a tabindex="0">PD&I</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/cms/41/">Produção</a></li>
+                    <li><a href="/cms/16/">Colaborações</a></li>
+                  </ul>
+                </li>
+
+            </ul>
+          </li>
+          <!-- Negócios do LBB -->
+
+          <!-- Capacitação -->
+          <li class="menu-item dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Capacitação<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+
+              <li class="menu-item dropdown-submenu">
+                <li><a href="/cms/39/">Cursos com Inscrição Aberta</a></li>
+                <li><a href="/cms/40/">Cursos Finalizados</a></li>
+            </ul>
+          </li>
+          <!-- Capacitação -->
+
+          <!-- Produção -->
+          <li class="menu-item dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produção<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+
+              <li class="menu-item dropdown-submenu">
+                <li><a href="/cms/41/">Artigos científicos</a></li>
+                <li><a href="/cms/43/">Anais de Congressos</a></li>
+                <li><a href="/cms/44/">Outras Publicações</a></li>
+                <li><a href="/cms/45/">PI</a></li>
+                <li><a href="/cms/46/">Quick Guides</a></li>            </ul>
+          </li>
+          <!-- Produção -->
+
+        {% if request.user.is_authenticated %}
+          <li><a href="{% url 'logout' %}">Logout ({{ request.user.username }})</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>

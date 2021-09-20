@@ -1,0 +1,89 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>Listar Todas as Tarefas de Sequenciamento</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <div style="min-width: 60%; float: right;">
+      <div style="float: right;">
+        <a href="{% url 'new_tarefasequenciamento' %}" class="btn btn-sm btn-success">Adicionar</a>
+      </div>
+
+      <div style="float: left;">
+        <div class="form-horizontal"><div class="form-group">
+          <div class="col-md-12">
+            <select id="listar_sequenciamento" class="form-control" name="listar_sequenciamento" onChange="redirectUrl()">
+              <option value="0">Todos os Sequenciamentos</option>
+              {% for sequenciamento in sequenciamentos %}
+                <option value="{{sequenciamento.id}}">{{sequenciamento}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    {% if not tarefasequenciamentos %}
+
+    <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_tarefasequenciamento' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for tarefasequenciamento in tarefasequenciamentos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ tarefasequenciamento.get_detail_url }}">{{ tarefasequenciamento }}</a></h3>
+
+                <p><b>Status: </b> <div class='text-highlight'> {{ tarefasequenciamento.status }}&nbsp;</div></p>
+                <p><b>Responsável: </b> <div class='text-highlight'> {{ tarefasequenciamento.responsavel|verifyfullname }}&nbsp;</div></p>
+
+                <br/>
+
+                <p>
+                    <a href="{{ tarefasequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+                      <a href="{{ tarefasequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ tarefasequenciamento.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+    <script>
+      $(function(){
+
+        $('#listar_sequenciamento').val({{sequenciamento_id}});
+
+        $('#listar_sequenciamento').on('change', function () {
+
+        if ($(this).val() != 0) {
+          var url = '/tarefasequenciamento/list/sequenciamento/' + $(this).val();
+
+          if (url) {
+            window.location = url;
+          }
+        }
+        else {
+          window.location = '{% url 'list_tarefasequenciamento' %}';
+        }
+
+        return false;
+      });
+    });
+  </script>
+
+{% endblock content %}

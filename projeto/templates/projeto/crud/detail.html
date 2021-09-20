@@ -1,0 +1,59 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>{{ projeto }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-projetos.html" %} <br/>
+
+    <h2>{{ projeto }}</h2>
+
+    <hr/>
+
+    {% if projeto.resumo %} <p><b>Resumo:</b> <br/> <div class='text-highlight'> {{ projeto.resumo }}&nbsp;</div></p> {% endif %}
+    <p><b>Situação:</b> <br/> <div class='text-highlight'> {{ projeto.status_verbose }}&nbsp;</div></p>
+    <p><b>Líder:</b> <br/> <div class='text-highlight'> {{ projeto.lider|verifyfullname }}&nbsp;</div></p>
+    {% if projeto.seg %} <p><b>Código SEG:</b> <br/> <div class='text-highlight'> {{ projeto.seg }}&nbsp;</div></p> {% endif %}
+    <p><b>Título (Português):</b> <br/> <div class='text-highlight'> {{ projeto.titulo_portugues }}&nbsp;</div></p>
+    <p><b>Título (Inglês):</b> <br/> <div class='text-highlight'> {{ projeto.titulo_ingles }}&nbsp;</div></p>
+    <p><b>Data Início:</b> <br/> <div class='text-highlight'> {{ projeto.data_inicio }}&nbsp;</div></p>
+    <p><b>Duração (Meses):</b> <br/> <div class='text-highlight'> {{ projeto.duracao }}&nbsp;</div></p>
+    {% if projeto.hipotese %} <p><b>Hipotese:</b> <br/> <div class='text-highlight'> {{ projeto.hipotese }}&nbsp;</div></p> {% endif %}
+
+    {% if projeto.instituicao_proponente %}
+      <p><b>Proponente(s):</b> <br/> <div class='text-highlight'><a href="{% url 'detail_instituicao_projeto' projeto.instituicao_proponente.id %}">{{ projeto.instituicao_proponente }}</a></div></p>
+    {% endif %}
+
+    {% if projeto.instituicao_executora %}
+      <p><b>Executora:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_instituicao_projeto' projeto.instituicao_executora.id %}">{{ projeto.instituicao_executora }}</a></div></p>
+    {% endif %}
+
+    {% if projeto.objetivo_geral %} <p><b>Objetivo Geral:</b> <br/> <div class='text-highlight'> {{ projeto.objetivo_geral }}&nbsp;</div></p> {% endif %}
+
+    {% if projeto.colaborador.all %}
+      <p><b>Colaborador(es): </b> <br/> <div class='text-highlight'>
+      {% for colaborador in projeto.colaborador.all %}{% if not forloop.first %}, {% endif %}
+        {{ colaborador|verifyfullname }}{% endfor %}
+      &nbsp;</div></p>
+    {% endif %}
+
+    {% if projeto.blast %} <p><b>Blast:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.blast }}">{{ projeto.blast }}</a>&nbsp;</div></p> {% endif %}
+    {% if projeto.jbrowse %} <p><b>JBrowse:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.jbrowse }}"> {{ projeto.jbrowse }}</a>&nbsp;</div></p> {% endif %}
+    {% if projeto.resultados %} <p><b>Resultados:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.resultados }}"> {{ projeto.resultados }}</a>&nbsp;</div></p> {% endif %}
+   
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ projeto.data_cadastro }}&nbsp;</div></p>
+    <p><b>Atualizado:</b> <br/> <div class='text-highlight'> {{ projeto.data_atualizado }}&nbsp;</div></p>
+
+    <hr/>
+    {% if request.user == projeto.criado_por or request.user == projeto.lider or request.user.is_superuser %}
+      <p>
+        <a href="{{ projeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ projeto.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+        <a href="{% url 'list_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
+      </p>
+    {% endif %}
+
+{% endblock content %}

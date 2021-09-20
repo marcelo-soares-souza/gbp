@@ -1,0 +1,21 @@
+<script> $(document).ready(function() { $('.nav-tabs a[id="{{request.resolver_match.url_name}}"]').tab('show'); }); </script>
+{% if request.user.is_authenticated %}
+  <ul class="nav nav-tabs" id="myTab" >
+    {% if 'new' in request.resolver_match.url_name %}
+        <li class="tab-title"><a id="new_tarefasequenciamento" href="{% url 'new_tarefasequenciamento' %}#">Tarefa de Sequenciamento</a></li>
+        <li class="tab-title"><a id="new_sequenciamento" href="{% url 'new_sequenciamento' %}#">Sequenciamento</a></li>
+        <li class="tab-title"><a id="new_contrato" href="{% url 'new_contrato' %}#">Contrato</a></li>
+        <li class="tab-title"><a id="new_tiposequenciamento" href="{% url 'new_tiposequenciamento' %}#">Tipos de Sequenciamento</a></li>
+    {% elif 'detail' in request.resolver_match.url_name %}
+        <li class="tab-title"><a id="detail_tarefasequenciamento" href="{% url 'list_tarefasequenciamento' %}#">Tarefa de Sequenciamento {{count_tarefasequenciamento}}</a></li>
+        <li class="tab-title"><a id="detail_sequenciamento" href="{% url 'list_sequenciamento' %}#">Sequenciamento {{count_sequenciamento}}</a></li>
+        <li class="tab-title"><a id="detail_contrato" href="{% url 'list_contrato' %}#">Contrato {{count_contrato}}</a></li>
+        <li class="tab-title"><a id="detail_tiposequenciamento" href="{% url 'list_tiposequenciamento' %}#">Tipos de Sequenciamento {{count_tiposequenciamento}}</a></li>
+    {% else %}
+        <li class="tab-title"><a id="list_tarefasequenciamento" href="{% url 'list_tarefasequenciamento' %}#">Tarefa de Sequenciamento {{count_tarefasequenciamento}}</a></li>
+        <li class="tab-title"><a id="list_sequenciamento" href="{% url 'list_sequenciamento' %}#">Sequenciamento {{count_sequenciamento}}</a></li>
+        <li class="tab-title"><a id="list_contrato" href="{% url 'list_contrato' %}#">Contrato {{count_contrato}}</a></li>
+        <li class="tab-title"><a id="list_tiposequenciamento" href="{% url 'list_tiposequenciamento' %}#">Tipos de Sequenciamento {{count_tiposequenciamento}}</a></li>
+    {% endif %}
+  </ul>
+{% endif %}

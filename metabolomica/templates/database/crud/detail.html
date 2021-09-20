@@ -1,0 +1,31 @@
+{% extends "base/base_bmdb.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>{{ database.name }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <h2>{{ database.name }}</h2>
+    <hr/>
+
+    <p><b>Name:</b> <br/> <div class='text-highlight'>{{ database.name }}&nbsp;</div></p>
+    <p><b>Description:</b> <br/> <div class='text-highlight'>{{ database.description|default_if_none:"" }}&nbsp;</div></p>
+    <p><b>Added:</b> <br/> <div class='text-highlight'>{{ database.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="/metabolomica{{ database.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+          {% if request.user == database.criado_por or request.user.is_superuser %}
+            <a href="/metabolomica{{ database.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+          {% endif %}
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Back</a>
+        {% endbuttons %}
+      </p>
+
+{% endblock content %}

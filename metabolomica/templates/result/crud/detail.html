@@ -1,0 +1,149 @@
+{% extends "base/base_bmdb.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>{{ result.name }}</title> {% endblock title %}
+
+{% block content %}
+{% load static %}
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <h2>{{ result.name }}</h2>
+    <hr/>
+    <p><b>Sample:</b> <br/> <div class='text-highlight'>
+      <a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample }}</a>&nbsp;</div></p>
+
+    <p><b>Experimental Condition:</b> <br/> <div class='text-highlight'>{{ result.experimental_condition|default_if_none:"" }}&nbsp;</div></p>
+
+    {% if result.equipment.all %}
+      <p><b>Equipments:</b>
+      <div class='text-highlight'>
+        {% for equipment in result.equipment.all %}
+          {% if not forloop.first %}, {% endif %}
+            <a href="{% url 'detail_equipment' equipment.id %}">{{ equipment }}</a>
+        {% endfor %}&nbsp;
+        </div></p>
+     {% endif %}
+    
+	  {% if result.image %}
+        <p>
+		  <img src="{{ result.image.url }}" class="img-thumbnail"/>
+        </p>
+        <p><b>Image:</b><br/> <div class='text-highlight'>
+          <a href="{{ result.image.url }}">{{ result.image }}</a>
+        </div></p>
+	  {% endif %}
+
+    {% if csv %}
+    <p><b>Processed data:</b> <br/>
+        <table class="table table-striped" style="font-size: 12px;">
+          <thead>
+            <tr>
+              <th>Ret. Time</th>
+              <th>Peak</th>
+              <th>Meas. mz</th>
+              <th>Formula</th>
+              <th>Adduct</th>
+              <th>Score</th>
+              <th>Err ppm</th>
+              <th>Noise</th>
+              <th>Resolution</th>
+              <th>Intensity</th>
+              <th>Theo. mz</th>
+              <th>mono. mass</th>
+              <th>Neut. form.</th>
+              <th>Exp. evidence</th>
+              <th>Comp. name</th>
+              <th>OBS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for c in csv %}
+            <tr>
+              <td>{{ c.Retention_Time }}
+              <td>{{ c.Peak }}
+              <td>{{ c.Measured_mz }}
+              <td>{{ c.Ion_formula }}
+              <td>{{ c.Adduct }}
+              <td>{{ c.Score }}
+              <td>{{ c.Error_ppm }}
+              <td>{{ c.Signal_noise }}
+              <td>{{ c.Resolution }}
+              <td>{{ c.Intensity }}
+              <td>{{ c.Theoretical_mz }}
+              <td>{{ c.monoisotopic_mass }}
+              <td>{{ c.Neutral_formula }}
+              <td>{{ c.Experimental_evidence }}
+              <td>{{ c.Compound_name }}
+              <td>{{ c.Observation }}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </p>
+      {% endif %}
+
+      {% if csv %}
+        <p><b>CSV Upload:</b> <br/> <div class='text-highlight'>
+            <a href="{{ result.csv.url }}">{{ result.csv }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.lc_method %}
+        <p><b>LC Method:</b> <br/> <div class='text-highlight'>
+            <a href="{{ result.lc_method.url }}">{{ result.lc_method }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.ms_method %}
+        <p><b>MS Method:</b> <br/> <div class='text-highlight'>
+            <a href="{{ result.ms_method.url }}">{{ result.ms_method }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.parameters %}
+        <p><b>Parameters:</b> <br/> <div class='text-highlight'>
+            <a href="{{ result.parameters.url }}">{{ result.parameters }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.sample_preparation %}
+        <p><b>Sample Preparation:</b><br/> <div class='text-highlight'>
+            <a href="{{ result.sample_preparation.url }}">{{ result.sample_preparation }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.raw_data %}
+        <p><b>Raw Data:</b><br/> <div class='text-highlight'>
+            <a href="{{ result.raw_data.url }}">{{ result.raw_data }}</a>
+        </div></p>
+      {% endif %}
+
+      {% if result.processed_data %}
+        <p><b>Processed Data:</b><br/> <div class='text-highlight'>
+            <a href="{{ result.processed_data.url }}">{{ result.processed_data }}</a>
+        </div></p>
+      {% endif %}
+
+    <p><b>Analyst:</b> <br/> <div class='text-highlight'>{{ result.criado_por|verifyfullname }}&nbsp;</div></p>
+    <p><b>Added:</b> <br/> <div class='text-highlight'>{{ result.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="/metabolomica{{ result.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+          {% if request.user == result.criado_por or request.user.is_superuser %}
+            <a href="/metabolomica{{ result.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+          {% endif %}
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Back</a>
+        {% endbuttons %}
+      </p>
+{% endblock content %}
+
+{% block footer %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+
+{{ form.media }}
+{% endblock %}

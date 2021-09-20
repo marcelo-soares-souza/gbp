@@ -1,0 +1,74 @@
+{% extends "base/base.html" %}
+{% load gbp_filters %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todas as Instituições</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-projetos.html" %} <br/>
+
+    {% if request.user|has_group:'Admin Projetos' or request.user|has_group:'Editor Projetos' or request.user.is_superuser %}
+      <div style="float: right;"><a href="{% url 'new_instituicao_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+      <br/><br/>
+    {% endif %}
+
+    {% if not instituicaos %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_instituicao_projeto' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for instituicao in instituicaos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ instituicao.get_detail_url }}">{{ instituicao.sigla }}</a></h3>
+
+                {% if instituicao.descricao %}
+                  <p><b>Descrição:</b> <br/> <div class='text-highlight'> {{ instituicao.descricao|truncatechars:256 }}&nbsp;</div></p>
+                {% endif %}
+
+                <p><b>Nome:</b> <br/> <div class='text-highlight'> {{ instituicao.nome }}&nbsp;</div></p>
+
+                {% if instituicao.site %}
+                  <p><b>Site:</b> <br/> <div class='text-highlight'> <a href="{{instituicao.site}}" target="_blank"> {{ instituicao.site }} </a>&nbsp;</div></p>
+                {% endif %}
+
+                {% if instituicao.proponente.all %}
+                  <p><b>Projetos Associados (Como Proponente):</b> <br/> <div class='text-highlight'>
+                  {% for projeto in instituicao.proponente.all %}{% if not forloop.first %}, {% endif %}
+                     <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>{% endfor %}
+                  &nbsp;</div></p>
+                {% endif %}
+
+                {% if instituicao.executora.all %}
+                 <p><b>Projetos Associados (Como Executor(a)):</b> <br/> <div class='text-highlight'>
+                 {% for projeto in instituicao.executora.all %}{% if not forloop.first %}, {% endif %}
+                   <a href="{% url 'detail_projeto' projeto.id %}">{{ projeto }}</a>{% endfor %}
+                 &nbsp;</div></p>
+                {% endif %}
+
+                <br/>
+
+                {% if request.user == instituicao.criado_por or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ instituicao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ instituicao.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ instituicao.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

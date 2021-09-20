@@ -1,0 +1,52 @@
+{% extends "base/base_bmdb.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>List all Species</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+
+        <a href="{% url 'new_species' %}" class="btn btn-sm btn-success">Add</a>
+      </div>
+    </div>
+    <br/><br/>
+
+    {% if not species %}
+
+      <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_species' %}">Add?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for species in species %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+				  <h3> <a href="/metabolomica{{ species.get_detail_url }}"><i>{{ species.scientific_name }}</i>&nbsp;{{ species.strain|default_if_none:"" }}</a> </h3><br/>
+				<p><b>Name: </b> <br/>
+				<div class='text-highlight'>{{ species.name }}</div>
+                </br>
+                <p>
+                    <a href="/metabolomica{{ species.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+                    {% if request.user == species.criado_por or request.user.is_superuser %}
+
+                      <a href="/metabolomica{{ species.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ species.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination_bmdb.html' %}
+
+    {% endif %}
+
+{% endblock content %}

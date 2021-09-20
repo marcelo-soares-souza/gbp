@@ -1,0 +1,39 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ tiposequenciamento }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <h2>{{ tiposequenciamento }}</h2>
+
+    <hr/>
+
+    {% if tiposequenciamento.sequenciamento_set.all %}
+      <p><b>Sequenciamentos deste Tipo: </b> <br/>
+        <div class='text-highlight'>
+          {% for sequenciamento in tiposequenciamento.sequenciamento_set.all %}{% if not forloop.first %}, {% endif %}
+          <a href="{{ sequenciamento.get_detail_url }}">{{ sequenciamento }}</a>{% endfor %}
+        </div>
+      </p>
+    {% endif %}
+
+    <p><b>Descrição:</b> <br/> <div class='text-highlight'> {{ tiposequenciamento.descricao }}&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ tiposequenciamento.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="{{ tiposequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+          {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+            <a href="{{ tiposequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+          {% endif %}
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Voltar</a>
+        {% endbuttons %}
+      </p>
+{% endblock content %}

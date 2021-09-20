@@ -1,0 +1,85 @@
+{% extends "base/base.html" %}
+{% load gbp_filters %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Cadastrar/Editar Tarefa</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-projetos.html" %} <br/>
+
+    <form class="form-horizontal" method="POST">
+      {% if request.user|has_group:'Admin Projetos' or
+            request.user|has_group:'Editor Projetos' or
+            request.user.is_superuser %}
+
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+
+        <div class="modal-footer">
+            {% buttons %}
+              <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+              <a href="javascript:window.history.go(-1)" class="btn btn-default btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+              <a href="{% url 'new_instituicao_projeto' %}" class="btn btn-default btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
+            {% endbuttons %}
+        </div>
+        {% else %}
+          <center><b>Você não possui permissão<b/></center>
+        {% endif %}
+    </form>
+
+    {% if 'update' not in request.resolver_match.url_name %}
+      <tbody class="tarefas">
+         {% include 'tarefas.html' %}
+      </tbody>
+    {% endif %}
+
+    <script>
+      var value = {};
+
+      {% for projeto in projetos %}
+        value[{{projeto.projeto_id}}] = {{projeto.total}};
+      {% endfor %}
+
+      $(function() {
+        if ($('#id_projeto').val() != 0) {
+          $('#tarefas').html('').load("/tarefa/ajax/projeto/" + $('#id_projeto').val());
+          $('#tarefas').show();
+        }
+
+        $('#id_projeto').on('change', function () {
+          if ($(this).val() != 0) {
+            if (value[$(this).val()]) {
+              $('#tarefas').html('').load("/tarefa/ajax/projeto/" + $(this).val());
+              $('#tarefas').show();
+              $('#id_numero').val(value[$(this).val()] + 1);
+            }
+            else {
+              $('#tarefas').hide();
+              $('#id_numero').val(1);
+            }
+          }
+          else {
+            $('#tarefas').hide();
+            $('#id_numero').val(1);
+            $('#id_projeto').val("");
+          }
+
+          return false;
+        });
+
+        $('#id_planoacao').on('change', function () {
+          if ($(this).val() != 0) {
+            $('#tarefas').html('').load("/tarefa/ajax/planoacao/" + $(this).val());
+          }
+          else {
+            $('#tarefas').html('').load("/tarefa/ajax/projeto/" + $('#id_projeto').val());
+          }
+
+          return false;
+        });
+      });
+    </script>
+
+{% endblock content %}

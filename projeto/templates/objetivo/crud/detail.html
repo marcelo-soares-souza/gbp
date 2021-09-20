@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ objetivo }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-projetos.html" %} <br/>
+
+    <h2>{{ objetivo }}</h2>
+
+    <hr/>
+
+    <p><b>Projeto:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_projeto' objetivo.projeto.id %}">{{ objetivo.projeto }}</a>&nbsp;</div></p>
+
+    <p><b>Descrição:</b> <br/> <div class='text-highlight'>{{ objetivo.descricao }}&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ objetivo.data_cadastro   }}&nbsp;</div></p>
+
+    <hr/>
+
+    {% if request.user == objetivo.criado_por or request.user.is_superuser %}
+      <p>
+        <a href="{{ objetivo.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ objetivo.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+        <a href="{% url 'list_objetivo_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
+      </p>
+    {% endif %}
+
+{% endblock content %}

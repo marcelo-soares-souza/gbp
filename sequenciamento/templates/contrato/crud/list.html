@@ -1,0 +1,51 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todos os Contrato</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        <a href="{% url 'new_contrato' %}" class="btn btn-sm btn-success">Adicionar</a>
+      </div>
+    </div>
+
+    {% if not contratos %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_contrato' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for contrato in contratos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ contrato.get_detail_url }}">{% if contrato.numero %} {{ contrato.numero }}: {% endif %} {{ contrato.empresa_executora }}</a></h3>
+                <p><b>Projeto: </b> <br/> <div class='text-highlight'> {{ contrato.projeto }}&nbsp;</div></p>
+                <p><b>Status do Contrato</b> <br/> <div class='text-highlight'>{{ contrato.status_contrato }}&nbsp;</div></p>
+
+                <br/>
+
+                <p>
+                    <a href="{{ contrato.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if request.user == contrato.criado_por or request.user.is_superuser %}
+                      <a href="{{ contrato.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ contrato.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

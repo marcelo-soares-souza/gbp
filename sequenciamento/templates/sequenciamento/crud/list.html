@@ -1,0 +1,113 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>Listar Todos os Sequenciamento</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        &nbsp;&nbsp;<a href="{% url 'new_sequenciamento' %}" class="btn btn-sm btn-success">Adicionar</a>
+      </div>
+
+      <div style="float: left;">
+        <div class="form-horizontal"><div class="form-group">
+          <div class="col-md-12">
+            <select id="listar_tipo" class="form-control" name="listar_tipo" onChange="redirectUrl()">
+              <option value="0">Todos os Tipos</option>
+              {% for tipo in tipos %}
+                <option value="{{tipo.id}}">{{tipo}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    {% if not sequenciamentos %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_sequenciamento' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for sequenciamento in sequenciamentos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ sequenciamento.get_detail_url }}">{% if sequenciamento.numero %} {{ sequenciamento.numero }}: {% endif %} {{ sequenciamento.material_biologico }}</a></h3>
+
+                <p><b>Tipo: </b> <div class='text-highlight'> {{ sequenciamento.tipo_sequenciamento }}&nbsp;</div></p>
+                <p><b>Responsável: </b> <div class='text-highlight'> {{ sequenciamento.responsavel|verifyfullname }}&nbsp;</div></p>
+                <p><b>Contrato: </b> <div class='text-highlight'> {{ sequenciamento.contrato }}&nbsp;</div></p>
+
+                {% if sequenciamento.colaborador.all %}
+                  <!-- <p><b>Colaboradores: </b> <div class='text-highlight'> {{sequenciamento.colaborador.all|join:', '}}&nbsp;</div></p> -->
+                  <p><b>Colaboradores: </b>
+                    <div class='text-highlight'>
+                      {% for colaborador in sequenciamento.colaborador.all %}
+                      {% if not forloop.first %}, {% endif %}
+                        {{colaborador|verifyfullname}}
+                      {% endfor %}
+                      &nbsp;
+                    </div>
+                  </p>
+                {% endif %}
+
+                {% if sequenciamento.tarefasequenciamento_set.all %}
+                  <p><b>Tarefas: </b> <div class='text-highlight'>
+                    {% for tarefa in sequenciamento.tarefasequenciamento_set.all %}{% if not forloop.first %}, {% endif %}
+                      <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>
+                    {% endfor %}
+                  &nbsp;</div></p>
+                {% endif %}
+
+                <br/>
+
+                <p>
+                    <a href="{{ sequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+                      <a href="{{ sequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                    {% endif %}
+                    <a href="{% url 'new_sequenciamento' %}clonar/{{sequenciamento.id}}" class="btn btn-sm btn-success">Clonar</a>
+                    <a href="{% url 'new_tarefasequenciamento' %}{{sequenciamento.id}}" class="btn btn-sm btn-info">Adicionar Tarefa</a>
+                </p>
+
+                <div class="data-atualizado">{{ sequenciamento.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+    <script>
+      $(function(){
+
+        $('#listar_tipo').val({{tipo_id}});
+
+        $('#listar_tipo').on('change', function () {
+
+        if ($(this).val() != 0) {
+          var url = '/sequenciamento/list/tipo/' + $(this).val();
+
+          if (url) {
+            window.location = url;
+          }
+        }
+        else {
+          window.location = '{% url 'list_sequenciamento' %}';
+        }
+
+        return false;
+       });
+     });
+   </script>
+
+{% endblock content %}

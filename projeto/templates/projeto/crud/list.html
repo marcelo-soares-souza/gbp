@@ -1,0 +1,60 @@
+{% extends "base/base.html" %}
+{% load gbp_filters %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todos os Projetos</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-projetos.html" %} <br/>
+
+    <div style="padding-top: 4px; float: left;">
+          <form id="searchform" action="{% url 'list_projeto' %}" method="get" accept-charset="utf-8" style="float: right;">
+            <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+            <button type="submit" class="btn btn-default btn-success">Search</button>
+          </form>
+    </div>
+
+    {% if request.user|has_group:'Admin Projetos' or request.user|has_group:'Editor Projetos' or request.user.is_superuser %}
+      <div style="float: right;"><a href="{% url 'new_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+      <br/><br/>
+    {% endif %}
+
+    {% if not projetos %}
+      {% if request.user|has_group:'Admin Projetos' or request.user|has_group:'Editor Projetos' or request.user.is_superuser %}
+        <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_projeto' %}">Cadastrar?</a> </h4></div>
+      {% endif %}
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for projeto in projetos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ projeto.get_detail_url }}">{{ projeto.sigla }}</a></h3>
+
+                <p><b>Título:</b> <br/> <div class='text-highlight'> {{ projeto.titulo_portugues }}&nbsp;</div></p>
+                <p><b>Líder:</b> <br/> <div class='text-highlight'> {{ projeto.lider|verifyfullname }}&nbsp;</div></p>
+                <p><b>Situação:</b> <br/> <div class='text-highlight'> {{ projeto.status_verbose }}&nbsp;</div></p>
+
+                <br/>
+                {% if request.user == projeto.criado_por or request.user == projeto.lider or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ projeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ projeto.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ projeto.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,18 @@
+  <div id="objetivos">
+      {% for objetivo in objetivos %}
+        <ul class="list-group">
+          <li class="list-group-item">
+              <h4><a href="{{ objetivo.get_detail_url }}">{{ objetivo }}</a></h4>
+              <p><b>Descrição:</b> <br/> <div class='text-highlight'>{{objetivo.descricao}}&nbsp;</div></p>
+              <br/>
+              <p style="float: right;">
+                {% if request.user == objetivo.criado_por or request.user.is_superuser %}
+                  <a href="{{ objetivo.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                  <a href="{{ objetivo.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                {% endif %}
+            </p>
+           <br/><br/>
+          </li>
+        </ul>
+      {% endfor %}
+  </div>

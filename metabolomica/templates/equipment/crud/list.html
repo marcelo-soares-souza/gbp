@@ -1,0 +1,49 @@
+{% extends "base/base_bmdb.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>List all Equipments</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+        <a href="{% url 'new_equipment' %}" class="btn btn-sm btn-success">Add</a>
+      </div>
+    </div>
+    <br/><br/>
+
+    {% if not equipments %}
+      <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_equipment' %}">Add?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+	{% for equipment in equipments %}
+
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                  <h3><a href="/metabolomica{{equipment.get_detail_url }}">{{ equipment.name }}</a></h4>
+                  <br/>
+                  <p>
+                    <a href="/metabolomica{{ equipment.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+                    {% if request.user == equipment.criado_por or request.user.is_superuser %}
+                      <a href="/metabolomica{{ equipment.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                  </p>
+
+                <div class="data-atualizado">{{ equipment.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination_bmdb.html' %}
+
+    {% endif %}
+
+{% endblock content %}

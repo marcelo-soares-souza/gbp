@@ -1,0 +1,56 @@
+{% extends "base/base_bmdb.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>List all Results</title> {% endblock title %}
+
+{% block content %}
+{% load static %}
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <div style="min-width: 50%; float: right;">
+      <div style="float: right;">
+
+        <a href="{% url 'new_result' %}" class="btn btn-sm btn-success">Add</a>
+      </div>
+    </div>
+    <br/><br/>
+
+    {% if not results %}
+
+      <div class="jumbotron"><h4>No files were found. <a href="{% url 'new_result' %}">Add?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+        {% for result in results %}
+             <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="/metabolomica{{ result.get_detail_url }}">{{ result.name }}</a></h3>
+                <br/>
+                <p><b>Experimental Condition: </b> <br/>
+                <div class='text-highlight'> {{ result.experimental_condition|default_if_none:"" }}&nbsp;</div><br/>
+                <p>
+                    <a href="/metabolomica{{ result.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+                    {% if request.user == result.criado_por or request.user.is_superuser %}
+                      <a href="/metabolomica{{ result.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </p>
+
+                <div class="data-atualizado">{{ result.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination_bmdb.html' %}
+
+    {% endif %}
+{% endblock content %}
+
+{% block footer %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+
+{{ form.media }}
+{% endblock %}

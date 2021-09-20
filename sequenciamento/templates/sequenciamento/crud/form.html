@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Cadastrar/Editar Sequenciamento</title> {% endblock title %}
+
+{% block content %}
+
+    {% if 'update' in request.resolver_match.url_name %}
+      <ul class="nav nav-tabs" id="myTab" ><li class="active"><a href="#"> Editando {{ sequenciamento }}</a></li></ul>
+    {% else %}
+      {% include "base/menu-sequenciamentos.html" %}
+    {% endif %}
+
+    <br/>
+    <form class="form-horizontal" method="POST">
+        {% csrf_token %}
+
+        {% bootstrap_form form layout='horizontal' %}
+
+        <div class="modal-footer">
+            {% buttons %}
+                <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+            {% endbuttons %}
+        </div>
+
+    </form>
+  </form>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(function() { $('#id_data_contratacao').datepicker({ language: 'pt-BR' }); });
+    });
+ </script>
+
+{% endblock content %}

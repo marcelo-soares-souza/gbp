@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ fddb }}</title> {% endblock title %}
+
+{% block content %}
+
+    <h2>{{ fddb }}</h2>
+
+    <hr/>
+
+    {{ fddb.texto | safe }}&nbsp;
+
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ fddb.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+    {% if request.user == fddb.criado_por or request.user.is_superuser %}
+      <p>
+        <a href="{{ fddb.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ fddb.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+        <a href="{% url 'list_fddb' %}" class="btn btn-sm btn-info">Voltar</a>
+      </p>
+    {% endif %}
+
+{% endblock content %}

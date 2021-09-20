@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ metaprojeto }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-projetos.html" %} <br/>
+
+    <h2>{{ metaprojeto }}</h2>
+
+    <hr/>
+
+    <p><b>Projeto:</b> <br/> <div class='text-highlight'> {{ metaprojeto.projeto }}&nbsp;</div></p>
+
+    <p><b>Objetivo Associado:</b> <br/> <div class='text-highlight'>
+      {% for objetivo in metaprojeto.objetivo.all %}{% if not forloop.first %}, {% endif %}
+        <a href="{% url 'detail_objetivo_projeto' objetivo.id %}">{{ objetivo }}</a>{% endfor %}
+    &nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ metaprojeto.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+    {% if request.user == objetivo.criado_por or request.user.is_superuser %}
+      <p>
+        <a href="{{ metaprojeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ metaprojeto.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+        <a href="{% url 'list_metaprojeto_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
+      </p>
+    {% endif %}
+
+{% endblock content %}

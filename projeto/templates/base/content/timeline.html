@@ -1,0 +1,64 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+    <div class="jumbotron">
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <div id="timeline" style="width: 1050px; height: 1130px"></div>
+<script>
+      google.charts.load('current', {'packages':['timeline']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var container = document.getElementById('timeline');
+        var chart = new google.visualization.Timeline(container);
+
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn({ type: 'string', id: 'Name' });
+        dataTable.addColumn({ type: 'string', id: 'Role' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+        dataTable.addRows([
+        [ 'Andrei S Steindorff', 'Consultor', new Date(2016, 7, 7), new Date(2016, 9, 6) ],
+        [ 'Patrícia V Pascoal', 'Mestrando', new Date(2016, 7, 20), new Date(2016, 9, 6) ],
+        [ 'Sámed IIA Hadi', 'Doutorando', new Date(2016, 7, 12), new Date(2016, 9, 6) ],
+        [ 'Marcelo S Souza', 'Consultor', new Date(2016, 7, 11), new Date(2016, 9, 6) ],
+        [ 'Gustavo P Martins', 'Graduando', new Date(2016, 7, 8), new Date(2016, 9, 6) ],
+        [ 'Andrei S Steindorff', 'Consultor', new Date(2016, 5, 1), new Date(2016, 7, 6) ],
+        [ 'Marcelo S Souza', 'Colaborador', new Date(2016, 3, 1), new Date(2016, 7, 10) ],
+        [ 'Thaís R Santiago', 'Post Doc', new Date(2016, 2, 1), new Date(2016, 9, 6) ],
+        [ 'Brenda N Porto', 'DTI', new Date(2015, 12, 9), new Date(2016, 9, 6) ],
+        [ 'Felipe L Valentim', 'Colaborador', new Date(2015, 11, 5), new Date(2015, 12, 31) ],
+        [ 'Vanessa A Soares', 'Graduando', new Date(2015, 11, 3), new Date(2016, 4, 30) ],
+        [ 'Gabriel AR Vogado', 'Graduando', new Date(2015, 7, 6), new Date(2015, 9, 18) ],
+        [ 'Marcelo S Souza', 'DTI', new Date(2015, 6, 1), new Date(2015, 11, 30) ],
+        [ 'Igor N Castro', 'Graduando', new Date(2015, 3, 24), new Date(2015, 4, 23) ],
+        [ 'Lucas S Brito', 'DTI', new Date(2015, 3, 1), new Date(2016, 8, 31) ],
+        [ 'Amanda C Gaban', 'DTI', new Date(2015, 2, 2), new Date(2015, 4, 15) ],
+        [ 'Igor N Castro', 'Graduando', new Date(2014, 12, 1), new Date(2015, 3, 23) ],
+        [ 'Jaire A Ferreira Filho', 'Mestrando', new Date(2014, 3, 5), new Date(2015, 3, 31) ],
+        [ 'Carolina H Mesquita', 'Graduando', new Date(2013, 10, 21), new Date(2014, 4, 30) ],
+        [ 'Deuvânio S Silva', 'Graduando', new Date(2013, 4, 1), new Date(2013, 8, 30) ],
+        [ 'Emílio LC Rodrigues', 'Graduando', new Date(2012, 8, 24), new Date(2014, 3, 7) ],
+        [ 'Thiago JS Gomes', 'Graduando', new Date(2011, 7, 1), new Date(2012, 1, 31) ],
+        [ 'Richardson S Lima', 'Analista', new Date(2011, 6, 1), new Date(2013, 5, 1) ],
+        [ 'Eduardo F Formighieri', 'Pesquisador', new Date(2010, 6, 22), new Date(2016, 9, 6) ],
+        [ 'Andrei S Steindorff', 'contrato atual', new Date(2016, 7, 7), new Date(2017, 7, 24) ],
+        [ 'Patrícia V Pascoal', 'contrato atual', new Date(2016, 7, 20), new Date(2017, 7, 19) ],
+        [ 'Sámed IIA Hadi', 'contrato atual', new Date(2016, 7, 12), new Date(2017, 7, 11) ],
+        [ 'Marcelo S Souza', 'contrato atual', new Date(2016, 7, 11), new Date(2017, 7, 10) ],
+        [ 'Gustavo P Martins', 'contrato atual', new Date(2016, 7, 8), new Date(2016, 12, 8) ],
+        [ 'Thaís R Santiago', 'contrato atual', new Date(2016, 2, 1), new Date(2017, 2, 28) ],
+        [ 'Brenda N Porto', 'contrato atual', new Date(2015, 12, 9), new Date(2017, 4, 30) ],
+        [ 'Eduardo F Formighieri', 'contrato atual', new Date(2010, 6, 22), new Date(2017, 9, 6) ]]);
+
+      var options = {
+      //timeline: { groupByRowLabel: true }
+        colors: ['#FFEEE8', '#EFF1FF', '#E4F6EE', '#FFEDF7', '#D1D8F6', '#F7D1C4', '#F9CED2', '#DFD6E4', '#AA99A2', '#73A991', '#C59281', '#919CC7'],
+        backgroundColor: '#BCE1D0'
+      };
+        chart.draw(dataTable, options);
+      }
+</script>
+
+    </div>
+{% endblock content %}

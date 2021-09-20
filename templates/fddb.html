@@ -1,0 +1,21 @@
+<center>
+{% if fddbs %}
+  {% for fddb in fddbs %}
+    <ul class="list-group">
+      <li class="list-group-item">
+
+        <h3>{{ fddb }}</h3>
+
+        <br/>
+        <a href="/media/fddb/{{ fddb.organismo }}_{{ fddb.folha }}_{{ fddb.complemento }}.jpg" target="_blank">
+          <img src="/media/fddb/{{ fddb.organismo }}_{{ fddb.folha }}_{{ fddb.complemento }}_low.jpg" width="200"/>
+        </a>
+        <br/><br/>
+      </li>
+    </ul>
+  {% endfor %}
+{% else %}
+  <br/><br/>
+  <h3>Nenhum Dado Encontrado</h3>
+{% endif %}
+</center>

@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+
+{% load gbp_filters %}
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Páginas</title> {% endblock title %}
+
+{% block content %}
+  {% if request.user|has_group:'Admin CMS' or
+        request.user|has_group:'Editor CMS' or
+        request.user.is_superuser %}
+
+    <div style="padding-top: 4px; float: left;">
+          <form id="searchform" action="{% url 'list_pagina' %}" method="get" accept-charset="utf-8" style="float: right;">
+            <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+            <button type="submit" class="btn btn-default btn-success">Search</button>
+          </form>
+    </div>
+
+    <div style="float: right;"><a href="{% url 'new_pagina' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+    <br/><br/>
+
+    {% if not pagina %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_pagina' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for pagina in pagina %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ pagina.get_detail_url }}">{{ pagina.titulo }}</a></h3>
+
+                <br/>
+
+                {% if request.user == pagina.criado_por or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ pagina.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ pagina.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ pagina.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+  {% else %}
+    <center><h3>Você não possui Permissão</h3></center>
+  {% endif %}
+{% endblock content %}

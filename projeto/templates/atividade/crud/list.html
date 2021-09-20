@@ -1,0 +1,96 @@
+{% extends "base/base.html" %}
+{% load gbp_filters %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todas as Atividade</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-projetos.html" %} <br/>
+
+    <div style="min-width: 60%; float: right;">
+
+      {% if request.user|has_group:'Admin Projetos' or request.user|has_group:'Editor Projetos' or request.user.is_superuser %}
+        <div style="float: right;"><a href="{% url 'new_atividade_projeto' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+      {% endif %}
+
+      <div style="float: left;">
+        <div class="form-horizontal"><div class="form-group">
+          <div class="col-md-12">
+            <select id="listar_projeto" class="form-control" name="listar_projeto" onChange="redirectUrl()">
+              <option value="0">Todos os Projetos</option>
+              {% for projeto in projetos %}
+                <option value="{{projeto.id}}">{{projeto}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div></div>
+      </div>
+    </div>
+    <br/><br/>
+
+    {% if not atividades %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_atividade_projeto' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for atividade in atividades %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ atividade.get_detail_url }}">{{ atividade }}</a></h3>
+
+                {% if atividade.planoacao.all %}
+                  <p><b>Plano de Ação Associado:</b> <br/> <div class='text-highlight'>
+                    {% for planoacao in atividade.planoacao.all %}{% if not forloop.first %}, {% endif %}
+                      {{ planoacao }}{% endfor %}
+                  &nbsp;</div></p>
+
+                {% endif %}
+
+                <br/>
+
+                {% if request.user == atividade.criado_por or request.user.is_superuser %}
+                  <p>
+                    <a href="{{ atividade.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ atividade.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                  </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ atividade.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+    <script>
+        $(function(){
+          $('#listar_projeto').val({{projeto_id}});
+
+          $('#listar_projeto').on('change', function () {
+
+          if ($(this).val() != 0) {
+            var url = '/atividade/list/projeto/' + $(this).val();
+
+            if (url) {
+              window.location = url;
+            }
+          }
+          else {
+            window.location = '{% url 'list_atividade_projeto' %}';
+          }
+
+          return false;
+        });
+      });
+    </script>
+
+{% endblock content %}

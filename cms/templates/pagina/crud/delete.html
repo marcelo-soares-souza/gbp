@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+
+{% load gbp_filters %}
+{% load bootstrap3 %}
+
+{% block title %} <title>Apagar {{ object }}</title> {% endblock title %}
+
+{% block content %}
+{% if request.user|has_group:'Admin CMS' or request.user.is_superuser or request.user == pagina.criado_por %}
+  <form action="" method="post">{% csrf_token %}
+    <h3>Deseja Apagar "{{ object }}"?</h3>
+
+    <br/>
+
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Remover</button>
+    {% endbuttons %}
+  </form>
+{% else %}
+  <center><h3>Você não possui Permissão</h3></center>
+{% endif %}
+
+
+{% endblock content %}

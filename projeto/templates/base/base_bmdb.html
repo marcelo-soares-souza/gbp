@@ -1,0 +1,91 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- <script defer="defer" src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script> -->
+    <script defer="defer" src="/static/files/js/barra.js" type="text/javascript"></script>
+
+    <link href="/static/files/img/favicon.ico" rel="Shortcut Icon" />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/static/smart-selects/admin/js/chainedm2m.js"></script>
+    <script type="text/javascript" src="/static/smart-selects/admin/js/bindfields.js"></script>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/files/css/style.css" />
+
+    {% block title %} <title>Bioinformatics in Bioenergy Lab (LBB) - EMBRAPA Agroenergy</title> {% endblock title %}
+
+</head>
+
+<body>
+  <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
+	  <ul id="menu-barra-temp" style="list-style:none;">
+  		<li style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED"><a href="www.brazilgovnews.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Brazilian Government News</a></li>
+		  <li><a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a></li>
+	  </ul>
+  </div>
+
+  {% include "base/menu.html" %}
+
+  <div class="row">
+    {% if request.user.is_authenticated %}
+      {% include "base/menu-internal.html" %}
+    {% else %}
+      <div class="col-sm-1"></div>
+    {% endif %}
+
+    <div class="col-sm-1">
+      <div class="container" style="max-width: 1024px;">
+        {% bootstrap_messages %}
+        {% block content %}
+        {% endblock content %}
+      </div>
+    </div>
+  </div>
+
+  <br/>
+
+  <!-- <div style='float:right; margin-right: 15px; font-size: 11px;'>Using Django {{ django_version }}</div> -->
+
+  <footer class="footer">
+    <br/>
+    <div class="container">
+      <p class="text-muted">
+        <div style="float: left;">
+          <b>Bioinformatics in Bioenergy Lab (LBB)</b><br/>
+          <b>Embrapa Agroenergy</b><br/><br/>
+          <small>
+            Parque Estação Biológica (pqEB), PqEB s/nº, Ed. Embrapa Agroenergia<br/>
+            Caixa Postal 40.315, Postcode 70770-901, Brasília, DF<br/>
+			Tel: +55 (61) 3448-1581 | Fax: +55 (61) 3448-1589 | <a href="https://www.embrapa.br/fale-conosco">Contact</a>
+          </small>
+        </div>
+
+        <div style="float: right;">
+          <br/><br/>
+          <small>
+            Brazilian Agricultural Research Corporation - Embrapa<br/>
+            All rights reserved, pursuant to Brazilian Federal Law 9.610.
+          </small>
+        </div>
+
+     </p>
+    </div>
+    <br/><br/>
+  </footer>
+
+</body>
+</html>

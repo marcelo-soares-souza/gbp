@@ -1,0 +1,20 @@
+  <div id="tarefas">
+      {% for tarefa in tarefas %}
+        <ul class="list-group">
+          <li class="list-group-item">
+              <h4><a href="{{ tarefa.get_detail_url }}">{{ tarefa }}</a></h4>
+              <p><b>Descrição:</b> <br/> <div class='text-highlight'>{{tarefa.nome}}&nbsp;</div></p>
+              <p><b>Plano de Ação:</b> <br/> <div class='text-highlight'>{{tarefa.planoacao}}&nbsp;</div></p>
+              <p><b>Atividade:</b> <br/> <div class='text-highlight'>{{tarefa.atividade}}&nbsp;</div></p>
+              <br/>
+              <p style="float: right;">
+                {% if request.user == tarefa.criado_por or request.user.is_superuser %}
+                  <a href="{{ tarefa.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                  <a href="{{ tarefa.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                {% endif %}
+            </p>
+           <br/><br/>
+          </li>
+        </ul>
+      {% endfor %}
+  </div>

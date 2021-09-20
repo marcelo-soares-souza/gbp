@@ -1,0 +1,119 @@
+{% extends "base/base_bmdb.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>Database {{database.name}}</title> {% endblock title %}
+
+{% block content %}
+  <div style="padding-top: 16px; float: right;">
+    <form id="searchform" action="{% url 'dashboard_detail' database.id %}" method="get" accept-charset="utf-8" style="float: right;">
+      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+      <button type="submit" class="btn btn-default btn-success">Search</button>
+    </form>
+  </div>
+
+  <h2>{{ database.name }}</h2>
+  <hr/>
+  
+    <label class="checkbox-inline"><input type="checkbox" name="database" id="database" value="1">Database</label>
+    <label class="checkbox-inline"><input type="checkbox" name="equipment" id="equipment" value="1">Equipment</label>
+    <label class="checkbox-inline"><input type="checkbox" name="bio_sample" id="bio_sample" value="1">Bio Sample</label>
+
+  <div class="dashboard">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="database">Database</th>
+          <th class="lab_code">Sample</th>
+          <th class="name">Result</th>
+          <th class="experimental_condition">Condition</th>
+          <th class="equipment">Equipment</th>
+          <th class="analytical_method">Analytical Method</th>
+          <th class="extr_method">Extr Method</th>
+          <th class="parameters_lc_ms">Parameters LC MS</th>
+          <th class="lc_raw_data">LC Data</th>
+          <th class="ms_raw_data">MS Data</th>
+          <th class="raw_data">Raw Data</th>
+          <th class="process_data">Process Data</th>
+          <th class="replicate">Replicate</th>
+          <th class="species">Species</th>
+          <th class="bio_sample">Bio Sample</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for result in results %}
+        <tr class="sample-{{result.sample.id}} result-{{result.id}}">
+          <td class="database">{{result.sample.database}}</td>
+          <td class="lab_code"><a href="{% url 'detail_sample' result.sample.id %}">{{ result.sample.lab_code }}</a></td>
+          <td class="name"><a href="{% url 'detail_result' result.id %}">{{ result.name }}</a></td>
+          <td class="experimental_condition">{{result.experimental_condition}}</td>
+          <td class="equipment">
+            {% for equipment in result.equipment.all %}{% if not forloop.first %}, {% endif %}<a href="{% url 'detail_equipment' equipment.id %}">{{ equipment }}</a>{% endfor %}
+          </td>
+          <td class="analytical_method">{{result.analytical_method}}</td>
+          <td class="extr_method">{{result.extr_method}}</td>
+          <td class="parameters_lc_ms">{{result.parameters_lc_ms}}</td>
+          <td class="lc_raw_data">{{result.lc_raw_data}}</td>
+          <td class="ms_raw_data">{{result.ms_raw_data}}</td>
+          <td class="raw_data">{{result.raw_data}}</td>
+          <td class="process_data">{{result.process_data}}</td>
+          <td class="replicate">{{result.sample.replicate}}</td>
+          <td class="species"><i>{{result.sample.species.scientific_name}}</i>&nbsp;{{ result.sample.species.strain|default_if_none:"" }}</td>
+          <td class="bio_sample">{{result.sample.bio_sample}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    {% if results.count <= 0 %}
+      <center>No Data Found.</center>
+    {% endif %}
+  </div>
+
+ <script type="text/javascript">
+    $(document).ready(function() {
+        if(!$("#database").is(':checked'))
+          $('.database').hide();
+
+        if(!$("#equipment").is(':checked'))
+          $('.equipment').hide();
+
+        if(!$("#bio_sample").is(':checked'))
+          $('.bio_sample').hide();
+
+        $('.process_data').hide();
+        $('.analytical_method').hide();
+        $('.extr_method').hide();
+        $('.parameters_lc_ms').hide();
+        $('.lc_raw_data').hide();
+        $('.ms_raw_data').hide();
+        $('.raw_data').hide();
+
+        $('#database').change(function() {
+            if($("#database").is(':checked'))
+              $('.database').show();
+            else
+              $('.database').hide();
+        });
+
+        $('#equipment').change(function() {
+            if($("#equipment").is(':checked'))
+              $('.equipment').show();
+            else
+              $('.equipment').hide();
+        });
+
+        $('#bio_sample').change(function() {
+            if($("#bio_sample").is(':checked'))
+              $('.bio_sample').show();
+            else
+              $('.bio_sample').hide();
+        });
+
+    });
+
+
+ </script>
+
+{% endblock content %}

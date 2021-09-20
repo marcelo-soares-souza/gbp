@@ -1,0 +1,207 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>{{ projeto }}</title> {% endblock title %}
+
+{% block content %}
+
+    <h2>{{ projeto }}</h2>
+
+    <hr/>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne{{ projeto.id }}" data-toggle="collapse" data-target="#collapseOne{{ projeto.id }}">
+          <h4 class="panel-title">
+              Dados Gerais
+          </h4>
+        </div>
+
+        <div id="collapseOne{{ projeto.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne{{ projeto.id }}">
+          <div class="panel-body">
+
+    {% if projeto.resumo %} <p><b>Resumo:</b> <br/> <div class='text-highlight'> {{ projeto.resumo }}&nbsp;</div></p> {% endif %}
+    <p><b>Situação:</b> <br/> <div class='text-highlight'> {{ projeto.status_verbose }}&nbsp;</div></p>
+    <p><b>Líder:</b> <br/> <div class='text-highlight'> {{ projeto.lider|verifyfullname }}&nbsp;</div></p>
+    {% if projeto.seg %} <p><b>Código SEG:</b> <br/> <div class='text-highlight'> {{ projeto.seg }}&nbsp;</div></p> {% endif %}
+    <p><b>Título (Português):</b> <br/> <div class='text-highlight'> {{ projeto.titulo_portugues }}&nbsp;</div></p>
+    <p><b>Título (Inglês):</b> <br/> <div class='text-highlight'> {{ projeto.titulo_ingles }}&nbsp;</div></p>
+    <p><b>Data Início:</b> <br/> <div class='text-highlight'> {{ projeto.data_inicio }}&nbsp;</div></p>
+    <p><b>Duração (Meses):</b> <br/> <div class='text-highlight'> {{ projeto.duracao }}&nbsp;</div></p>
+    {% if projeto.hipotese %} <p><b>Hipotese:</b> <br/> <div class='text-highlight'> {{ projeto.hipotese }}&nbsp;</div></p> {% endif %}
+
+    {% if projeto.instituicao_proponente %}
+      <p><b>Proponente(s):</b> <br/> <div class='text-highlight'><a href="{% url 'detail_instituicao_projeto' projeto.instituicao_proponente.id %}">{{ projeto.instituicao_proponente }}</a></div></p>
+    {% endif %}
+
+    {% if projeto.instituicao_executora %}
+      <p><b>Executora:</b> <br/> <div class='text-highlight'><a href="{% url 'detail_instituicao_projeto' projeto.instituicao_executora.id %}">{{ projeto.instituicao_executora }}</a></div></p>
+    {% endif %}
+
+    {% if projeto.objetivo_geral %} <p><b>Objetivo Geral:</b> <br/> <div class='text-highlight'> {{ projeto.objetivo_geral }}&nbsp;</div></p> {% endif %}
+
+    {% if projeto.colaborador.all %}
+      <p><b>Colaborador(es): </b> <br/> <div class='text-highlight'>
+      {% for colaborador in projeto.colaborador.all %}{% if not forloop.first %}, {% endif %}
+        {{ colaborador|verifyfullname }}{% endfor %}
+      &nbsp;</div></p>
+    {% endif %}
+
+    {% if projeto.blast %} <p><b>Blast:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.blast }}" target="_blank">{{ projeto.blast }}</a>&nbsp;</div></p> {% endif %}
+    {% if projeto.jbrowse %} <p><b>JBrowse:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.jbrowse }}" target="_blank"> {{ projeto.jbrowse }}</a>&nbsp;</div></p> {% endif %}
+    {% if projeto.resultados %} <p><b>Resultados:</b> <br/> <div class='text-highlight'> <a href="{{ projeto.resultados }}" target="_blank"> {{ projeto.resultados }}</a>&nbsp;</div></p> {% endif %}
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ projeto.data_cadastro }}&nbsp;</div></p>
+    <p><b>Atualizado:</b> <br/> <div class='text-highlight'> {{ projeto.data_atualizado }}&nbsp;</div></p>
+
+    <hr/>
+    {% if request.user == projeto.criado_por or request.user == projeto.lider or request.user.is_superuser %}
+      <p>
+        <a href="{{ projeto.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        {% if request.user == projeto.criado_por or request.user.is_superuser %}
+          <a href="{{ projeto.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  </div></div></div>
+
+    {% if objetivos.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoObjetivo" data-toggle="collapse" data-target="#collapseTwoObjetivo">
+            <h4 class="panel-title">
+                Objetivos ({{ objetivos.count }})
+            </h4>
+          </div>
+  
+        <div id="collapseTwoObjetivo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoObjetivo">
+            <div class="panel-body">
+              {% for objetivo in objetivos.all %}
+               <h3><a href="{% url 'detail_objetivo_projeto' objetivo.id %}" target="_blank">Objetivo: {{ objetivo.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ objetivo.descricao }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if resultados.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoResultado" data-toggle="collapse" data-target="#collapseTwoResultado">
+            <h4 class="panel-title">
+                Resultados ({{ resultados.count }})
+            </h4>
+          </div>
+  
+        <div id="collapseTwoResultado" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoResultado">
+            <div class="panel-body">
+              {% for resultado in resultados.all %}
+               <h3><a href="{% url 'detail_resultado_projeto' resultado.id %}" target="_blank">Resultado: {{ resultado.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ resultado.descricao }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if projetocomponentes.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoProjetoComponente" data-toggle="collapse" data-target="#collapseTwoProjetoComponente">
+            <h4 class="panel-title">
+                Projeto Componentes ({{ projetocomponentes.count }})
+            </h4>
+          </div>
+  
+        <div id="collapseTwoProjetoComponente" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoProjetoComponente">
+            <div class="panel-body">
+              {% for projetocomponente in projetocomponentes.all %}
+               <h3><a href="{% url 'detail_projetocomponente_projeto' projetocomponente.id %}" target="_blank">Projeto Componente: {{ projetocomponente.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ projetocomponente.nome }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if metas.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoMeta" data-toggle="collapse" data-target="#collapseTwoMeta">
+            <h4 class="panel-title">
+                Metas ({{ metas.count }})
+            </h4>
+          </div>
+  
+        <div id="collapseTwoMeta" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoMeta">
+            <div class="panel-body">
+              {% for meta in metas.all %}
+               <h3><a href="{% url 'detail_metaprojeto_projeto' meta.id %}" target="_blank">Meta: {{ meta.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ meta.nome }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if planoacoes.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoPlanoAcao" data-toggle="collapse" data-target="#collapseTwoPlanoAcao">
+            <h4 class="panel-title">
+                Plano Ações ({{ planoacoes.count }})
+            </h4>
+          </div>
+  
+        <div id="collapseTwoPlanoAcao" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoPlanoAcao">
+            <div class="panel-body">
+              {% for planoacao in planoacoes.all %}
+               <h3><a href="{% url 'detail_planoacao_projeto' planoacao.id %}" target="_blank">Plano Ação: {{ planoacao.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ planoacao.nome }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if atividades.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoAtividade" data-toggle="collapse" data-target="#collapseTwoAtividade">
+            <h4 class="panel-title">
+                Atividades ({{ atividades.count }})
+            </h4>
+          </div>
+  
+        <div id="collapseTwoAtividade" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoAtividade">
+            <div class="panel-body">
+              {% for atividade in atividades.all %}
+               <h3><a href="{% url 'detail_atividade_projeto' atividade.id %}" target="_blank">Atividade: {{ atividade.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ atividade.nome }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if tarefas.all %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwoTarefa" data-toggle="collapse" data-target="#collapseTwoTarefa">
+            <h4 class="panel-title">
+                Tarefas ({{ tarefas.count }})
+            </h4>
+          </div>
+  
+        <div id="collapseTwoTarefa" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoTarefa">
+            <div class="panel-body">
+              {% for tarefa in tarefas.all %}
+               <h3><a href="{% url 'detail_tarefa_projeto' tarefa.id %}" target="_blank">Tarefa: {{ tarefa.numero }}</a>&nbsp;</h3>
+               <p><div class='text-highlight'>{{ tarefa.nome }}&nbsp;</div></p>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+          </div>
+        </div>
+      </div>
+{% endblock content %}

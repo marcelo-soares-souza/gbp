@@ -1,0 +1,51 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>{{ contrato.empresa_executora }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <h2>{% if contrato.numero %} {{ contrato.numero }}: {% endif %} {{ contrato.empresa_executora }}</h2>
+
+    <hr/>
+
+    <p><b>Projeto:</b> <br/> <div class='text-highlight'>{{ contrato.projeto }}&nbsp;</div></p>
+
+    <p><b>Status do Contrato</b> <br/> <div class='text-highlight'>{{ contrato.status_contrato }}&nbsp;</div></p>
+
+    <p><b>Status do Pagamento</b> <br/> <div class='text-highlight'>{{ contrato.status_pagamento }}&nbsp;</div></p>
+
+    <p><b>Data de Contratação</b> <br/> <div class='text-highlight'>{{ contrato.data_contratacao }}&nbsp;</div></p>
+
+    <p><b>Status no CGEN</b> <br/> <div class='text-highlight'>{{ contrato.status_cgen }}&nbsp;</div></p>
+
+    <p><b>TTM</b> <br/> <div class='text-highlight'>{{ contrato.ttm }}&nbsp;</div></p>
+
+    <p><b>Contato do Gestor</b> <br/> <div class='text-highlight'>{{ contrato.contato_gestor }}&nbsp;</div></p>
+
+    <p><b>Código do Pedido do Gestor</b> <br/> <div class='text-highlight'>{{ contrato.codigo_pedido_gestor }}&nbsp;</div></p>
+
+    {% if contrato.objetivo %}
+      <p><b>Objetivo</b> <br/> <div class='text-highlight'>{{ contrato.objetivo }}&nbsp;</div></p>
+    {% endif %}
+
+    <p><b>Descrição</b> <br/> <div class='text-highlight'>{{ contrato.descricao }}&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ contrato.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="{{ contrato.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+          {% if request.user == contrato.criado_por or request.user.is_superuser %}
+            <a href="{{ contrato.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+          {% endif %}
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Voltar</a>
+        {% endbuttons %}
+      </p>
+
+{% endblock content %}

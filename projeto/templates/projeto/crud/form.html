@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+{% load gbp_filters %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Cadastrar/Editar Projeto</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-projetos.html" %} <br/>
+
+    {% if 'update' in request.resolver_match.url_name %}
+      <h4>Editando {{projeto}}</h4>
+      <hr/>
+    {% endif %}
+
+    {% if projetos %}
+      {% if request.user|has_group:'Admin Projetos' or
+            request.user|has_group:'Editor Projetos' or
+            request.user.is_superuser %}
+        <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="id_select_projeto">Editar Projeto</label>
+            <div class="col-md-9">
+            <select id="editar_projeto" class="form-control" name="editar_projeto" onChange="redirectUrl()">
+              <option  value="" selected="selected">---------</option>
+              <option  value="0">Criar Novo Projeto</option>
+              {% for projeto in projetos %}
+                <option value="{{projeto.id}}">Editar {{projeto}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <center><b>Você não possui permissão<b/></center>
+    {% endif %}
+  {% endif %}
+
+    {% if request.user|has_group:'Admin Projetos' or
+          request.user|has_group:'Editor Projetos' or
+          request.user.is_superuser %}
+    <form class="form-horizontal" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+
+        <div class="modal-footer">
+            {% buttons %}
+                <button type="submit" class="btn btn-default btn-success">Enviar <span class="glyphicon glyphicon-ok"></span></button>
+                <a href="{% url 'new_objetivo_projeto' %}" class="btn btn-sm btn-info">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
+            {% endbuttons %}
+        </div>
+      </form>
+    {% endif %}
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(function() { $('#id_data_inicio').datepicker({ language: 'pt-BR' }); });
+      });
+    </script>
+
+    <script>
+      $(function(){
+        $('#editar_projeto').on('change', function () {
+          if ($(this).val() == 0) {
+            window.location = '{% url 'new_projeto' %}';
+          }
+          else {
+            var url = '/projeto/update/' + $(this).val();
+            if (url) {
+                window.location = url;
+            }
+          }
+          return false;
+        });
+      });
+    </script>
+{% endblock content %}

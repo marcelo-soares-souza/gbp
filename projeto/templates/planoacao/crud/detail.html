@@ -1,0 +1,43 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>{{ planoacao }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-projetos.html" %} <br/>
+
+    <h2>{{ planoacao }}</h2>
+
+    <hr/>
+
+    <p><b>Projeto: </b> <br/> <div class='text-highlight'> {{ planoacao.projeto }}&nbsp;</div></p>
+
+    {% if planoacao.codigo_seg %}
+      <p><b>Codigo SEG: </b> <br/> <div class='text-highlight'> {{ planoacao.codigo_seg }}&nbsp;</div></p>
+    {% endif %}
+
+    <p><b>Responsável: </b> <br/> <div class='text-highlight'> {{ planoacao.responsavel|verifyfullname }}&nbsp;</div></p>
+    <p><b>Data Início:</b> <br/> <div class='text-highlight'> {{ planoacao.data_inicio }}&nbsp;</div></p>
+    <p><b>Data Fim:</b> <br/> <div class='text-highlight'> {{ planoacao.data_fim }}&nbsp;</div></p>
+
+    <p><b>Resultados Associados:</b> <br/> <div class='text-highlight'>
+      {% for resultado in planoacao.resultado.all %}{% if not forloop.first %}, {% endif %}
+        <a href="{% url 'detail_resultado_projeto' resultado.id %}">{{ resultado }}</a>{% endfor %}
+    &nbsp;</div></p>
+
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'> {{ planoacao.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+    {% if request.user == planoacao.criado_por or request.user.is_superuser %}
+      <p>
+        <a href="{{ planoacao.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{{ planoacao.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+        <a href="{% url 'list_planoacao_projeto' %}" class="btn btn-sm btn-info">Voltar</a>
+      </p>
+    {% endif %}
+
+{% endblock content %}

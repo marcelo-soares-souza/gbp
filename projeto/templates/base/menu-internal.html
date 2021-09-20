@@ -1,0 +1,232 @@
+{% load gbp_filters %}
+
+{% if request.user.is_authenticated %}
+<div class="col-sm-2" style="margin-left: -14px;">
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-2 col-md-2">
+            <div class="panel-group" id="accordion">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseProjetos">Projetos</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseProjetos" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                {% if all_projetos %}
+                                  {% for projeto in all_projetos %}
+                                    <tr>
+                                      <td>
+                                        <li class="menu-item dropdown-submenu">
+                                          <a tabindex="0">{{projeto}}</a>
+                                          <ul class="dropdown-menu dropdown-center">
+                                              <li><a href="{% url 'dashboard_projeto' projeto.id %}">Details</a></li>
+                                              {% if projeto.jbrowse %} <li><a href="{{ projeto.jbrowse }}" target="_blank">jBrowse</a></li> {% endif %}
+                                              {% if projeto.blast %} <li><a href="{{ projeto.blast }}" target="_blank">Blast</a></li> {% endif %}
+                                              {% if projeto.resultados %} <li><a href="{{ projeto.resultados }}" target="_blank">Resultados</a></li> {% endif %}
+                                           </ul>
+                                        </li>
+                                      </td>
+                                    </tr>
+                                    <!--
+                                    <tr>
+                                        <td>
+                                            &nbsp;&nbsp;<a href="{% url 'detail_projeto' projeto.id %}">{{ projeto.sigla }}</a>
+                                        </td>
+                                    </tr>
+                                    -->
+                                  {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td>
+                                            &nbsp;&nbsp;Sem Projeto
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                {% if request.user|has_group:'Editor FDDB' or
+                      request.user|has_group:'Admin FDDB' or
+                      request.user|has_group:'Editor BMDB' or
+                      request.user|has_group:'Admin BMDB' or
+                      request.user|has_group:'Editor Projetos' or
+                      request.user|has_group:'Admin Projetos' or
+                      request.user.is_superuser %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFddb">Banco de Dados</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseFddb" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                              {% if request.user|has_group:'Admin Projetos' or
+                                    request.user|has_group:'Editor Projetos' or
+                                    request.user.is_superuser %}
+                                <tr>
+                                    <td>
+                                      <li class="menu-item dropdown-submenu glyphicon glyphicon-list-alt">
+                                        <a tabindex="0">Projetos</a>
+                                        <ul class="dropdown-menu dropdown-center">
+                                          <li class="dropdown-li"><a href="{% url 'new_projeto' %}">Adicionar</a></li>
+                                          <li class="dropdown-li"><a href="{% url 'list_projeto' %}">Listar/Editar</a></li>
+                                        </ul>
+                                      </li>
+                                    </td>
+                                </tr>
+
+                              {% endif %}
+
+                              {% if request.user|has_group:'Editor FDDB' or
+                                    request.user|has_group:'Admin FDDB' or
+                                    request.user.is_superuser %}
+                                <tr>
+                                    <td>
+                                      <li class="menu-item dropdown-submenu glyphicon glyphicon-flash text-danger">
+                                        <a tabindex="0">FDDB</a>
+                                        <ul class="dropdown-menu dropdown-center">
+                                          <li class="dropdown-li"><a href="{% url 'home_fddb' %}">Ver</a></li>
+                                        </ul>
+                                      </li>
+                                    </td>
+                                </tr>
+                                {% endif %}
+
+                                {% if request.user|has_group:'Editor BMDB' or
+                                      request.user|has_group:'Admin BMDB' or
+                                      request.user.is_superuser %}
+                                  <tr>
+                                    <td>
+                                      <li class="menu-item dropdown-submenu glyphicon glyphicon-tint text-info">
+                                        <a tabindex="0">BMDB</a>
+                                        <ul class="dropdown-menu dropdown-center">
+                                          <li><a href="{% url 'dashboard_metabolomica' %}">Databases</a></li>
+                                          {% if request.user|has_group:'Admin BMDB' or
+                                                request.user|has_group:'Editor BMDB' or
+                                                request.user.is_superuser %}
+                                            <li><a href="{% url 'new_sample' %}">Add raw data</a></li>
+                                            <li><a href="{% url 'list_sample' %}">List/Edit</a></li>
+                                          {% endif %}
+                                        </ul>
+                                      </li>
+                                    </td>
+                                  </tr>
+                                {% endif %}
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFerramentas">Ferramentas</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseFerramentas" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                              {% if request.user|has_group:'Editor Sequenciamento' or
+                                    request.user|has_group:'Admin Sequenciamento' or
+                                    request.user.is_superuser %}
+                                <tr>
+                                  <td>
+                                    <li class="menu-item dropdown-submenu glyphicon glyphicon-th text-danger">
+                                      <a tabindex="0">Sequencia</a>
+                                      <ul class="dropdown-menu dropdown-center">
+                                        <li><a href="{% url 'dashboard_sequenciamento' %}">Dashboard</a></li>
+                                        {% if request.user|has_group:'Admin Sequenciamento' or
+                                              request.user.is_superuser %}
+                                          <li><a href="{% url 'new_sequenciamento' %}">Adicionar</a></li>
+                                        {% endif %}
+                                      </ul>
+                                    </li>
+                                  </td>
+                                </tr>
+                              {% endif %}
+
+                              <tr>
+                                <td>
+                                  <span class="menu-item dropdown-submenu glyphicon glyphicon-book"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/pagina/detail/69/">Blast</a>
+
+                                    <!--
+                                    <a tabindex="0">Blast</a>
+                                    <ul class="dropdown-menu dropdown-center">
+                                      <li><a href="https://lbb.cnpae.embrapa.br/sequenceserver/">All</a></li>
+                                      <li><a href="https://lbb.cnpae.embrapa.br/sequenceserver-patents/">Patents</a></li>
+                                      <li><a href="https://lbb.cnpae.embrapa.br/sequenceserver-humicola/">Humicola</a></li>
+                                    </ul>
+                                    -->
+                                  </li>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-stats text-success"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/pagina/detail/65">jBrowse</a>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-folder-open text-warning"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/arquivos/" target="_blank" >Arquivos</a>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <span class="glyphicon glyphicon-download text-primary"></span>&nbsp;&nbsp;<a href="https://lbb.cnpae.embrapa.br/gitlab/" target="_blank" >Código</a>
+                                  </td>
+                              </tr>
+                              {% if request.user|has_group:'Admin CMS' or request.user.is_superuser %}
+                                <tr>
+                                  <td>
+                                    <span class="glyphicon glyphicon-th-list text-success"></span>&nbsp;&nbsp;<a href="{% url 'list_pagina' %}">CMS LBB</a>
+                                  </td>
+                                </tr>
+                              {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% if request.user.is_superuser %}
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseAdministrar">Administrar</a>
+                          </h4>
+                      </div>
+                      <div id="collapseAdministrar" class="panel-collapse collapse">
+                          <div class="panel-body">
+                              <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user text-primary"></span>&nbsp;&nbsp;<a href="/admin/auth/user/">Usuários</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-eye-open text-success"></span>&nbsp;&nbsp;<a href="/admin/auth/group/">Grupos</a>
+                                    </td>
+                                </tr>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+</div>

@@ -1,3 +1,1 @@
-# gbp
-
-GBP LBB
+Laboratório de Bioinformática em Bioenergia (LBB) Web Plataform - GBP

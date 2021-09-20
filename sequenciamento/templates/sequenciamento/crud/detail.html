@@ -1,0 +1,87 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>{{ sequenciamento.material_biologico }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <h2>{{ sequenciamento.numero }}: {{ sequenciamento.material_biologico }}</h2>
+
+    <hr/>
+
+    {% if sequenciamento.tarefasequenciamento_set.all %}
+      <p><b>Tarefas Registradas: </b> <br/>
+        <div class='text-highlight'>
+          {% for tarefa in sequenciamento.tarefasequenciamento_set.all %}{% if not forloop.first %}, {% endif %}
+          <a href="{{ tarefa.get_detail_url }}">{{ tarefa.tarefa }}</a>{% endfor %}
+        </div>
+      </p>
+    {% endif %}
+
+    <p><b>Material Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.material_biologico }}&nbsp;</div></p>
+
+    <p><b>Tipo de Sequenciamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.tipo_sequenciamento }}&nbsp;</div></p>
+
+    <p><b>Responsável:</b> <br/> <div class='text-highlight'>{{ sequenciamento.responsavel|verifyfullname }}&nbsp;</div></p>
+
+    <p><b>Objetivo:</b> <br/> <div class='text-highlight'>{{ sequenciamento.objetivo }}&nbsp;</div></p>
+
+    <p><b>Descrição do Material Biológico:</b> <br/> <div class='text-highlight'>{{ sequenciamento.descricao_material_biologico }}&nbsp;</div></p>
+
+    <p><b>Número de Amostras:</b> <br/> <div class='text-highlight'>{{ sequenciamento.numero_amostras }}&nbsp;</div></p>
+
+    <p><b>Status do Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_contrato }}&nbsp;</div></p>
+
+    <p><b>Status do Pagamento:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_pagamento }}&nbsp;</div></p>
+
+    <p><b>Prioridade:</b> <br/> <div class='text-highlight'>{{ sequenciamento.prioridade }}&nbsp;</div></p>
+
+    <p><b>Empresa Executora:</b> <br/> <div class='text-highlight'>{{ sequenciamento.empresa_executora }}&nbsp;</div></p>
+
+    <p><b>Data de Contratação:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_contratacao }}&nbsp;</div></p>
+
+    <p><b>Detalhamento do Material:</b> <br/> <div class='text-highlight'>{{ sequenciamento.detalhamento_material }}&nbsp;</div></p>
+
+    <p><b>Status no CGEN:</b> <br/> <div class='text-highlight'>{{ sequenciamento.status_cgen }}&nbsp;</div></p>
+
+    <p><b>TTM:</b> <br/> <div class='text-highlight'>{{ sequenciamento.ttm }}&nbsp;</div></p>
+
+    <p><b>Contato do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contato_gestor }}&nbsp;</div></p>
+
+    <p><b>Código do Pedido do Gestor:</b> <br/> <div class='text-highlight'>{{ sequenciamento.codigo_pedido_gestor }}&nbsp;</div></p>
+
+    {% if sequenciamento.colaborador.all %}
+      <!-- <p><b>Colaboradores: </b> <div class='text-highlight'> {{sequenciamento.colaborador.all|join:', '}}&nbsp;</div></p> -->
+      <p><b>Colaboradores: </b>
+        <div class='text-highlight'>
+          {% for colaborador in sequenciamento.colaborador.all %}
+          {% if not forloop.first %}, {% endif %}
+            {{colaborador|verifyfullname}}
+          {% endfor %}
+          &nbsp;
+        </div>
+      </p>
+    {% endif %}
+
+    <p><b>Contrato:</b> <br/> <div class='text-highlight'>{{ sequenciamento.contrato }}&nbsp;</div></p>
+
+    <p><b>Cadastrado:</b> <br/> <div class='text-highlight'>{{ sequenciamento.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="{{ sequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+         {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+            <a href="{{ sequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+          {% endif %}
+          <a href="{% url 'new_sequenciamento' %}clonar/{{sequenciamento.id}}" class="btn btn-sm btn-success">Clonar</a>
+          <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Voltar</a>
+        {% endbuttons %}
+      </p>
+
+{% endblock content %}

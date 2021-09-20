@@ -1,0 +1,57 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Listar Todos os Tipo de Sequenciamento</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-sequenciamentos.html" %} <br/>
+
+    <div style="float: right;"><a href="{% url 'new_tiposequenciamento' %}" class="btn btn-sm btn-success">Adicionar</a></div>
+
+    {% if not tiposequenciamentos %}
+
+      <div class="jumbotron"><h4>Nenhum Dado Cadastrado. <a href="{% url 'new_tiposequenciamento' %}">Cadastrar?</a> </h4></div>
+
+    {% else %}
+
+        {% include 'base/sort_links.html' %}
+
+        {% for tiposequenciamento in tiposequenciamentos %}
+            <ul class="list-group">
+              <li class="list-group-item">
+
+                <h3><a href="{{ tiposequenciamento.get_detail_url }}">{{ tiposequenciamento }}</a></h3>
+
+                {% if tiposequenciamento.sequenciamento_set.all %}
+                  <p><b>Sequenciamentos: </b> <div class='text-highlight'>
+                    {% for sequenciamento in tiposequenciamento.sequenciamento_set.all %}{% if not forloop.first %}, {% endif %}
+                    <a href="{{ sequenciamento.get_detail_url }}">{{ sequenciamento.material_biologico }}</a>{% endfor %}
+                    &nbsp;</div>
+                  </p>
+                {% endif %}
+
+                <br/>
+
+                {% if request.user == tiposequenciamento.criado_por or request.user.is_superuser %}
+                <p>
+                    <a href="{{ tiposequenciamento.get_update_url }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if request.user == sequenciamento.criado_por or request.user.is_superuser %}
+                      <a href="{{ tiposequenciamento.get_delete_url }}" class="btn btn-sm btn-danger">Apagar</a>
+                    {% endif %}
+                    <a href="{% url 'new_sequenciamento' %}{{tiposequenciamento.id}}" class="btn btn-sm btn-info">Adicionar Sequenciamento</a>
+                </p>
+                {% endif %}
+
+                <div class="data-atualizado">{{ tiposequenciamento.data_atualizado }}</div>
+
+              </li>
+            </ul>
+        {% endfor %}
+
+        {% include 'base/pagination.html' %}
+
+    {% endif %}
+
+{% endblock content %}

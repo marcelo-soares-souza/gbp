@@ -1,0 +1,34 @@
+{% extends "base/base_bmdb.html" %}
+
+{% load bootstrap3 %}
+{% load gbp_filters %}
+
+{% block title %} <title>{{ sample.name }}</title> {% endblock title %}
+
+{% block content %}
+
+    {% include "base/menu-metabolomica.html" %} <br/>
+
+    <h2>{{ sample.lab_code }}</h2>
+    <hr/>
+
+    <p><b>Database:</b> <br/> <div class='text-highlight'>{{ sample.database }}&nbsp;</div></p>
+	<p><b>Replicate:</b> <br/> <div class='text-highlight'>{{ sample.replicate|default_if_none:"" }}&nbsp;</div></p>
+	<p><b>Species:</b> <br/> <div class='text-highlight'><i>{{ sample.species.scientific_name|default_if_none:"" }}</i>&nbsp;{{ sample.species.strain|default_if_none:"" }}</div></p>
+	<p><b>Biological sample:</b> <br/> <div class='text-highlight'>{{ sample.bio_sample|default_if_none:"" }}&nbsp;</div></p>
+    <p><b>User:</b> <br/> <div class='text-highlight'>{{ sample.criado_por|verifyfullname }}&nbsp;</div></p>
+    <p><b>Added:</b> <br/> <div class='text-highlight'>{{ sample.data_cadastro }}&nbsp;</div></p>
+
+    <hr/>
+
+      <p>
+        {% buttons %}
+          <a href="/metabolomica{{ sample.get_update_url }}" class="btn btn-sm btn-warning">Update</a>
+          {% if request.user == sample.criado_por or request.user.is_superuser %}
+            <a href="/metabolomica{{ sample.get_delete_url }}" class="btn btn-sm btn-danger">Delete</a>
+          {% endif %}
+            <a href="javascript:window.history.go(-1)" class="btn btn-sm btn-info"></span> Back</a>
+        {% endbuttons %}
+      </p>
+
+{% endblock content %}
