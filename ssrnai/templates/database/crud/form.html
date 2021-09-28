@@ -1,0 +1,38 @@
+{% extends "base/base_bmdb.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %} <title>Add/Update Database</title> {% endblock title %}
+
+{% block content %}
+
+    {% if 'update' in request.resolver_match.url_name %}
+      <ul class="nav nav-tabs" id="myTab" ><li class="active"><a href="#"> Updating {{ database }}</a></li></ul>
+    {% else %}
+      {% include "base/menu-metabolomica.html" %}
+    {% endif %}
+
+    <br/>
+
+    <form class="form-horizontal" method="POST">
+        {% csrf_token %}
+
+        {% bootstrap_form form layout='horizontal' %}
+
+        <div class="modal-footer">
+            {% buttons %}
+                <button type="submit" class="btn btn-default btn-success">Submit <span class="glyphicon glyphicon-ok"></span></button>
+                <a href="javascript:window.history.go(-1)" class="btn btn-info"></span> Back</a>
+            {% endbuttons %}
+        </div>
+
+    </form>
+  </form>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(function() { $('#id_data_contratacao').datepicker({ language: 'en-US' }); });
+    });
+ </script>
+
+{% endblock content %}

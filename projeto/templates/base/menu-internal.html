@@ -122,6 +122,28 @@
                                   </tr>
                                 {% endif %}
 
+                                <!-- #duplicado do BMDB -->
+                                {% if request.user|has_group:'Editor RIDB' or
+                                      request.user|has_group:'Admin RIDB' or
+                                      request.user.is_superuser %}
+                                  <tr>
+                                    <td>
+                                      <li class="menu-item dropdown-submenu glyphicon glyphicon-screenshot text-success">
+                                        <a tabindex="0">RIDB</a>
+                                        <ul class="dropdown-menu dropdown-center">
+                                          <li><a href="{% url 'dashboard_ssrnai' %}">Databases</a></li>
+                                          {% if request.user|has_group:'Admin RIDB' or
+                                                request.user|has_group:'Editor RIDB' or
+                                                request.user.is_superuser %}
+                                            <li><a href="{% url 'new_sample' %}">Add raw data</a></li>
+                                            <li><a href="{% url 'list_sample' %}">List/Edit</a></li>
+                                          {% endif %}
+                                        </ul>
+                                      </li>
+                                    </td>
+                                  </tr>
+                                {% endif %}
+
                             </table>
                         </div>
                     </div>

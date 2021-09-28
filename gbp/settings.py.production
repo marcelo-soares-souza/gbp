@@ -96,9 +96,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'lbb_gbp_production',
-        'USER': 'lbb_gbp_production',
-        'PASSWORD': 'lbb_gbp_production',
-        'HOST': '10.188.181.10',
+        'USER': 'postgres',
+        'PASSWORD': '132',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

@@ -42,6 +42,11 @@ from metabolomica.views.species import SpeciesCreate, SpeciesDelete, SpeciesDeta
 from metabolomica.views.formula import FormulaCreate, FormulaDelete, FormulaDetail, FormulaList, FormulaUpdate
 from metabolomica.views.analytical import AnalyticalCreate, AnalyticalDelete, AnalyticalDetail, AnalyticalList, AnalyticalUpdate
 
+# URLs ssRNAi
+#from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
+from ssrnai.views.dashboard import DashboardSsrnai, DashboardSsrnaiDetail
+
+
 urlpatterns = [
 
     # url(r'^$', Home.as_view(), name='home'),
@@ -370,6 +375,10 @@ urlpatterns = [
     url(r'^metabolomica/dashboard-result/sample/(?P<pk>\d+)/$', DashboardResultSampleList.as_view(), name='dashboard_result_sample'),
     url(r'^metabolomica/dashboard-result/(?P<pk>\d+)/$', DashboardResultList.as_view(), name='dashboard_result'),
     url(r'^metabolomica/dashboard-result/', DashboardResultList.as_view(), name='dashboard_result'),
+
+    # Views DashBoard Ssrnai
+    url(r'^ssrnai/dashboard/', DashboardSsrnai.as_view(), name='dashboard_ssrnai'),
+    url(r'^ssrnai/dashboard-ssrnai-detail/(?P<pk>\d+)/$', DashboardSsrnaiDetail.as_view(), name='dashboard_ssrnai_detail'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),
