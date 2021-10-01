@@ -44,8 +44,9 @@ from metabolomica.views.analytical import AnalyticalCreate, AnalyticalDelete, An
 
 # URLs ssRNAi
 #from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
-from ssrnai.views.dashboard import DashboardSsrnai, DashboardSsrnaiDetail
-
+from ssrnai.views.dashboard import DashboardSsrnai
+from ssrnai.views.databaseSerach import DatabaseSearch
+from ssrnai.views.showOrganism import ShowOrganism
 
 urlpatterns = [
 
@@ -376,9 +377,10 @@ urlpatterns = [
     url(r'^metabolomica/dashboard-result/(?P<pk>\d+)/$', DashboardResultList.as_view(), name='dashboard_result'),
     url(r'^metabolomica/dashboard-result/', DashboardResultList.as_view(), name='dashboard_result'),
 
-    # Views DashBoard Ssrnai
+    # Views Ssrnai
     url(r'^ssrnai/dashboard/', DashboardSsrnai.as_view(), name='dashboard_ssrnai'),
-    url(r'^ssrnai/dashboard-ssrnai-detail/(?P<pk>\d+)/$', DashboardSsrnaiDetail.as_view(), name='dashboard_ssrnai_detail'),
+    url(r'^ssrnai/databaseSearch/(?P<pk>\d+)/$', DatabaseSearch.as_view(), name='database-search'),
+    url(r'^ssrnai/show-organism/', ShowOrganism.as_view(), name='show-organism'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),

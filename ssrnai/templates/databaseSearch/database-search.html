@@ -1,0 +1,33 @@
+{% extends "base/base_bmdb.html" %} {% load gbp_filters %} {% load bootstrap3 %}
+{% block title %} <title>Database Search</title> {% endblock title %} {% block
+content %}
+<h2>{{ database.name }}</h2>
+<hr />
+{% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
+RIDB' or request.user.is_superuser %}
+<div class="row">
+  <div class="col-md-6"><h4 class="ssrnai-titles">Campos de Buscas</h4></div>
+  <div class="col-md-6"><h4 class="ssrnai-titles">Análises</h4></div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-md-6">
+
+    <form action="/ssrnai/show-organism/" class="form-horizontal" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="organisms">Escolha o organismo:</label>
+        <select class="form-control" id="organisms" name="organism">
+        {% for organism in organisms %}
+        <option value={{organism.id}}>{{organism.organism_name}}</option>
+        {% endfor %}
+        </select>
+        <input class="btn btn-primary mt-10" type="submit"/>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">Teste</div>
+</div>
+{% else %}
+<h3>Você não possui permissão</h3>
+{% endif %} {% endblock content %}>

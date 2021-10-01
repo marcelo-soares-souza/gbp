@@ -1,0 +1,7 @@
+database_id,organism_name,common_name,taxonomy
+1,Conyza bonariensis,buva,Plantae/angiospérmicas/eudicotiledóneas/AsteralesAsteraceae/Conyza
+1,Conyza canadensis,buva,Plantae/angiospérmicas/eudicotiledóneas/AsteralesAsteraceae/Conyza
+6,Digitaria insularis,capim-amargoso,Tracheophytes/Angiosperms/Angiosperms/Monocots/Commelinids/Poales/Poaceae/Panicoideae/Digitaria
+3,Meloidogyne incognita,nematoide das galhas,Animalia/Nematoda/Secernentea/Tylenchida/Heteroderidae/Meloidogyne
+5,Euschistus heros,percevejo marrom,Animalia/Arthropoda/Insecta/Hemiptera/Pentatomidae/Euschistus
+4,Spodoptera frugiperda,lagarta do cartucho,Animalia/Arthropoda/Insecta/Lepidoptera/Noctuoidea/Noctuidae/Spodoptera

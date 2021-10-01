@@ -167,3 +167,12 @@ body {
 .dropdown-center {
     text-align: center !important;
 }
+
+.ssrnai-titles{
+  font-weight: bold;
+  text-align: center;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
