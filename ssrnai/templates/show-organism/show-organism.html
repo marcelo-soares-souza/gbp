@@ -1,13 +1,51 @@
 {% extends "base/base_bmdb.html" %} {% load gbp_filters %} {% load bootstrap3 %}
 {% block title %} <title>Show organism</title> {% endblock title %} {% block
 content %}
+<input
+  class="btn btn-primary"
+  type="button"
+  value="Voltar"
+  onClick="javascript:history.go(-1);"
+/>
 <hr />
 {% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
 RIDB' or request.user.is_superuser %}
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
+    <p>{{database}}</p>
+    <p>{{organism.organism_name}}</p>
+    {% for gene in genes %}
+    <p>{{gene.gene_name}}</p>
+    {% endfor %} 
+    {% for gf in gene_function %}
+    <p>{{gf.gene_description}}</p>
+    {% endfor %} 
+    {% for go in gene_ontology_blastx %}
+    <p>{{go.gene_ontology_blastx}}</p>
+    {% endfor %}
+    
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Gene</th>
+          <th scope="col">Função gênica</th>
+          <th scope="col">GO</th>
+          <th scope="col">Tamanho CDS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for gene in genes %}
+          <tr>
+            <td>{{gene.gene_name}}</td>
+            <td>{{gene.gene_description}}</td>
+            <td>{{gene.gene_ontology_blastx}}</td>
+            <td>{{gene.length}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
-  <div class="col-md-6">Teste</div>
 </div>
 {% else %}
 <h3>Você não possui permissão</h3>

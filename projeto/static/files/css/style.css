@@ -176,3 +176,21 @@ body {
 .mt-10 {
   margin-top: 10px !important;
 }
+
+.mt-20 {
+  margin-top: 20px !important;
+}
+
+.mt-30 {
+  margin-top: 30px !important;
+}
+
+.vcenter {
+  display: flex;
+  align-items: center;     /* Align the flex-items vertically */
+  justify-content: space-around;
+}
+
+.btn-analize{
+  width: 70%;
+}
