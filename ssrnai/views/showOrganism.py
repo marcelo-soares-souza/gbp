@@ -4,8 +4,13 @@ from django.views.generic.base import View
 from ssrnai.models import Organisms
 from django.views.generic import DetailView
 from django.db.models import Q
-from ssrnai.models.percevejo.percevejo_dsrna_information import Percevejo_Dsrna_Information
+from ssrnai.models.percevejo.percevejo_dsrna_information import PercevejoDsrnaInformation
 from ssrnai.models.percevejo.percevejo_gene_information import Percevejo_Gene_Information
+from ssrnai.models.percevejo.percevejo_iscore import Percevejo_Iscore
+from ssrnai.models.percevejo.percevejo_dicer import Percevejo_Dicer
+from ssrnai.models.percevejo.percevejo_structure import Percevejo_Structure
+from ssrnai.models.percevejo.percevejo_expression import Percevejo_Expression
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class ShowOrganism(DetailView):
@@ -53,7 +58,7 @@ class ShowOrganism(DetailView):
                 else:
                     genes = Percevejo_Gene_Information.objects.filter(gene_name__icontains=gene)
                     #context['genes'] = genes
-            except genes.DoesNotExist:
+            except ObjectDoesNotExist:
                 nextgene.gene_name = 'Busca retornou 0 genes'
                 genes.append(nextgene)
                 #context['genes'] = genes
@@ -72,12 +77,15 @@ class ShowOrganism(DetailView):
                 else:
                     genes = Percevejo_Gene_Information.objects.filter(gene_description__icontains=gene_function)
                     #context['genes'] = genes
-            except genes.DoesNotExist:
+            except ObjectDoesNotExist:
                 nextgene.gene_name = 'Busca retornou 0 genes'
                 genes.append(nextgene)
 
         for g in genes:
             gene_list.append(g)
+        
+        genes = list(set(gene_list))
+        gene_list = genes
 
         #GO function search
         genes = []
@@ -90,7 +98,7 @@ class ShowOrganism(DetailView):
                 else:
                     genes = Percevejo_Gene_Information.objects.filter(gene_ontology_blastx__icontains=go_function)
 
-            except genes.DoesNotExist:
+            except ObjectDoesNotExist:
                 nextgene.gene_description = 'Erro go'
                 genes.append(nextgene)
 
@@ -99,11 +107,131 @@ class ShowOrganism(DetailView):
 
         context['genes'] = gene_list
 
-        
+            
+        #dsRNA search
+        ds_list = []
+        result_list = []
+        ##cria uma lista de resultado. 
+        for g in gene_list:
+            expression = []
+            try:
+                expression = Percevejo_Expression.objects.filter(gene=int(g.id))
+            except ObjectDoesNotExist:
+                expression = []
+            if(len(expression)>1):
+                expression = expression[0]
+
+            dsRNAs = []
+            try:
+                dsRNAs = PercevejoDsrnaInformation.objects.filter(gene=int(g.id))
+                    #context['gene_ontology_blastx'] = newgene
+            except ObjectDoesNotExist:
+                dsRNAs = ''
+
+            result = []
+            if(dsRNAs != ''):
+                for ds in dsRNAs:
+                    iscore = []
+                    try:
+                        iscore = Percevejo_Iscore.objects.filter(dsrna=int(ds.id))
+                    except ObjectDoesNotExist:
+                        iscore = []
+                    
+                    if(len(iscore)>1):
+                        iscore = iscore[0]
+
+                    dicer = []
+                    try:
+                        dicer = Percevejo_Dicer.objects.filter(dsrna=int(ds.id))
+                    except ObjectDoesNotExist:
+                        dicer = []
+
+                    if(len(dicer)>1):
+                        dicer = dicer[0]
+                    
+                    estrutura = []
+                    try:
+                        estrutura = Percevejo_Structure.objects.filter(dsrna=int(ds.id))
+                    except ObjectDoesNotExist:
+                        estrutura = []
+
+                    if(len(estrutura)>1):
+                        estrutura = estrutura[0]
+
+                    result.append(g.id) #0
+                    result.append(g.gene_name) #1
+                    result.append(g.gene_description) #2
+                    result.append(g.gene_ontology_blastx) #3
+                    result.append(g.length) #4
+
+                    if not not expression:
+                        result.append(expression[0].id) #5
+                    else:
+                        result.append('-')
+
+                    result.append(ds.dsrna_name) #6
+                    localizacao = (str(ds.start) +  '-'  + str(ds.stop)) #NOT A RESULT!!!
+                    result.append(localizacao) #7
+                    result.append(ds.id) #8
+
+                    if not not iscore:
+                        result.append(iscore.id) #9
+                        result.append(iscore.mean_dsir) #10
+                        result.append(iscore.mean_iscore) #11
+                        result.append(iscore.mean_sbiopredsi) #12
+                    else:
+                        result.append("-")
+                        result.append("-")
+                        result.append("-")
+                        result.append("-")
+
+                    if not not dicer:
+                        result.append(dicer[0].id) #13
+                        result.append(dicer[0].sirna_number) #14
+                        result.append(dicer[0].coverage) #15
+                    else:
+                        result.append("-")
+                        result.append("-")
+                        result.append("-")
+
+                    if not not estrutura:
+                        result.append(estrutura[0].id) #16
+                        result.append(estrutura[0].classification) #17
+                    else:
+                        result.append("-")
+                        result.append("-")
+
+                    result.append(str("on_target")) #18
+                    result.append(str("off_target")) #19
+                    result_list.append(result)
+                    result = []
+                    ds_list.append(ds)
+            else:
+                result.append(g.id) #0
+                result.append(g.gene_name) #1
+                result.append(g.gene_description) #2
+                result.append(g.gene_ontology_blastx) #3
+                result.append(g.length) #4
+                result.append(expression.id) #5
+                result.append("-") #6
+                result.append("-") #7
+                result.append("-") #8
+                result.append("-") #9
+                result.append("-") #10
+                result.append("-") #11
+                result.append("-") #12
+                result.append("-") #13
+                result.append("-") #14
+                result.append("-") #15
+                result.append("-") #16
+                result.append("-") #17
+                result.append(str("on_target")) #18
+                result.append(str("off_target")) #19
+                result_list.append(result)
 
 
-        
-        
+        context['dsRNAs'] = ds_list
+        context['result_list'] = result_list    
 
         #context['min_iscore'] = min_iscore
         #context['max_iscore'] = max_iscore

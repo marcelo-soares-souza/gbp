@@ -47,6 +47,11 @@ from metabolomica.views.analytical import AnalyticalCreate, AnalyticalDelete, An
 from ssrnai.views.dashboard import DashboardSsrnai
 from ssrnai.views.databaseSerach import DatabaseSearch
 from ssrnai.views.showOrganism import ShowOrganism
+from ssrnai.views.percevejo.percevejo_sequence import PercevejoSequence
+from ssrnai.views.percevejo.percevejo_iscore import PercevejoIScore
+from ssrnai.views.percevejo.percevejo_dicer import PercevejoDicer
+from ssrnai.views.percevejo.percevejo_structure import PercevejoStructure
+from ssrnai.views.percevejo.percevejo_expression import PercevejoExpression
 
 urlpatterns = [
 
@@ -381,6 +386,11 @@ urlpatterns = [
     url(r'^ssrnai/dashboard/', DashboardSsrnai.as_view(), name='dashboard_ssrnai'),
     url(r'^ssrnai/databaseSearch/(?P<pk>\d+)/$', DatabaseSearch.as_view(), name='database-search'),
     url(r'^ssrnai/show-organism/', ShowOrganism.as_view(), name='show-organism'),
+    url(r'^ssrnai/percevejo/percevejo_sequence/(?P<pk>\d+)/$', PercevejoSequence.as_view(), name='percevejo-sequence'),
+    url(r'^ssrnai/percevejo/percevejo_iscore/(?P<pk>\d+)/$', PercevejoIScore.as_view(), name='percevejo-iscore'),
+    url(r'^ssrnai/percevejo/percevejo_dicer/(?P<pk>\d+)/$', PercevejoDicer.as_view(), name='percevejo-dicer'),
+    url(r'^ssrnai/percevejo/percevejo_structure/(?P<pk>\d+)/$', PercevejoStructure.as_view(), name='percevejo-structure'),
+    url(r'^ssrnai/percevejo/percevejo_expression/(?P<pk>\d+)/$', PercevejoExpression.as_view(), name='percevejo-expression'),
 
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),
