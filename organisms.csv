@@ -5,3 +5,4 @@ database_id,organism_name,common_name,taxonomy
 3,Meloidogyne incognita,nematoide das galhas,Animalia/Nematoda/Secernentea/Tylenchida/Heteroderidae/Meloidogyne
 5,Euschistus heros,percevejo marrom,Animalia/Arthropoda/Insecta/Hemiptera/Pentatomidae/Euschistus
 4,Spodoptera frugiperda,lagarta do cartucho,Animalia/Arthropoda/Insecta/Lepidoptera/Noctuoidea/Noctuidae/Spodoptera
+7,Halyomorpha halys,percevejo fedorento,Animalia/Arthropoda/Insecta/Hemiptera/Pentatomidae/Halyomorpha

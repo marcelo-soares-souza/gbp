@@ -11,7 +11,7 @@
         {% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin RIDB' or request.user.is_superuser %}
           <h3>
             {% for database in databases %}
-            <a href="/ssrnai/dashboard-ssrnai-detail/{{database.id}}">{{database}}</a><br/><br/>
+            <a href="/ssrnai/databaseSearch/{{database.id}}">{{database}}</a><br/><br/>
             {% endfor %}
           </h3>
         {% else %}
