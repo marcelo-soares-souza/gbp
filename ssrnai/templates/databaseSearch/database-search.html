@@ -11,7 +11,7 @@ RIDB' or request.user.is_superuser %}
 </div>
 <hr />
 <div class="row">
-  <form action="/ssrnai/show-organism/" class="form-horizontal" method="POST">
+  <form action="/ssrnai/percevejo/percevejo_results/" class="form-horizontal" method="POST">
     {% csrf_token %}
     <input type="hidden" name="db" value={{database.id}} />
     <div class="col-md-6">

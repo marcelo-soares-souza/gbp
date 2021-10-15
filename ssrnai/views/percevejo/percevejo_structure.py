@@ -6,7 +6,7 @@ from ssrnai.models.percevejo.percevejo_dsrna_information import PercevejoDsrnaIn
 
 class PercevejoStructure(DetailView):
     template_name = 'percevejo/percevejo_structure.html'
-    context_object_name = 'iscore'
+    context_object_name = 'structure'
     model = Percevejo_Structure
     fields = '__all__'
 

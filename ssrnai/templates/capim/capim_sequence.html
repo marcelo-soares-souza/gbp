@@ -1,0 +1,41 @@
+{% extends "base/base_bmdb.html" %} {% load gbp_filters %} {% load bootstrap3 %}
+{% block title %} <title>Show organism</title> {% endblock title %} {% block
+content %}
+<input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
+<hr />
+{% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
+RIDB' or request.user.is_superuser %}
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>{{gene.gene_name}}</th>
+          <td><button type="button" class="btn" onclick="window.location.href='https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&BLAST_SPEC=GeoBlast&PAGE_TYPE=BlastSearch';">BLAST</button></td>
+          <td><button type="button" class="btn" onclick="window.location.href='https://www.bioinformatics.nl/cgi-bin/primer3plus/primer3plus.cgi';">PRIMER</button></td>
+          <td>{{gene.cds_seq}}</td>
+        </tr>
+        <tr>
+          <th>{{gene.gene_name}}</th>
+          <td><button type="button" class="btn" onclick="window.location.href='https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&BLAST_SPEC=GeoBlast&PAGE_TYPE=BlastSearch';">BLAST</button></td>
+          <td><button type="button" class="btn" onclick="window.location.href='https://www.bioinformatics.nl/cgi-bin/primer3plus/primer3plus.cgi';">PRIMER</button></td>
+          <td style="width:70%">{{gene.cds_seq}}</td>
+        </tr>
+        <tr>
+          <th>{{dsrna.dsrna_name}}</th>
+          <td><button type="button" class="btn" target="_blank" onclick="window.location.href='https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&BLAST_SPEC=GeoBlast&PAGE_TYPE=BlastSearch';">BLAST</button></td>
+          <td><button type="button" class="btn" onclick="window.location.href='https://www.bioinformatics.nl/cgi-bin/primer3plus/primer3plus.cgi';">PRIMER</button></td>
+          <td>{{dsrna.dsrna_seq}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% else %}
+<h3>Você não possui permissão</h3>
+{% endif %} {% endblock content %}>

@@ -1,0 +1,122 @@
+{% extends "base/base_bmdb.html" %} {% load gbp_filters %} {% load bootstrap3 %}
+{% block title %} <title>Show organism</title> {% endblock title %} {% block
+content %}
+<input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
+<hr />
+{% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
+RIDB' or request.user.is_superuser %}
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Gene</th>
+          <td>{{gene.gene_name}}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Eheros_FatBody</th>
+          <td>{{expression.eheros_fat_body1}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_FatBody</th>
+          <td>{{expression.eheros_fat_body2}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_FatBody</th>
+          <td>{{expression.eheros_fat_body3}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_FatBody</th>
+          <td>{{expression.eheros_fat_body4}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut1}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_FatBody</th>
+          <td>{{expression.eheros_fat_body5}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut2}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut3}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut4}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut5}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut6}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut7}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut8}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut9}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut10}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut11}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut12}}</td>
+        </tr>
+        <tr>
+          <th>Eheros_Gut</th>
+          <td>{{expression.eheros_gut13}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Tabela expressão</th>
+          <th>Tratamento</th>
+          <th>NCBI_id</th>
+          <th>Descrição</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for description in descriptions %}
+        <tr>
+          <th>{{description.expression}}</th>
+          <td>{{description.treatment}}</td>
+          <td>{{description.ncbi_id}}</td>
+          <td>{{description.condition_description}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% else %}
+<h3>Você não possui permissão</h3>
+{% endif %} {% endblock content %}>

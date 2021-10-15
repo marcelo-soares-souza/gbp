@@ -7,7 +7,7 @@ class Nematoide_Gene_Information(models.Model, TemplateModelMixin):
     organism = models.ForeignKey(Organisms("organism_id"), null=True, blank=True, on_delete=models.SET_NULL)
     gene_name = models.CharField(("gene_name"), max_length=250)
     length = models.IntegerField(("length"), null=True, blank=True)
-    cds_seq = models.TextField(("cds_seq"), null=True, blank=True)
+    cds_seq = models.CharField(("cds_seq"), max_length=16000, null=True, blank=True)
     gene_description = models.TextField(("gene_description"), null=True, blank=True)
     sprot_top_blastx_hit = models.TextField(("sprot_top_blastx_hit"), null=True, blank=True)
     pfam = models.TextField(("pfam"), null=True, blank=True)

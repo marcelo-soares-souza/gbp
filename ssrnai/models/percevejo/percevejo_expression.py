@@ -1,7 +1,6 @@
 from django.db.models.fields import FloatField
 from ssrnai.models.organisms import Organisms
 from ssrnai.models.percevejo.percevejo_gene_information import Percevejo_Gene_Information
-from ssrnai.models.percevejo.percevejo_dsrna_information import PercevejoDsrnaInformation
 from django.db import models
 from projeto.models.template import TemplateModelMixin
 
@@ -32,8 +31,8 @@ class Percevejo_Expression(models.Model, TemplateModelMixin):
 
     class Meta:
         ordering = ['id']
-        verbose_name = 'dicer'
-        verbose_name_plural = 'dicers'
+        verbose_name = 'expression'
+        verbose_name_plural = 'expressions'
 
     def __str__(self):
         return '%s' % (self.id)

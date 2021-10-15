@@ -1,0 +1,84 @@
+{% extends "base/base_bmdb.html" %} {% load gbp_filters %} {% load bootstrap3 %}
+{% block title %} <title>Show organism</title> {% endblock title %} {% block
+content %}
+<input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
+<hr />
+{% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
+RIDB' or request.user.is_superuser %}
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>dsRNA</th>
+          <th>Parâmetros</th>
+          <th>DSIR</th>
+          <th>iSCORE</th>
+          <th>sBiopredsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>{{gene.gene_name}}_{{dsRNA.dsrna_name}}</th>
+          <th>Média</th>
+          <td>{{iscore.mean_dsir}}</td>
+          <td>{{iscore.mean_iscore}}</td>
+          <td>{{iscore.mean_sbiopredsi}}</td>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Soma</th> 
+          <td>{{iscore.sum_dsir}}</td>
+          <td>{{iscore.sum_iscore}}</td>
+          <td>{{iscore.sum_sbiopredsi}}</td>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Valor máx</th>
+          <td>{{iscore.max_dsir}}</td>
+          <td>{{iscore.max_iscore}}</td>
+          <td>{{iscore.max_sbiopredsi}}</td>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Valor mín</th>
+          <td>{{iscore.min_dsir}}</td>
+          <td>{{iscore.min_iscore}}</td>
+          <td>{{iscore.min_sbiopredsi}}</td>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Tamanho</th>
+          <td>{{dsRNA.length}}</td>
+          <td>{{dsRNA.length}}</td>
+          <td>{{dsRNA.length}}</td>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Mediana</th>
+          <td>{{iscore.median_dsir}}</td>
+          <td>{{iscore.median_iscore}}</td>
+          <td>{{iscore.median_sbiopredsi}}</td>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Desvio Padrão</th>
+          <td>{{iscore.std_dsir}}</td>
+          <td>{{iscore.std_iscore}}</td>
+          <td>{{iscore.std_sbiopredsi}}</td>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Variância</th>
+          <td>{{iscore.var_dsir}}</td>
+          <td>{{iscore.var_iscore}}</td>
+          <td>{{iscore.var_sbiopredsi}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% else %}
+<h3>Você não possui permissão</h3>
+{% endif %} {% endblock content %}>

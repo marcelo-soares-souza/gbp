@@ -1,0 +1,39 @@
+{% extends "base/base_bmdb.html" %} {% load gbp_filters %} {% load bootstrap3 %}
+{% block title %} <title>Show organism</title> {% endblock title %} {% block
+content %}
+<input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
+<hr />
+{% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
+RIDB' or request.user.is_superuser %}
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>dsRNA</th>
+          <th>Classificação</th>
+          <th>Energia de interação</th>
+          <th>Match</th>
+          <th>Mismatch</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{gene.gene_name}}_{{dsRNA.dsrna_name}}</td>
+          <td>{{structure.classification}}</td>
+          {% if structure.interaction_energy != None %}
+          <td>{{structure.interaction_energy}}</td>
+          {% else %}
+          <td>-</td>
+          {% endif %}
+          <td>{{structure.match}}</td>
+          <td>{{structure.mismatch}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% else %}
+<h3>Você não possui permissão</h3>
+{% endif %} {% endblock content %}>

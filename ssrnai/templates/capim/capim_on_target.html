@@ -1,0 +1,44 @@
+{% extends "base/base_bmdb.html" %} {% load gbp_filters %} {% load bootstrap3 %}
+{% block title %} <title>Show organism</title> {% endblock title %} {% block
+content %}
+<input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
+<hr />
+{% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
+RIDB' or request.user.is_superuser %}
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <div class="row">
+              <div class="col-md-12">Localização no dsRNA</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Início</div>
+              <div class="col-md-6">Fim</div>
+            </div>  
+          </th>
+          <th>Número de on-targets</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ontarget in ontargets %}
+        <tr>
+          <td>
+            <div class="row">
+              <div class="col-md-6">{{ontarget.start_dsRNA}}</div>
+              <div class="col-md-6">{{ontarget.end_dsRNA}}</div>
+            </div> 
+          </td>
+          <td>{{ontarget.number_ontarget}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% else %}
+<h3>Você não possui permissão</h3>
+{% endif %} {% endblock content %}>

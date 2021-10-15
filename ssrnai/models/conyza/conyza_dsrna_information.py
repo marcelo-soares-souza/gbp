@@ -8,10 +8,11 @@ class Conyza_Dsrna_Information(models.Model, TemplateModelMixin):
     organism = models.ForeignKey(Organisms("organism_id"), null=True, blank=True, on_delete=models.SET_NULL)
     gene = models.ForeignKey(Conyza_Gene_Information("gene_id"), null=True, blank=True, on_delete=models.SET_NULL)
     dsrna_name = models.CharField(("dsrna_name"), max_length=100)
-    start = models.IntegerField(("start"))
-    stop = models.IntegerField(("stop"))
-    length = models.IntegerField("length")
-    dsrna_seq = models.TextField(("dsrna_seq"))
+    start = models.IntegerField(("start"), null=True, blank=True)
+    stop = models.IntegerField(("stop"), null=True, blank=True)
+    length = models.IntegerField(("length"), null=True, blank=True)
+    dsrna_seq = models.CharField(("dsrna_seq"), max_length=2000, null=True, blank=True)
+    offtarget_image = models.TextField(("offtarget_image"), null=True, blank=True)
 
 
     class Meta:

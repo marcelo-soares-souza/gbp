@@ -11,7 +11,21 @@
         {% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin RIDB' or request.user.is_superuser %}
           <h3>
             {% for database in databases %}
-            <a href="/ssrnai/databaseSearch/{{database.id}}">{{database}}</a><br/><br/>
+            {% if database.id == 1 %}
+            <a href="/ssrnai/buva/buva_database_search/{{database.id}}">{{database}}</a><br/><br/>
+            {% endif %}
+            {% if database.id == 3 %}
+            <a href="/ssrnai/nematoide/nematoide_database_search/{{database.id}}">{{database}}</a><br/><br/>
+            {% endif %}
+            {% if database.id == 4 %}
+            <a href="/ssrnai/lagarta/lagarta_database_search/{{database.id}}">{{database}}</a><br/><br/>
+            {% endif %}
+            {% if database.id == 5 %}
+            <a href="/ssrnai/percevejo/percevejo_database_search/{{database.id}}">{{database}}</a><br/><br/>
+            {% endif %}
+            {% if database.id == 6 %}
+            <a href="/ssrnai/capim/capim_database_search/{{database.id}}">{{database}}</a><br/><br/>
+            {% endif %}
             {% endfor %}
           </h3>
         {% else %}

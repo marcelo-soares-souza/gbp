@@ -43,15 +43,49 @@ from metabolomica.views.formula import FormulaCreate, FormulaDelete, FormulaDeta
 from metabolomica.views.analytical import AnalyticalCreate, AnalyticalDelete, AnalyticalDetail, AnalyticalList, AnalyticalUpdate
 
 # URLs ssRNAi
-#from metabolomica.views.database import DatabaseCreate, DatabaseDelete, DatabaseDetail, DatabaseList, DatabaseUpdate
 from ssrnai.views.dashboard import DashboardSsrnai
 from ssrnai.views.databaseSerach import DatabaseSearch
 from ssrnai.views.showOrganism import ShowOrganism
+from ssrnai.views.percevejo.percevejo_database_serach import PercevejoDatabaseSearch
+from ssrnai.views.percevejo.percevejo_results import PercevejoResults
 from ssrnai.views.percevejo.percevejo_sequence import PercevejoSequence
 from ssrnai.views.percevejo.percevejo_iscore import PercevejoIScore
 from ssrnai.views.percevejo.percevejo_dicer import PercevejoDicer
 from ssrnai.views.percevejo.percevejo_structure import PercevejoStructure
 from ssrnai.views.percevejo.percevejo_expression import PercevejoExpression
+from ssrnai.views.percevejo.percevejo_on_target import PercevejoOnTarget
+from ssrnai.views.capim.capim_database_serach import CapimDatabaseSearch
+from ssrnai.views.capim.capim_results import CapimResults
+from ssrnai.views.capim.capim_sequence import CapimSequence
+from ssrnai.views.capim.capim_iscore import CapimIScore
+from ssrnai.views.capim.capim_dicer import CapimDicer
+from ssrnai.views.capim.capim_structure import CapimStructure
+from ssrnai.views.capim.capim_expression import CapimExpression
+from ssrnai.views.capim.capim_on_target import CapimOnTarget
+from ssrnai.views.buva.buva_database_serach import BuvaDatabaseSearch
+from ssrnai.views.buva.buva_results import BuvaResults
+from ssrnai.views.buva.buva_sequence import BuvaSequence
+from ssrnai.views.buva.buva_iscore import BuvaIScore
+from ssrnai.views.buva.buva_dicer import BuvaDicer
+from ssrnai.views.buva.buva_structure import BuvaStructure
+from ssrnai.views.buva.buva_expression import BuvaExpression
+from ssrnai.views.buva.buva_on_target import BuvaOnTarget
+from ssrnai.views.lagarta.lagarta_database_serach import LagartaDatabaseSearch
+from ssrnai.views.lagarta.lagarta_results import LagartaResults
+from ssrnai.views.lagarta.lagarta_sequence import LagartaSequence
+from ssrnai.views.lagarta.lagarta_iscore import LagartaIScore
+from ssrnai.views.lagarta.lagarta_dicer import LagartaDicer
+from ssrnai.views.lagarta.lagarta_structure import LagartaStructure
+from ssrnai.views.lagarta.lagarta_expression import LagartaExpression
+from ssrnai.views.lagarta.lagarta_on_target import LagartaOnTarget
+from ssrnai.views.nematoide.nematoide_database_serach import NematoideDatabaseSearch
+from ssrnai.views.nematoide.nematoide_results import NematoideResults
+from ssrnai.views.nematoide.nematoide_sequence import NematoideSequence
+from ssrnai.views.nematoide.nematoide_iscore import NematoideIScore
+from ssrnai.views.nematoide.nematoide_dicer import NematoideDicer
+from ssrnai.views.nematoide.nematoide_structure import NematoideStructure
+from ssrnai.views.nematoide.nematoide_expression import NematoideExpression
+from ssrnai.views.nematoide.nematoide_on_target import NematoideOnTarget
 
 urlpatterns = [
 
@@ -385,13 +419,48 @@ urlpatterns = [
     # Views Ssrnai
     url(r'^ssrnai/dashboard/', DashboardSsrnai.as_view(), name='dashboard_ssrnai'),
     url(r'^ssrnai/databaseSearch/(?P<pk>\d+)/$', DatabaseSearch.as_view(), name='database-search'),
-    url(r'^ssrnai/show-organism/', ShowOrganism.as_view(), name='show-organism'),
+    #url(r'^ssrnai/show-organism/', ShowOrganism.as_view(), name='show-organism'),
+    url(r'^ssrnai/percevejo/percevejo_database_search/(?P<pk>\d+)/$', PercevejoDatabaseSearch.as_view(), name='percevejo-databasesearch'),
+    url(r'^ssrnai/percevejo/percevejo_results/', PercevejoResults.as_view(), name='percevejo-results'),
     url(r'^ssrnai/percevejo/percevejo_sequence/(?P<pk>\d+)/$', PercevejoSequence.as_view(), name='percevejo-sequence'),
     url(r'^ssrnai/percevejo/percevejo_iscore/(?P<pk>\d+)/$', PercevejoIScore.as_view(), name='percevejo-iscore'),
     url(r'^ssrnai/percevejo/percevejo_dicer/(?P<pk>\d+)/$', PercevejoDicer.as_view(), name='percevejo-dicer'),
     url(r'^ssrnai/percevejo/percevejo_structure/(?P<pk>\d+)/$', PercevejoStructure.as_view(), name='percevejo-structure'),
     url(r'^ssrnai/percevejo/percevejo_expression/(?P<pk>\d+)/$', PercevejoExpression.as_view(), name='percevejo-expression'),
-
+    url(r'^ssrnai/percevejo/percevejo_on_taget/(?P<pk>\d+)/$', PercevejoOnTarget.as_view(), name='percevejo-on-target'),
+    url(r'^ssrnai/capim/capim_database_search/(?P<pk>\d+)/$', CapimDatabaseSearch.as_view(), name='capim-databasesearch'),
+    url(r'^ssrnai/capim/capim_results/', CapimResults.as_view(), name='capim-results'),
+    url(r'^ssrnai/capim/capim_sequence/(?P<pk>\d+)/$', CapimSequence.as_view(), name='capim-sequence'),
+    url(r'^ssrnai/capim/capim_iscore/(?P<pk>\d+)/$', CapimIScore.as_view(), name='capim-iscore'),
+    url(r'^ssrnai/capim/capim_dicer/(?P<pk>\d+)/$', CapimDicer.as_view(), name='capim-dicer'),
+    url(r'^ssrnai/capim/capim_structure/(?P<pk>\d+)/$', CapimStructure.as_view(), name='capim-structure'),
+    url(r'^ssrnai/capim/capim_expression/(?P<pk>\d+)/$', CapimExpression.as_view(), name='capim-expression'),
+    url(r'^ssrnai/capim/capim_on_taget/(?P<pk>\d+)/$', CapimOnTarget.as_view(), name='capim-on-target'),
+    url(r'^ssrnai/buva/buva_database_search/(?P<pk>\d+)/$', BuvaDatabaseSearch.as_view(), name='buva-databasesearch'),
+    url(r'^ssrnai/buva/buva_results/', BuvaResults.as_view(), name='buva-results'),
+    url(r'^ssrnai/buva/buva_sequence/(?P<pk>\d+)/$', BuvaSequence.as_view(), name='buva-sequence'),
+    url(r'^ssrnai/buva/buva_iscore/(?P<pk>\d+)/$', BuvaIScore.as_view(), name='buva-iscore'),
+    url(r'^ssrnai/buva/buva_dicer/(?P<pk>\d+)/$', BuvaDicer.as_view(), name='buva-dicer'),
+    url(r'^ssrnai/buva/buva_structure/(?P<pk>\d+)/$', BuvaStructure.as_view(), name='buva-structure'),
+    url(r'^ssrnai/buva/buva_expression/(?P<pk>\d+)/$', BuvaExpression.as_view(), name='buva-expression'),
+    url(r'^ssrnai/buva/buva_on_taget/(?P<pk>\d+)/$', BuvaOnTarget.as_view(), name='buva-on-target'),
+    url(r'^ssrnai/lagarta/lagarta_database_search/(?P<pk>\d+)/$', LagartaDatabaseSearch.as_view(), name='lagarta-databasesearch'),
+    url(r'^ssrnai/lagarta/lagarta_results/', LagartaResults .as_view(), name='lagarta-results'),
+    url(r'^ssrnai/lagarta/lagarta_sequence/(?P<pk>\d+)/$', LagartaSequence.as_view(), name='lagarta-sequence'),
+    url(r'^ssrnai/lagarta/lagarta_iscore/(?P<pk>\d+)/$', LagartaIScore.as_view(), name='lagarta-iscore'),
+    url(r'^ssrnai/lagarta/lagarta_dicer/(?P<pk>\d+)/$', LagartaDicer.as_view(), name='lagarta-dicer'),
+    url(r'^ssrnai/lagarta/lagarta_structure/(?P<pk>\d+)/$', LagartaStructure.as_view(), name='lagarta-structure'),
+    url(r'^ssrnai/lagarta/lagarta_expression/(?P<pk>\d+)/$', LagartaExpression.as_view(), name='lagarta-expression'),
+    url(r'^ssrnai/lagarta/lagarta_on_taget/(?P<pk>\d+)/$', LagartaOnTarget.as_view(), name='lagarta-on-target'),
+    url(r'^ssrnai/nematoide/nematoide_database_search/(?P<pk>\d+)/$', NematoideDatabaseSearch.as_view(), name='nematoide-databasesearch'),
+    url(r'^ssrnai/nematoide/nematoide_results/', NematoideResults.as_view(), name='nematoide-results'),
+    url(r'^ssrnai/nematoide/nematoide_sequence/(?P<pk>\d+)/$', NematoideSequence.as_view(), name='nematoide-sequence'),
+    url(r'^ssrnai/nematoide/nematoide_iscore/(?P<pk>\d+)/$', NematoideIScore.as_view(), name='nematoide-iscore'),
+    url(r'^ssrnai/nematoide/nematoide_dicer/(?P<pk>\d+)/$', NematoideDicer.as_view(), name='nematoide-dicer'),
+    url(r'^ssrnai/nematoide/nematoide_structure/(?P<pk>\d+)/$', NematoideStructure.as_view(), name='nematoide-structure'),
+    url(r'^ssrnai/nematoide/nematoide_expression/(?P<pk>\d+)/$', NematoideExpression.as_view(), name='nematoide-expression'),
+    url(r'^ssrnai/nematoide/nematoide_on_taget/(?P<pk>\d+)/$', NematoideOnTarget.as_view(), name='nematoide-on-target'),
+    
     # Login e Logout
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
