@@ -2,6 +2,7 @@
 {% block title %} <title>Show organism</title> {% endblock title %} {% block
 content %}
 <input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
+<h2>{{ database.name }}</h2>
 <hr />
 {% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
 RIDB' or request.user.is_superuser %}
@@ -16,76 +17,100 @@ RIDB' or request.user.is_superuser %}
       </thead>
       <tbody>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body1}}</td>
+          <th>exilis_Spike</th>
+          <td>{{expression.exilis_Spike}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body2}}</td>
+          <th>exilis_Grain</th>
+          <td>{{expression.exilis_Grain}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body3}}</td>
+          <th>exilis_Seedling</th>
+          <td>{{expression.exilis_Seedling}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body4}}</td>
+          <th>exilis_leaf</th>
+          <td>{{expression.exilis_leaf}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut1}}</td>
+          <th>exilis_whole</th>
+          <td>{{expression.exilis_whole}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body5}}</td>
+          <th>eriantha_whole</th>
+          <td>{{expression.eriantha_whole}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut2}}</td>
+          <th>cuyabensis_whole</th>
+          <td>{{expression.cuyabensis_whole}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut3}}</td>
+          <th>sanguinalis_Resist1</th>
+          <td>{{expression.sanguinalis_Resist1}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut4}}</td>
+          <th>sanguinalis_Resist2</th>
+          <td>{{expression.sanguinalis_Resist2}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut5}}</td>
+          <th>sanguinalis_Suscep1</th>
+          <td>{{expression.sanguinalis_Suscep1}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut6}}</td>
+          <th>sanguinalis_Suscep2</th>
+          <td>{{expression.sanguinalis_Suscep2}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut7}}</td>
+          <th>ciliaris_leaves</th>
+          <td>{{expression.ciliaris_leaves}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut8}}</td>
+          <th>ciliaris_roots</th>
+          <td>{{expression.ciliaris_roots}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut9}}</td>
+          <th>ciliaris_leave</th>
+          <td>{{expression.ciliaris_leave}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut10}}</td>
+          <th>ciliaris_root</th>
+          <td>{{expression.ciliaris_root}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut11}}</td>
+          <th>milanjiana_Whole</th>
+          <td>{{expression.milanjiana_Whole}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut12}}</td>
+          <th>californica_leaf1</th>
+          <td>{{expression.californica_leaf1}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut13}}</td>
+          <th>californica_leaf2</th>
+          <td>{{expression.californica_leaf2}}</td>
+        </tr>
+        <tr>
+          <th>californica_leaf3</th>
+          <td>{{expression.californica_leaf3}}</td>
+        </tr>
+        <tr>
+          <th>californica_leaf4</th>
+          <td>{{expression.californica_leaf4}}</td>
+        </tr>
+        <tr>
+          <th>californica_leaf5</th>
+          <td>{{expression.californica_leaf5}}</td>
+        </tr>
+        <tr>
+          <th>californica_leaf6</th>
+          <td>{{expression.californica_leaf6}}</td>
+        </tr>
+        <tr>
+          <th>ciliaris_Resist1</th>
+          <td>{{expression.ciliaris_Resist1}}</td>
+        </tr>
+        <tr>
+          <th>ciliaris_Resist2</th>
+          <td>{{expression.ciliaris_Resist2}}</td>
         </tr>
       </tbody>
     </table>

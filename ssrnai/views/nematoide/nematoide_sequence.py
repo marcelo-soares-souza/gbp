@@ -1,7 +1,7 @@
 from django.views.generic import DetailView
 from ssrnai.models.nematoide.nematoide_dsrna_information import Nematoide_Dsrna_Information
 from ssrnai.models.nematoide.nematoide_gene_information import Nematoide_Gene_Information
-
+from ssrnai.models import Database
 
 class NematoideSequence(DetailView):
     template_name = 'nematoide/nematoide_sequence.html'
@@ -14,5 +14,6 @@ class NematoideSequence(DetailView):
         context['dsrna'] = Nematoide_Dsrna_Information.objects.get(id=int(self.kwargs['pk']))
         dsrna = context['dsrna']
         context['gene'] = Nematoide_Gene_Information.objects.get(id=int(dsrna.gene_id))
+        context['database'] = Database.objects.get(id=int(3))
 
         return context

@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.lagarta.lagarta_expression import Lagarta_Expression
 from ssrnai.models.lagarta.lagarta_expression_description import Lagarta_expression_description
 from ssrnai.models.lagarta.lagarta_gene_information import Lagarta_Gene_Information
+from ssrnai.models import Database
 
 
 class LagartaExpression(DetailView):
@@ -16,5 +17,6 @@ class LagartaExpression(DetailView):
         expression = context['expression']
         context['gene'] = Lagarta_Gene_Information.objects.get(id=int(expression.gene_id))
         context['descriptions'] = Lagarta_expression_description.objects.all()
+        context['database'] = Database.objects.get(id=int(4))
 
         return context

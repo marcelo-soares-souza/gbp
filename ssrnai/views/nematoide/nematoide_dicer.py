@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.nematoide.nematoide_dicer import Nematoide_Dicer
 from ssrnai.models.nematoide.nematoide_gene_information import Nematoide_Gene_Information
 from ssrnai.models.nematoide.nematoide_dsrna_information import Nematoide_Dsrna_Information
+from ssrnai.models import Database
 
 
 class NematoideDicer(DetailView):
@@ -16,5 +17,6 @@ class NematoideDicer(DetailView):
         dicer = context['dicer']
         context['dsRNA'] = Nematoide_Dsrna_Information.objects.get(id=int(dicer.dsrna_id))
         context['gene'] = Nematoide_Gene_Information.objects.get(id=int(dicer.gene_id))
+        context['database'] = Database.objects.get(id=int(3))
 
         return context

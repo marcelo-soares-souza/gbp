@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.lagarta.lagarta_iscore import Lagarta_Iscore
 from ssrnai.models.lagarta.lagarta_gene_information import Lagarta_Gene_Information
 from ssrnai.models.lagarta.lagarta_dsrna_information import Lagarta_Dsrna_Information
+from ssrnai.models import Database
 
 class LagartaIScore(DetailView):
     template_name = 'lagarta/lagarta_iscore.html'
@@ -15,5 +16,6 @@ class LagartaIScore(DetailView):
         iscore = context['iscore']
         context['dsRNA'] = Lagarta_Dsrna_Information.objects.get(id=int(iscore.dsrna_id))
         context['gene'] = Lagarta_Gene_Information.objects.get(id=int(iscore.gene_id))
+        context['database'] = Database.objects.get(id=int(4))
 
         return context

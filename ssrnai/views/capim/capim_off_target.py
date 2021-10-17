@@ -1,5 +1,6 @@
 from django.views.generic import DetailView
 from ssrnai.models.capim.capim_off_targets import Capim_Off_Targets
+from ssrnai.models import Database
 
 class CapimOffTarget(DetailView):
     template_name = 'capim/capim_on_target.html'
@@ -10,5 +11,6 @@ class CapimOffTarget(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CapimOffTarget, self).get_context_data(**kwargs)
         context['offtargets'] = Capim_Off_Targets.objects.get(gene=int(self.kwargs['pk']))
+        context['database'] = Database.objects.get(id=int(6))
 
         return context

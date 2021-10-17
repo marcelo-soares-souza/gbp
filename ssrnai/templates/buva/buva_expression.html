@@ -2,6 +2,7 @@
 {% block title %} <title>Show organism</title> {% endblock title %} {% block
 content %}
 <input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
+<h2>{{ database.name }}</h2>
 <hr />
 {% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
 RIDB' or request.user.is_superuser %}
@@ -16,76 +17,92 @@ RIDB' or request.user.is_superuser %}
       </thead>
       <tbody>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body1}}</td>
+          <th>Q17_R1_POST</th>
+          <td>{{expression.Q17_R1_POST}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body2}}</td>
+          <th>Q17_R1_PRE</th>
+          <td>{{expression.Q17_R1_PRE}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body3}}</td>
+          <th>Q17_R5_POST</th>
+          <td>{{expression.Q17_R5_POST}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body4}}</td>
+          <th>Q17_R5_PRE</th>
+          <td>{{expression.Q17_R5_PRE}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut1}}</td>
+          <th>Q21_S4_POST</th>
+          <td>{{expression.Q21_S4_POST}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body5}}</td>
+          <th>Q21_S4_PRE</th>
+          <td>{{expression.Q21_S4_PRE}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut2}}</td>
+          <th>Q21_S5_POST</th>
+          <td>{{expression.Q21_S5_POST}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut3}}</td>
+          <th>Q21_S5_PRE</th>
+          <td>{{expression.Q21_S5_PRE}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut4}}</td>
+          <th>Q21_S7_POST</th>
+          <td>{{expression.Q21_S7_POST}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut5}}</td>
+          <th>Q21_S7_PRE</th>
+          <td>{{expression.Q21_S7_PRE}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut6}}</td>
+          <th>Q34_S1_POST</th>
+          <td>{{expression.Q34_S1_POST}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut7}}</td>
+          <th>Q34_S1_PRE</th>
+          <td>{{expression.Q34_S1_PRE}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut8}}</td>
+          <th>Q34_S2_POST</th>
+          <td>{{expression.Q34_S2_POST}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut9}}</td>
+          <th>Q34_S2_PRE</th>
+          <td>{{expression.Q34_S2_PRE}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut10}}</td>
+          <th>Q34_S5_POST</th>
+          <td>{{expression.Q34_S5_POST}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut11}}</td>
+          <th>Q34_S5_PRE</th>
+          <td>{{expression.Q34_S5_PRE}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut12}}</td>
+          <th>Q42_R4_POST</th>
+          <td>{{expression.Q42_R4_POST}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut13}}</td>
+          <th>Q42_R4_PRE</th>
+          <td>{{expression.Q42_R4_PRE}}</td>
+        </tr>
+        <tr>
+          <th>Q42_R5_POST</th>
+          <td>{{expression.Q42_R5_POST}}</td>
+        </tr>
+        <tr>
+          <th>Q42_R5_PRE</th>
+          <td>{{expression.Q42_R5_PRE}}</td>
+        </tr>
+        <tr>
+          <th>Q42_R6_POST</th>
+          <td>{{expression.Q42_R6_POST}}</td>
+        </tr>
+        <tr>
+          <th>Q42_R6_PRE</th>
+          <td>{{expression.Q42_R6_PRE}}</td>
         </tr>
       </tbody>
     </table>

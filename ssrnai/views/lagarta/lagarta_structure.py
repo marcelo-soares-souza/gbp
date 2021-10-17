@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.lagarta.lagarta_structure import Lagarta_Structure
 from ssrnai.models.lagarta.lagarta_gene_information import Lagarta_Gene_Information
 from ssrnai.models.lagarta.lagarta_dsrna_information import Lagarta_Dsrna_Information
+from ssrnai.models import Database
 
 class LagartaStructure(DetailView):
     template_name = 'lagarta/lagarta_structure.html'
@@ -15,5 +16,6 @@ class LagartaStructure(DetailView):
         structure = context['structure']
         context['dsRNA'] = Lagarta_Dsrna_Information.objects.get(id=int(structure.dsrna_id))
         context['gene'] = Lagarta_Gene_Information.objects.get(id=int(structure.gene_id))
+        context['database'] = Database.objects.get(id=int(4))
 
         return context

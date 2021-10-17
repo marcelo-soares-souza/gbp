@@ -1,7 +1,7 @@
 from django.db.models.fields import CharField
 from django.shortcuts import render
 from django.views.generic.base import View
-from ssrnai.models import Organisms
+from ssrnai.models import Organisms, Database
 from django.views.generic import DetailView
 from django.db.models import Q
 from ssrnai.models.nematoide.nematoide_dsrna_information import Nematoide_Dsrna_Information
@@ -18,7 +18,7 @@ class NematoideResults(DetailView):
     def post(self, request):
         context = {}
         database = request.POST.get('db', '')
-        context['database'] = database 
+        context['database'] = Database.objects.get(id=int(database)) 
             
         organism = request.POST.get('organism', '0')
         gene = request.POST.get('gene', '')
@@ -113,8 +113,8 @@ class NematoideResults(DetailView):
                 expression = Nematoide_Expression.objects.filter(gene=int(g.id))
             except ObjectDoesNotExist:
                 expression = []
-            if(len(expression)>1):
-                expression = expression[0]
+            #if(len(expression)>1):
+            #    expression = expression[0]
 
             dsRNAs = []
             try:
@@ -132,8 +132,8 @@ class NematoideResults(DetailView):
                     except ObjectDoesNotExist:
                         iscore = []
                     
-                    if(len(iscore)>1):
-                        iscore = iscore[0]
+                    #if(len(iscore)>1):
+                    #    iscore = iscore[0]
 
                     dicer = []
                     try:
@@ -141,8 +141,8 @@ class NematoideResults(DetailView):
                     except ObjectDoesNotExist:
                         dicer = []
 
-                    if(len(dicer)>1):
-                        dicer = dicer[0]
+                    #if(len(dicer)>1):
+                    #    dicer = dicer[0]
                     
                     estrutura = []
                     try:
@@ -150,8 +150,8 @@ class NematoideResults(DetailView):
                     except ObjectDoesNotExist:
                         estrutura = []
 
-                    if(len(estrutura)>1):
-                        estrutura = estrutura[0]
+                    #if(len(estrutura)>1):
+                    #    estrutura = estrutura[0]
 
                     result.append(g.id) #0
                     result.append(g.gene_name) #1
@@ -170,10 +170,10 @@ class NematoideResults(DetailView):
                     result.append(ds.id) #8
 
                     if not not iscore:
-                        result.append(iscore.id) #9
-                        result.append(iscore.mean_dsir) #10
-                        result.append(iscore.mean_iscore) #11
-                        result.append(iscore.mean_sbiopredsi) #12
+                        result.append(iscore[0].id) #9
+                        result.append(iscore[0].mean_dsir) #10
+                        result.append(iscore[0].mean_iscore) #11
+                        result.append(iscore[0].mean_sbiopredsi) #12
                     else:
                         result.append("-")
                         result.append("-")

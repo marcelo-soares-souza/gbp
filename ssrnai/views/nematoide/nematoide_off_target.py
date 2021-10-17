@@ -1,5 +1,6 @@
 from django.views.generic import DetailView
 from ssrnai.models.nematoide.nematoide_off_targets import Nematoide_Off_Targets
+from ssrnai.models import Database
 
 class NematoideOffTarget(DetailView):
     template_name = 'nematoide/nematoide_on_target.html'
@@ -10,5 +11,6 @@ class NematoideOffTarget(DetailView):
     def get_context_data(self, **kwargs):
         context = super(NematoideOffTarget, self).get_context_data(**kwargs)
         context['offtargets'] = Nematoide_Off_Targets.objects.get(gene=int(self.kwargs['pk']))
+        context['database'] = Database.objects.get(id=int(3))
 
         return context

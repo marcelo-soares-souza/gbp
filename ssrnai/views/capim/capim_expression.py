@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.capim.capim_expression import Capim_Expression
 from ssrnai.models.capim.capim_expression_description import Capim_expression_description
 from ssrnai.models.capim.capim_gene_information import Capim_Gene_Information
+from ssrnai.models import Database
 
 class CapimExpression(DetailView):
     template_name = 'capim/capim_expression.html'
@@ -15,5 +16,6 @@ class CapimExpression(DetailView):
         expression = context['expression']
         context['gene'] = Capim_Gene_Information.objects.get(id=int(expression.gene_id))
         context['descriptions'] = Capim_expression_description.objects.all()
+        context['database'] = Database.objects.get(id=int(6))
 
         return context

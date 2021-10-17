@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.conyza.conyza_expression import Conyza_Expression
 from ssrnai.models.conyza.conyza_expression_description import Conyza_expression_description
 from ssrnai.models.conyza.conyza_gene_information import Conyza_Gene_Information
+from ssrnai.models import Database
 
 
 class BuvaExpression(DetailView):
@@ -16,5 +17,6 @@ class BuvaExpression(DetailView):
         expression = context['expression']
         context['gene'] = Conyza_Gene_Information.objects.get(id=int(expression.gene_id))
         context['descriptions'] = Conyza_expression_description.objects.all()
+        context['database'] = Database.objects.get(id=int(1))
 
         return context

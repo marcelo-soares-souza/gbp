@@ -2,7 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.nematoide.nematoide_expression import Nematoide_Expression
 from ssrnai.models.nematoide.nematoide_expression_description import Nematoide_expression_description
 from ssrnai.models.nematoide.nematoide_gene_information import Nematoide_Gene_Information
-
+from ssrnai.models import Database
 
 class NematoideExpression(DetailView):
     template_name = 'nematoide/nematoide_expression.html'
@@ -16,5 +16,6 @@ class NematoideExpression(DetailView):
         expression = context['expression']
         context['gene'] = Nematoide_Gene_Information.objects.get(id=int(expression.gene_id))
         context['descriptions'] = Nematoide_expression_description.objects.all()
+        context['database'] = Database.objects.get(id=int(3))
 
         return context

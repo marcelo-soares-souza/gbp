@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.capim.capim_dicer import Capim_Dicer
 from ssrnai.models.capim.capim_gene_information import Capim_Gene_Information
 from ssrnai.models.capim.capim_dsrna_information import Capim_Dsrna_Information
+from ssrnai.models import Database
 
 
 class CapimDicer(DetailView):
@@ -16,5 +17,6 @@ class CapimDicer(DetailView):
         dicer = context['dicer']
         context['dsRNA'] = Capim_Dsrna_Information.objects.get(id=int(dicer.dsrna_id))
         context['gene'] = Capim_Gene_Information.objects.get(id=int(dicer.gene_id))
+        context['database'] = Database.objects.get(id=int(6))
 
         return context

@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.conyza.conyza_iscore import Conyza_Iscore
 from ssrnai.models.conyza.conyza_gene_information import Conyza_Gene_Information
 from ssrnai.models.conyza.conyza_dsrna_information import Conyza_Dsrna_Information
+from ssrnai.models import Database
 
 
 class BuvaIScore(DetailView):
@@ -16,5 +17,6 @@ class BuvaIScore(DetailView):
         iscore = context['iscore']
         context['dsRNA'] = Conyza_Dsrna_Information.objects.get(id=int(iscore.dsrna_id))
         context['gene'] = Conyza_Gene_Information.objects.get(id=int(iscore.gene_id))
+        context['database'] = Database.objects.get(id=int(1))
 
         return context

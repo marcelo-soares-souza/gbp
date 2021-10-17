@@ -1,5 +1,6 @@
 from django.views.generic import DetailView
 from ssrnai.models.capim.capim_on_targets import Capim_On_Targets
+from ssrnai.models import Database
 
 class CapimOnTarget(DetailView):
     template_name = 'capim/capim_on_target.html'
@@ -10,5 +11,6 @@ class CapimOnTarget(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CapimOnTarget, self).get_context_data(**kwargs)
         context['ontargets'] = Capim_On_Targets.objects.filter(dsrna=int(self.kwargs['pk']))
+        context['database'] = Database.objects.get(id=int(6))
 
         return context

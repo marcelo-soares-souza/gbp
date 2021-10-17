@@ -1,7 +1,7 @@
 from django.db.models.fields import CharField
 from django.shortcuts import render
 from django.views.generic.base import View
-from ssrnai.models import Organisms
+from ssrnai.models import Organisms, Database
 from django.views.generic import DetailView
 from django.db.models import Q
 from ssrnai.models.percevejo.percevejo_dsrna_information import PercevejoDsrnaInformation
@@ -18,9 +18,7 @@ class PercevejoResults(DetailView):
     def post(self, request):
         context = {}
         database = request.POST.get('db', '')
-        context['database'] = database 
-        #if database == 5:
-            #Gene = Percevejo_Gene_Information()
+        context['database'] = Database.objects.get(id=int(database))
             
         organism = request.POST.get('organism', '0')
         gene = request.POST.get('gene', '')
@@ -144,8 +142,8 @@ class PercevejoResults(DetailView):
                     except ObjectDoesNotExist:
                         iscore = []
                     
-                    if(len(iscore)>1):
-                        iscore = iscore[0]
+                    #if(len(iscore)>1):
+                    #    iscore = iscore[0]
 
                     dicer = []
                     try:
@@ -153,8 +151,8 @@ class PercevejoResults(DetailView):
                     except ObjectDoesNotExist:
                         dicer = []
 
-                    if(len(dicer)>1):
-                        dicer = dicer[0]
+                    #if(len(dicer)>1):
+                    #    dicer = dicer[0]
                     
                     estrutura = []
                     try:
@@ -162,8 +160,8 @@ class PercevejoResults(DetailView):
                     except ObjectDoesNotExist:
                         estrutura = []
 
-                    if(len(estrutura)>1):
-                        estrutura = estrutura[0]
+                    #if(len(estrutura)>1):
+                    #    estrutura = estrutura[0]
 
                     result.append(g.id) #0
                     result.append(g.gene_name) #1
@@ -182,10 +180,10 @@ class PercevejoResults(DetailView):
                     result.append(ds.id) #8
 
                     if not not iscore:
-                        result.append(iscore.id) #9
-                        result.append(iscore.mean_dsir) #10
-                        result.append(iscore.mean_iscore) #11
-                        result.append(iscore.mean_sbiopredsi) #12
+                        result.append(iscore[0].id) #9
+                        result.append(iscore[0].mean_dsir) #10
+                        result.append(iscore[0].mean_iscore) #11
+                        result.append(iscore[0].mean_sbiopredsi) #12
                     else:
                         result.append("-")
                         result.append("-")

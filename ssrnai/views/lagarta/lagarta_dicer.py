@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.lagarta.lagarta_dicer import Lagarta_Dicer
 from ssrnai.models.lagarta.lagarta_gene_information import Lagarta_Gene_Information
 from ssrnai.models.lagarta.lagarta_dsrna_information import Lagarta_Dsrna_Information
+from ssrnai.models import Database
 
 class LagartaDicer(DetailView):
     template_name = 'lagarta/lagarta_dicer.html'
@@ -15,5 +16,6 @@ class LagartaDicer(DetailView):
         dicer = context['dicer']
         context['dsRNA'] = Lagarta_Dsrna_Information.objects.get(id=int(dicer.dsrna_id))
         context['gene'] = Lagarta_Gene_Information.objects.get(id=int(dicer.gene_id))
+        context['database'] = Database.objects.get(id=int(4))
 
         return context

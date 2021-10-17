@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.capim.capim_iscore import Capim_Iscore
 from ssrnai.models.capim.capim_gene_information import Capim_Gene_Information
 from ssrnai.models.capim.capim_dsrna_information import Capim_Dsrna_Information
+from ssrnai.models import Database
 
 
 class CapimIScore(DetailView):
@@ -16,5 +17,6 @@ class CapimIScore(DetailView):
         iscore = context['iscore']
         context['dsRNA'] = Capim_Dsrna_Information.objects.get(id=int(iscore.dsrna_id))
         context['gene'] = Capim_Gene_Information.objects.get(id=int(iscore.gene_id))
+        context['database'] = Database.objects.get(id=int(6))
 
         return context

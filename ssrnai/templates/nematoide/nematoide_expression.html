@@ -2,6 +2,7 @@
 {% block title %} <title>Show organism</title> {% endblock title %} {% block
 content %}
 <input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
+<h2>{{ database.name }}</h2>
 <hr />
 {% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
 RIDB' or request.user.is_superuser %}
@@ -16,77 +17,109 @@ RIDB' or request.user.is_superuser %}
       </thead>
       <tbody>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body1}}</td>
+          <th>MI_egg_2</th>
+          <td>{{expression.MI_egg_2}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body2}}</td>
+          <th>MI_J3_3</th>
+          <td>{{expression.MI_J3_3}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body3}}</td>
+          <th>MI_J4_3</th>
+          <td>{{expression.MI_J4_3}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body4}}</td>
+          <th>MI_J4_2</th>
+          <td>{{expression.MI_J4_2}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut1}}</td>
+          <th>MI_egg_1</th>
+          <td>{{expression.MI_egg_1}}</td>
         </tr>
         <tr>
-          <th>Eheros_FatBody</th>
-          <td>{{expression.eheros_fat_body5}}</td>
+          <th>MI_J4_1</th>
+          <td>{{expression.MI_J4_1}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut2}}</td>
+          <th>MI_female_2</th>
+          <td>{{expression.MI_female_2}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut3}}</td>
+          <th>MI_female_1</th>
+          <td>{{expression.MI_female_1}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut4}}</td>
+          <th>MI_female_3</th>
+          <td>{{expression.MI_female_3}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut5}}</td>
+          <th>MI_J2_2</th>
+          <td>{{expression.MI_J2_2}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut6}}</td>
+          <th>MI_J3_1</th>
+          <td>{{expression.MI_J3_1}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut7}}</td>
+          <th>MI_J2_3</th>
+          <td>{{expression.MI_J2_3}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut8}}</td>
+          <th>MI_J3_2</th>
+          <td>{{expression.MI_J3_2}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut9}}</td>
+          <th>MI_J2_1</th>
+          <td>{{expression.MI_J2_1}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut10}}</td>
+          <th>MI_egg_3</th>
+          <td>{{expression.MI_egg_3}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut11}}</td>
+          <th>Nig_2_Rep3</th>
+          <td>{{expression.Nig_2_Rep3}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut12}}</td>
+          <th>Nig_2_Rep2</th>
+          <td>{{expression.Nig_2_Rep2}}</td>
         </tr>
         <tr>
-          <th>Eheros_Gut</th>
-          <td>{{expression.eheros_gut13}}</td>
+          <th>Nig_3_Rep1</th>
+          <td>{{expression.Nig_3_Rep1}}</td>
         </tr>
+        <tr>
+          <th>Nig_2_Rep1</th>
+          <td>{{expression.Nig_2_Rep1}}</td>
+        </tr>
+        <tr>
+          <th>Nig_1_Rep3</th>
+          <td>{{expression.Nig_1_Rep3}}</td>
+        </tr>
+        <tr>
+          <th>Nig_1_Rep2</th>
+          <td>{{expression.Nig_1_Rep2}}</td>
+        </tr>
+        <tr>
+          <th>Nig_1_Rep1</th>
+          <td>{{expression.Nig_1_Rep1}}</td>
+        </tr>
+        <tr>
+          <th>Ken_1_Rep3</th>
+          <td>{{expression.Ken_1_Rep3}}</td>
+        </tr>
+        <tr>
+          <th>Nig_3_Rep2</th>
+          <td>{{expression.Nig_3_Rep2}}</td>
+        </tr>
+        <tr>
+          <th>Nig_3_Rep3</th>
+          <td>{{expression.Nig_3_Rep3}}</td>
+        </tr>
+        <tr>
+          <th>Ken_1_Rep1</th>
+          <td>{{expression.Ken_1_Rep1}}</td>
+        </tr>       								        
       </tbody>
     </table>
   </div>

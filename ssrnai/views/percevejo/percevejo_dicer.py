@@ -1,4 +1,5 @@
 from django.views.generic import DetailView
+from ssrnai.models import Database
 from ssrnai.models.percevejo.percevejo_dicer import Percevejo_Dicer
 from ssrnai.models.percevejo.percevejo_gene_information import Percevejo_Gene_Information
 from ssrnai.models.percevejo.percevejo_dsrna_information import PercevejoDsrnaInformation
@@ -16,5 +17,6 @@ class PercevejoDicer(DetailView):
         dicer = context['dicer']
         context['dsRNA'] = PercevejoDsrnaInformation.objects.get(id=int(dicer.dsrna_id))
         context['gene'] = Percevejo_Gene_Information.objects.get(id=int(dicer.gene_id))
+        context['database'] = Database.objects.get(id=int(5))
 
         return context

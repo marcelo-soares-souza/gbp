@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from ssrnai.models.nematoide.nematoide_structure import Nematoide_Structure
 from ssrnai.models.nematoide.nematoide_gene_information import Nematoide_Gene_Information
 from ssrnai.models.nematoide.nematoide_dsrna_information import Nematoide_Dsrna_Information
+from ssrnai.models import Database
 
 class NematoideStructure(DetailView):
     template_name = 'nematoide/nematoide_structure.html'
@@ -15,5 +16,6 @@ class NematoideStructure(DetailView):
         structure = context['structure']
         context['dsRNA'] = Nematoide_Dsrna_Information.objects.get(id=int(structure.dsrna_id))
         context['gene'] = Nematoide_Gene_Information.objects.get(id=int(structure.gene_id))
+        context['database'] = Database.objects.get(id=int(3))
 
         return context

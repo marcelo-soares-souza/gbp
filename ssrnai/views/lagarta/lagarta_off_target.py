@@ -1,5 +1,6 @@
 from django.views.generic import DetailView
 from ssrnai.models.lagarta.lagarta_off_targets import Lagarta_Off_Targets
+from ssrnai.models import Database
 
 class LagartaOffTarget(DetailView):
     template_name = 'lagarta/lagarta_on_target.html'
@@ -10,5 +11,6 @@ class LagartaOffTarget(DetailView):
     def get_context_data(self, **kwargs):
         context = super(LagartaOffTarget, self).get_context_data(**kwargs)
         context['offtargets'] = Lagarta_Off_Targets.objects.get(gene=int(self.kwargs['pk']))
+        context['database'] = Database.objects.get(id=int(4))
 
         return context
