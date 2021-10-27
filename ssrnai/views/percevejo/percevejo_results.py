@@ -2,7 +2,7 @@ from django.db.models.fields import CharField
 from django.shortcuts import render
 from django.views.generic.base import View
 from ssrnai.models import Organisms, Database
-from django.views.generic import DetailView
+from django.views.generic import ListView
 from django.db.models import Q
 from ssrnai.models.percevejo.percevejo_dsrna_information import PercevejoDsrnaInformation
 from ssrnai.models.percevejo.percevejo_gene_information import Percevejo_Gene_Information
@@ -10,10 +10,12 @@ from ssrnai.models.percevejo.percevejo_iscore import Percevejo_Iscore
 from ssrnai.models.percevejo.percevejo_dicer import Percevejo_Dicer
 from ssrnai.models.percevejo.percevejo_structure import Percevejo_Structure
 from ssrnai.models.percevejo.percevejo_expression import Percevejo_Expression
+from ssrnai.models.percevejo.percevejo_asiatico_expression import Percevejo_Asiatico_Expression
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-class PercevejoResults(DetailView):
+class PercevejoResults(ListView):
 
     def post(self, request):
         context = {}
@@ -119,12 +121,19 @@ class PercevejoResults(DetailView):
         ##cria uma lista de resultado. 
         for g in gene_list:
             expression = []
-            try:
-                expression = Percevejo_Expression.objects.filter(gene=int(g.id))
-            except ObjectDoesNotExist:
-                expression = []
-            if(len(expression)>1):
-                expression = expression[0]
+            if(g.organism_id==13):
+                try:
+                    expression = Percevejo_Asiatico_Expression.objects.filter(gene=int(g.id))
+                except ObjectDoesNotExist:
+                    expression = []
+            else:
+                try:
+                    expression = Percevejo_Expression.objects.filter(gene=int(g.id))
+                except ObjectDoesNotExist:
+                    expression = []
+            
+            #if(len(expression)>1):
+            #    expression = expression[0]
 
             dsRNAs = []
             try:
@@ -208,6 +217,7 @@ class PercevejoResults(DetailView):
 
                     result.append(str("on_target")) #18
                     result.append(str("off_target")) #19
+                    result.append(g.organism_id) #20
                     result_list.append(result)
                     result = []
                     ds_list.append(ds)
@@ -237,6 +247,7 @@ class PercevejoResults(DetailView):
                 result.append("-") #17
                 result.append(str("on_target")) #18
                 result.append(str("off_target")) #19
+                result.append(g.organism_id) #20
                 result_list.append(result)
 
 
@@ -254,6 +265,19 @@ class PercevejoResults(DetailView):
         #context['min_ontarget_number'] = min_ontarget_number
         #context['max_ontarget_number'] = max_ontarget_number
 
+        #paginator = Paginator(result_list, 2) # Show 10 contacts per page
+
+        #page = request.GET.get('page',1)
+        #try:
+        #    results = paginator.page(page)
+        #except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        #    results = paginator.page(1)
+        #except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        #    results = paginator.page(paginator.num_pages)
+
         return render(request, 'percevejo/percevejo_results.html', context)
+        #return render(request, 'percevejo/percevejo_results.html', {'results': results})
     
     #success_url = reverse_lazy('show-organism')

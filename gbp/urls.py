@@ -53,6 +53,7 @@ from ssrnai.views.percevejo.percevejo_iscore import PercevejoIScore
 from ssrnai.views.percevejo.percevejo_dicer import PercevejoDicer
 from ssrnai.views.percevejo.percevejo_structure import PercevejoStructure
 from ssrnai.views.percevejo.percevejo_expression import PercevejoExpression
+from ssrnai.views.percevejo.percevejo_asiatico_expression import PercevejoAsiaticoExpression
 from ssrnai.views.percevejo.percevejo_on_target import PercevejoOnTarget
 from ssrnai.views.capim.capim_database_serach import CapimDatabaseSearch
 from ssrnai.views.capim.capim_results import CapimResults
@@ -69,6 +70,7 @@ from ssrnai.views.buva.buva_iscore import BuvaIScore
 from ssrnai.views.buva.buva_dicer import BuvaDicer
 from ssrnai.views.buva.buva_structure import BuvaStructure
 from ssrnai.views.buva.buva_expression import BuvaExpression
+from ssrnai.views.buva.buva_canadensis_expression import BuvaCanadensisExpression
 from ssrnai.views.buva.buva_on_target import BuvaOnTarget
 from ssrnai.views.lagarta.lagarta_database_serach import LagartaDatabaseSearch
 from ssrnai.views.lagarta.lagarta_results import LagartaResults
@@ -427,6 +429,7 @@ urlpatterns = [
     url(r'^ssrnai/percevejo/percevejo_dicer/(?P<pk>\d+)/$', PercevejoDicer.as_view(), name='percevejo-dicer'),
     url(r'^ssrnai/percevejo/percevejo_structure/(?P<pk>\d+)/$', PercevejoStructure.as_view(), name='percevejo-structure'),
     url(r'^ssrnai/percevejo/percevejo_expression/(?P<pk>\d+)/$', PercevejoExpression.as_view(), name='percevejo-expression'),
+    url(r'^ssrnai/percevejo/percevejo_asiatico_expression/(?P<pk>\d+)/$', PercevejoAsiaticoExpression.as_view(), name='percevejo-asiatico-expression'),
     url(r'^ssrnai/percevejo/percevejo_on_taget/(?P<pk>\d+)/$', PercevejoOnTarget.as_view(), name='percevejo-on-target'),
     url(r'^ssrnai/capim/capim_database_search/(?P<pk>\d+)/$', CapimDatabaseSearch.as_view(), name='capim-databasesearch'),
     url(r'^ssrnai/capim/capim_results/', CapimResults.as_view(), name='capim-results'),
@@ -443,6 +446,7 @@ urlpatterns = [
     url(r'^ssrnai/buva/buva_dicer/(?P<pk>\d+)/$', BuvaDicer.as_view(), name='buva-dicer'),
     url(r'^ssrnai/buva/buva_structure/(?P<pk>\d+)/$', BuvaStructure.as_view(), name='buva-structure'),
     url(r'^ssrnai/buva/buva_expression/(?P<pk>\d+)/$', BuvaExpression.as_view(), name='buva-expression'),
+    url(r'^ssrnai/buva/buva_canadensis_expression/(?P<pk>\d+)/$', BuvaCanadensisExpression.as_view(), name='buva-canadensis-expression'),
     url(r'^ssrnai/buva/buva_on_taget/(?P<pk>\d+)/$', BuvaOnTarget.as_view(), name='buva-on-target'),
     url(r'^ssrnai/lagarta/lagarta_database_search/(?P<pk>\d+)/$', LagartaDatabaseSearch.as_view(), name='lagarta-databasesearch'),
     url(r'^ssrnai/lagarta/lagarta_results/', LagartaResults .as_view(), name='lagarta-results'),

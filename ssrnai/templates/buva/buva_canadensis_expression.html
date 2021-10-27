@@ -1,0 +1,179 @@
+{% extends "base/base_bmdb.html" %} {% load gbp_filters %} {% load bootstrap3 %}
+{% block title %} <title>Show organism</title> {% endblock title %} {% block
+content %}
+<input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
+<h2>{{ database.name }}</h2>
+<hr />
+{% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
+RIDB' or request.user.is_superuser %}
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Gene</th>
+          <td>{{gene.gene_name}}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Water_1T_r1</th>
+          <td>{{expression.Water_1T_r1}}</td>
+        </tr>
+        <tr>
+          <th>Water_1T_r2</th>
+          <td>{{expression.Water_1T_r2}}</td>
+        </tr>
+        <tr>
+          <th>Water_1T_r3</th>
+          <td>{{expression.Water_1T_r3}}</td>
+        </tr>
+        <tr>
+          <th>Water_1T_r4</th>
+          <td>{{expression.Water_1T_r4}}</td>
+        </tr>
+        <tr>
+          <th>Water_6T_r1</th>
+          <td>{{expression.Water_6T_r1}}</td>
+        </tr>
+        <tr>
+          <th>Water_6T_r2</th>
+          <td>{{expression.Water_6T_r2}}</td>
+        </tr>
+        <tr>
+          <th>Water_6T_r3</th>
+          <td>{{expression.Water_6T_r3}}</td>
+        </tr>
+        <tr>
+          <th>Water_6T_r4</th>
+          <td>{{expression.Water_6T_r4}}</td>
+        </tr>
+        <tr>
+          <th>2,4-D_1T_r1</th>
+          <td>{{expression.D_2_4_1T_r1}}</td>
+        </tr>
+        <tr>
+          <th>2,4-D_1T_r2</th>
+          <td>{{expression.D_2_4_1T_r2}}</td>
+        </tr>
+        <tr>
+          <th>2,4-D_1T_r3</th>
+          <td>{{expression.D_2_4_1T_r3}}</td>
+        </tr>
+        <tr>
+          <th>2,4-D_1T_r4</th>
+          <td>{{expression.D_2_4_1T_r4}}</td>
+        </tr>
+        <tr>
+          <th>2,4-D_6T_r1</th>
+          <td>{{expression.D_2_4_6T_r1}}</td>
+        </tr>
+        <tr>
+          <th>2,4-D_6T_r2</th>
+          <td>{{expression.D_2_4_6T_r2}}</td>
+        </tr>
+        <tr>
+          <th>2,4-D_6T_r3</th>
+          <td>{{expression.D_2_4_6T_r3}}</td>
+        </tr>
+        <tr>
+          <th>2,4-D_6T_r4</th>
+          <td>{{expression.D_2_4_6T_r4}}</td>
+        </tr>
+        <tr>
+          <th>Dicamba_1T_r1</th>
+          <td>{{expression.Dicamba_1T_r1}}</td>
+        </tr>
+        <tr>
+          <th>Dicamba_1T_r2</th>
+          <td>{{expression.Dicamba_1T_r2}}</td>
+        </tr>
+        <tr>
+          <th>Dicamba_1T_r3</th>
+          <td>{{expression.Dicamba_1T_r3}}</td>
+        </tr>
+        <tr>
+          <th>Dicamba_1T_r4</th>
+          <td>{{expression.Dicamba_1T_r4}}</td>
+        </tr>
+        <tr>
+          <th>Dicamba_6T_r1</th>
+          <td>{{expression.Dicamba_6T_r1}}</td>
+        </tr>
+        <tr>
+          <th>Dicamba_6T_r2</th>
+          <td>{{expression.Dicamba_6T_r2}}</td>
+        </tr>
+        <tr>
+          <th>Dicamba_6T_r3</th>
+          <td>{{expression.Dicamba_6T_r3}}</td>
+        </tr>
+        <tr>
+          <th>Dicamba_6T_r4</th>
+          <td>{{expression.Dicamba_6T_r4}}</td>
+        </tr>
+        <tr>
+          <th>HM_1T_r1</th>
+          <td>{{expression.HM_1T_r1}}</td>
+        </tr>
+        <tr>
+          <th>HM_1T_r2</th>
+          <td>{{expression.HM_1T_r2}}</td>
+        </tr>
+        <tr>
+          <th>HM_1T_r3</th>
+          <td>{{expression.HM_1T_r3}}</td>
+        </tr>
+        <tr>
+          <th>HM_1T_r4</th>
+          <td>{{expression.HM_1T_r4}}</td>
+        </tr>
+        <tr>
+          <th>HM_6T_r1</th>
+          <td>{{expression.HM_6T_r1}}</td>
+        </tr>
+        <tr>
+          <th>HM_6T_r2</th>
+          <td>{{expression.HM_6T_r2}}</td>
+        </tr>
+        <tr>
+          <th>HM_6T_r3</th>
+          <td>{{expression.HM_6T_r3}}</td>
+        </tr>
+        <tr>
+          <th>HM_6T_r4</th>
+          <td>{{expression.HM_6T_r4}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Tabela expressão</th>
+          <th>Tratamento</th>
+          <th>NCBI_id</th>
+          <th>Descrição</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for description in descriptions %}
+        <tr>
+          <th>{{description.expression}}</th>
+          <td>{{description.treatment}}</td>
+          <td>{{description.ncbi_id}}</td>
+          <td>{{description.condition_description}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% else %}
+<h3>Você não possui permissão</h3>
+{% endif %} {% endblock content %}>

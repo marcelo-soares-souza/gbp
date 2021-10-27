@@ -34,7 +34,11 @@ RIDB' or request.user.is_superuser %}
               <td>{{result.3}}</td>
               <td>{{result.4}}</td>
               {% if result.5 != '-' %}
-              <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/buva/buva_expression/{{result.5}}';">Expressão</button></td>
+                {% if result.20 == 8 %}
+                  <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/buva/buva_canadensis_expression/{{result.5}}';">Expressão</button></td>
+                {% else %}
+                <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/buva/buva_expression/{{result.5}}';">Expressão</button></td>
+                {% endif %}
               {% else %}
               <td>-</td>
               {% endif %}

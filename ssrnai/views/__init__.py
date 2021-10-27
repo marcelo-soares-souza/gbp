@@ -10,6 +10,9 @@ from ssrnai.views.buva.buva_database_serach import BuvaDatabaseSearch
 from ssrnai.views.capim.capim_database_serach import CapimDatabaseSearch
 from ssrnai.views.lagarta.lagarta_database_serach import LagartaDatabaseSearch
 from ssrnai.views.nematoide.nematoide_database_serach import NematoideDatabaseSearch
+from ssrnai.views.percevejo.percevejo_asiatico_expression import PercevejoAsiaticoExpression
+from ssrnai.views.buva.buva_canadensis_expression import BuvaCanadensisExpression
 
 __all__ = ['DatabaseList', 'DatabaseDetail', 'DatabaseCreate', 'DatabaseUpdate', 'DatabaseDelete', 'DashboardSsrnai', 'DatabaseSearch', 'ShowOrganism',
-'BuvaDatabaseSearch', 'CapimDatabaseSearch', 'LagartaDatabaseSearch', 'NematoideDatabaseSearch', 'PercevejoDatabaseSearch']
+'BuvaDatabaseSearch', 'CapimDatabaseSearch', 'LagartaDatabaseSearch', 'NematoideDatabaseSearch', 'PercevejoDatabaseSearch', 'PercevejoAsiaticoExpression',
+'BuvaCanadensisExpression']

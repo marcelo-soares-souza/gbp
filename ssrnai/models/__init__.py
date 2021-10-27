@@ -10,6 +10,7 @@ from ssrnai.models.conyza.conyza_on_targets import Conyza_On_Targets
 from ssrnai.models.conyza.conyza_iscore import Conyza_Iscore
 from ssrnai.models.conyza.conyza_structure import Conyza_Structure
 from ssrnai.models.conyza.conyza_expression import Conyza_Expression
+from ssrnai.models.conyza.conyza_canadensis_expression import Conyza_Canadensis_Expression
 from ssrnai.models.capim.capim_gene_information import Capim_Gene_Information
 from ssrnai.models.capim.capim_dsrna_information import Capim_Dsrna_Information
 from ssrnai.models.capim.capim_expression_description import Capim_expression_description
@@ -30,6 +31,7 @@ from ssrnai.models.percevejo.percevejo_on_targets import Percevejo_On_Targets
 from ssrnai.models.percevejo.percevejo_iscore import Percevejo_Iscore
 from ssrnai.models.percevejo.percevejo_structure import Percevejo_Structure
 from ssrnai.models.percevejo.percevejo_expression import Percevejo_Expression
+from ssrnai.models.percevejo.percevejo_asiatico_expression import Percevejo_Asiatico_Expression
 from ssrnai.models.nematoide.nematoide_gene_information import Nematoide_Gene_Information
 from ssrnai.models.nematoide.nematoide_dsrna_information import Nematoide_Dsrna_Information
 from ssrnai.models.nematoide.nematoide_expression_description import Nematoide_expression_description
@@ -52,11 +54,10 @@ from ssrnai.models.lagarta.lagarta_structure import Lagarta_Structure
 from ssrnai.models.lagarta.lagarta_expression import Lagarta_Expression
 
 __all__ = ['database', 'organism', 'conyzagene', 'conyzadsrna', 'conyzaexpressiondescription', 'conyzanetwork', 'conyzadicer', 
-'conyzaofftargets', 'conyzaontargets', 'conyzaiscore', 'conyzastructure', 'conyzaexpression', 'capimgene', 'capimdsrna', 'capimexpressiondescription', 
-'capimnetwork', 'capimdicer', 'capimofftargets', 'capimontargets', 'capimiscore', 'capimstructure', 'capimexpression', 'percevejogene', 'percevejodsrna',
-'percevejoexpressiondescription', 'percevejonetwork', 'percevejodicer', 'percevejoofftargets', 'percevejoontargets', 'percevejoiscore', 
-'percevejostructure', 'percevejoexpression', 'nematoidegeneinformation', 'nematoidedsrnainformation', 'nematoideexpressiondescription', 
-'nematoidenetwork', 'nematoidedicer', 'nematoideofftargets', 'nematoideontargets', 'nematoideiscore', 'nematoidestructure', 'nematoideexpression'
-'lagartagene', 'lagartadsrna',
-'lagartaexpressiondescription', 'lagartanetwork', 'lagartadicer', 'lagartaofftargets', 'lagartaontargets', 'lagartaiscore', 'lagartastructure', 
-'lagartaexpression']
+'conyzaofftargets', 'conyzaontargets', 'conyzaiscore', 'conyzastructure', 'conyzaexpression', 'conyzacanadensisexpression' 'capimgene', 'capimdsrna', 
+'capimexpressiondescription', 'capimnetwork', 'capimdicer', 'capimofftargets', 'capimontargets', 'capimiscore', 'capimstructure', 'capimexpression', 
+'percevejogene', 'percevejodsrna', 'percevejoexpressiondescription', 'percevejonetwork', 'percevejodicer', 'percevejoofftargets', 'percevejoontargets', 
+'percevejoiscore', 'percevejostructure', 'percevejoexpression', 'percevejoasiaticoexpression', 'nematoidegeneinformation', 'nematoidedsrnainformation', 
+'nematoideexpressiondescription', 'nematoidenetwork', 'nematoidedicer', 'nematoideofftargets', 'nematoideontargets', 'nematoideiscore', 
+'nematoidestructure', 'nematoideexpression', 'lagartagene', 'lagartadsrna', 'lagartaexpressiondescription', 'lagartanetwork', 'lagartadicer', 
+'lagartaofftargets', 'lagartaontargets', 'lagartaiscore', 'lagartastructure', 'lagartaexpression']

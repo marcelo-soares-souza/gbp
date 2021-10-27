@@ -6,6 +6,7 @@ content %}
 <hr />
 {% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
 RIDB' or request.user.is_superuser %}
+
 <div class="row">
   <div class="col-md-12">
     <table class="table">
@@ -34,7 +35,11 @@ RIDB' or request.user.is_superuser %}
               <td>{{result.3}}</td>
               <td>{{result.4}}</td>
               {% if result.5 != '-' %}
-              <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/percevejo/percevejo_expression/{{result.5}}';">Expressão</button></td>
+                {% if result.20 == 13 %}
+                  <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/percevejo/percevejo_asiatico_expression/{{result.5}}';">Expressão</button></td>
+                {% else %}
+                  <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/percevejo/percevejo_expression/{{result.5}}';">Expressão</button></td>
+                {% endif %}
               {% else %}
               <td>-</td>
               {% endif %}

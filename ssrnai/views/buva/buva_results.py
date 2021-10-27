@@ -1,9 +1,11 @@
+from typing import DefaultDict
 from django.db.models.fields import CharField
 from django.shortcuts import render
 from django.views.generic.base import View
 from ssrnai.models import Organisms, Database
 from django.views.generic import DetailView
 from django.db.models import Q
+from ssrnai.models.conyza.conyza_canadensis_expression import Conyza_Canadensis_Expression
 from ssrnai.models.conyza.conyza_dsrna_information import Conyza_Dsrna_Information
 from ssrnai.models.conyza.conyza_gene_information import Conyza_Gene_Information
 from ssrnai.models.conyza.conyza_iscore import Conyza_Iscore
@@ -112,10 +114,16 @@ class BuvaResults(DetailView):
         ##cria uma lista de resultado. 
         for g in gene_list:
             expression = []
-            try:
-                expression = Conyza_Expression.objects.filter(gene=int(g.id))
-            except ObjectDoesNotExist:
-                expression = []
+            if(g.organism_id==8):
+                try:
+                    expression = Conyza_Canadensis_Expression.objects.filter(gene=int(g.id))
+                except ObjectDoesNotExist:
+                    expression = []
+            else:
+                try:
+                    expression = Conyza_Expression.objects.filter(gene=int(g.id))
+                except ObjectDoesNotExist:
+                    expression = []
             #if(len(expression)>1):
             #   expression = expression[0]
 
@@ -201,6 +209,7 @@ class BuvaResults(DetailView):
 
                     result.append(str("on_target")) #18
                     result.append(str("off_target")) #19
+                    result.append(g.organism_id) #20
                     result_list.append(result)
                     result = []
                     ds_list.append(ds)
@@ -230,6 +239,7 @@ class BuvaResults(DetailView):
                 result.append("-") #17
                 result.append(str("on_target")) #18
                 result.append(str("off_target")) #19
+                result.append(g.organism_id) #20
                 result_list.append(result)
 
 

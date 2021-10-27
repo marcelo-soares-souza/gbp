@@ -14,6 +14,7 @@ class Conyza_Gene_Information(models.Model, TemplateModelMixin):
     kegg = models.TextField(("kegg"), null=True, blank=True)
     gene_ontology_blastx = models.TextField(("gene_ontology_blastx"), null=True, blank=True)
     gene_ontology_pfam = models.TextField(("kegene_ontology_pfamgg"), null=True, blank=True)
+    dataset = models.CharField(("dataset"), max_length=250, null=True, blank=True)
 
 
     class Meta:
