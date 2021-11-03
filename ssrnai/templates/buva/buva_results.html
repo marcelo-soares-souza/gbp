@@ -1,8 +1,8 @@
 {% extends "base/base_bmdb.html" %} {% load gbp_filters %} {% load bootstrap3 %}
-{% block title %} <title>Show organism</title> {% endblock title %} {% block
-content %}
+{% block title %} <title>Show organism</title> {% endblock title %} 
+{% block content %}
 <input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
-<h2>{{ database.name }}</h2>
+<h2>BD SSRNAi Buvas</h2>
 <hr />
 {% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
 RIDB' or request.user.is_superuser %}
@@ -27,7 +27,7 @@ RIDB' or request.user.is_superuser %}
         </tr>
       </thead>
       <tbody>
-        {% for result in result_list %}
+        {% for result in results %}
           <tr>
               <td>{{result.1}}</td>
               <td>{{result.2}}</td>
@@ -35,9 +35,9 @@ RIDB' or request.user.is_superuser %}
               <td>{{result.4}}</td>
               {% if result.5 != '-' %}
                 {% if result.20 == 8 %}
-                  <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/buva/buva_canadensis_expression/{{result.5}}';">Expressão</button></td>
+                  <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/buva_canadensis_expression/{{result.5}}';">Expressão</button></td>
                 {% else %}
-                <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/buva/buva_expression/{{result.5}}';">Expressão</button></td>
+                  <td><button type="button" class="btn" onclick="window.location.href='/ssrnai/buva/buva_expression/{{result.5}}';">Expressão</button></td>
                 {% endif %}
               {% else %}
               <td>-</td>
@@ -129,7 +129,8 @@ RIDB' or request.user.is_superuser %}
       </tbody>
     </table>
   </div>
+  {% include 'base/pagination_ssrnai.html' %}
 </div>
 {% else %}
 <h3>Você não possui permissão</h3>
-{% endif %} {% endblock content %}>
+{% endif %}{% endblock content %}

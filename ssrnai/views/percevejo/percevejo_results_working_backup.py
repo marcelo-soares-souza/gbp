@@ -2,50 +2,51 @@ from django.db.models.fields import CharField
 from django.shortcuts import render
 from django.views.generic.base import View
 from ssrnai.models import Organisms, Database
-from django.views.generic import DetailView
+from django.views.generic import ListView
 from django.db.models import Q
-from ssrnai.models.capim.capim_dsrna_information import Capim_Dsrna_Information
-from ssrnai.models.capim.capim_gene_information import Capim_Gene_Information
-from ssrnai.models.capim.capim_iscore import Capim_Iscore
-from ssrnai.models.capim.capim_dicer import Capim_Dicer
-from ssrnai.models.capim.capim_structure import Capim_Structure
-from ssrnai.models.capim.capim_expression import Capim_Expression
+from ssrnai.models.percevejo.percevejo_dsrna_information import PercevejoDsrnaInformation
+from ssrnai.models.percevejo.percevejo_gene_information import Percevejo_Gene_Information
+from ssrnai.models.percevejo.percevejo_iscore import Percevejo_Iscore
+from ssrnai.models.percevejo.percevejo_dicer import Percevejo_Dicer
+from ssrnai.models.percevejo.percevejo_structure import Percevejo_Structure
+from ssrnai.models.percevejo.percevejo_expression import Percevejo_Expression
+from ssrnai.models.percevejo.percevejo_asiatico_expression import Percevejo_Asiatico_Expression
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from projeto.views.login import LoggedInMixin
 from django.urls import reverse_lazy
+import collections
+
+class PercevejoResults(LoggedInMixin,ListView):
 
 
-class CapimResults(DetailView):
-
-    allowed_sort_fields = {'gene_name': {'default_direction': '', 'verbose_name': 'Gene_name'},
-                           'dsrna_name': {'default_direction': '', 'verbose_name': 'Dsrna_name'}}
-
-    default_sort_field = 'gene_name'
-
-    template_name = 'capim/capim__results.html'
-    paginate_by = 10
-    context_object_name = 'page_obj'
+    template_name = 'percevejo/percevejo_results.html'
+    context_object_name = 'results'
+    model = Percevejo_Gene_Information
     fields = '__all__'
 
-    success_url = reverse_lazy('capim_results')
+    success_url = reverse_lazy('show-organism')
 
-    def get(self, request):
+    def post(self, request):
         context = {}
-
-        organism = self.request.GET.get('organism', '0')
-        gene = self.request.GET.get('gene', '')
-        gene_function = self.request.GET.get('gene_function', '')
-        go_function = self.request.GET.get('go_function', '')
-        min_iscore = self.request.GET.get('min_iscore', '')
-        max_iscore = self.request.GET.get('max_iscore', '')
-        min_dicer = self.request.GET.get('min_dicer', '')
-        max_dicer = self.request.GET.get('max_dicer', '')
-        min_structure = self.request.GET.get('min_structure', '')
-        max_structure = self.request.GET.get('max_structure', '')
-        min_expression = self.request.GET.get('min_expression', '')
-        max_expression = self.request.GET.get('max_expression', '')
-        min_ontarget_number = self.request.GET.get('min_ontarget_number', '')
-        max_ontarget_number = self.request.GET.get('max_ontarget_number', '')
+        database = request.POST.get('db', '')
+        context['database'] = Database.objects.get(id=int(database))
+            
+        organism = request.POST.get('organism', '0')
+        gene = request.POST.get('gene', '')
+        gene_function = request.POST.get('gene_function', '')
+        go_function = request.POST.get('go_function', '')
+        min_iscore = request.POST.get('min_iscore', '')
+        max_iscore = request.POST.get('max_iscore', '')
+        min_dicer = request.POST.get('min_dicer', '')
+        max_dicer = request.POST.get('max_dicer', '')
+        min_structure = request.POST.get('min_structure', '')
+        max_structure = request.POST.get('max_structure', '')
+        min_expression = request.POST.get('min_expression', '')
+        max_expression = request.POST.get('max_expression', '')
+        min_ontarget_number = request.POST.get('min_ontarget_number', '')
+        max_ontarget_number = request.POST.get('max_ontarget_number', '')
+        #organism = Organisms.objects.filter(id=int(id))
 
         #organism search
         if organism == '0':   
@@ -58,14 +59,14 @@ class CapimResults(DetailView):
         #gene search
         gene_list = []
         genes = []
-        nextgene = Capim_Gene_Information()
+        nextgene = Percevejo_Gene_Information()
         #if gene == '*' or gene_function == '*' or go_function == '*':
         #    try:
         #        if organism != '0':
-        #            genes = Capim_Gene_Information.objects.filter(organism_id=int(organism))
+        #            genes = Percevejo_Gene_Information.objects.filter(organism_id=int(organism))
         #            #context['genes'] = genes
         #        else:
-        #            genes = Capim_Gene_Information.objects.all()
+        #            genes = Percevejo_Gene_Information.objects.all()
         #            #context['genes'] = genes
         #    except ObjectDoesNotExist:
         #        genes = []
@@ -73,10 +74,10 @@ class CapimResults(DetailView):
         if not not gene:
             try:
                 if organism != '0':
-                    genes = Capim_Gene_Information.objects.filter(gene_name__icontains=gene, organism_id=int(organism))
+                    genes = Percevejo_Gene_Information.objects.filter(gene_name__icontains=gene, organism_id=int(organism))
                     #context['genes'] = genes
                 else:
-                    genes = Capim_Gene_Information.objects.filter(gene_name__icontains=gene)
+                    genes = Percevejo_Gene_Information.objects.filter(gene_name__icontains=gene)
                     #context['genes'] = genes
             except ObjectDoesNotExist:
                 genes = []
@@ -86,14 +87,14 @@ class CapimResults(DetailView):
 
         #gene function search
         genes = []
-        nextgene = Capim_Gene_Information()
+        nextgene = Percevejo_Gene_Information()
         if not not gene_function:
             try:
                 if organism != '0':
-                    genes = Capim_Gene_Information.objects.filter(gene_description__icontains=gene_function, organism_id=int(organism))
+                    genes = Percevejo_Gene_Information.objects.filter(gene_description__icontains=gene_function, organism_id=int(organism))
                     #context['genes'] = genes
                 else:
-                    genes = Capim_Gene_Information.objects.filter(gene_description__icontains=gene_function)
+                    genes = Percevejo_Gene_Information.objects.filter(gene_description__icontains=gene_function)
                     #context['genes'] = genes
             except ObjectDoesNotExist:
                 genes = []
@@ -106,14 +107,14 @@ class CapimResults(DetailView):
 
         #GO function search
         genes = []
-        nextgene = Capim_Gene_Information()
+        nextgene = Percevejo_Gene_Information()
         if not not go_function:
             try:
                 if organism != '0':
-                    genes = Capim_Gene_Information.objects.filter(gene_ontology_blastx__icontains=go_function, organism_id=int(organism))
+                    genes = Percevejo_Gene_Information.objects.filter(gene_ontology_blastx__icontains=go_function, organism_id=int(organism))
                     #context['gene_ontology_blastx'] = newgene
                 else:
-                    genes = Capim_Gene_Information.objects.filter(gene_ontology_blastx__icontains=go_function)
+                    genes = Percevejo_Gene_Information.objects.filter(gene_ontology_blastx__icontains=go_function)
 
             except ObjectDoesNotExist:
                 genes = []
@@ -130,17 +131,23 @@ class CapimResults(DetailView):
         ##cria uma lista de resultado. 
         for g in gene_list:
             expression = []
-            try:
-                expression = Capim_Expression.objects.filter(gene=int(g.id))
-            except ObjectDoesNotExist:
-                expression = []
+            if(g.organism_id==13):
+                try:
+                    expression = Percevejo_Asiatico_Expression.objects.filter(gene=int(g.id))
+                except ObjectDoesNotExist:
+                    expression = []
+            else:
+                try:
+                    expression = Percevejo_Expression.objects.filter(gene=int(g.id))
+                except ObjectDoesNotExist:
+                    expression = []
             
             #if(len(expression)>1):
             #    expression = expression[0]
 
             dsRNAs = []
             try:
-                dsRNAs = Capim_Dsrna_Information.objects.filter(gene=int(g.id))
+                dsRNAs = PercevejoDsrnaInformation.objects.filter(gene=int(g.id))
                     #context['gene_ontology_blastx'] = newgene
             except ObjectDoesNotExist:
                 dsRNAs = []
@@ -150,7 +157,7 @@ class CapimResults(DetailView):
                 for ds in dsRNAs:
                     iscore = []
                     try:
-                        iscore = Capim_Iscore.objects.filter(dsrna=int(ds.id))
+                        iscore = Percevejo_Iscore.objects.filter(dsrna=int(ds.id))
                     except ObjectDoesNotExist:
                         iscore = []
                     
@@ -159,7 +166,7 @@ class CapimResults(DetailView):
 
                     dicer = []
                     try:
-                        dicer = Capim_Dicer.objects.filter(dsrna=int(ds.id))
+                        dicer = Percevejo_Dicer.objects.filter(dsrna=int(ds.id))
                     except ObjectDoesNotExist:
                         dicer = []
 
@@ -168,7 +175,7 @@ class CapimResults(DetailView):
                     
                     estrutura = []
                     try:
-                        estrutura = Capim_Structure.objects.filter(dsrna=int(ds.id))
+                        estrutura = Percevejo_Structure.objects.filter(dsrna=int(ds.id))
                     except ObjectDoesNotExist:
                         estrutura = []
 
@@ -253,15 +260,29 @@ class CapimResults(DetailView):
                 result.append(g.organism_id) #20
                 result_list.append(result)
 
-        page = self.request.GET.get('page', 1)
 
-        paginator = Paginator(result_list, 10)
-        
-        try:
-            results = paginator.page(page)
-        except PageNotAnInteger:
-            results = paginator.page(1)
-        except EmptyPage:
-            results = paginator.page(paginator.num_pages)
+        context['dsRNAs'] = ds_list
+        context['result_list'] = result_list    
 
-        return render(request, 'capim/capim_results.html', { 'results': results })
+        #context['min_iscore'] = min_iscore
+        #context['max_iscore'] = max_iscore
+        #context['min_dicer'] = min_dicer
+        #context['max_dicer'] = max_dicer
+        #context['min_structure'] = min_structure
+        #context['max_structure'] = max_structure
+        #context['min_expression'] = min_expression
+        #context['max_expression'] = max_expression
+        #context['min_ontarget_number'] = min_ontarget_number
+        #context['max_ontarget_number'] = max_ontarget_number
+
+        paginator = Paginator(result_list, 5) # Show 10 contacts per page
+
+        page_number = request.GET.get('page')
+        results = paginator.get_page(page_number)
+
+        #return context
+        #return render(request, 'percevejo/percevejo_results.html', context)
+        return render(request, 'percevejo/percevejo_results.html', {'results': results})
+    
+    #return render(request, 'percevejo/percevejo_results.html', context)
+    #success_url = reverse_lazy('show-organism')

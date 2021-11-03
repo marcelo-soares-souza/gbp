@@ -2,7 +2,7 @@
 {% block title %} <title>Show organism</title> {% endblock title %} {% block
 content %}
 <input class="btn btn-primary" type="button" value="Voltar" onClick="javascript:history.go(-1);"/>
-<h2>{{ database.name }}</h2>
+<h2>BD SSRNAi Nematoides</h2>
 <hr />
 {% if request.user|has_group:'Editor RIDB' or request.user|has_group:'Admin
 RIDB' or request.user.is_superuser %}
@@ -27,7 +27,7 @@ RIDB' or request.user.is_superuser %}
         </tr>
       </thead>
       <tbody>
-        {% for result in result_list %}
+        {% for result in results %}
           <tr>
               <td>{{result.1}}</td>
               {% if result.2 != '' %}
@@ -133,6 +133,7 @@ RIDB' or request.user.is_superuser %}
       </tbody>
     </table>
   </div>
+  {% include 'base/pagination_ssrnai.html' %}
 </div>
 {% else %}
 <h3>Você não possui permissão</h3>

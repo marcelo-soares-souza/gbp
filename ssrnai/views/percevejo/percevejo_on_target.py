@@ -4,7 +4,7 @@ from ssrnai.models import Database
 
 
 class PercevejoOnTarget(DetailView):
-    template_name = 'percevejo/percevejo_on_target.html'
+    template_name = 'percevejo/percevejo_on_target_.html'
     context_object_name = 'ontargets'
     model = Percevejo_On_Targets
     fields = '__all__'

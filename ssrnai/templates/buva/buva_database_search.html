@@ -11,8 +11,7 @@ RIDB' or request.user.is_superuser %}
 </div>
 <hr />
 <div class="row">
-  <form action="/ssrnai/buva/buva_results/" class="form-horizontal" method="POST">
-    {% csrf_token %}
+  <form action="/ssrnai/buva/buva_results/" class="form-horizontal" method="GET">
     <input type="hidden" name="db" value={{database.id}} />
     <div class="col-md-6">
       <div class="form-group">

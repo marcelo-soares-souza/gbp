@@ -1,0 +1,32 @@
+{% load templatetags %}
+{% if results.has_other_pages %}
+  <ul class="pagination">
+    {% if results.has_previous %}
+      <li><a href="?{% query_transform page=1 %}">Primeiro</a></li>
+      <li><a href="?{% query_transform page=results.previous_page_number %}">Anterior</a></li>
+    {% else %}
+      <li class="disabled"><span>Primeiro</span></li>
+      <li class="disabled"><span>Anterior</span></li>
+    {% endif %}
+    {% if not results.has_next and results.number >= 3 %}
+      <li><a href="?{% query_transform page=results.number|add:'-2' %}">{{ results.number|add:"-2" }}</a></li>
+    {% endif %}
+    {% if results.has_previous %}
+      <li><a href="?{% query_transform page=results.previous_page_number %}">{{ results.previous_page_number }}</a></li>
+    {% endif %}
+      <li class="active"><a href="#">{{ results.number }}</a></li>
+    {% if results.has_next %}
+      <li><a href="?{% query_transform page=results.next_page_number %}">{{ results.next_page_number }}</a></li>
+    {% endif %}
+    {% if not results.has_previous and results.paginator.num_pages >= 3 %}
+      <li><a href="?{% query_transform page=results.number|add:'2' %}">{{ results.number|add:"2" }}</a></li>
+    {% endif %}
+    {% if results.has_next %}
+      <li><a href="?{% query_transform page=results.next_page_number %}">Próximo</a></li>
+      <li><a href="?{% query_transform page=results.paginator.num_pages %}">Último</a></li>
+    {% else %}
+      <li class="disabled"><span>Próximo</span></li>
+      <li class="disabled"><span>Último</span></li>
+    {% endif %}
+  </ul>
+{% endif %}

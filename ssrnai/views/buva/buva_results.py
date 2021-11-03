@@ -1,42 +1,55 @@
-from typing import DefaultDict
 from django.db.models.fields import CharField
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.views.generic.base import View
-from ssrnai.models import Organisms, Database
-from django.views.generic import DetailView
+from ssrnai.models import Organisms, Database, organisms
+from django.views.generic import ListView
 from django.db.models import Q
-from ssrnai.models.conyza.conyza_canadensis_expression import Conyza_Canadensis_Expression
 from ssrnai.models.conyza.conyza_dsrna_information import Conyza_Dsrna_Information
 from ssrnai.models.conyza.conyza_gene_information import Conyza_Gene_Information
+from projeto.views.login import LoggedInMixin
+from django.urls import reverse_lazy
 from ssrnai.models.conyza.conyza_iscore import Conyza_Iscore
 from ssrnai.models.conyza.conyza_dicer import Conyza_Dicer
 from ssrnai.models.conyza.conyza_structure import Conyza_Structure
 from ssrnai.models.conyza.conyza_expression import Conyza_Expression
+from ssrnai.models.conyza.conyza_canadensis_expression import Conyza_Canadensis_Expression
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template import RequestContext
+from django.http import HttpResponse, HttpResponseRedirect, request
 
 
-class BuvaResults(DetailView):
+class BuvaResults(ListView):
 
-    def post(self, request):
+    allowed_sort_fields = {'gene_name': {'default_direction': '', 'verbose_name': 'Gene_name'},
+                           'dsrna_name': {'default_direction': '', 'verbose_name': 'Dsrna_name'}}
+
+    default_sort_field = 'gene_name'
+
+    template_name = 'buva/buva_results.html'
+    paginate_by = 10
+    context_object_name = 'page_obj'
+    fields = '__all__'
+
+    success_url = reverse_lazy('buva_results')
+
+    def get(self, request):
         context = {}
-        database = request.POST.get('db', '')
-        context['database'] = Database.objects.get(id=int(1))
-            
-        organism = request.POST.get('organism', '0')
-        gene = request.POST.get('gene', '')
-        gene_function = request.POST.get('gene_function', '')
-        go_function = request.POST.get('go_function', '')
-        min_iscore = request.POST.get('min_iscore', '')
-        max_iscore = request.POST.get('max_iscore', '')
-        min_dicer = request.POST.get('min_dicer', '')
-        max_dicer = request.POST.get('max_dicer', '')
-        min_structure = request.POST.get('min_structure', '')
-        max_structure = request.POST.get('max_structure', '')
-        min_expression = request.POST.get('min_expression', '')
-        max_expression = request.POST.get('max_expression', '')
-        min_ontarget_number = request.POST.get('min_ontarget_number', '')
-        max_ontarget_number = request.POST.get('max_ontarget_number', '')
-        #organism = Organisms.objects.filter(id=int(id))
+
+        organism = self.request.GET.get('organism', '0')
+        gene = self.request.GET.get('gene', '')
+        gene_function = self.request.GET.get('gene_function', '')
+        go_function = self.request.GET.get('go_function', '')
+        min_iscore = self.request.GET.get('min_iscore', '')
+        max_iscore = self.request.GET.get('max_iscore', '')
+        min_dicer = self.request.GET.get('min_dicer', '')
+        max_dicer = self.request.GET.get('max_dicer', '')
+        min_structure = self.request.GET.get('min_structure', '')
+        max_structure = self.request.GET.get('max_structure', '')
+        min_expression = self.request.GET.get('min_expression', '')
+        max_expression = self.request.GET.get('max_expression', '')
+        min_ontarget_number = self.request.GET.get('min_ontarget_number', '')
+        max_ontarget_number = self.request.GET.get('max_ontarget_number', '')
 
         #organism search
         if organism == '0':   
@@ -50,6 +63,17 @@ class BuvaResults(DetailView):
         gene_list = []
         genes = []
         nextgene = Conyza_Gene_Information()
+        #if gene == '*' or gene_function == '*' or go_function == '*':
+        #    try:
+        #        if organism != '0':
+        #            genes = Conyza_Gene_Information.objects.filter(organism_id=int(organism))
+        #            #context['genes'] = genes
+        #        else:
+        #            genes = Conyza_Gene_Information.objects.all()
+        #            #context['genes'] = genes
+        #    except ObjectDoesNotExist:
+        #        genes = []
+
         if not not gene:
             try:
                 if organism != '0':
@@ -59,9 +83,7 @@ class BuvaResults(DetailView):
                     genes = Conyza_Gene_Information.objects.filter(gene_name__icontains=gene)
                     #context['genes'] = genes
             except ObjectDoesNotExist:
-                nextgene.gene_name = 'Busca retornou 0 genes'
-                genes.append(nextgene)
-                #context['genes'] = genes
+                genes = []
 
         for g in genes:
             gene_list.append(g)
@@ -78,8 +100,7 @@ class BuvaResults(DetailView):
                     genes = Conyza_Gene_Information.objects.filter(gene_description__icontains=gene_function)
                     #context['genes'] = genes
             except ObjectDoesNotExist:
-                nextgene.gene_name = 'Busca retornou 0 genes'
-                genes.append(nextgene)
+                genes = []
 
         for g in genes:
             gene_list.append(g)
@@ -99,8 +120,7 @@ class BuvaResults(DetailView):
                     genes = Conyza_Gene_Information.objects.filter(gene_ontology_blastx__icontains=go_function)
 
             except ObjectDoesNotExist:
-                nextgene.gene_description = 'Erro go'
-                genes.append(nextgene)
+                genes = []
 
         for g in genes:
             gene_list.append(g)
@@ -124,8 +144,9 @@ class BuvaResults(DetailView):
                     expression = Conyza_Expression.objects.filter(gene=int(g.id))
                 except ObjectDoesNotExist:
                     expression = []
+            
             #if(len(expression)>1):
-            #   expression = expression[0]
+            #    expression = expression[0]
 
             dsRNAs = []
             try:
@@ -242,21 +263,17 @@ class BuvaResults(DetailView):
                 result.append(g.organism_id) #20
                 result_list.append(result)
 
+        page = self.request.GET.get('page', 1)
 
-        context['dsRNAs'] = ds_list
-        context['result_list'] = result_list    
+        paginator = Paginator(result_list, 10)
+        
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
 
-        #context['min_iscore'] = min_iscore
-        #context['max_iscore'] = max_iscore
-        #context['min_dicer'] = min_dicer
-        #context['max_dicer'] = max_dicer
-        #context['min_structure'] = min_structure
-        #context['max_structure'] = max_structure
-        #context['min_expression'] = min_expression
-        #context['max_expression'] = max_expression
-        #context['min_ontarget_number'] = min_ontarget_number
-        #context['max_ontarget_number'] = max_ontarget_number
-
-        return render(request, 'buva/buva_results.html', context)
+        return render(request, 'buva/buva_results.html', { 'results': results })
     
     #success_url = reverse_lazy('show-organism')

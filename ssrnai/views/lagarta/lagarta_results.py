@@ -11,30 +11,39 @@ from ssrnai.models.lagarta.lagarta_dicer import Lagarta_Dicer
 from ssrnai.models.lagarta.lagarta_structure import Lagarta_Structure
 from ssrnai.models.lagarta.lagarta_expression import Lagarta_Expression
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.urls import reverse_lazy
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class LagartaResults(DetailView):
 
-    def post(self, request):
+    allowed_sort_fields = {'gene_name': {'default_direction': '', 'verbose_name': 'Gene_name'},
+                           'dsrna_name': {'default_direction': '', 'verbose_name': 'Dsrna_name'}}
+
+    default_sort_field = 'gene_name'
+
+    template_name = 'lagarta/lagarta_results.html'
+    paginate_by = 10
+    context_object_name = 'page_obj'
+    fields = '__all__'
+
+    success_url = reverse_lazy('lagarta_results')
+
+    def get(self, request):
         context = {}
-        database = request.POST.get('db', '')
-        context['database'] = Database.objects.get(id=int(4))
-            
-        organism = request.POST.get('organism', '0')
-        gene = request.POST.get('gene', '')
-        gene_function = request.POST.get('gene_function', '')
-        go_function = request.POST.get('go_function', '')
-        min_iscore = request.POST.get('min_iscore', '')
-        max_iscore = request.POST.get('max_iscore', '')
-        min_dicer = request.POST.get('min_dicer', '')
-        max_dicer = request.POST.get('max_dicer', '')
-        min_structure = request.POST.get('min_structure', '')
-        max_structure = request.POST.get('max_structure', '')
-        min_expression = request.POST.get('min_expression', '')
-        max_expression = request.POST.get('max_expression', '')
-        min_ontarget_number = request.POST.get('min_ontarget_number', '')
-        max_ontarget_number = request.POST.get('max_ontarget_number', '')
-        #organism = Organisms.objects.filter(id=int(id))
+        organism = self.request.GET.get('organism', '0')
+        gene = self.request.GET.get('gene', '')
+        gene_function = self.request.GET.get('gene_function', '')
+        go_function = self.request.GET.get('go_function', '')
+        min_iscore = self.request.GET.get('min_iscore', '')
+        max_iscore = self.request.GET.get('max_iscore', '')
+        min_dicer = self.request.GET.get('min_dicer', '')
+        max_dicer = self.request.GET.get('max_dicer', '')
+        min_structure = self.request.GET.get('min_structure', '')
+        max_structure = self.request.GET.get('max_structure', '')
+        min_expression = self.request.GET.get('min_expression', '')
+        max_expression = self.request.GET.get('max_expression', '')
+        min_ontarget_number = self.request.GET.get('min_ontarget_number', '')
+        max_ontarget_number = self.request.GET.get('max_ontarget_number', '')
 
         #organism search
         if organism == '0':   
@@ -233,20 +242,17 @@ class LagartaResults(DetailView):
                 result_list.append(result)
 
 
-        context['dsRNAs'] = ds_list
-        context['result_list'] = result_list    
+        page = self.request.GET.get('page', 1)
 
-        #context['min_iscore'] = min_iscore
-        #context['max_iscore'] = max_iscore
-        #context['min_dicer'] = min_dicer
-        #context['max_dicer'] = max_dicer
-        #context['min_structure'] = min_structure
-        #context['max_structure'] = max_structure
-        #context['min_expression'] = min_expression
-        #context['max_expression'] = max_expression
-        #context['min_ontarget_number'] = min_ontarget_number
-        #context['max_ontarget_number'] = max_ontarget_number
+        paginator = Paginator(result_list, 10)
+        
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
 
-        return render(request, 'lagarta/lagarta_results.html', context)
+        return render(request, 'lagarta/lagarta_results.html', { 'results': results })
     
     #success_url = reverse_lazy('show-organism')
